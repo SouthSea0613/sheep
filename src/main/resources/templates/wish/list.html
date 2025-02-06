@@ -5,16 +5,30 @@
     <title>Title</title>
 </head>
 <body>
-    <h2>위시리스트 목록</h2>
-<div class="search-area">
-    <select id="select">
-        <option value="wish_title" selected>제목</option>
-    </select>
-    <input type="text" id="keyword">
-    <button id="wish-search">검색</button>
+<h2>위시리스트 목록</h2>
+<div class="list-area">
+<div>
+    <input type="checkbox">번호
 </div>
-<div id="wish-button">
-    <input type="submit" id="wish-button" value="글쓰기">
+<div>제목</div>
+</div>
+
+<div class="list-row">
+    <th:block th:if="${#lists.isEmpty(wishList)}">
+        <div>
+            <div>위시리스트가 없습니다</div>
+        </div>
+    </th:block>
+    <th:block th:unless="${#lists.isEmpty(wishList)}">
+        <th:block th:each="wish:${wishList}">
+            <div th:text="${wish.wish_number}"></div>
+            <div th:href="@{/wish/detail(wish_number=${wish.wish_number})}" th:text="${wish.wish_title}"></div>
+        </th:block>
+    </th:block>
+</div>
+<div id="wish_button area">
+    <input type="submit" id="wish_write" value="글쓰기">
+    <input type="submit" id="wish_takeoff" value="견적요청">
 </div>
 </body>
 </html>
