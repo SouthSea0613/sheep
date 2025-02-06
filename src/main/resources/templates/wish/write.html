@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
-  <script>
-
-  </script>
+  <style>
+    ul {
+      display: none;
+      list-style-type: none;
+    }
+  </style>
 </head>
 <body>
   <h2>위시작성</h2>
@@ -178,5 +181,26 @@
     <br>
     <div><input type="submit" value="위시 저장"></div>
   </div>
+<script>
+  function toggleUl(checkbox) {
+    let ul = checkbox.parentElement.nextElementSibling;
+
+    if (checkbox.checked) {
+      ul.style.display = 'block';
+      console.log(checkbox.id + ' 체크되었습니다.');
+    } else {
+      ul.style.display = 'none';
+      ul.querySelectorAll('input[type="checkbox"]').forEach(function(innerCheckbox) {
+        innerCheckbox.checked = false;
+      });
+    }
+  }
+
+  document.querySelectorAll('input[name="pcategory"]').forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+      toggleUl(this);
+    });
+  });
+</script>
 </body>
 </html>
