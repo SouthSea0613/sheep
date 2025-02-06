@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h2>회원가입.html</h2>
+<form id="join_form">
+
+    아이디
+    <input type="text" name="user_id" onblur="idCheck()" id="user_id">
+    <span id="idCheck"></span><br>
+    <input id="idCheckVal" type="hidden" value="0">
+
+    비밀번호
+    <input type="password" name="user_pw" id="user_pw"><br>
+
+    비밀번호 확인
+    <input type="password" id="user_pw2" onblur="pwCheck()">
+    <span id="pwCheck"></span><br>
+    <input id="pwCheckVal" type="hidden" value="0">
+
+    이름
+    <input type="text" name="user_name" id="user_name"><br>
+
+    전화번호
+
+    주소
+
+    메일
+</form>
+</body>
+</html>
