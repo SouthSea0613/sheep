@@ -3,12 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="/../../resources/static/javascript/join.js"></script>
 </head>
 <body>
     <h2>회원정보수정</h2>
 
     <div>
+        <form action="/../../resources/templates/mypage/" id="insertInfo">
+        아이디 <!-- dto랑 만들고 하자 -->
+        <input type="text" id="user_id" th:text="${session.user_id}" readonly><br>
 
+        비밀번호
+        <input type="password" id="user_pw" th:text="${session.user_pw}" readonly><br>
+
+        이름
+        <input type="text" id="user_name"><br>
+
+        전화번호
+        <input type="text" id="user_phone"><br>
+
+        주소
+        <input type="text" id="user_addr"><br>
+
+        이메일
+        <input type="text" id="user_email"><br>
+
+        <div class="button-area">
+            <input type="button" onclick="insertInfo()" value="수정완료" >
+        </div>
+        </form>
     </div>
 </body>
 </html>
