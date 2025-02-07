@@ -193,6 +193,9 @@
       ul.querySelectorAll('input[type="checkbox"]').forEach(function(innerCheckbox) {
         innerCheckbox.checked = false;
       });
+      ul.querySelectorAll('input[type="text"]').forEach(function (textBox) {
+        textBox.value = '';
+      });
     }
   }
 
