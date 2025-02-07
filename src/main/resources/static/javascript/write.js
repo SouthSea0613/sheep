@@ -12,7 +12,7 @@ function toggleUl() {
             listul[i].style.display = 'block';
 
 
-        }else{
+        } else {
 
             listul[i].style.display = 'none';
             listul[i].querySelectorAll('input[type="checkbox"]').forEach(function (innerCheckbox) {
