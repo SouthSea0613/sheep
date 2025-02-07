@@ -1,22 +1,32 @@
-function toggleUl(checkbox) {
-    let ul = checkbox.parentElement.nextElementSibling;
+// 작동을 안함...
 
-    if (checkbox.checked) {
-        ul.style.display = 'block';
-        console.log(checkbox.id + ' 체크되었습니다.');
-    } else {
-        ul.style.display = 'none';
-        ul.querySelectorAll('input[type="checkbox"]').forEach(function(innerCheckbox) {
-            innerCheckbox.checked = false;
-        });
-        ul.querySelectorAll('input[type="text"]').forEach(function (textBox) {
-            textBox.value = '';
-        });
+
+function toggleUl() {
+
+    let checkbox = document.querySelectorAll(".chk")
+    let listul = document.querySelectorAll("ul")
+
+    for (let i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked) {
+
+            listul[i].style.display = 'block';
+
+
+        }else{
+
+            listul[i].style.display = 'none';
+            listul[i].querySelectorAll('input[type="checkbox"]').forEach(function (innerCheckbox) {
+                innerCheckbox.checked = false;
+            });
+            listul[i].querySelectorAll('input[type="text"]').forEach(function (textBox) {
+                textBox.value = '';
+            });
+        }
     }
+    document.querySelectorAll('input[name="pcategory"]').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            toggleUl(this);
+        });
+    });
 }
 
-document.querySelectorAll('input[name="pcategory"]').forEach(function(checkbox) {
-    checkbox.addEventListener('change', function() {
-        toggleUl(this);
-    });
-});
