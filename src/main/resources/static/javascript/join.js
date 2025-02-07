@@ -89,8 +89,8 @@ function joinCheck() {
             return false;
         }
     }
+}
 
-    function insertInfo() {
+function write() {
 
-    }
 }
