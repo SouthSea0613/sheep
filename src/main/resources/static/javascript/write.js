@@ -1,6 +1,3 @@
-// 작동을 안함...
-
-
 function toggleUl() {
 
     let checkbox = document.querySelectorAll(".chk")
