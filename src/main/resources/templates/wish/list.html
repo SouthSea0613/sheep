@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/javascript/wish.js"></script>
+</head>
+<body>
+<h2>위시리스트 목록</h2>
+
+<div class="list-area">
+<div>
+    <input type="checkbox">번호
+</div>
+
+<div>제목</div>
+</div>
+
+<div class="list-row">
+    <th:block th:if="${#lists.isEmpty(wishList)}">
+        <div>
+            <div>위시리스트가 없습니다</div>
+        </div>
+    </th:block>
+    <th:block th:unless="${#lists.isEmpty(wishList)}">
+        <th:block th:each="wish:${wishList}">
+            <div th:text="${wish.wish_number}"></div>
+            <div th:href="@{/wish/detail(wish_number=${wish.wish_number})}" th:text="${wish.wish_title}"></div>
+        </th:block>
+    </th:block>
+</div>
+
+<div id="wish_button area">
+    <input type="button" id="wish_write" onclick="write()" value="글쓰기" >
+    <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
+</div>
+
+</body>
+</html>
