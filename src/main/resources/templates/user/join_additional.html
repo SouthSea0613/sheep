@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <h2>추가인증.html</h2>
+  <form id="join_addForm_seller"></form>
+  <div>
+    <input type="radio" name="join_additional" value="seller" checked>시공업체
+    <input type="radio" name="join_additional" value="enginner">기술자<br>
+
+      사업자등록번호 <input type="text" id="seller_regnum">
+      대표자 <input type="text" id="seller_name">
+      주소 <input type="button" value="주소검색" id="seller_addr">
+
+  </div>
+</body>
+</html>
