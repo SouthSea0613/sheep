@@ -74,3 +74,19 @@ function joinCheck() {
     //주소 넣어야함
     $('#join_form').submit();
 }
+
+// 회원정보수정(추가인증)
+    function addPwCheck() {
+    const user_pw = $('#user_pw');
+    if (user_pw.val() != '') {
+        if(user_pw.val() == $('#user_pw')) {
+            alert('추가 인증이 완료되었습니다.');
+            location.hfef="/user/";    // 컨트롤러 주소 나오면 수정 예정
+        }
+        else {
+            alert('추가 인증이 실패되었습니다.');
+            user_pw.focus();
+            return false;
+        }
+    }
+}
