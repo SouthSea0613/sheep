@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>board_Detail</title>
+    <title>Seller_Board_Detail</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
             integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script defer th:src="@{../../../static/javascript/board_detail.js}"></script>
@@ -38,7 +38,7 @@
                         <div th:text="${board_regdate}">작성일자</div>
                     </div>
                     <div>
-                        <input type="button" value="글수정">
+                        <button class="" id="" th:onclick="'uploard_board('+${board.board_number}+')'">글수정</button>
                     </div>
                 </div>
                 <div>
@@ -50,15 +50,16 @@
                 <button class="" onclick="backBtn()">글목록</button>
             </div>
             <br>
-            <form action="">
+            <form id="" class="">
                 <div>
+                    <input type="hidden" name="reply_number" id="reply_board_number" th:value="${board.board_number}">
                     <textarea name="" id="" cols="30" rows="2" placeholder="댓글을 남겨보세요."></textarea>
-                    <input type="button" value="댓글 작성">
+                    <input type="button" value="댓글 작성" class="" onclick="replyInsert()">
                 </div>
             </form>
             <br>
             <div>
-                <table th:align="center">
+                <table  th:align="center">
                     <tr>
                         <td>작성자</td>
                         <td>내용</td>
@@ -79,7 +80,6 @@
             </table>
         </section>
     </div> <!-- 첫 div 끝 -->
-    <th:block th:replace=""></th:block>
     <div>
         <!--   footer   -->
     </div>

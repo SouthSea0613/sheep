@@ -27,19 +27,36 @@
             <!--  위 div는 필수 항목 묶음  -->
             <div>
                 <div id="type">주거형태</div>
-                <input type="radio" name="housingtype" id="apartment">아파트
-                <input type="radio" name="housingtype" id="house">단독주택
-                <input type="radio" name="housingtype" id="villa">빌라
+                <div>
+                    <input type="radio" name="housingtype" id="apartment">아파트
+                    <input type="radio" name="housingtype" id="house">단독주택
+                    <input type="radio" name="housingtype" id="villa">빌라
+                </div>
             </div>
             <br>
             <div>
                 <div>평수</div>
-                <input type="text" name="size" id="size" placeholder="평수를 적어주세요.">
+                <div>
+                    <input type="radio" name="housingsize" id="10">10평 대
+                    <input type="radio" name="housingsize" id="20">20평 대
+                    <input type="radio" name="housingsize" id="30">30평 대
+                    <input type="radio" name="housingsize" id="40">40평 대
+                    <input type="radio" name="housingsize" id="50">50평 이상
+                    <div>
+                        <input type="checkbox" name="" id=""><input type="text" name="" id="size_text" placeholder="참고">
+                    </div>
+                    <div>
+                        <p>평수를 모르신다면 참고란에 적어주세요.</p>
+                        <p>평수를 정확히 알고 계신다면 참고란에 적어주세요.</p>
+                    </div>
+                </div>
             </div>
             <br>
             <div>
                 <div>예산</div>
-                <input type="text" name="money" id="money" placeholder="예산을 적어주세요.">
+                <div>
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="money" id="money" placeholder="예산을 적어주세요.">만원
+                </div>
             </div>
             <br>
             <div>견적부분은 전체 인테리어 형식으로 작성됩니다.</div>
