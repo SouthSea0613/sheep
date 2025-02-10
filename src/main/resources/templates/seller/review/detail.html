@@ -2,9 +2,71 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>board_Detail</title>
 </head>
 <body>
-
+<div>
+    <div>
+        <!--   header   -->
+    </div>
+    <h2>업체 시공 후기 디테일</h2>
+    <div>
+        <section>
+            <form action="">
+                <div>
+                    <div>제목입니다.</div>
+                    <div>
+                        <div>글쓴이</div>
+                        <div>등록일시</div>
+                    </div>
+                    <input type="button" value="글수정">
+                </div>
+                <div>
+                    <img src="" alt="시공한 사진">
+                </div>
+                <div>
+                    <div>시공한 사례에 대한 설명글.</div>
+                </div>
+                <br>
+                <div>
+                    <textarea name="" id="" cols="30" rows="2" placeholder="댓글을 남겨보세요."></textarea>
+                    <input type="button" value="댓글 작성">
+                </div>
+            </form>
+            <br>
+            <div>
+                <table th:align="center">
+                    <tr>
+                        <td>작성자</td>
+                        <td>내용</td>
+                        <td>등록일시</td>
+                    </tr>
+                </table>
+            </div>
+            <table th:align="center">
+                <th:block>
+                    <th:block>
+                        <tr>
+                            <td class="" th:text="${user_id}"></td>
+                            <td class="" th:text="${reply_content}"></td>
+                            <td class="" th:text="${reply_regdate}"></td>
+                        </tr>
+                    </th:block>
+                </th:block>
+            </table>
+        </section>
+    </div> <!-- 첫 div 끝 -->
+    <th:block th:replace=""></th:block>
+    <div>
+        <!--   footer   -->
+    </div>
+</div>
+<template>
+    <tr>
+        <td class="">{user_id}</td>
+        <td class="">{reply_content}</td>
+        <td class="">{reply_regdate}</td>
+    </tr>
+</template>
 </body>
 </html>
