@@ -1,48 +1,49 @@
-function idCheck() {
+function id_check() {
     let data = {};
     const user_id = $('#user_id');
     data.user_id = user_id.val();
-    axios.post('idCheck', data)
+    axios.post('/user/id_check', data)
         .then(res => {
+            console.log(res);
             if (res.data) {
-                $('idCheck').text('사용 가능한 아이디 입니다.');
-                $('idCheckVal').val(1);
+                $('#id_check').text('사용 가능한 아이디 입니다.');
+                $('#id_check_val').val(1);
             } else {
-                $('idCheck').text('이미 사용중인 아이디 입니다.')
-                $('idCheckVal').val(0);
+                $('#id_check').text('이미 사용중인 아이디 입니다.')
+                $('#id_check_val').val(0);
             }
         })
         .catch(err => {
-            $('idCheck').text('');
-            $('idCheckVal').val(0);
+            $('#id_check').text('');
+            $('#id_check_val').val(0);
         })
 }
 
-function pwCheck() {
+function pw_check() {
     const user_pw = $('#user_pw');
     if (user_pw.val() != '') {
         if (user_pw.val() == $('#user_pw2').val()) {
-            $('pwCheck').text('비밀번호가 일치 합니다.');
-            $('pwCheckVal').val(1);
+            $('#pw_check').text('비밀번호가 일치 합니다.');
+            $('#pw_check_val').val(1);
         } else {
-            $('#pwCheck').text('비밀번호가 일치하지 않습니다.');
-            $('#pwCheckVal').val(0);
+            $('#pw_check').text('비밀번호가 일치하지 않습니다.');
+            $('#pw_check_val').val(0);
         }
     } else {
-        $('#pwCheck').text('');
-        $('#pwCheckVal').val(0);
+        $('#pw_check').text('');
+        $('#pw_check_val').val(0);
     }
 }
 
-function joinCheck() {
+function join_check() {
     const user_id = $('#user_id');
     if (user_id.val() == '') {
         alert('아이디를 입력해주세요.');
         user_id.focus();
         return false;
     }
-    const idCheckVal = $('#idCheckVal');
-    if (idCheckVal.val() == 0) {
+    const id_check_val = $('#id_check_val');
+    if (id_check_val.val() == 0) {
         alert('이미 사용중인 아이디 입니다.');
         user_id.focus();
         return false;
@@ -53,8 +54,8 @@ function joinCheck() {
         user_pw.focus();
         return false;
     }
-    const pwCheckVal = $('#pwCheckVal');
-    if (pwCheckVal.val() == 0) {
+    const pw_check_val = $('#pw_check_val');
+    if (pw_check_val.val() == 0) {
         alert('비밀번호가 일치하지 않습니다.');
         $('#user_pw2').focus();
         return false;
@@ -71,6 +72,12 @@ function joinCheck() {
         user_phone.focus();
         return false;
     }
-    //주소 넣어야함
+    const user_addr = $('#user_addr');
+    if (user_addr.val() == '') {
+        alert('주소를 입력해주세요.');
+        user_addr.focus();
+        return false;
+    }
+
     $('#join_form').submit();
 }
