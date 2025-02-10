@@ -12,6 +12,9 @@
 <body>
 <h2>위시 디테일</h2>
 <div>
+    <!--   header   -->
+</div>
+<div>
     <!--  위 div는 전체 묶음  -->
     <form action="/takeoff/customer/list" method="get">
 <!--    위 폼 태그에 컨트롤러 경로 작성    -->
@@ -26,12 +29,20 @@
             <br>
             <div>
                 <div>평수</div>
-                <input type="text" name="size" id="size" placeholder="평수를 적어주세요." value="32평" readonly>
-            </div>
-            <br>
-            <div>
-                <div>예산</div>
-                <input type="text" name="money" id="money" placeholder="예산을 적어주세요." value="1000만원" readonly>
+                <div>
+                    <input type="radio" name="housingsize" id="10" onClick="return false;">10평 대
+                    <input type="radio" name="housingsize" id="20" onClick="return false;">20평 대
+                    <input type="radio" name="housingsize" id="30" checked onClick="return false;">30평 대
+                    <input type="radio" name="housingsize" id="40" onClick="return false;">40평 대
+                    <input type="radio" name="housingsize" id="50" onClick="return false;">50평 이상
+                    <div>
+                        <input type="text" name="" id="size_text" placeholder="참고" value="38평" readonly>
+                    </div>
+                    <div>
+                        <p>평수를 모르신다면 참고란에 적어주세요.</p>
+                        <p>평수를 정확히 알고 계신다면 참고란에 적어주세요.</p>
+                    </div>
+                </div>
             </div>
             <br>
         </div>
@@ -199,6 +210,9 @@
         <input type="button" value="목록으로" onclick="location.href='list.html'">
 <!--    위시 리스트로 넘어감    -->
     </form>
+</div>
+<div>
+    <!--   footer   -->
 </div>
 </body>
 </html>
