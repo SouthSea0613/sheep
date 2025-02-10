@@ -20,7 +20,7 @@ function toggleUl() {
             });
         }
     }
-    document.querySelectorAll('input[name="pcategory"]').forEach(function (checkbox) {
+    document.querySelectorAll('input[name="category"]').forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
             toggleUl(this);
         });
