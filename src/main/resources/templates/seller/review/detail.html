@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>board_Detail</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script defer th:src="@{../../../static/javascript/board_detail.js}"></script>
 </head>
 <body>
 <div>
@@ -12,22 +15,42 @@
     <h2>업체 시공 후기 디테일</h2>
     <div>
         <section>
-            <form action="">
-                <div>
-                    <div>제목입니다.</div>
+            <div>       <!-- 글내용 전체 묶음 -->
+                <div>   <!-- 글내용 위 한줄 묶음 -->
                     <div>
-                        <div>글쓴이</div>
-                        <div>등록일시</div>
+                        <div>board_number</div>
+                        <div th:text="${board_number}">글번호</div>
                     </div>
-                    <input type="button" value="글수정">
+                    <div>
+                        <div>board_writer</div>
+                        <div th:text="${user_id}">작성자</div>
+                    </div>
+                    <div>
+                        <div>board_title</div>
+                        <div th:text="${board_title}">글제목</div>
+                    </div>
+                    <div>
+                        <div>board_status</div>
+                        <div th:text="${board_status}">글상태</div>
+                    </div>
+                    <div>
+                        <div>board_regdate</div>
+                        <div th:text="${board_regdate}">작성일자</div>
+                    </div>
+                    <div>
+                        <input type="button" value="글수정">
+                    </div>
                 </div>
                 <div>
-                    <img src="" alt="시공한 사진">
+                    <div>board_content</div>
+                    <div th:text="${board_content}">글내용</div>
+                    <img src="" alt="이미지">
                 </div>
-                <div>
-                    <div>시공한 사례에 대한 설명글.</div>
-                </div>
-                <br>
+                <button class="" onclick="delete_board(this)">글삭제</button>
+                <button class="" onclick="backBtn()">글목록</button>
+            </div>
+            <br>
+            <form action="">
                 <div>
                     <textarea name="" id="" cols="30" rows="2" placeholder="댓글을 남겨보세요."></textarea>
                     <input type="button" value="댓글 작성">
