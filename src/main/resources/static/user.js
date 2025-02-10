@@ -1,8 +1,8 @@
-function idCheck() {
+function id_check() {
     let data = {};
     const user_id = $('#user_id');
     data.user_id = user_id.val();
-    axios.post('idCheck', data)
+    axios.post('id_check', data)
         .then(res => {
             if (res.data) {
                 $('idCheck').text('사용 가능한 아이디 입니다.');

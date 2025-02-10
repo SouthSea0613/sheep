@@ -23,7 +23,11 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(UserDto userDto){
-        
-        return "index";
+        if(userService.join(userDto)) {
+            return "redirect:/";
+        }
+        else {
+            return "redirect:/user/join";
+        }
     }
 }
