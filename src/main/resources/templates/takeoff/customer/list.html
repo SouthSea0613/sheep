@@ -7,6 +7,29 @@
 </head>
 <body>
 <h2>견적현황리스트</h2>
-
+<div class="list-area">
+    <th:block th:if="${#lists.isEmpty(takeoffList)}">
+        <div>
+            <div>
+                견적리스트가 없습니다<br>
+                위시리스트부터 작성해주세요.
+            </div>
+            <div class="wishBarea">
+                <input type="button" id="wish_write" onclick="write()" value="위시 작성하기">
+            </div>
+        </div>
+    </th:block>
+    <th:block th:unless="${#lists.isEmpty(takeoffList)}">
+        <th:block th:each="takeoff:${takeoffList}">
+            <div th:text="${takeoff.takeoff_number}">글번호</div>
+            <div>
+                <a th:href="@{/takeoff/seller/detail(takeoff_number=${takeoff.takeoff_number})}"
+                    th:text="${takeoff.takeoff_title}">글제목</a>
+            </div>
+            <div class="takeoffSarea" th:text="${takeoff.takeoff_status}">견적상태
+            </div>
+        </th:block>
+    </th:block>
+</div>
 </body>
 </html>
