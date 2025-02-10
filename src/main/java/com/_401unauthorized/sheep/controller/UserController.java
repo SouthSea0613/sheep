@@ -1,5 +1,6 @@
 package com._401unauthorized.sheep.controller;
 
+import com._401unauthorized.sheep.dto.UserDto;
 import com._401unauthorized.sheep.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +18,12 @@ public class UserController {
 
     @GetMapping("/join")
     public String join() {
-        return "index";
+        return "user/join";
     }
+
     @PostMapping("/join")
     public String join(UserDto userDto){
-
+        
+        return "index";
     }
 }
