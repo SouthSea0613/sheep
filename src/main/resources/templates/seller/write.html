@@ -10,13 +10,22 @@
 </div>
 <h2>업체페이지 작성/수정</h2>
 <div>
-    <form action="">
+    <form action="/seller/review/detail" method="get">
         <div>
-            <input type="text" name="board_title" id="">
+            <input type="text" name="" id="board_title" placeholder="제목을 입력하세요.">
         </div>
         <br>
         <div>
             <textarea name="board_content" placeholder="글을 작성해주세요."></textarea>
+        </div>
+        <br>
+        <div>
+            <input type="text" name="" id="UUID" placeholder="첨부파일 없음" readonly>
+            <input type="button" value="첨부파일" onclick="">
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="글쓰기">
         </div>
     </form>
 </div>
