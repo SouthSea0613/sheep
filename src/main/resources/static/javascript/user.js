@@ -66,6 +66,13 @@ function join_check() {
         user_name.focus();
         return false;
     }
+    //  통신사 추가
+    const user_phone_company = $('#user_phone_company');
+    if (user_phone_company.val() == 'none') {
+        alert('통신사를 선택해주세요.');
+        user_phone_company.focus();
+        return false;
+    }
     const user_phone = $('#user_phone');
     if (user_phone.val() == '') {
         alert('전화번호를 입력해주세요.');
@@ -78,6 +85,10 @@ function join_check() {
         user_addr.focus();
         return false;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> copyuser_jieun
     // 이메일 추가
     let user_email = $('#user_email');
     const user_email_detail = $('#user_email_detail');
@@ -85,7 +96,11 @@ function join_check() {
         alert('이메일을 바르게 입력해주세요.');
         return false;
     } else {
+<<<<<<< HEAD
         if (user_email_detail.val() == '직접입력') {
+=======
+        if (user_email_detail.val() == 'none') {
+>>>>>>> copyuser_jieun
             const email_input = $('#email_input');
             user_email.val(user_email.val() + '@' + email_input.val());
         } else {
@@ -95,6 +110,11 @@ function join_check() {
     $('#join_form').submit();
 }
 
+<<<<<<< HEAD
+=======
+
+// 이메일 비동기
+>>>>>>> copyuser_jieun
 function test(user_email) {
     let data = {};
     data.user_email = user_email;
@@ -136,4 +156,32 @@ function self_insert_check(){
     const email_input = $('#email_input');
     const user_email = user_email_id.val() + '@' + email_input.val();
     test(user_email);
+<<<<<<< HEAD
 }
+=======
+}
+
+// 로그인 비동기
+function login() {
+    let data = {};
+    const user_id = $('#user_id');
+    const user_pw = $('#user_pw');
+    data.user_id = user_id.val();
+    data.user_pw = user_pw.val();
+    console.log(data);
+    axios.post('/user/login', data)
+        .then(res => {
+            console.log(res);
+            if (res.data) {
+                location.href="/";
+            } else {
+                $('#error_user').text('아이디 비밀번호를 확인해주세요.')
+                $('#error_user_val').val(0);
+            }
+        })
+        .catch(err => {
+            $('#error_user').text('');
+            $('#error_user_val').val(0);
+        })
+}
+>>>>>>> copyuser_jieun

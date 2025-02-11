@@ -41,6 +41,7 @@
     <input type="text" name="user_addr" id="user_addr"><br>
 
     메일
+<<<<<<< HEAD
     <input type="text" name="user_email" id="user_email"> @
 
     <select onchange="self_insert()" name="user_email_detail" id="user_email_detail">
@@ -54,6 +55,23 @@
     <span id="email_check"></span><br>
     <input id="email_check_val" type="hidden" value="0">
     <input type="text" onblur="self_insert_check()" name="email_input" id="email_input"><br>
+=======
+    <input type="text" name="user_email" id="user_email" >
+    <select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
+
+        <option value="none">메일선택</option>
+        <option value="@naver.com">@naver.com</option>
+        <option value="@gmail.com">@gmail.com</option>
+        <option value="@daum.net">@daum.net</option>
+        <option value="@nate.com">@nate.com</option>
+        <option value="other">직접입력</option>
+    </select>
+    <span id="email_check"></span><br>
+    <input id="email_check_val" type="hidden" value="0">
+    <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
+    <span id="email_check1"></span><br>
+    <input id="email_check_val1" type="hidden" value="0">
+>>>>>>> copyuser_jieun
 
     <input type="button" value="회원가입" id="join_button" onclick="join_check()">
 

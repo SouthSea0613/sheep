@@ -9,6 +9,7 @@ public interface UserDao {
     boolean join(UserDto userDto);
 
     String id_check(String user_id);
+<<<<<<< HEAD
 
     String email_check(String user_email);
 
@@ -17,4 +18,10 @@ public interface UserDao {
     boolean join_additional_seller(SellerDto sellerDto);
 
     boolean change_user_type(String user_id, int type);
+=======
+    String email_check(String user_email);
+    String getSecurityPw(String user_id);
+    UserDto getUserInfo(String user_id);
+    UserDto login(String user_id);
+>>>>>>> copyuser_jieun
 }
