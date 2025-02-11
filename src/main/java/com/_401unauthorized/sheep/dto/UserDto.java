@@ -15,10 +15,7 @@ public class UserDto {
     String user_id;
     String user_pw;
     String user_name;
-<<<<<<< HEAD
-=======
     String user_phone_company;
->>>>>>> yoonsic2
     String user_phone;
     String user_addr;
     String user_email;
