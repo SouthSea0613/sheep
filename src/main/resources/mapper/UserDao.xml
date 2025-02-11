@@ -3,11 +3,27 @@
 <mapper namespace="com._401unauthorized.sheep.dao.UserDao">
 
     <insert id="join">
-        INSERT INTO USER VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_addr}, #{user_email}, null)
+        INSERT INTO USER VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_phone_company}, #{user_phone}, #{user_addr}, #{user_email}, 0)
     </insert>
 
     <select id="id_check" resultType="java.lang.String">
         SELECT * FROM USER WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="email_check" resultType="java.lang.String">
+        SELECT * FROM USER WHERE USER_EMAIL = #{user_email}
+    </select>
+
+    <select id="getSecurityPw" resultType="java.lang.String">
+        SELECT USER_PW FROM USER WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="getUserInfo" resultType="com._401unauthorized.sheep.dto.UserDto">
+        SELECT USER_ID, USER_NAME, USER_TYPE FROM USER WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="login" resultType="com._401unauthorized.sheep.dto.UserDto">
+        SELECT USER_ID, USER_PW, USER_TYPE FROM USER WHERE USER_ID = #{user_id}
     </select>
 
 </mapper>

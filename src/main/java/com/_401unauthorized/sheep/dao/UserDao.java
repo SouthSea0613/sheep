@@ -7,4 +7,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserDao {
     boolean join(UserDto userDto);
     String id_check(String user_id);
+    String email_check(String user_email);
+    String getSecurityPw(String user_id);
+    UserDto getUserInfo(String user_id);
+    UserDto login(String user_id);
 }
