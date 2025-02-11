@@ -9,4 +9,5 @@
     <select id="id_check" resultType="java.lang.String">
         SELECT * FROM USER WHERE USER_ID = #{user_id}
     </select>
+
 </mapper>
