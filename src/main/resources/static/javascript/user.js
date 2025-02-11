@@ -130,6 +130,7 @@ function self_insert(){
         test(user_email);
     }
 }
+
 function self_insert_check(){
     let user_email_id = $('#user_email');
     const email_input = $('#email_input');
