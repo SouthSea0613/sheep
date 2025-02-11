@@ -28,12 +28,12 @@
     <input type="text" name="user_name" id="user_name"><br>
 
     전화번호
-    <select>
+    <select name="user_phone_company" id="user_phone_company">
         <option value="none">통신사</option>
-        <option>SKT</option>
-        <option>KT</option>
-        <option>LGU+</option>
-        <option>알뜰폰</option>
+        <option value="1">SKT</option>
+        <option value="2">KT</option>
+        <option value="3">LGU+</option>
+        <option value="4">알뜰폰</option>
     </select>
     <input type="text" name="user_phone" id="user_phone"><br>
 
@@ -41,16 +41,19 @@
     <input type="text" name="user_addr" id="user_addr"><br>
 
     메일
-    <input type="text" name="user_email" id="user_email">
-    <span>@</span>
-    <select name="user_email_detail" id="user_email_detail">
+    <input type="text" name="user_email" id="user_email"> @
+
+    <select onchange="self_insert()" name="user_email_detail" id="user_email_detail">
         <option value="none">메일선택</option>
         <option value="naver.com">naver.com</option>
         <option value="gmail.com">gmail.com</option>
         <option value="daum.net">daum.net</option>
-        <option value="nate.co.kr">nate.co.kr</option>
+        <option value="nate.com">nate.com</option>
+        <option name="self_insert" id="self_insert" value="직접입력">직접입력</option>
     </select>
-    <input type="text" name="email_input" id="email_input"><br>
+    <span id="email_check"></span><br>
+    <input id="email_check_val" type="hidden" value="0">
+    <input type="text" onblur="self_insert_check()" name="email_input" id="email_input"><br>
 
     <input type="button" value="회원가입" id="join_button" onclick="join_check()">
 

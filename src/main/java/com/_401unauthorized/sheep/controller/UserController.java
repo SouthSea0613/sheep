@@ -36,4 +36,12 @@ public class UserController {
         }
         return true;
     }
+    @PostMapping("/email_check")
+    @ResponseBody
+    public boolean email_check(@RequestBody UserDto userDto){
+        if(userService.email_check(userDto.getUser_email())){
+            return false;
+        }
+        return true;
+    }
 }

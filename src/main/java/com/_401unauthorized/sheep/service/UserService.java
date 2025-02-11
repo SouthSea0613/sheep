@@ -26,4 +26,11 @@ public class UserService {
         }
         return false;
     }
+
+    public boolean email_check(String user_email) {
+        if(userDao.email_check(user_email) != null){
+            return true;
+        }
+        return false;
+    }
 }
