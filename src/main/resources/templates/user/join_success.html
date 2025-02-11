@@ -5,11 +5,20 @@
     <title>Title</title>
 </head>
 <body>
-    <h2>join_success.html</h2>
-    <span th:text="">남피오</span>
+    <h2>회원가입 성공.html</h2>
+    <span th:text="${user_id}"></span>
     <span>님 회원이 되신 것을 환영합니다.</span><br>
-    <button>로그인</button><br>
+
+    <form th:action="@{/user/login}" method="get">
+        <input type="submit" value="로그인"><br>
+    </form>
+
     <h4>시공사 or 기술자 이시면 추가인증을 진행해주세요.</h4>
-    <a href="join_additional">추가인증</a>
+
+    <form th:action="@{/user/join_additional}" method="get">
+        <input type="hidden" name="user_id" th:value="${user_id}">
+        <input type="submit" value="추가인증">
+    </form>
+
 </body>
 </html>

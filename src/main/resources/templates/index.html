@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<meta charset="UTF-8">
-		<title>Title</title>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6b87b35f5abccf4104cdc6116a58a9d&libraries=services"></script>
-	</head>
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script type="text/javascript"
+			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6b87b35f5abccf4104cdc6116a58a9d&libraries=services"></script>
+</head>
 
-	<body>
-		<h1>index.html</h1>
-		<div id="map" style="width:500px;height:400px;">
-		</div>
+<body>
+<h1>index.html</h1>
 
-		<script>
-			var container = document.getElementById('map');
-			var options = {
-				center: new kakao.maps.LatLng(33.450701, 126.570667),
-				level: 3
-			};
+<a th:href="@{/user/join}" th:text="join.html"></a>
+<a th:href="@{/user/login}" th:text="login"></a>
 
-			var map = new kakao.maps.Map(container, options);
-		</script>
-	</body>
+<div id="map" style="width:500px;height:400px;">
+</div>
+
+<script>
+	var container = document.getElementById('map');
+	var options = {
+		center: new kakao.maps.LatLng(37.43887833749142, 126.67511828936453),
+		level: 3
+	};
+
+	var map = new kakao.maps.Map(container, options);
+</script>
+</body>
 </html>

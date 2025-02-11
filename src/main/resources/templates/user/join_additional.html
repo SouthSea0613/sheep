@@ -21,10 +21,62 @@
       }
     }
 
+<<<<<<< HEAD
     function join_addCheck(){
       //비동기
       alert("인증이 완료되었습니다.")
     }
+=======
+    function seller_regnum_check(){
+        let data = {};
+        const seller_regnum = $('#seller_regnum');
+        data.seller_regnum = seller_regnum.val();
+        axios.post('/user/seller_regnum_check', data)
+            .then(res => {
+                console.log(res);
+                if (res.data) {
+                    $('#seller_regnum_check').text('사용 가능한 사업자등록번호 입니다.');
+                    $('#seller_regnum_val').val(1);
+                } else {
+                    $('#seller_regnum_check').text('이미 사용중인 사업자등록번호 입니다.')
+                    $('#seller_regnum_val').val(0);
+                }
+            })
+            .catch(err => {
+                $('#seller_regnum_check').text('');
+                $('#seller_regnum_val').val(0);
+            })
+    }
+
+    function join_addCheck_seller() {
+        const seller_regnum = $('#seller_regnum');
+        if (seller_regnum.val() == '') {
+            alert('사업자등록번호 를 입력하세요.');
+            seller_regnum.focus();
+            return false;
+        }
+        const seller_regnum_val = $('#seller_regnum_val');
+        if (seller_regnum_val.val() == 0) {
+            alert('이미 사용중인 사업자등록번호 입니다.');
+            seller_regnum.focus();
+            return false;
+        }
+        const seller_name = $('#seller_name');
+        if (seller_name.val() == '') {
+            alert('대표자 성함을 입력하세요.');
+            seller_name.focus();
+            return false;
+        }
+        const seller_addr = $('#seller_addr');
+        if (seller_addr.val() == '') {
+            alert('사업자 주소를 입력하세요.');
+            seller_addr.focus();
+            return false;
+        }
+        $('#join_addForm_seller').submit();
+    }
+
+>>>>>>> yoonsic2
   </script>
 </head>
 <body>
@@ -34,12 +86,25 @@
   <input type="radio" name="join_additional" id="join_additional1" value="seller" checked onchange="check()">시공업체
   <input type="radio" name="join_additional"  id="join_additional2" value="engineer" onchange="check()">기술자<br>
 
+<<<<<<< HEAD
   <form id="join_addForm_seller">
   <div>
       사업자등록번호 <input type="text" id="seller_regnum"><br>
       대표자 <input type="text" id="seller_name"><br>
       주소 <input type="button" value="주소검색" id="seller_addr"><br>
     <input type="button" value="인증요청" id="join_addBtn" onclick="join_addCheck()">
+=======
+  <form th:action="@{/user/join_additional_seller}" method="post" id="join_addForm_seller" >
+  <div>
+      <input type="hidden" name="user_id" th:value="${param.user_id}">
+      사업자등록번호 <input type="text" name="seller_regnum" id="seller_regnum" onblur="seller_regnum_check()">
+      <span id="seller_regnum_check"></span><br>
+      <input id="seller_regnum_val" type="hidden" value="0">
+      업체명 <input type="text" id="seller_company" name="seller_company"><br>
+      대표자 <input type="text" id="seller_name" name="seller_name"><br>
+      주소 <input type="text" id="seller_addr" name="seller_addr"><br>
+    <input type="button" value="인증요청" id="join_addBtn" onclick="join_addCheck_seller()">
+>>>>>>> yoonsic2
   </div>
   </form>
 

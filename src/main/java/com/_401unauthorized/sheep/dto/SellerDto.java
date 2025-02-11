@@ -11,16 +11,10 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Builder
 @Accessors(chain = true)
-public class UserDto {
+public class SellerDto {
+    String seller_regnum;
     String user_id;
-    String user_pw;
-    String user_name;
-<<<<<<< HEAD
-=======
-    String user_phone_company;
->>>>>>> yoonsic2
-    String user_phone;
-    String user_addr;
-    String user_email;
-    String user_type;
+    String seller_company;
+    String seller_name;
+    String seller_addr;
 }
