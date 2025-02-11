@@ -1,6 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.UserDao;
+import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -33,4 +34,16 @@ public class UserService {
         }
         return false;
     }
+
+    public boolean seller_regnum_check(String seller_regnum) {
+        if(userDao.seller_regnum_check(seller_regnum) != null){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean join_additional_seller(SellerDto sellerDto) {
+        return userDao.change_user_type(sellerDto.getUser_id(), 1) && userDao.join_additional_seller(sellerDto);
+    }
+
 }

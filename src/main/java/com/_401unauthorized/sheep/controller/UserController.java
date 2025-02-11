@@ -1,11 +1,14 @@
 package com._401unauthorized.sheep.controller;
 
+import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
 import com._401unauthorized.sheep.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 @Slf4j
 @RequiredArgsConstructor
@@ -20,14 +23,22 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String join(UserDto userDto){
+    public String join(UserDto userDto, Model model) {
         if(userService.service_join(userDto)){
-            return "redirect:/";
+            model.addAttribute("user_id", userDto.getUser_id());
+            return "user/join_success";
         }
-        return "index";
+        else {
+            return "redirect:/user/join";
+        }
     }
 
-    //비동기 axios
+    @GetMapping("/join_additional")
+    public String join_additional() {
+        return "user/join_additional";
+    }
+
+    //비동기 axios -------------------------------------------------
     @PostMapping("/id_check")
     @ResponseBody
     public boolean id_check(@RequestBody UserDto userDto){
@@ -44,4 +55,27 @@ public class UserController {
         }
         return true;
     }
+    @PostMapping("/seller_regnum_check")
+    @ResponseBody
+    public boolean seller_regnum_check(@RequestBody SellerDto sellerDto){
+        if(userService.seller_regnum_check(sellerDto.getSeller_regnum())){
+            return false;
+        }
+        return true;
+    }
+    //-----------------------------------------------------------
+
+    @GetMapping("/login")
+    public String login() {
+        return "user/login";
+    }
+
+    @PostMapping("/join_additional_seller")
+    public String join_additional_seller(SellerDto sellerDto){
+        if(userService.join_additional_seller(sellerDto)){
+            return "redirect:/user/login";
+        }
+        return "redirect:/user/join_additional";
+    }
+
 }
