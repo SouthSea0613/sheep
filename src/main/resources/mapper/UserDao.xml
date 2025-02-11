@@ -7,4 +7,44 @@
         VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_phone}, #{user_addr}, #{user_email}, NULL)
     </update>
 
+    <insert id="join">
+        INSERT INTO USER
+        VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_phone_company}, #{user_phone}, #{user_addr}, #{user_email}, 0)
+    </insert>
+
+    <insert id="join_additional_seller">
+        INSERT INTO SELLER
+        VALUES (#{seller_regnum}, #{user_id}, #{seller_company}, #{seller_name}, #{seller_addr}, null)
+    </insert>
+
+    <update id="change_user_type">
+        UPDATE USER
+        SET USER_TYPE = #{type}
+        WHERE USER_ID = #{user_id}
+    </update>
+
+    <select id="id_check" resultType="java.lang.String">
+        SELECT USER_ID
+        FROM USER
+        WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="email_check" resultType="java.lang.String">
+        SELECT USER_EMAIL
+        FROM USER
+        WHERE USER_EMAIL = #{user_email}
+    </select>
+
+    <select id="login" resultType="com._401unauthorized.sheep.dto.UserDto">
+        SELECT USER_ID, USER_PW, USER_TYPE
+        FROM USER
+        WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="seller_regnum_check" resultType="java.lang.String">
+        SELECT *
+        FROM SELLER
+        WHERE  SELLER_REGNUM = #{seller_regnum}
+    </select>
+
 </mapper>
