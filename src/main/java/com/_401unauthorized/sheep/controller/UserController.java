@@ -27,6 +27,7 @@ public class UserController {
         return "index";
     }
 
+    //비동기 axios
     @PostMapping("/id_check")
     @ResponseBody
     public boolean id_check(@RequestBody UserDto userDto){
