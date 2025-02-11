@@ -23,22 +23,14 @@ public class UserController {
     }
 
     @PostMapping("/join")
-<<<<<<< HEAD
-    public String join(UserDto userDto){
-        if(userService.join(userDto)) {
-            return "redirect:/";
-=======
     public String join(UserDto userDto, Model model) {
         if(userService.join(userDto)){
             model.addAttribute("user_id", userDto.getUser_id());
             return "user/join_success";
->>>>>>> jieun
         }
         else {
             return "redirect:/user/join";
         }
-<<<<<<< HEAD
-=======
     }
 
     @PostMapping("/id_check")
@@ -97,6 +89,5 @@ public class UserController {
             return "redirect:/user/login";
         }
         return "redirect:/user/join_additional";
->>>>>>> jieun
     }
 }

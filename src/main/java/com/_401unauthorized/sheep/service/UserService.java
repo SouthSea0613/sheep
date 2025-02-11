@@ -1,10 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.UserDao;
-<<<<<<< HEAD
-=======
 import com._401unauthorized.sheep.dto.SellerDto;
->>>>>>> jieun
 import com._401unauthorized.sheep.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +20,6 @@ public class UserService {
         userDto.setUser_pw(encoder_pw);
         return userDao.join(userDto);
     }
-<<<<<<< HEAD
-=======
 
     public boolean id_check(String user_id) {
         if (userDao.id_check(user_id) != null) {
@@ -66,6 +61,5 @@ public class UserService {
             return false;
         }
     }
->>>>>>> jieun
 }
 

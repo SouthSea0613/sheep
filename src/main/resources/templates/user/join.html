@@ -7,12 +7,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
 </head>
+
 <body>
-<<<<<<< HEAD
-    <h2>회원가입.html</h2>
-=======
 <h2>회원가입.html</h2>
->>>>>>> jieun
 <form th:action="@{/user/join}" method="post" id="join_form">
 
 	아이디
@@ -31,34 +28,6 @@
 	이름
 	<input type="text" name="user_name" id="user_name"><br>
 
-<<<<<<< HEAD
-    전화번호
-    <select>
-        <option value="none">통신사</option>
-        <option>SKT</option>
-        <option>KT</option>
-        <option>LGU+</option>
-        <option>알뜰폰</option>
-    </select>
-    <input type="text" id="user_phone" name="user_phone"><br>
-
-    주소
-    <input type="text" id="user_addr" name="user_addr"><br>
-
-    메일
-    <input type="text" id="user_email" name="user_email">
-    <span>@</span>
-    <select>
-        <option value="none">메일선택</option>
-        <option value="naver.com">naver.com</option>
-        <option value="gmail.com">gmail.com</option>
-        <option value="daum.net">daum.net</option>
-        <option value="nate.co.kr">nate.co.kr</option>
-    </select>
-    <input type="text" id="email_input"><br>
-
-    <input type="submit" value="회원가입" id="join_button">
-=======
 	전화번호
 	<select name="user_phone_company" id="user_phone_company">
 		<option value="none">통신사</option>
@@ -86,8 +55,6 @@
 	<input id="email_check_val" type="hidden" value="0">
 	<input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
 	<input type="button" value="회원가입" id="join_button" onclick="join_check()">
->>>>>>> jieun
-
 </form>
 </body>
 </html>
