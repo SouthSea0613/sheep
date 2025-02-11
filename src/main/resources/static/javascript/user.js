@@ -85,36 +85,25 @@ function join_check() {
         user_addr.focus();
         return false;
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> copyuser_jieun
-    // 이메일 추가
     let user_email = $('#user_email');
     const user_email_detail = $('#user_email_detail');
     if (user_email.val() == '' || user_email_detail.val() == 'none') {
         alert('이메일을 바르게 입력해주세요.');
         return false;
     } else {
-<<<<<<< HEAD
         if (user_email_detail.val() == '직접입력') {
-=======
-        if (user_email_detail.val() == 'none') {
->>>>>>> copyuser_jieun
-            const email_input = $('#email_input');
-            user_email.val(user_email.val() + '@' + email_input.val());
-        } else {
-            user_email.val(user_email.val() + '@' + user_email_detail.val());
+            if (user_email_detail.val() == 'none') {
+                const email_input = $('#email_input');
+                user_email.val(user_email.val() + '@' + email_input.val());
+            } else {
+                user_email.val(user_email.val() + '@' + user_email_detail.val());
+            }
         }
+        $('#join_form').submit();
     }
-    $('#join_form').submit();
 }
 
-<<<<<<< HEAD
-=======
-
-// 이메일 비동기
->>>>>>> copyuser_jieun
 function test(user_email) {
     let data = {};
     data.user_email = user_email;
@@ -122,10 +111,10 @@ function test(user_email) {
         .then(res => {
             console.log(res);
             if (res.data) {
-                $('#email_check').text('사용 가능한 이메일 입니다.');
+                $('#email_check').text('사용 가능한 이메일입니다.');
                 $('#email_check_val').val(1);
             } else {
-                $('#email_check').text('이미 사용중인 아이디 입니다.')
+                $('#email_check').text('이미 사용중인 이메일입니다.')
                 $('#email_check_val').val(0);
             }
         })
@@ -156,9 +145,6 @@ function self_insert_check(){
     const email_input = $('#email_input');
     const user_email = user_email_id.val() + '@' + email_input.val();
     test(user_email);
-<<<<<<< HEAD
-}
-=======
 }
 
 // 로그인 비동기
@@ -184,4 +170,3 @@ function login() {
             $('#error_user_val').val(0);
         })
 }
->>>>>>> copyuser_jieun

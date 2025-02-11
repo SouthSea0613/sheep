@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script th:src="@{/javascript/user.js}"></script>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script th:src="@{/javascript/user.js}"></script>
 </head>
 <body>
 <h2>로그인.html</h2>
 
-    아이디<input type="text" name="user_id" id="user_id"><br>
-    비밀번호<input type="password" name="user_pw" id="user_pw"><br>
-    <span id="error_user"></span><br>
-    <br>
+아이디<input type="text" name="user_id" id="user_id"><br>
+비밀번호<input type="password" name="user_pw" id="user_pw"><br>
+<span id="error_user"></span><br>
+<br>
 <button onclick="login()">로그인</button>
-    <a href="id_find.html">아이디가 기억나지 않아요</a><br>
-    <a href="pw_reset">비밀번호가 기억나지 않아요</a>
+<a href="id_find.html">아이디가 기억나지 않아요</a><br>
+<a href="pw_reset">비밀번호가 기억나지 않아요</a>
 </body>
 </html>

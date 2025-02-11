@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserDao userDao;
 
-    public boolean service_join(UserDto userDto) {
+    public boolean join(UserDto userDto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encoder_pw = encoder.encode(userDto.getUser_pw());
         userDto.setUser_pw(encoder_pw);
@@ -29,17 +29,14 @@ public class UserService {
     }
 
     public boolean email_check(String user_email) {
-<<<<<<< HEAD
-        if(userDao.email_check(user_email) != null){
-=======
         if (userDao.email_check(user_email) != null) {
->>>>>>> copyuser_jieun
             return true;
         }
-        return false;
+        else {
+            return false;
+        }
     }
 
-<<<<<<< HEAD
     public boolean seller_regnum_check(String seller_regnum) {
         if(userDao.seller_regnum_check(seller_regnum) != null){
             return true;
@@ -49,7 +46,8 @@ public class UserService {
 
     public boolean join_additional_seller(SellerDto sellerDto) {
         return userDao.change_user_type(sellerDto.getUser_id(), 1) && userDao.join_additional_seller(sellerDto);
-=======
+    }
+
     public boolean login(UserDto userDto) {
         UserDto user = userDao.login(userDto.getUser_id());
         if (user != null) {
@@ -62,8 +60,6 @@ public class UserService {
         } else {
             return false;
         }
->>>>>>> copyuser_jieun
     }
-
 }
 
