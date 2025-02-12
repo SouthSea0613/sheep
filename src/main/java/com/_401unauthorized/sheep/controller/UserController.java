@@ -35,11 +35,7 @@ public class UserController {
     @PostMapping("/id_find_email")
     @ResponseBody
     public boolean id_find_email(@RequestBody UserDto userDto) {
-<<<<<<< HEAD
         if(userService.id_find_check(userDto.getUser_email()) != null){
-=======
-        if (userService.id_find_check(userDto.getUser_email())) {
->>>>>>> copyuser_jieun
             return false;
         }
         return true;
