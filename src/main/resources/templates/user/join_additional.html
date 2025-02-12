@@ -130,7 +130,7 @@
 
   <form th:action="@{/user/join_additional_engineer}" method="post" id="join_addForm_engineer" style="display: none">
     <div>
-        <input type="hidden" name="user_id" th:value="@{param.user_id}">
+        <input type="hidden" name="user_id" th:value="${param.user_id}">
       자격증번호 <input type="text" name="engineer_regnum" id="engineer_regnum" onblur="engineer_regnum_check()">
         <span id="engineer_regnum_check"></span><br>
         <input type="hidden" id="engineer_regnum_val" value="0">
