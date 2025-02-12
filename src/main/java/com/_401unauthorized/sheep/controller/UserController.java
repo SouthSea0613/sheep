@@ -1,5 +1,6 @@
 package com._401unauthorized.sheep.controller;
 
+import com._401unauthorized.sheep.dto.EngineerDto;
 import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
 import com._401unauthorized.sheep.service.UserService;
@@ -79,6 +80,15 @@ public class UserController {
         }
         return true;
     }
+    @PostMapping("/engineer_regnum_check")
+    @ResponseBody
+    public boolean engineer_regnum_check(@RequestBody EngineerDto engineerDto){
+        log.info("{}",engineerDto);
+        if (userService.engineer_regnum_check(engineerDto.getEngineer_regnum())){
+            return false;
+        }
+        return true;
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -106,6 +116,7 @@ public class UserController {
         }
     }
 
+<<<<<<< HEAD
     @GetMapping("/id_find")
     public String id_find() {
         return "user/id_find";
@@ -124,4 +135,19 @@ public class UserController {
         return "redirect:/user/pw_reset";
         }
     }
+=======
+    @PostMapping("/join_additional_engineer")
+    public String join_additional_engineer(EngineerDto engineerDto){
+        if(userService.join_additional_engineer(engineerDto)) {
+            return "redirect:/user/login";
+        }
+        return "redirect:/user/join_additional";
+    }
+
+
+    @GetMapping("id_find")
+    public String id_find() {
+        return "user/id_find";
+    }
+>>>>>>> uesr_eunhye
 }

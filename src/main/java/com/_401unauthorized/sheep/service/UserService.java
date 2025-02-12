@@ -1,6 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.UserDao;
+import com._401unauthorized.sheep.dto.EngineerDto;
 import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -63,6 +64,7 @@ public class UserService {
         }
     }
 
+<<<<<<< HEAD
     public String id_find_check(String user_email) {
         log.info("xxxxxxxxxxx:{}", userDao.id_find_check(user_email));
         return userDao.id_find_check(user_email);
@@ -73,6 +75,24 @@ public class UserService {
         String encoder_pw = encoder.encode(userDto.getUser_pw());
         userDto.setUser_pw(encoder_pw);
         return userDao.pw_reset(userDto);
+=======
+    public boolean engineer_regnum_check(String engineer_regnum) {
+        if(userDao.engineer_regnum_check(engineer_regnum) != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean id_find_check(String user_email) {
+        if (userDao.id_find_check(user_email) != null) {
+            return true;
+        }
+        return false;
+>>>>>>> uesr_eunhye
+    }
+
+    public boolean join_additional_engineer(EngineerDto engineerDto) {
+        return userDao.change_user_type(engineerDto.getUser_id(),2) && userDao.join_additional_engineer(engineerDto);
     }
 }
 
