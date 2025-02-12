@@ -6,20 +6,33 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/javascript/user.js"></script>
+    <script>
+        function additional() {
+            const user_pw = $('#user_pw').val();
+            if (user_pw != '') {
+                alert('비밀번호를 입력바랍니다.');
+                user_pw.focus();
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
-<h2>사용자 추가인증</h2>
 
-<div>
-    <form action="/user/login" id="addPwCheck">
-        아이디
-        <input type="text" id="user_id" readonly placeholder="아이디"><br>
+<section>
+    <h2>사용자 추가인증</h2>
 
-        비밀번호
-        <input type="password" id="user_pw"><br>
+    <div>
+        <form th:action="@{/mypage/additional}" method="post" id="additional_form">
+            아이디
+            <input type="text" name="user_id" id="user_id" th:text="${session?.user_id}" readonly<br>
 
-        <input type="button" onclick="addPwCheck()" value="확인">
-    </form>
-</div>
+            비밀번호
+            <input type="password" name="user_pw" id="user_pw"><br>
+
+            <input type="button" onclick="additional()" value="확인">
+        </form>
+    </div>
+</section>
 </body>
 </html>
