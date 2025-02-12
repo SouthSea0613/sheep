@@ -68,5 +68,12 @@ public class UserService {
         }
         return false;
     }
+
+    public boolean pw_reset(UserDto userDto) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encoder_pw = encoder.encode(userDto.getUser_pw());
+        userDto.setUser_pw(encoder_pw);
+        return userDao.pw_reset(userDto);
+    }
 }
 

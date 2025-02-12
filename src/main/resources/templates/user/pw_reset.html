@@ -77,7 +77,7 @@
 <section>
     <h2>비밀번호 재설정</h2>
 
-    <form th:action="@{/user/login}" th:method="post" id="pw_reset_form">
+    <form th:action="@{/user/pw_reset}" th:method="post" id="pw_reset_form">
         아이디 <input th:type="text" name="user_id" id="user_id" onblur="id_check2()">
         <span id="id_check"></span><br>
         <input id="id_check_val" type="hidden" value="0">

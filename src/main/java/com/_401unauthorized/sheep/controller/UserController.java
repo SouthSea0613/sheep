@@ -24,11 +24,10 @@ public class UserController {
 
     @PostMapping("/join")
     public String join(UserDto userDto, Model model) {
-        if(userService.join(userDto)){
+        if (userService.join(userDto)) {
             model.addAttribute("user_id", userDto.getUser_id());
             return "user/join_success";
-        }
-        else {
+        } else {
             return "redirect:/user/join";
         }
     }
@@ -36,7 +35,7 @@ public class UserController {
     @PostMapping("/id_find_email")
     @ResponseBody
     public boolean id_find_email(@RequestBody UserDto userDto) {
-        if(userService.id_find_check(userDto.getUser_email())){
+        if (userService.id_find_check(userDto.getUser_email())) {
             return false;
         }
         return true;
@@ -47,8 +46,7 @@ public class UserController {
     public boolean id_check(@RequestBody UserDto userDto) {
         if (userService.id_check(userDto.getUser_id())) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -63,8 +61,7 @@ public class UserController {
     public boolean email_check(@RequestBody UserDto userDto) {
         if (userService.email_check(userDto.getUser_email())) {
             return false;
-        }
-        else {
+        } else {
             return true;
         }
     }
@@ -90,25 +87,36 @@ public class UserController {
             httpSession.setAttribute("user_id", userDto.getUser_id());
             httpSession.setAttribute("user_type", userDto.getUser_type());
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
 
     @PostMapping("/join_additional_seller")
-    public String join_additional_seller(SellerDto sellerDto){
-        if(userService.join_additional_seller(sellerDto)){
+    public String join_additional_seller(SellerDto sellerDto) {
+        if (userService.join_additional_seller(sellerDto)) {
             return "redirect:/user/login";
-        }
-        else {
+        } else {
             return "redirect:/user/join_additional";
         }
     }
 
-    @GetMapping("id_find")
+    @GetMapping("/id_find")
     public String id_find() {
         return "user/id_find";
     }
 
+    @GetMapping("/pw_reset")
+    public String pw_reset() {
+        return "user/pw_reset";
+    }
+
+    @PostMapping("/pw_reset")
+    public String pw_reset(UserDto userDto) {
+        if (userService.pw_reset(userDto)) {
+            return "redirect:/user/login";
+    } else {
+        return "redirect:/user/pw_reset";
+        }
+    }
 }
