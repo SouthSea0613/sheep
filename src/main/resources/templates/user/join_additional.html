@@ -1,103 +1,102 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-    function check(){
-      const radio = $('input[name=join_additional]:checked').val();
-      const addForm_seller = $('#join_addForm_seller');
-      const addForm_engineer = $('#join_addForm_engineer');
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+		function check() {
+			const radio = $('input[name=join_additional]:checked').val();
+			const addForm_seller = $('#join_addForm_seller');
+			const addForm_engineer = $('#join_addForm_engineer');
 
-      if(radio==='seller'){
-        addForm_seller.css('display','block')
-        addForm_engineer.css('display','none')
+			if (radio === 'seller') {
+				addForm_seller.css('display', 'block')
+				addForm_engineer.css('display', 'none')
 
-      }else if(radio==='engineer'){
-        addForm_engineer.css('display','block')
-        addForm_seller.css('display','none')
-      }
-    }
+			} else if (radio === 'engineer') {
+				addForm_engineer.css('display', 'block')
+				addForm_seller.css('display', 'none')
+			}
+		}
 
-    function seller_regnum_check(){
-        let data = {};
-        const seller_regnum = $('#seller_regnum');
-        data.seller_regnum = seller_regnum.val();
-        axios.post('/user/seller_regnum_check', data)
-            .then(res => {
-                console.log(res);
-                if (res.data) {
-                    $('#seller_regnum_check').text('사용 가능한 사업자등록번호 입니다.');
-                    $('#seller_regnum_val').val(1);
-                } else {
-                    $('#seller_regnum_check').text('이미 사용중인 사업자등록번호 입니다.')
-                    $('#seller_regnum_val').val(0);
-                }
-            })
-            .catch(err => {
-                $('#seller_regnum_check').text('');
-                $('#seller_regnum_val').val(0);
-            })
-    }
+		function seller_regnum_check() {
+			let data = {};
+			const seller_regnum = $('#seller_regnum');
+			data.seller_regnum = seller_regnum.val();
+			axios.post('/user/seller_regnum_check', data)
+				.then(res => {
+					console.log(res);
+					if (res.data) {
+						$('#seller_regnum_check').text('사용 가능한 사업자등록번호 입니다.');
+						$('#seller_regnum_val').val(1);
+					} else {
+						$('#seller_regnum_check').text('이미 사용중인 사업자등록번호 입니다.')
+						$('#seller_regnum_val').val(0);
+					}
+				})
+				.catch(err => {
+					$('#seller_regnum_check').text('');
+					$('#seller_regnum_val').val(0);
+				})
+		}
 
-    function join_addCheck_seller() {
-        const seller_regnum = $('#seller_regnum');
-        if (seller_regnum.val() == '') {
-            alert('사업자등록번호 를 입력하세요.');
-            seller_regnum.focus();
-            return false;
-        }
-        const seller_regnum_val = $('#seller_regnum_val');
-        if (seller_regnum_val.val() == 0) {
-            alert('이미 사용중인 사업자등록번호 입니다.');
-            seller_regnum.focus();
-            return false;
-        }
-        const seller_name = $('#seller_name');
-        if (seller_name.val() == '') {
-            alert('대표자 성함을 입력하세요.');
-            seller_name.focus();
-            return false;
-        }
-        const seller_addr = $('#seller_addr');
-        if (seller_addr.val() == '') {
-            alert('사업자 주소를 입력하세요.');
-            seller_addr.focus();
-            return false;
-        }
-        $('#join_addForm_seller').submit();
-    }
-
-  </script>
+		function join_addCheck_seller() {
+			const seller_regnum = $('#seller_regnum');
+			if (seller_regnum.val() == '') {
+				alert('사업자등록번호 를 입력하세요.');
+				seller_regnum.focus();
+				return false;
+			}
+			const seller_regnum_val = $('#seller_regnum_val');
+			if (seller_regnum_val.val() == 0) {
+				alert('이미 사용중인 사업자등록번호 입니다.');
+				seller_regnum.focus();
+				return false;
+			}
+			const seller_name = $('#seller_name');
+			if (seller_name.val() == '') {
+				alert('대표자 성함을 입력하세요.');
+				seller_name.focus();
+				return false;
+			}
+			const seller_addr = $('#seller_addr');
+			if (seller_addr.val() == '') {
+				alert('사업자 주소를 입력하세요.');
+				seller_addr.focus();
+				return false;
+			}
+			$('#join_addForm_seller').submit();
+		}
+	</script>
 </head>
 <body>
-  <h2>추가인증.html</h2>
+<h2>추가인증.html</h2>
 
 
-  <input type="radio" name="join_additional" id="join_additional1" value="seller" checked onchange="check()">시공업체
-  <input type="radio" name="join_additional"  id="join_additional2" value="engineer" onchange="check()">기술자<br>
+<input type="radio" name="join_additional" id="join_additional1" value="seller" checked onchange="check()">시공업체
+<input type="radio" name="join_additional" id="join_additional2" value="engineer" onchange="check()">기술자<br>
 
-  <form th:action="@{/user/join_additional_seller}" method="post" id="join_addForm_seller" >
-  <div>
-      <input type="hidden" name="user_id" th:value="${param.user_id}">
-      사업자등록번호 <input type="text" name="seller_regnum" id="seller_regnum" onblur="seller_regnum_check()">
-      <span id="seller_regnum_check"></span><br>
-      <input id="seller_regnum_val" type="hidden" value="0">
-      업체명 <input type="text" id="seller_company" name="seller_company"><br>
-      대표자 <input type="text" id="seller_name" name="seller_name"><br>
-      주소 <input type="text" id="seller_addr" name="seller_addr"><br>
-    <input type="button" value="인증요청" id="join_addBtn" onclick="join_addCheck_seller()">
-  </div>
-  </form>
+<form th:action="@{/user/join_additional_seller}" method="post" id="join_addForm_seller">
+	<div>
+		<input type="hidden" name="user_id" th:value="${param.user_id}">
+		사업자등록번호 <input type="text" name="seller_regnum" id="seller_regnum" onblur="seller_regnum_check()">
+		<span id="seller_regnum_check"></span><br>
+		<input id="seller_regnum_val" type="hidden" value="0">
+		업체명 <input type="text" id="seller_company" name="seller_company"><br>
+		대표자 <input type="text" id="seller_name" name="seller_name"><br>
+		주소 <input type="text" id="seller_addr" name="seller_addr"><br>
+		<input type="button" value="인증요청" id="join_addBtn" onclick="join_addCheck_seller()">
+	</div>
+</form>
 
-  <form id="join_addForm_engineer" style="display: none">
-    <div>
-      자격증번호 <input type="text" id="engineer_regnum"><br>
-      취득일 <input type="text" id="engineer_regdate"><br>
-      <input type="button" value="인증요청" id="join_addBtn2" onclick="join_addCheck()">
-    </div>
-  </form>
+<form id="join_addForm_engineer" style="display: none">
+	<div>
+		자격증번호 <input type="text" id="engineer_regnum"><br>
+		취득일 <input type="text" id="engineer_regdate"><br>
+		<input type="button" value="인증요청" id="join_addBtn2" onclick="join_addCheck()">
+	</div>
+</form>
 </body>
 </html>

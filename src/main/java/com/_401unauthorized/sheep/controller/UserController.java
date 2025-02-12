@@ -33,13 +33,24 @@ public class UserController {
         }
     }
 
+    @PostMapping("/id_find_email")
+    @ResponseBody
+    public boolean id_find_email(@RequestBody UserDto userDto) {
+        if(userService.id_find_check(userDto.getUser_email())){
+            return false;
+        }
+        return true;
+    }
+
     @PostMapping("/id_check")
     @ResponseBody
     public boolean id_check(@RequestBody UserDto userDto) {
         if (userService.id_check(userDto.getUser_id())) {
             return false;
         }
-        return true;
+        else {
+            return true;
+        }
     }
 
     @GetMapping("/join_additional")
@@ -49,8 +60,8 @@ public class UserController {
 
     @PostMapping("/email_check")
     @ResponseBody
-    public boolean email_check(@RequestBody UserDto userDto){
-        if(userService.email_check(userDto.getUser_email())){
+    public boolean email_check(@RequestBody UserDto userDto) {
+        if (userService.email_check(userDto.getUser_email())) {
             return false;
         }
         else {
@@ -60,8 +71,8 @@ public class UserController {
 
     @PostMapping("/seller_regnum_check")
     @ResponseBody
-    public boolean seller_regnum_check(@RequestBody SellerDto sellerDto){
-        if(userService.seller_regnum_check(sellerDto.getSeller_regnum())){
+    public boolean seller_regnum_check(@RequestBody SellerDto sellerDto) {
+        if (userService.seller_regnum_check(sellerDto.getSeller_regnum())) {
             return false;
         }
         return true;
@@ -80,7 +91,9 @@ public class UserController {
             httpSession.setAttribute("user_type", userDto.getUser_type());
             return true;
         }
-        return false;
+        else {
+            return false;
+        }
     }
 
     @PostMapping("/join_additional_seller")
@@ -88,6 +101,14 @@ public class UserController {
         if(userService.join_additional_seller(sellerDto)){
             return "redirect:/user/login";
         }
-        return "redirect:/user/join_additional";
+        else {
+            return "redirect:/user/join_additional";
+        }
     }
+
+    @GetMapping("id_find")
+    public String id_find() {
+        return "user/id_find";
+    }
+
 }

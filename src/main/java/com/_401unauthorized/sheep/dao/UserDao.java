@@ -13,4 +13,5 @@ public interface UserDao {
     boolean change_user_type(String user_id, int type);
     String email_check(String user_email);
     UserDto login(String user_id);
+    String id_find_check(String user_email);
 }

@@ -61,5 +61,12 @@ public class UserService {
             return false;
         }
     }
+
+    public boolean id_find_check(String user_email) {
+        if (userDao.id_find_check(user_email) != null) {
+            return true;
+        }
+        return false;
+    }
 }
 

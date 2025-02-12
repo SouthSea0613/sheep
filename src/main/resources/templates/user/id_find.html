@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function id_find_email() {
+            let data = {};
+            const id_find_email = $('#id_find_email');
+            data.id_find_email = id_find_email.val();
+            axios.post('/user/id_find_email', data)
+                .then(res => {
+                    if (res.data) {
+                        $('#id_find_email_check').text('없어');
+                        $('#id_find_val').val(1);
+                    } else {
+                        $('#id_find_email_check').text('있어');
+                        $('#id_find_val').val(0);
+                    }
+                })
+                .catch(err => {
+                    $('#id_find_email_check').text('');
+                    $('#id_find_val').val(0);
+                })
+        }
+
+        function id_find() {
+            let data = {};
+
+        }
+    </script>
+</head>
+<body>
+<h2>아이디 찾기</h2>
+
+메일
+<input type="text" name="id_find_email" id="id_find_email" onblur="id_find_email()">
+<span id="id_find_email_check"></span><br>
+<input id="id_find_val" type="hidden" value="0">
+
+이름
+<input type="text" name="id_find_name" id="id_find_name"><br>
+
+<input type="button" value="아이디 찾기" id="id_find_button" onclick="id_find()">
+
+</body>
+</html>
