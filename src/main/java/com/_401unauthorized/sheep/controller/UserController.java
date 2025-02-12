@@ -116,7 +116,6 @@ public class UserController {
         }
     }
 
-<<<<<<< HEAD
     @GetMapping("/id_find")
     public String id_find() {
         return "user/id_find";
@@ -135,7 +134,7 @@ public class UserController {
         return "redirect:/user/pw_reset";
         }
     }
-=======
+
     @PostMapping("/join_additional_engineer")
     public String join_additional_engineer(EngineerDto engineerDto){
         if(userService.join_additional_engineer(engineerDto)) {
@@ -143,11 +142,4 @@ public class UserController {
         }
         return "redirect:/user/join_additional";
     }
-
-
-    @GetMapping("id_find")
-    public String id_find() {
-        return "user/id_find";
-    }
->>>>>>> uesr_eunhye
 }
