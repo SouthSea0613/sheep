@@ -11,6 +11,10 @@
         INSERT INTO SELLER
         VALUES (#{seller_regnum}, #{user_id}, #{seller_company}, #{seller_name}, #{seller_addr}, null)
     </insert>
+    <insert id="join_additional_engineer">
+        insert into engineer
+        values (#{engineer_regnum}, #{user_id}, #{engineer_regdate})
+    </insert>
 
     <update id="change_user_type">
         UPDATE USER
@@ -40,6 +44,11 @@
         SELECT *
         FROM SELLER
         WHERE  SELLER_REGNUM = #{seller_regnum}
+    </select>
+    <select id="engineer_regnum_check" resultType="java.lang.String">
+        select *
+        from engineer
+        where engineer_regnum = #{engineer_regnum}
     </select>
 
 </mapper>

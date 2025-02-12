@@ -1,5 +1,6 @@
 package com._401unauthorized.sheep.controller;
 
+import com._401unauthorized.sheep.dto.EngineerDto;
 import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
 import com._401unauthorized.sheep.service.UserService;
@@ -66,6 +67,14 @@ public class UserController {
         }
         return true;
     }
+    @PostMapping("/engineer_regnum_check")
+    @ResponseBody
+    public boolean engineer_regnum_check(@RequestBody EngineerDto engineerDto){
+        if(userService.engineer_regnum_check(engineerDto.getEngineer_regnum())){
+            return false;
+        }
+        return true;
+    }
 
     @GetMapping("/login")
     public String login() {
@@ -86,6 +95,14 @@ public class UserController {
     @PostMapping("/join_additional_seller")
     public String join_additional_seller(SellerDto sellerDto){
         if(userService.join_additional_seller(sellerDto)){
+            return "redirect:/user/login";
+        }
+        return "redirect:/user/join_additional";
+    }
+
+    @PostMapping("/join_additional_engineer")
+    public String join_additional_engineer(EngineerDto engineerDto){
+        if(userService.join_additional_engineer(engineerDto)) {
             return "redirect:/user/login";
         }
         return "redirect:/user/join_additional";

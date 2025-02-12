@@ -1,6 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.UserDao;
+import com._401unauthorized.sheep.dto.EngineerDto;
 import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +61,17 @@ public class UserService {
         } else {
             return false;
         }
+    }
+
+    public boolean engineer_regnum_check(String engineer_regnum) {
+        if(userDao.engineer_regnum_check(engineer_regnum) != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean join_additional_engineer(EngineerDto engineerDto) {
+        return userDao.change_user_type(engineerDto.getUser_id(),2) && userDao.join_additional_engineer(engineerDto);
     }
 }
 
