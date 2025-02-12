@@ -4,24 +4,21 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script th:inline="javascript">
-        function pwCheck() {
-            let pw = document.getElementById("pwCheck");
-        }
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/javascript/user.js"></script>
 </head>
 <body>
 <h2>사용자 추가인증</h2>
 
 <div>
-    <form action="/user/login.html" id="pwCheck">
+    <form action="/user/login" id="addPwCheck">
         아이디
-        <input type="text" readonly placeholder="wldmsdl6276"><br>
+        <input type="text" id="user_id" readonly placeholder="아이디"><br>
 
         비밀번호
-        <input type="password"><br>
+        <input type="password" id="user_pw"><br>
 
-        <input type="button" onclick="pwCheck()" value="확인">
+        <input type="button" onclick="addPwCheck()" value="확인">
     </form>
 </div>
 </body>
