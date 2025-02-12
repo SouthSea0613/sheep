@@ -69,7 +69,10 @@
 <form th:action="@{/user/login}" method="get">
 <input type="submit" value="로그인" style="display: none" id="id_find_login">
 </form>
-<input type="button" value="비밀번호 재설정" style="display: none" id="id_find_pwreset" th:href="@{/user/pw_reset}">
+
+<form th:action="@{/user/pw_reset}" method="get">
+<input type="submit" value="비밀번호 재설정" style="display: none" id="id_find_pwreset">
+</form>
 
 </body>
 </html>
