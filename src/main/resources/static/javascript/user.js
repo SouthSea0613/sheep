@@ -118,7 +118,6 @@ function addPwCheck() {
 }
 
 function test(user_email) {
-	console.log(user_email);
 	let data = {};
 	data.user_email = user_email;
 	axios.post('/user/email_check', data)
