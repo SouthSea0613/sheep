@@ -63,23 +63,22 @@ public class UserService {
         }
     }
 
-<<<<<<< HEAD
     public boolean engineer_regnum_check(String engineer_regnum) {
         if(userDao.engineer_regnum_check(engineer_regnum) != null) {
-=======
-    public boolean id_find_check(String user_email) {
-        if (userDao.id_find_check(user_email) != null) {
->>>>>>> origin/copyuser_jieun
             return true;
         }
         return false;
     }
-<<<<<<< HEAD
+
+    public boolean id_find_check(String user_email) {
+        if (userDao.id_find_check(user_email) != null) {
+            return true;
+        }
+        return false;
+    }
 
     public boolean join_additional_engineer(EngineerDto engineerDto) {
         return userDao.change_user_type(engineerDto.getUser_id(),2) && userDao.join_additional_engineer(engineerDto);
     }
-=======
->>>>>>> origin/copyuser_jieun
 }
 

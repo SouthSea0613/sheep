@@ -115,7 +115,6 @@ public class UserController {
         }
     }
 
-<<<<<<< HEAD
     @PostMapping("/join_additional_engineer")
     public String join_additional_engineer(EngineerDto engineerDto){
         if(userService.join_additional_engineer(engineerDto)) {
@@ -123,11 +122,10 @@ public class UserController {
         }
         return "redirect:/user/join_additional";
     }
-=======
+
+
     @GetMapping("id_find")
     public String id_find() {
         return "user/id_find";
     }
-
->>>>>>> origin/copyuser_jieun
 }
