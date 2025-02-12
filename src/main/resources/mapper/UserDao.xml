@@ -53,4 +53,10 @@
         SET USER_PW = #{user_pw}
         WHERE USER_ID = #{user_id}
     </update>
+
+    <select id="additional" resultType="java.lang.String">
+        SELECT USER_PW
+        FROM USER
+        WHERE USER_ID = #{user_id}
+    </select>
 </mapper>

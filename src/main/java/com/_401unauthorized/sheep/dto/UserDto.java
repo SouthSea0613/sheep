@@ -20,4 +20,6 @@ public class UserDto {
     String user_addr;
     String user_email;
     String user_type;
+    String engineer_regnum;
+    String engineer_regdate;
 }

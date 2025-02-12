@@ -8,9 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,11 +23,19 @@ public class MyPageController {
     }
 
     @PostMapping("/additional")
-    public String additional(UserDto userDto, Model model) {
-        if(myPageService.additional(userDto, model)) {
-            model.addAttribute("user", userDto);
-            return "mypage/write";
+    @ResponseBody
+    public boolean additional(@RequestBody UserDto userDto, HttpSession httpSessionsession) {
+        userDto.setUser_id(httpSessionsession.getAttribute("user_id").toString());
+        if(myPageService.additional(userDto)) {
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    @GetMapping("/write")
+    public String write() {
+        return "mypage/write";
     }
 
 }
