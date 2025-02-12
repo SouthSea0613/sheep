@@ -36,10 +36,15 @@ public class UserController {
     @PostMapping("/id_find_email")
     @ResponseBody
     public boolean id_find_email(@RequestBody UserDto userDto) {
-        if(userService.id_find_check(userDto.getUser_email())){
+        if(userService.id_find_check(userDto.getUser_email()) != null){
             return false;
         }
         return true;
+    }
+    @PostMapping("/id_find_email_id")
+    @ResponseBody
+    public String id_find_email_id(@RequestBody UserDto userDto) {
+        return userService.id_find_check(userDto.getUser_email());
     }
 
     @PostMapping("/id_check")

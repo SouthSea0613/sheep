@@ -43,7 +43,7 @@
     </select>
 
     <select id="id_find_check" resultType="java.lang.String">
-        SELECT USER_EMAIL
+        SELECT USER_ID
         FROM USER
         WHERE USER_EMAIL = #{user_email}
     </select>

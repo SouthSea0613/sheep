@@ -5,6 +5,7 @@ import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -62,11 +63,9 @@ public class UserService {
         }
     }
 
-    public boolean id_find_check(String user_email) {
-        if (userDao.id_find_check(user_email) != null) {
-            return true;
-        }
-        return false;
+    public String id_find_check(String user_email) {
+        log.info("xxxxxxxxxxx:{}", userDao.id_find_check(user_email));
+        return userDao.id_find_check(user_email);
     }
 }
 
