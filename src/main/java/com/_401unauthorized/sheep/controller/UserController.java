@@ -81,7 +81,8 @@ public class UserController {
     @PostMapping("/engineer_regnum_check")
     @ResponseBody
     public boolean engineer_regnum_check(@RequestBody EngineerDto engineerDto){
-        if(userService.engineer_regnum_check(engineerDto.getEngineer_regnum())){
+        log.info("{}",engineerDto);
+        if (userService.engineer_regnum_check(engineerDto.getEngineer_regnum())){
             return false;
         }
         return true;
