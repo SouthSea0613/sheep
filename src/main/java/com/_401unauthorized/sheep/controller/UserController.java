@@ -33,6 +33,15 @@ public class UserController {
         }
     }
 
+    @PostMapping("/id_find_email")
+    @ResponseBody
+    public boolean id_find_email(@RequestBody UserDto userDto) {
+        if(userService.id_find_check(userDto.getUser_email())){
+            return false;
+        }
+        return true;
+    }
+
     @PostMapping("/id_check")
     @ResponseBody
     public boolean id_check(@RequestBody UserDto userDto) {
@@ -90,4 +99,10 @@ public class UserController {
         }
         return "redirect:/user/join_additional";
     }
+
+    @GetMapping("id_find")
+    public String id_find() {
+        return "user/id_find";
+    }
+
 }
