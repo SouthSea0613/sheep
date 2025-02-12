@@ -14,6 +14,10 @@ public interface UserDao {
     boolean change_user_type(String user_id, int type);
     String email_check(String user_email);
     UserDto login(String user_id);
+<<<<<<< HEAD
     String engineer_regnum_check(String engineerRegnum);
     boolean join_additional_engineer(EngineerDto engineerDto);
+=======
+    String id_find_check(String user_email);
+>>>>>>> origin/copyuser_jieun
 }
