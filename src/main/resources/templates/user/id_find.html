@@ -66,7 +66,9 @@
 <span id="id_find_res"></span><br>
 <input id="id_find_res_val" type="hidden" value="0">
 
-<input type="button" value="로그인" style="display: none" id="id_find_login" th:href="@{/user/login}">
+<form th:action="@{/user/login}" method="get">
+<input type="submit" value="로그인" style="display: none" id="id_find_login">
+</form>
 <input type="button" value="비밀번호 재설정" style="display: none" id="id_find_pwreset" th:href="@{/user/pw_reset}">
 
 </body>
