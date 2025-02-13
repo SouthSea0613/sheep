@@ -83,10 +83,10 @@ public class UserController {
     @PostMapping("/login")
     @ResponseBody
     public boolean login(@RequestBody UserDto userDto, HttpSession httpSession) {
-        if (userService.login(userDto)) {
-            log.info(userDto.toString());
-            httpSession.setAttribute("user_id", userDto.getUser_id());
-            httpSession.setAttribute("user_type", userDto.getUser_type());
+        UserDto user = userService.login(userDto);
+        if (user != null) {
+            httpSession.setAttribute("user_id", user.getUser_id());
+            httpSession.setAttribute("user_type", user.getUser_type());
             return true;
         } else {
             return false;
