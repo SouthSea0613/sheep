@@ -11,16 +11,16 @@
               <h2 class="header_left">header.html</h2>
           <nav>
               <ul class="header_right">
-                  <li class="success" id="user_name">테스트님</li>
                   <li class="success">
                       <form th:action="@{/user/logout}" method="post">
                           <button>로그아웃</button>
                       </form>
                   </li>
+                  <li class="success" id="user_name">테스트님</li>
                   <li class="before">
                       <a th:href="@{/user/join}" th:text="회원가입"></a>
                   </li>
-                  <li>
+                  <li class="before">
                       <a th:href="@{/user/login}" th:text="로그인"></a>
                   </li>
               </ul>
