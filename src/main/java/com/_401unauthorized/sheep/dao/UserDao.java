@@ -25,7 +25,7 @@ public interface UserDao {
 
 
 
-    UserDto getInfo(UserDto userDto);
+    UserDto getInfoSeller(UserDto userDto);
 
-    UserDto getInfoNormal(UserDto userDto);
+    UserDto getInfo(UserDto userDto);
 }

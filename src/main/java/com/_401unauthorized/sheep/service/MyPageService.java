@@ -32,14 +32,14 @@ public class MyPageService {
         UserDto user=null;
         switch (userDto.getUser_type()){
             case "0":
-              user = userDao.getInfoNormal(userDto);
+              user = userDao.getInfo(userDto);
               user.setUser_type("normal");
                 break;
             case "1":
-                user = userDao.getInfoNormal(userDto);
+                user = userDao.getInfo(userDto);
                 user.setUser_type("seller");
             case "2":
-                userDao.getInfo(userDto);
+                userDao.getInfoSeller(userDto);
                 break;
         }
         return userDto;
