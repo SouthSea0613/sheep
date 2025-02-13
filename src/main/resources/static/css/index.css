@@ -12,9 +12,13 @@
 }
 
 .header_left {
-    float: left;
+    float: left !important;
 }
 
 .header_right {
-    float: right;
+    float: right !important;
+}
+
+li {
+    text-decoration: none;
 }

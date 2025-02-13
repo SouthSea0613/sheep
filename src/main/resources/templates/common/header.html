@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>common</title>
+    <link rel="stylesheet" href="../../static/css/index.css">
 </head>
 <body>
   <header th:fragment="header">
@@ -10,8 +11,8 @@
           <div class="header_content">
               <div class="logo"><img src="" alt=""></div>
               <h2 class="header_left">header.html</h2>
-              <nav class="header_right">
-                  <ul>
+              <nav class="header_mid">
+                  <ul class="header_mid">
                       <li>지도 공통</li>
                       <li>지도 공통</li>
                       <li>지도 공통</li>
@@ -21,18 +22,20 @@
                       <li>구인구직 시공사</li>
                       <li>팁&랜선 소비자</li>
                   </ul>
-                  <ul>
+              </nav>
+              <nav>
+                  <ul class="header_right_ul">
                       <li class="success" id="user_name">테스트님</li>
                       <li class="success">
-                          <form th:action="@{}" method="post">
+                          <form th:action="@{/user/logout}" method="post">
                               <button>로그아웃</button>
                           </form>
                       </li>
                       <li class="before">
-                          <a href="/user/login">로그인</a>
+                          <a th:href="@{/user/login}">로그인</a>
                       </li>
                       <li>
-                          <a href="/user/join">회원가입</a>
+                          <a th:href="@{/user/join}">회원가입</a>
                       </li>
                   </ul>
               </nav>
