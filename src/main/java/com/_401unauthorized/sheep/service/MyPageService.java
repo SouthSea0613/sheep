@@ -27,6 +27,11 @@ public class MyPageService {
         }
 
     public UserDto write(UserDto userDto) {
-
+        switch (userDto.getUser_type()){
+            case "0", "1":
+                userDao.write(userDto);
+                break;
+        }
+        return userDto;
     }
 }

@@ -19,4 +19,6 @@ public interface UserDao {
     String id_find_check(String user_email);
     boolean pw_reset(UserDto userDto);
     String additional(String user_id);
+
+    void write(UserDto userDto);
 }

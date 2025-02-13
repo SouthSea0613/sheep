@@ -99,8 +99,10 @@ public class UserController {
     @ResponseBody
     public boolean login(@RequestBody UserDto userDto, HttpSession httpSession) {
         if (userService.login(userDto)) {
+
             httpSession.setAttribute("user_id", userDto.getUser_id());
             httpSession.setAttribute("user_type", userDto.getUser_type());
+
             return true;
         } else {
             return false;
