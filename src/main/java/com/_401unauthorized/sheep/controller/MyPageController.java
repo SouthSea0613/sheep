@@ -34,15 +34,21 @@ public class MyPageController {
     }
 
     @GetMapping("/write")
-    public String write(UserDto userDto,HttpSession httpSession, Model model) {
+    public String write(HttpSession httpSession, Model model) {
         UserDto user = new UserDto();
         user.setUser_id(httpSession.getAttribute("user_id").toString());
         log.info(user.toString());
         user.setUser_type(httpSession.getAttribute("user_type").toString());
         log.info(user.getUser_type());
         log.info("유저{}", user.getUser_id());
-        model.addAttribute("userdto", myPageService.getInfo(userDto));
+        model.addAttribute("userdto", myPageService.getInfo(user));
         return "mypage/write";
     }
+
+    @PostMapping("/write")
+
+
+
+
 
 }
