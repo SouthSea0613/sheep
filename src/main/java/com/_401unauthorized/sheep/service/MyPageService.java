@@ -32,35 +32,45 @@ public class MyPageService {
 
 
     public UserDto getInfo(UserDto userDto) {
-        UserDto user=new UserDto();
+
+        UserDto user = new UserDto();
+        log.info("테스트");
+
+
         switch (userDto.getUser_type()){
             case "0":
               user = userDao.getInfo(userDto);
-              user.setUser_type("normal");
+              user.setUser_type("회원님");
+                log.info("테스트{}", user);
                 break;
             case "1":
                 user = userDao.getInfo(userDto);
-                user.setUser_type("seller");
+                user.setUser_type("사장님");
+                log.info("테스트{}", user);
                 break;
             case "2":
                 user =userDao.getInfoEngineer(userDto);
-                user.setUser_type("engineer");
+                user.setUser_type("기술자님");
+                log.info("테스트{}", user);
                 break;
         }
-            switch (userDto.getUser_phone_company()) {
-                case "1":
-                    break;
 
-                case "2":
-                    break;
-
-                case "3":
-                    break;
-
-                case "4":
-                    break;
-            }
+        
 
         return userDto;
+    }
+
+    public boolean updateInfo(UserDto userDto) {
+        boolean result = userDao.updateInfo(userDto);
+        if(result){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
+    public boolean updateEngineerInfo(UserDto userDto) {
+        return false;
     }
 }

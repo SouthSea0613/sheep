@@ -5,7 +5,7 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script th:src="@{/javascript/user.js}"></script>
+    <script th:src="@{/javascript/mypage.js}"></script>
 </head>
 <body>
 <h2>회원정보수정</h2><br>
@@ -16,7 +16,7 @@
         <input type="text" id="user_id" th:placeholder="${session?.user_id}" readonly><br>
 
         이름
-        <input type="text" name="user_name" id="user_name"><br>
+        <input type="text" name="user_name" id="user_name" th:placeholder="${userdto.getUser_name()}"><br>
 
         전화번호
         <select name="user_phone_company" id="user_phone_company">
@@ -44,18 +44,21 @@
         <span id="email_check"></span><br>
         <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
 
-        <!--기술자 영역-->
-        <div class="engineer_info">
-            자격증번호
-            <input type="text" id="engineer_regnum" readonly><br>
-
-            자격증 발급번호
-            <input type="text" name="engineer_regdate" id="engineer_regdate">
-        </div>
-        <div class="button-area">
-            <input type="button" id="write_button" value="수정완료" onclick="write()">
-        </div>
     </form>
+    <!--기술자 영역-->
+    <form id="engineer_form" method="post" action="/mypage/write">
+    <div class="engineer_info">
+        자격증번호
+        <input type="text" id="engineer_regnum" readonly><br>
+
+        자격증 발급번호
+        <input type="text" name="engineer_regdate" id="engineer_regdate">
+    </div>
+    </form>
+    <div class="button-area">
+        <input type="button" id="write_button" value="수정완료" onclick="write()">
+    </div>
+ 
 </div>
 </body>
 </html>
