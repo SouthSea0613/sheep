@@ -38,10 +38,13 @@ public class MyPageService {
             case "1":
                 user = userDao.getInfo(userDto);
                 user.setUser_type("seller");
+                break;
             case "2":
-                userDao.getInfoSeller(userDto);
+                user =userDao.getInfoSeller(userDto);
+                user.setUser_type("engineer");
                 break;
         }
+
         return userDto;
     }
 }
