@@ -18,5 +18,5 @@ public interface UserDao {
 
 //    mypage controller 영역
     String additional(String user_id);
-    UserDto write(UserDto userDto);
+    UserDto getInfoEngineer(UserDto userDto);
 }

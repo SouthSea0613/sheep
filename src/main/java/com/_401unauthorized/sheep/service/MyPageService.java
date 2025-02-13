@@ -28,14 +28,12 @@ public class MyPageService {
             }
         }
 
-    public UserDto write(UserDto userDto) {
-//        log.info("유저아이디"+userDto.getUser_id());
-//        log.info("타입"+userDto.getUser_type());
-//        switch (userDto.getUser_type()) {
-//            case "2":
-//                userDao.write(userDto);
-//                break;
-//        }
+    public UserDto getInfo(UserDto userDto) {
+        switch (userDto.getUser_type()) {
+            case "2":
+                userDao.getInfoEngineer(userDto);
+                break;
+        }
         return userDto;
     }
 }
