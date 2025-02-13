@@ -28,39 +28,23 @@ public class MyPageService {
         }
     }
 
-
-
-
     public UserDto getInfo(UserDto userDto) {
-        UserDto user=new UserDto();
+        UserDto user = new UserDto();   // 빈깡통
+
         switch (userDto.getUser_type()){
             case "0":
               user = userDao.getInfo(userDto);
-              user.setUser_type("normal");
+              user.setUser_type("회원");
                 break;
             case "1":
                 user = userDao.getInfo(userDto);
-                user.setUser_type("seller");
+                user.setUser_type("사장님");
                 break;
             case "2":
                 user =userDao.getInfoEngineer(userDto);
-                user.setUser_type("engineer");
+                user.setUser_type("작업자");
                 break;
         }
-            switch (userDto.getUser_phone_company()) {
-                case "1":
-                    break;
-
-                case "2":
-                    break;
-
-                case "3":
-                    break;
-
-                case "4":
-                    break;
-            }
-
-        return userDto;
+        return user;
     }
 }

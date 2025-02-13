@@ -45,6 +45,8 @@
         <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
 
         <!--기술자 영역-->
+        <form id="engineer_form" method="post" action="/mypage/write">
+        <th:block th:unless="${#lists.isEmpty(userdto.engineer_regnum)}">
         <div class="engineer_info">
             자격증번호
             <input type="text" id="engineer_regnum" readonly><br>
@@ -52,6 +54,9 @@
             자격증 발급번호
             <input type="text" name="engineer_regdate" id="engineer_regdate">
         </div>
+        </th:block>
+        </form>
+
         <div class="button-area">
             <input type="button" id="write_button" value="수정완료" onclick="write()">
         </div>
