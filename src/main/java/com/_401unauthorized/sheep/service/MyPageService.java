@@ -71,6 +71,10 @@ public class MyPageService {
     }
 
     public boolean updateEngineerInfo(UserDto userDto) {
+        boolean result = userDao.update_engineerinfo(userDto);
+        if(result){
+            return true;
+        }
         return false;
     }
 }
