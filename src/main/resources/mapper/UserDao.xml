@@ -59,4 +59,13 @@
         FROM USER
         WHERE USER_ID = #{user_id}
     </select>
+
+    <!-- 회원정보수정 페이지 넘어갈 때 타입별로 가져오기! -->
+    <select id="write" resultType="com._401unauthorized.sheep.dto.UserDto">
+        SELECT U.USER_ID, U.USER_PW, U.USER_NAME, U.USER_PHONE_COMPANY, U.USER_PHONE, U.USER_ADDR, U.USER_EMAIL, U.USER_TYPE,
+               E.ENGINEER_REGNUM, E.ENGINEER_REGDATE
+        FROM USER U
+            JOIN ENGINEER E
+                ON #{user_id} = E.USER_ID
+    </select>
 </mapper>

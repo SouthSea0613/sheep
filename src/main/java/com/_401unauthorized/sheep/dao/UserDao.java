@@ -15,5 +15,8 @@ public interface UserDao {
     UserDto login(String user_id);
     String id_find_check(String user_email);
     boolean pw_reset(UserDto userDto);
+
+//    mypage controller 영역
     String additional(String user_id);
+    UserDto write(UserDto userDto);
 }

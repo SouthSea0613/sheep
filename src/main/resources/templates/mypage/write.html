@@ -13,10 +13,10 @@
 <div>
     <form th:action="@{/mypage/write}" method="post" id="insertInfo">
         아이디
-        <input type="text" id="user_id" th:placeholder="${session.user_id}" readonly><br>
+        <input type="text" id="user_id" th:placeholder="${session?.user_id}" readonly><br>
 
         이름
-        <input type="text" name="user_name" id="user_name" th:placeholder="$"><br>
+        <input type="text" name="user_name" id="user_name"><br>
 
         전화번호
         <select name="user_phone_company" id="user_phone_company">
@@ -44,7 +44,11 @@
         <span id="email_check"></span><br>
         <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
 
-
+        <!--기술자 영역-->
+        <div>
+            자격증번호
+            <input type="text" id="engineer_regnum">
+        </div>
         <div class="button-area">
             <input type="button" id="write_button" value="수정완료" onclick="write()">
         </div>

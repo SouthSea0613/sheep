@@ -50,6 +50,7 @@ public class UserService {
 
     public boolean login(UserDto userDto) {
         UserDto user = userDao.login(userDto.getUser_id());
+        log.info(user.toString());
         if (user != null) {
             BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
             if (pwEncoder.matches(userDto.getUser_pw(), user.getUser_pw())) {

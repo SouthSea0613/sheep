@@ -3,6 +3,7 @@ package com._401unauthorized.sheep.service;
 import com._401unauthorized.sheep.dao.MyPageDao;
 import com._401unauthorized.sheep.dao.UserDao;
 import com._401unauthorized.sheep.dto.UserDto;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +16,7 @@ import org.springframework.ui.Model;
 public class MyPageService {
     private final MyPageDao myPageDao;
     private final UserDao userDao;
+    private final HttpSession httpSession;
 
     public boolean additional(UserDto userDto) {
         String user_pw = userDao.additional(userDto.getUser_id());
@@ -27,6 +29,13 @@ public class MyPageService {
         }
 
     public UserDto write(UserDto userDto) {
-
+//        log.info("유저아이디"+userDto.getUser_id());
+//        log.info("타입"+userDto.getUser_type());
+//        switch (userDto.getUser_type()) {
+//            case "2":
+//                userDao.write(userDto);
+//                break;
+//        }
+        return userDto;
     }
 }

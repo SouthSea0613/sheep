@@ -22,4 +22,8 @@ public class UserDto {
     String user_type;
     String engineer_regnum;
     String engineer_regdate;
+    String seller_regnum;
+    String seller_company;
+    String seller_name;
+    String seller_addr;
 }
