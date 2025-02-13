@@ -6,6 +6,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>견적현황리스트</h2>
 <div class="list-area">
     <th:block th:if="${#lists.isEmpty(takeoffList)}">
@@ -31,5 +32,6 @@
         </th:block>
     </th:block>
 </div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

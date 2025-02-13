@@ -9,6 +9,7 @@
 </head>
 
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>회원가입.html</h2>
 <form th:action="@{/user/join}" method="post" id="join_form">
 
@@ -56,5 +57,6 @@
 	<input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
 	<input type="button" value="회원가입" id="join_button" onclick="join_check()">
 </form>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

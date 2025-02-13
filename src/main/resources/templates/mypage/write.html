@@ -8,6 +8,7 @@
     <script th:src="@{/javascript/user.js}"></script>
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>회원정보수정</h2><br>
 
 <div>
@@ -57,5 +58,6 @@
         </div>
     </form>
 </div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

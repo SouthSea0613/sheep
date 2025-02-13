@@ -52,6 +52,7 @@
     </script>
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>아이디 찾기</h2>
 
 메일
@@ -73,6 +74,6 @@
 <form th:action="@{/user/pw_reset}" method="get">
 <input type="submit" value="비밀번호 재설정" style="display: none" id="id_find_pwreset">
 </form>
-
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

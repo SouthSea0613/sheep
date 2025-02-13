@@ -33,7 +33,7 @@
     </script>
 </head>
 <body>
-
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <section>
     <h2>사용자 추가인증</h2>
 
@@ -45,5 +45,6 @@
             <input type="button" onclick="additional()" value="확인">
     </div>
 </section>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

@@ -8,6 +8,7 @@
 	<script th:src="@{/javascript/user.js}"></script>
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>로그인.html</h2>
 
 아이디<input type="text" name="user_id" id="user_id"><br>
@@ -17,5 +18,6 @@
 <button onclick="login()">로그인</button>
 <a th:href="@{/user/id_find}">아이디가 기억나지 않아요</a><br>
 <a th:href="@{/user/pw_reset}">비밀번호가 기억나지 않아요</a>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
