@@ -6,22 +6,6 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script th:src="@{/javascript/user.js}"></script>
-    <script>
-        function pw_check() {
-            const user_pw = $('#user_pw');
-            if (user_pw.val() != '') {
-                if (user_pw.val() == $('#user_pw2').val()) {
-                    $('#pw_check').css().display('block');
-                    $('#pw_check').text('비밀번호가 일치 합니다.');
-                } else {
-                    $('#pw_check').css().display('block');
-                    $('#pw_check').text('비밀번호가 일치하지 않습니다.');
-                }
-            } else {
-                $('#pw_check').text('');
-            }
-        }
-    </script>
 </head>
 <body>
 <h2>회원정보수정</h2><br>
@@ -31,15 +15,8 @@
         아이디
         <input type="text" id="user_id" th:placeholder="${session.user_id}" readonly><br>
 
-        비밀번호 변경
-        <input type="password" name="user_pw" id="user_pw" placeholder="숫자, 영문 대.소문자 포함 8~12자"><br>
-
-        비밀번호 변경 확인
-        <input type="password" id="user_pw2" onblur="pw_check()"><br>
-        <p id="pw_check" style="display: none"></p><br>
-
         이름
-        <input type="text" name="user_name" id="user_name"><br>
+        <input type="text" name="user_name" id="user_name" th:placeholder="$"><br>
 
         전화번호
         <select name="user_phone_company" id="user_phone_company">

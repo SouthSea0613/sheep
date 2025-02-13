@@ -25,4 +25,8 @@ public class MyPageService {
                 return false;
             }
         }
+
+    public UserDto write(UserDto userDto) {
+
     }
+}
