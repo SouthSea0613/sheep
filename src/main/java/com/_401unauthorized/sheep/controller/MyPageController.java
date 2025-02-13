@@ -41,7 +41,8 @@ public class MyPageController {
         user.setUser_type(httpSession.getAttribute("user_type").toString());
         log.info(user.getUser_type());
         log.info("유저{}", user.getUser_id());
-        model.addAttribute("userdto", myPageService.write(userDto));
+        model.addAttribute("userdto", myPageService.getInfo(userDto));
         return "mypage/write";
     }
+
 }

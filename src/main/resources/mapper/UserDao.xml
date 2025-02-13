@@ -82,5 +82,8 @@
                  JOIN ENGINEER E
                       ON #{user_id} = E.USER_ID
     </select>
+    <select id="getInfoNormal" resultType="com._401unauthorized.sheep.dto.UserDto">
+        SELECT * FROM USER WHERE USER_ID=#{user_id}
+    </select>
 
 </mapper>

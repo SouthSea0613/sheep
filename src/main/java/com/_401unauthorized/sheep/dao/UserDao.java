@@ -23,8 +23,9 @@ public interface UserDao {
     String additional(String user_id);
 
 
-    void write(UserDto userDto);
+
 
     UserDto getInfo(UserDto userDto);
 
+    UserDto getInfoNormal(UserDto userDto);
 }
