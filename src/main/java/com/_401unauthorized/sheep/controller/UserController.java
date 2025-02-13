@@ -1,5 +1,6 @@
 package com._401unauthorized.sheep.controller;
 
+import com._401unauthorized.sheep.dto.EngineerDto;
 import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
 import com._401unauthorized.sheep.service.UserService;
@@ -35,10 +36,15 @@ public class UserController {
     @PostMapping("/id_find_email")
     @ResponseBody
     public boolean id_find_email(@RequestBody UserDto userDto) {
-        if (userService.id_find_check(userDto.getUser_email())) {
+        if(userService.id_find_check(userDto.getUser_email()) != null){
             return false;
         }
         return true;
+    }
+    @PostMapping("/id_find_email_id")
+    @ResponseBody
+    public String id_find_email_id(@RequestBody UserDto userDto) {
+        return userService.id_find_check(userDto.getUser_email());
     }
 
     @PostMapping("/id_check")
@@ -70,6 +76,15 @@ public class UserController {
     @ResponseBody
     public boolean seller_regnum_check(@RequestBody SellerDto sellerDto) {
         if (userService.seller_regnum_check(sellerDto.getSeller_regnum())) {
+            return false;
+        }
+        return true;
+    }
+    @PostMapping("/engineer_regnum_check")
+    @ResponseBody
+    public boolean engineer_regnum_check(@RequestBody EngineerDto engineerDto){
+        log.info("{}",engineerDto);
+        if (userService.engineer_regnum_check(engineerDto.getEngineer_regnum())){
             return false;
         }
         return true;
@@ -118,5 +133,13 @@ public class UserController {
     } else {
         return "redirect:/user/pw_reset";
         }
+    }
+
+    @PostMapping("/join_additional_engineer")
+    public String join_additional_engineer(EngineerDto engineerDto){
+        if(userService.join_additional_engineer(engineerDto)) {
+            return "redirect:/user/login";
+        }
+        return "redirect:/user/join_additional";
     }
 }

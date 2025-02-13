@@ -9,15 +9,15 @@
         function id_find_email() {
             let data = {};
             const id_find_email = $('#id_find_email');
-            data.id_find_email = id_find_email.val();
+            data.user_email = id_find_email.val();
             axios.post('/user/id_find_email', data)
                 .then(res => {
                     if (res.data) {
-                        $('#id_find_email_check').text('없어');
-                        $('#id_find_val').val(1);
-                    } else {
-                        $('#id_find_email_check').text('있어');
+                        $('#id_find_email_check').text('잘못된 형식의 메일 입니다.');
                         $('#id_find_val').val(0);
+                    } else {
+                        $('#id_find_email_check').text('');
+                        $('#id_find_val').val(1);
                     }
                 })
                 .catch(err => {
@@ -28,7 +28,26 @@
 
         function id_find() {
             let data = {};
+            const id_find_email = $('#id_find_email');
+            data.user_email = id_find_email.val();
+            axios.post('/user/id_find_email_id', data)
+                .then(res => {
+                    const id_find_email_id = res.data;
+                    if(id_find_email != null){
+                        $('#id_find_res').text('회원님의 ID는 ' + id_find_email_id + '입니다.');
+                        $('#id_find_res_val').val(1);
 
+                        $('#id_find_login').css('display', 'block')
+                        $('#id_find_pwreset').css('display', 'block')
+                    }
+                    else {
+                        $('#id_find_res').text('등록된 아이디가 없습니다');
+                        $('#id_find_res_val').val(0);
+
+                        $('#id_find_login').css('display', 'none')
+                        $('#id_find_pwreset').css('display', 'none')
+                    }
+                })
         }
     </script>
 </head>
@@ -43,7 +62,17 @@
 이름
 <input type="text" name="id_find_name" id="id_find_name"><br>
 
-<input type="button" value="아이디 찾기" id="id_find_button" onclick="id_find()">
+<input type="button" value="아이디 찾기" id="id_find_button" onclick="id_find()"><br>
+<span id="id_find_res"></span><br>
+<input id="id_find_res_val" type="hidden" value="0">
+
+<form th:action="@{/user/login}" method="get">
+<input type="submit" value="로그인" style="display: none" id="id_find_login">
+</form>
+
+<form th:action="@{/user/pw_reset}" method="get">
+<input type="submit" value="비밀번호 재설정" style="display: none" id="id_find_pwreset">
+</form>
 
 </body>
 </html>
