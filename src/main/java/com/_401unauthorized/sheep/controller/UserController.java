@@ -1,8 +1,8 @@
 package com._401unauthorized.sheep.controller;
 
-import com._401unauthorized.sheep.dto.SellerDto;
+
 import com._401unauthorized.sheep.dto.UserDto;
-import com._401unauthorized.sheep.dto.EngineerDto;
+
 import com._401unauthorized.sheep.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -74,17 +74,17 @@ public class UserController {
 
     @PostMapping("/seller_regnum_check")
     @ResponseBody
-    public boolean seller_regnum_check(@RequestBody SellerDto sellerDto) {
-        if (userService.seller_regnum_check(sellerDto.getSeller_regnum())) {
+    public boolean seller_regnum_check(@RequestBody UserDto userDto) {
+        if (userService.seller_regnum_check(userDto.getSeller_regnum())) {
             return false;
         }
         return true;
     }
     @PostMapping("/engineer_regnum_check")
     @ResponseBody
-    public boolean engineer_regnum_check(@RequestBody EngineerDto engineerDto){
-        log.info("{}",engineerDto);
-        if (userService.engineer_regnum_check(engineerDto.getEngineer_regnum())){
+    public boolean engineer_regnum_check(@RequestBody UserDto userDto){
+        log.info("{}",userDto);
+        if (userService.engineer_regnum_check(userDto.getEngineer_regnum())){
             return false;
         }
         return true;
@@ -109,8 +109,8 @@ public class UserController {
     }
 
     @PostMapping("/join_additional_seller")
-    public String join_additional_seller(SellerDto sellerDto) {
-        if (userService.join_additional_seller(sellerDto)) {
+    public String join_additional_seller(UserDto userDto) {
+        if (userService.join_additional_seller(userDto)) {
             return "redirect:/user/login";
         } else {
             return "redirect:/user/join_additional";
@@ -137,8 +137,8 @@ public class UserController {
     }
 
     @PostMapping("/join_additional_engineer")
-    public String join_additional_engineer(EngineerDto engineerDto){
-        if(userService.join_additional_engineer(engineerDto)) {
+    public String join_additional_engineer(UserDto userDto){
+        if(userService.join_additional_engineer(userDto)) {
             return "redirect:/user/login";
         }
         return "redirect:/user/join_additional";
