@@ -98,18 +98,10 @@ public class UserController {
     @PostMapping("/login")
     @ResponseBody
     public boolean login(@RequestBody UserDto userDto, HttpSession httpSession) {
-<<<<<<< HEAD
-        if (userService.login(userDto)) {
-
-            httpSession.setAttribute("user_id", userDto.getUser_id());
-            httpSession.setAttribute("user_type", userDto.getUser_type());
-
-=======
         UserDto user = userService.login(userDto);
         if (user != null) {
             httpSession.setAttribute("user_id", user.getUser_id());
             httpSession.setAttribute("user_type", user.getUser_type());
->>>>>>> origin/copyuser_jieun
             return true;
         } else {
             return false;

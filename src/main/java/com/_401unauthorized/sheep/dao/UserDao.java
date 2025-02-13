@@ -21,10 +21,10 @@ public interface UserDao {
 
 //    mypage controller 영역
     String additional(String user_id);
-<<<<<<< HEAD
+
 
     void write(UserDto userDto);
-=======
-    UserDto write(UserDto userDto);
->>>>>>> origin/copyuser_jieun
+
+    UserDto getInfo(UserDto userDto);
+
 }

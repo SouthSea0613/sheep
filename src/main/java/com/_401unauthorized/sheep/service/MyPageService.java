@@ -29,13 +29,12 @@ public class MyPageService {
         }
 
     public UserDto write(UserDto userDto) {
-<<<<<<< HEAD
+
         switch (userDto.getUser_type()){
             case "0", "1":
                 userDao.write(userDto);
                 break;
         }
-=======
 //        log.info("유저아이디"+userDto.getUser_id());
 //        log.info("타입"+userDto.getUser_type());
 //        switch (userDto.getUser_type()) {
@@ -43,7 +42,7 @@ public class MyPageService {
 //                userDao.write(userDto);
 //                break;
 //        }
->>>>>>> origin/copyuser_jieun
+
         return userDto;
     }
 }
