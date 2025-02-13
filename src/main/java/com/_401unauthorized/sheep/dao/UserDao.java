@@ -21,6 +21,7 @@ public interface UserDao {
 
 //    mypage controller 영역
     String additional(String user_id);
+<<<<<<< HEAD
 
 
 
@@ -28,4 +29,7 @@ public interface UserDao {
     UserDto getInfoSeller(UserDto userDto);
 
     UserDto getInfo(UserDto userDto);
+=======
+    UserDto getInfoEngineer(UserDto userDto);
+>>>>>>> copyuser_jieun
 }
