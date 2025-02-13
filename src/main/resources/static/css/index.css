@@ -77,3 +77,15 @@ li {
 .footer_content {
     text-align: center;
 }
+
+li.user {
+    display: none;
+}
+
+li.seller{
+    display: none;
+}
+
+li.engineer{
+    display: none;
+}

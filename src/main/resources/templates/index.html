@@ -11,8 +11,11 @@
 	<script defer src="/javascript/common.js"></script>
 	<script th:inline="javascript">
 		const user = [[${session.user_id}]];
+		const type = [[${session.user_type}]];
 
 		$(() => {
+			console.log(type)
+			userType();
 			loginStatus();
 		})
 	</script>
@@ -20,9 +23,6 @@
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <h1>index.html</h1>
-
-<a th:href="@{/user/join}" th:text="join.html"></a>
-<a th:href="@{/user/login}" th:text="login"></a>
 
 <div id="map" style="width:500px;height:400px;">
 </div>
