@@ -18,4 +18,13 @@ public interface UserDao {
     boolean join_additional_engineer(EngineerDto engineerDto);
     String id_find_check(String user_email);
     boolean pw_reset(UserDto userDto);
+
+//    mypage controller 영역
+    String additional(String user_id);
+
+
+    UserDto getInfo(UserDto userDto);
+
+    UserDto getInfoEngineer(UserDto userDto);
+
 }

@@ -1,8 +1,8 @@
 package com._401unauthorized.sheep.controller;
 
-import com._401unauthorized.sheep.dto.EngineerDto;
 import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
+import com._401unauthorized.sheep.dto.EngineerDto;
 import com._401unauthorized.sheep.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -98,9 +98,10 @@ public class UserController {
     @PostMapping("/login")
     @ResponseBody
     public boolean login(@RequestBody UserDto userDto, HttpSession httpSession) {
-        if (userService.login(userDto)) {
-            httpSession.setAttribute("user_id", userDto.getUser_id());
-            httpSession.setAttribute("user_type", userDto.getUser_type());
+        UserDto user = userService.login(userDto);
+        if (user != null) {
+            httpSession.setAttribute("user_id", user.getUser_id());
+            httpSession.setAttribute("user_type", user.getUser_type());
             return true;
         } else {
             return false;

@@ -1,50 +1,59 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="/javascript/user.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:src="@{/javascript/user.js}"></script>
 </head>
 <body>
-<h2>회원정보수정</h2>
+<h2>회원정보수정</h2><br>
 
 <div>
-    <form action="/../../resources/templates/mypage/write" id="insertInfo">
-        아이디 <!-- dto랑 만들고 하자 -->
-        <input type="text" id="user_id" th:text="${session.user_id}" readonly><br>
-
-        비밀번호
-        <input type="password" id="user_pw" th:text="${session.user_pw}" readonly><br>
+    <form th:action="@{/mypage/write}" method="post" id="insertInfo">
+        아이디
+        <input type="text" id="user_id" th:placeholder="${session?.user_id}" readonly><br>
 
         이름
-        <input type="text" id="user_name"><br>
+        <input type="text" name="user_name" id="user_name"><br>
 
         전화번호
-        <select>
+        <select name="user_phone_company" id="user_phone_company">
             <option value="none">통신사</option>
-            <option value="SKT">SKT</option>
-            <option value="KT">KT</option>
-            <option value="LGU">LGU</option>
-            <option value="OTHER">알뜰폰</option>
+            <option value="1">SKT</option>
+            <option value="2">KT</option>
+            <option value="3">LGU</option>
+            <option value="4">알뜰폰</option>
         </select>
-        <input type="text" id="user_phone"><br>
+        <input type="text" name="user_phone" id="user_phone"><br>
 
         주소
-        <input type="text" id="user_addr"><br>
+        <input type="text" name="user_addr" id="user_addr"><br>
 
         이메일
-        <input type="text" id="user_email">
-        <select>
-            <option value="none">도메인 선택</option>
-            <option value="naver.com">@naver.com</option>
-            <option value="gmail.com">@gmail.com</option>
-            <option value="daum.net">@daum.net</option>
-            <option value="nate.com">@nate.com</option>
+        <input type="text" name="user_email" id="user_email"> @
+        <select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
+            <option value="none">메일 선택</option>
+            <option value="naver.com">naver.com</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="daum.net">daum.net</option>
+            <option value="nate.com">nate.com</option>
+            <option value="other">직접입력</option>
         </select>
+        <span id="email_check"></span><br>
+        <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
 
+        <!--기술자 영역-->
+        <div class="engineer_info">
+            자격증번호
+            <input type="text" id="engineer_regnum" readonly><br>
+
+            자격증 발급번호
+            <input type="text" name="engineer_regdate" id="engineer_regdate">
+        </div>
         <div class="button-area">
-            <input type="button" onclick="write()" value="수정완료">
+            <input type="button" id="write_button" value="수정완료" onclick="write()">
         </div>
     </form>
 </div>

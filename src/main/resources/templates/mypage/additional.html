@@ -5,14 +5,29 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/javascript/user.js"></script>
+    <script th:src="@{/javascript/user.js}"></script>
     <script>
         function additional() {
-            const user_pw = $('#user_pw').val();
-            if (user_pw != '') {
+            const user_pw = $('#user_pw');
+            if (user_pw.val() == '') {
                 alert('비밀번호를 입력바랍니다.');
                 user_pw.focus();
                 return false;
+            } else {
+                let data = {};
+                data.user_pw = user_pw.val();
+                axios.post('/mypage/additional', data)
+                    .then(res => {
+                        if(res.data) {
+                            alert('인증이 완료 되었습니다');
+                            location.href="/mypage/write";
+                        } else {
+                            $('#pw_check').text('인증이 실패 되었습니다.');
+                        }
+                    })
+                    .catch(err => {
+                        $('#pw_check').text('');
+                    });
             }
         }
     </script>
@@ -23,15 +38,11 @@
     <h2>사용자 추가인증</h2>
 
     <div>
-        <form th:action="@{/mypage/additional}" method="post" id="additional_form">
-            아이디
-            <input type="text" name="user_id" id="user_id" th:text="${session?.user_id}" readonly<br>
-
             비밀번호
             <input type="password" name="user_pw" id="user_pw"><br>
+            <span id="pw_check"></span><br>
 
             <input type="button" onclick="additional()" value="확인">
-        </form>
     </div>
 </section>
 </body>

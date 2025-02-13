@@ -21,9 +21,21 @@
 	</script>
 </head>
 <body>
+<<<<<<< HEAD
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <h1>index.html</h1>
 
+=======
+
+<th:block th:replace="~{common/fragment::header}"></th:block>
+
+<h1>index.html</h1>
+
+<a th:href="@{/user/join}" th:text="join.html"></a>
+<a th:href="@{/user/login}" th:text="login"></a>
+<a th:href="@{/mypage/additional}" th:text="회원정보수정"></a>
+
+>>>>>>> user_minyoung
 <div id="map" style="width:500px;height:400px;">
 </div>
 
