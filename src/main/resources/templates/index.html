@@ -2,44 +2,44 @@
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6b87b35f5abccf4104cdc6116a58a9d&libraries=services"></script>
-	<link rel="stylesheet" href="./css/index.css">
-	<script defer src="/javascript/common.js"></script>
-	<script th:inline="javascript">
-		const user = [[${session.user_id}]];
-		const type = [[${session.user_type}]];
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c6b87b35f5abccf4104cdc6116a58a9d&libraries=services"></script>
+    <link rel="stylesheet" href="./css/index.css">
+    <script defer src="/javascript/common.js"></script>
+    <script th:inline="javascript">
+        const user = [[${session.user_id}]];
+        const type = [[${session.user_type}]];
 
-		$(() => {
-			console.log(type)
-			userType();
-			loginStatus();
-		})
-	</script>
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+        })
+    </script>
 </head>
 <body>
 
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<h1>index.html</h1>
+<div class="main_content">
+    <h1>index.html</h1>
 
-
-
-<div id="map" style="width:500px;height:400px;">
+    <div id="map" style="width:500px;height:400px;">
+    </div>
 </div>
 
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 
 <script>
-	var container = document.getElementById('map');
-	var options = {
-		center: new kakao.maps.LatLng(37.43887833749142, 126.67511828936453),
-		level: 3
-	};
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(37.43887833749142, 126.67511828936453),
+        level: 3
+    };
 
-	var map = new kakao.maps.Map(container, options);
+    var map = new kakao.maps.Map(container, options);
 </script>
 </body>
 </html>

@@ -4,6 +4,19 @@
     padding: 0;
 }
 
+body {
+    height: 8000px;
+}
+
+.main_content {
+    padding-top: 15%;
+}
+
+header {
+    position: fixed;
+    width: 100%;
+}
+
 .header_top {
     background-color: lightgray;
     min-height: 58px;

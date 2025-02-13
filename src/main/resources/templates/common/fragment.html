@@ -19,7 +19,8 @@
                           <button>로그아웃</button>
                       </form>
                   </li>
-                  <li class="success"><input type="button" id="user_name" value="테스트님"></li>
+                  <li class="success"><input type="button" id="user_name" onclick="List()" value="테스트님">
+                  </li>
                   <li class="before">
                       <a th:href="@{/user/join}" th:text="회원가입"></a>
                   </li>
@@ -32,15 +33,14 @@
               <div class="logo"><img src="" alt=""></div>
               <nav class="header_left">
                   <ul>
-                      <li class="all">지도 공통/</li>
-                      <li class="all">지도 공통/</li>
-                      <li class="all">지도 공통/</li>
-                      <li class="null">견적신청 소비자/</li>
-                      <li class="seller">견적서확인 시공사/</li>
-                      <li class="engineer">구인구직 기술사/</li>
-                      <li class="seller">구인구직 시공사/</li>
-                      <li class="user">팁&랜선 소비자/</li>
-
+                      <li class="all"><a th:href="@{/map}">지도 공통</a></li>
+                      <li class="all"><a th:href="@{/map}">지도 공통</a></li>
+                      <li class="all"><a th:href="@{/map}">지도 공통</a></li>
+                      <li class="null"><a th:href="@{/takeoff/customer/list}">견적신청 소비자</a></li>
+                      <li class="seller"><a th:href="@{/takeoff/seller/list}">견적서확인 시공사</a></li>
+                      <li class="engineer"><a th:href="@{/employment/list}">구인구직 기술자</a></li>
+                      <li class="seller"><a th:href="@{/employment/list}">구인구직 시공사</a></li>
+                      <li class="user"><a th:href="@{/board/list}">팁&랜선 소비자</a></li>
                   </ul>
               </nav>
           </div>
