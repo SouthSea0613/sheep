@@ -1,6 +1,4 @@
-function write() {
 
-}
 
 function takeoff() {
 
