@@ -142,4 +142,10 @@ public class UserController {
         }
         return "redirect:/user/join_additional";
     }
+
+    @PostMapping("/logout")
+    public String logout(HttpSession httpSession) {
+        httpSession.invalidate();
+        return "redirect:/";
+    }
 }
