@@ -28,42 +28,11 @@ public class MyPageService {
         }
     }
 
+
+
+
     public UserDto getInfo(UserDto userDto) {
-        UserDto user = new UserDto();
-        switch (user.getUser_type()) {
-            case "0":
-
-                break;
-
-            case "1":
-
-                break;
-
-            case "2":
-                user = userDao.getInfoEngineer(userDto);
-                user.setUser_type("engineer");
-                break;
-        }
-
-
-        // 통신사 처리
-        switch (userDto.getUser_phone_company()) {
-            case "1":
-                break;
-
-            case "2":
-                break;
-
-            case "3":
-                break;
-
-            case "4":
-                break;
-        }
-
-<<<<<<< HEAD
-    public UserDto getInfo(UserDto userDto) {
-        UserDto user=null;
+        UserDto user=new UserDto();
         switch (userDto.getUser_type()){
             case "0":
               user = userDao.getInfo(userDto);
@@ -74,13 +43,24 @@ public class MyPageService {
                 user.setUser_type("seller");
                 break;
             case "2":
-                user =userDao.getInfoSeller(userDto);
+                user =userDao.getInfoEngineer(userDto);
                 user.setUser_type("engineer");
                 break;
         }
+            switch (userDto.getUser_phone_company()) {
+                case "1":
+                    break;
 
-=======
->>>>>>> copyuser_jieun
+                case "2":
+                    break;
+
+                case "3":
+                    break;
+
+                case "4":
+                    break;
+            }
+
         return userDto;
     }
 }
