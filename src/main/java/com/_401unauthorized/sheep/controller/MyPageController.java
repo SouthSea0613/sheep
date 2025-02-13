@@ -26,7 +26,7 @@ public class MyPageController {
     @ResponseBody
     public boolean additional(@RequestBody UserDto userDto, HttpSession httpSessionsession) {
         userDto.setUser_id(httpSessionsession.getAttribute("user_id").toString());
-        if(myPageService.additional(userDto)) {
+        if (myPageService.additional(userDto)) {
             return true;
         } else {
             return false;
@@ -41,14 +41,15 @@ public class MyPageController {
         user.setUser_type(httpSession.getAttribute("user_type").toString());
         log.info(user.getUser_type());
         log.info("유저{}", user.getUser_id());
-        model.addAttribute("userdto", myPageService.getInfo(user));
+        model.addAttribute("userdto", myPageService.get_info(user));
         return "mypage/write";
     }
 
     @PostMapping("/write")
-
-
-
-
-
+    public boolean write(UserDto userDto) {
+        if(myPageService.write(userDto)) {
+        return true;
+    } else {
+        return false;}
+    }
 }
