@@ -62,6 +62,7 @@
         SET USER_PW = #{user_pw}
         WHERE USER_ID = #{user_id}
     </update>
+
     <update id="update_info">
         UPDATE USER SET USER_NAME=#{user_name},USER_PHONE_COMPANY=#{user_phone_company},USER_PHONE=#{user_phone},USER_ADDR=#{user_addr},
                         USER_EMAIL=#{user_email}

@@ -138,8 +138,8 @@ function test(user_email) {
 }
 
 function self_insert() {
-	const user_email_detail = $('#user_email_detail');
-	const email_input = $('#email_input')
+	let user_email_detail = $('#user_email_detail');
+	let email_input = $('#email_input')
 
 	if (user_email_detail.val() === 'other') {
 		email_input.css('display', 'block')

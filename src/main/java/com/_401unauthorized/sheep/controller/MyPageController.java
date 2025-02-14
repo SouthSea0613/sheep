@@ -42,24 +42,13 @@ public class MyPageController {
         return "mypage/write";
     }
     @PostMapping("/write")
-    @ResponseBody
-    public String write(UserDto userDto,HttpSession session){
+    public String write(UserDto userDto,HttpSession session) {
         userDto.setUser_id((String) session.getAttribute("user_id"));
-        if(userDto.getEngineer_regdate()!=null){
-            if(myPageService.update_info(userDto)&&myPageService.update_engineer_info(userDto)){
-                return "/mypage/write";
-            }else{
+        userDto.setUser_type((String) session.getAttribute("user_type"));
+            if (myPageService.update_info(userDto)) {
+                return "redirect:/mypage/write";
+            } else {
                 return "/mypage/additional";
             }
-        }else{
-            if(myPageService.update_info(userDto)){
-                log.info("true");
-                return "/mypage/write";
-            }else{
-                log.info("false");
-                return "/mypage/additional";
-            }
-        }
     }
-
 }

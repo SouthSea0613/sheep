@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 @Slf4j
@@ -47,19 +48,12 @@ public class MyPageService {
         return user;
     }
 
+    @Transactional
     public boolean update_info(UserDto userDto) {
-        boolean result = userDao.update_info(userDto);
-        log.info("서비스"+userDto.getUser_id());
-        if(result){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-    public boolean update_engineer_info(UserDto userDto) {
-        boolean result = userDao.update_engineer_info(userDto);
-        if(result){
+        if(userDao.update_info(userDto)){
+            if(userDto.getUser_type().equals("2")){
+                return userDao.update_engineer_info(userDto);
+            }
             return true;
         }
         return false;
