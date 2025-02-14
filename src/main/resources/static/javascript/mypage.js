@@ -9,7 +9,7 @@ function writebtn() {
     //
     //기술자정보
     const engineer_regnum = $('#engineer_regnum').val();
-    const insertInfo = $('#insertInfo');
+    const insertInfo = $('#insert_info');
     const engineer_form = $('#engineer_form')
     const user_email_detail = $('#user_email_detail');
     const email_input = $('#email_input');
