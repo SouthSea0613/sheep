@@ -38,45 +38,21 @@ public class MyPageController {
         UserDto user = new UserDto();
         user.setUser_id(httpSession.getAttribute("user_id").toString());
         user.setUser_type(httpSession.getAttribute("user_type").toString());
-<<<<<<< HEAD
-=======
-        log.info(user.getUser_type());
-        log.info("유저{}", user.getUser_id());
->>>>>>> origin/copyminyoung
-        model.addAttribute("userdto", myPageService.getInfo(user));
+        model.addAttribute("userdto", myPageService.get_info(user));
         return "mypage/write";
     }
     @PostMapping("/write")
-<<<<<<< HEAD
     @ResponseBody
-    public boolean write(@RequestBody UserDto userDto){
-        if(userDto.getEngineer_regdate() != null) {
-            if(myPageService.update_info(userDto)&&myPageService.update_enginner_info(userDto)){
-                return true;
-            }else {
-                return false;
-            }
-        }else {
-            if(myPageService.update_info(userDto){
-                return true;
-            }
-        }
-        return false;
-=======
-//    @ResponseBody
     public String write(UserDto userDto,HttpSession session){
-        log.info("테스트해보자");
-
         userDto.setUser_id((String) session.getAttribute("user_id"));
         if(userDto.getEngineer_regdate()!=null){
-            log.info("테스트해보자2");
-            if(myPageService.updateInfo(userDto)&&myPageService.updateEngineerInfo(userDto)){
+            if(myPageService.update_info(userDto)&&myPageService.update_engineer_info(userDto)){
                 return "/mypage/write";
             }else{
                 return "/mypage/additional";
             }
         }else{
-            if(myPageService.updateInfo(userDto)){
+            if(myPageService.update_info(userDto)){
                 log.info("true");
                 return "/mypage/write";
             }else{
@@ -84,9 +60,6 @@ public class MyPageController {
                 return "/mypage/additional";
             }
         }
-
-
->>>>>>> origin/copyminyoung
     }
 
 }
