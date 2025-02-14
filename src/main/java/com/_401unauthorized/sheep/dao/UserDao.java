@@ -23,8 +23,8 @@ public interface UserDao {
     String additional(String user_id);
 
 
-    UserDto getInfo(UserDto userDto);
+    UserDto get_info(UserDto userDto);
 
-    UserDto getInfoEngineer(UserDto userDto);
+    UserDto get_info_engineer(UserDto userDto);
 
 }
