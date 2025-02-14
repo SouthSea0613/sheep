@@ -13,23 +13,23 @@
 <div>
     <form th:action="@{/mypage/write}" method="post" id="insertInfo">
         아이디
-        <input type="text" id="user_id" th:value="${session?.user_id}"  th:placeholder="${session?.user_id}" readonly><br>
+        <input type="text" id="user_id" th:value="${session?.user_id}" readonly><br>
 
         이름
-        <input type="text" name="user_name" id="user_name" th:placeholder="${userdto.getUser_name()}"><br>
+        <input type="text" name="user_name" id="user_name" th:value="${userdto.user_name}"><br>
 
         전화번호
-        <select name="user_phone_company" id="user_phone_company">
+        <select name="user_phone_company" id="user_phone_company" >
             <option value="none">통신사</option>
             <option value="1">SKT</option>
             <option value="2">KT</option>
             <option value="3">LGU</option>
             <option value="4">알뜰폰</option>
         </select>
-        <input type="text" name="user_phone" id="user_phone"><br>
+        <input type="text" name="user_phone" id="user_phone" th:value="${userdto.user_phone}"><br>
 
         주소
-        <input type="text" name="user_addr" id="user_addr"><br>
+        <input type="text" name="user_addr" id="user_addr" th:value="${userdto.user_addr}"><br>
 
         이메일
         <input type="text" name="user_email" id="user_email"> @
@@ -42,20 +42,33 @@
             <option value="other">직접입력</option>
         </select>
         <span id="email_check"></span><br>
-        <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
+        <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()" ><br>
 
     <div class="engineer_info">
         자격증번호
-        <input type="text" id="engineer_regnum" readonly><br>
+        <input type="text" id="engineer_regnum" th:value="${userdto.engineer_regnum}" readonly><br>
 
-        자격증 발급번호
-        <input type="text" name="engineer_regdate" id="engineer_regdate">
+        자격증 발급일자
+        <input type="text" name="engineer_regdate" th:value="${userdto.engineer_regdate}" id="engineer_regdate">
     </div>
 
     </form>
     <div class="button-area">
         <input type="button" id="write_button" value="수정완료" onclick="writebtn()">
     </div>
+    <script th:inline="javascript">
+        const email = [[${userdto?.user_email}]];
+        const emailsplit = email.split("@");
+
+        const user_email = document.getElementById('user_email');
+        const email_detail = document.getElementById('user_email_detail');
+        user_email.value=emailsplit[0];
+        email_detail.value=emailsplit[1];
+
+
+
+
+    </script>
 </div>
 </body>
 </html>

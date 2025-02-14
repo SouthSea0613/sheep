@@ -8,8 +8,7 @@ function writebtn() {
     // const useremaildetail = $('.user_email_detail').val();
     //
     //기술자정보
-    const engineer_regnum =$('.engineer_regnum').val();
-    const engineer_regdate = $('.engineer_regdate').val();
+    const engineer_regnum =$('#engineer_regnum').val();
     const insertInfo = $('#insertInfo');
     const engineer_form = $('#engineer_form')
     console.log("엥"+insertInfo);

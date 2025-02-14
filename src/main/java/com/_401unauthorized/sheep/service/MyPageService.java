@@ -57,7 +57,7 @@ public class MyPageService {
 
         
 
-        return userDto;
+        return user;
     }
 
     public boolean updateInfo(UserDto userDto) {
