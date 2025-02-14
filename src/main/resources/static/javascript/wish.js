@@ -1,7 +1,0 @@
-function write() {
-
-}
-
-function takeoff() {
-
-}
