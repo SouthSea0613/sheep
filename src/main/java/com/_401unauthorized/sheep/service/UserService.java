@@ -1,8 +1,6 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.UserDao;
-import com._401unauthorized.sheep.dto.EngineerDto;
-import com._401unauthorized.sheep.dto.SellerDto;
 import com._401unauthorized.sheep.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -46,8 +44,8 @@ public class UserService {
         return false;
     }
 
-    public boolean join_additional_seller(SellerDto sellerDto) {
-        return userDao.change_user_type(sellerDto.getUser_id(), 1) && userDao.join_additional_seller(sellerDto);
+    public boolean join_additional_seller(UserDto userDto) {
+        return userDao.change_user_type(userDto.getUser_id(), 1) && userDao.join_additional_seller(userDto);
     }
 
     public UserDto login(UserDto userDto) {
@@ -83,8 +81,8 @@ public class UserService {
         return false;
     }
 
-    public boolean join_additional_engineer(EngineerDto engineerDto) {
-        return userDao.change_user_type(engineerDto.getUser_id(),2) && userDao.join_additional_engineer(engineerDto);
+    public boolean join_additional_engineer(UserDto userDto) {
+        return userDao.change_user_type(userDto.getUser_id(),2) && userDao.join_additional_engineer(userDto);
     }
 }
 
