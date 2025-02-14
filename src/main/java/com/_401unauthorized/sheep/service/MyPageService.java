@@ -31,19 +31,19 @@ public class MyPageService {
 
 
 
-    public UserDto getInfo(UserDto userDto) {
+    public UserDto get_info(UserDto userDto) {
         UserDto user=new UserDto();
         switch (userDto.getUser_type()){
             case "0":
-              user = userDao.getInfo(userDto);
+              user = userDao.get_info(userDto);
               user.setUser_type("회원");
                 break;
             case "1":
-                user = userDao.getInfo(userDto);
+                user = userDao.get_info(userDto);
                 user.setUser_type("사장님");
                 break;
             case "2":
-                user =userDao.getInfoEngineer(userDto);
+                user =userDao.get_info_engineer(userDto);
                 user.setUser_type("능력자님");
                 break;
         }

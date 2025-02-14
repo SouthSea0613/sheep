@@ -18,7 +18,7 @@
         <input type="text" id="user_id" th:placeholder="${session?.user_id}" readonly><br>
 
         이름
-        <input type="text" name="user_name" id="user_name"><br>
+        <input type="text" name="user_name" id="user_name" th:placeholder="${userdto?.user_name}"><br>
 
         전화번호
         <select name="user_phone_company" id="user_phone_company">
@@ -28,13 +28,13 @@
             <option value="3">LGU</option>
             <option value="4">알뜰폰</option>
         </select>
-        <input type="text" name="user_phone" id="user_phone"><br>
+        <input type="text" name="user_phone" id="user_phone" th:placeholder="${userdto?.user_phone}"><br>
 
         주소
-        <input type="text" name="user_addr" id="user_addr"><br>
+        <input type="text" name="user_addr" id="user_addr" th:placeholder="${userdto?.user_addr}"><br>
 
         이메일
-        <input type="text" name="user_email" id="user_email"> @
+        <input type="text" name="user_email" id="user_email" th:placeholder="${userdto?.user_email}"> @
         <select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
             <option value="none">메일 선택</option>
             <option value="naver.com">naver.com</option>
@@ -49,10 +49,10 @@
         <!--기술자 영역-->
         <div class="engineer_info">
             자격증번호
-            <input type="text" id="engineer_regnum" readonly><br>
+            <input type="text" id="engineer_regnum" th:placeholder="${userdto?.engineer_regnum}" readonly><br>
 
             자격증 발급번호
-            <input type="text" name="engineer_regdate" id="engineer_regdate">
+            <input type="text" name="engineer_regdate" id="engineer_regdate" th:placeholder="${userdto?.engineer_regdate}">
         </div>
         <div class="button-area">
             <input type="button" id="write_button" value="수정완료" onclick="write()">
