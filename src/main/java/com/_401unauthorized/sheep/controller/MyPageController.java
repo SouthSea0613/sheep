@@ -45,21 +45,25 @@ public class MyPageController {
         return "mypage/write";
     }
     @PostMapping("/write")
-    @ResponseBody
-    public String write(@RequestBody UserDto userDto){
+//    @ResponseBody
+    public String write(UserDto userDto,HttpSession session){
         log.info("테스트해보자");
+
+        userDto.setUser_id((String) session.getAttribute("user_id"));
         if(userDto.getEngineer_regdate()!=null){
             log.info("테스트해보자2");
             if(myPageService.updateInfo(userDto)&&myPageService.updateEngineerInfo(userDto)){
-                return "/mypage/additional";
-            }else{
                 return "/mypage/write";
+            }else{
+                return "/mypage/additional";
             }
         }else{
             if(myPageService.updateInfo(userDto)){
-                return "/mypage/additional";
-            }else{
+                log.info("true");
                 return "/mypage/write";
+            }else{
+                log.info("false");
+                return "/mypage/additional";
             }
         }
 

@@ -62,6 +62,7 @@ public class MyPageService {
 
     public boolean updateInfo(UserDto userDto) {
         boolean result = userDao.updateInfo(userDto);
+        log.info("서비스"+userDto.getUser_id());
         if(result){
             return true;
         }else{

@@ -13,7 +13,7 @@
 <div>
     <form th:action="@{/mypage/write}" method="post" id="insertInfo">
         아이디
-        <input type="text" id="user_id" th:placeholder="${session?.user_id}" readonly><br>
+        <input type="text" id="user_id" th:value="${session?.user_id}"  th:placeholder="${session?.user_id}" readonly><br>
 
         이름
         <input type="text" name="user_name" id="user_name" th:placeholder="${userdto.getUser_name()}"><br>
@@ -51,47 +51,11 @@
         자격증 발급번호
         <input type="text" name="engineer_regdate" id="engineer_regdate">
     </div>
-        <div class="button-area">
-            <input type="button" id="write_button" value="수정완료" onclick="write()">
-        </div>
+
     </form>
-<script>
-    function write() {
-        // const username = $('.user_name').val();
-        // const userid = $('.user_id').val();
-        // const userphonecompany = $('.user_phone_company').val();
-        // const userphone = $('.user_phone').val();
-        // const useraddr = $('.user_addr').val();
-        // const useremail = $('.user_email').val();
-        // const useremaildetail = $('.user_email_detail').val();
-        //
-        //기술자정보
-        const engineer_regnum =$('.engineer_regnum').val();
-        const engineer_regdate = $('.engineer_regdate').val();
-        const insertInfo = $('#insertInfo');
-        const engineer_form = $('#engineer_form')
-        console.log("엥"+insertInfo);
-        console.log(engineer_form);
-        // if(engineer_regnum!=null){
-        //     alert("수정이 완료되었습니다");
-        //     insertInfo.submit();
-        //     engineer_form.submit();
-        //
-        //
-        // }else{
-        //     alert("수정이 완료되었습니다");
-        //     insertInfo.submit();
-        //
-        // }
-
-
-
-
-
-
-
-    }
-</script>
+    <div class="button-area">
+        <input type="button" id="write_button" value="수정완료" onclick="writebtn()">
+    </div>
 </div>
 </body>
 </html>
