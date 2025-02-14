@@ -34,15 +34,44 @@ public class MyPageController {
     }
 
     @GetMapping("/write")
-    public String write(UserDto userDto,HttpSession httpSession, Model model) {
+    public String write(HttpSession httpSession, Model model) {
         UserDto user = new UserDto();
         user.setUser_id(httpSession.getAttribute("user_id").toString());
         log.info(user.toString());
         user.setUser_type(httpSession.getAttribute("user_type").toString());
         log.info(user.getUser_type());
         log.info("유저{}", user.getUser_id());
+<<<<<<< HEAD
         model.addAttribute("userdto", myPageService.get_info(user));
+=======
+        model.addAttribute("userdto", myPageService.getInfo(user));
+>>>>>>> origin/copyminyoung
         return "mypage/write";
+    }
+    @PostMapping("/write")
+//    @ResponseBody
+    public String write(UserDto userDto,HttpSession session){
+        log.info("테스트해보자");
+
+        userDto.setUser_id((String) session.getAttribute("user_id"));
+        if(userDto.getEngineer_regdate()!=null){
+            log.info("테스트해보자2");
+            if(myPageService.updateInfo(userDto)&&myPageService.updateEngineerInfo(userDto)){
+                return "/mypage/write";
+            }else{
+                return "/mypage/additional";
+            }
+        }else{
+            if(myPageService.updateInfo(userDto)){
+                log.info("true");
+                return "/mypage/write";
+            }else{
+                log.info("false");
+                return "/mypage/additional";
+            }
+        }
+
+
     }
 
 }
