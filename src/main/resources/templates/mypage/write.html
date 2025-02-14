@@ -19,9 +19,9 @@
         <input type="text" name="user_name" id="user_name" th:value="${userdto.user_name}"><br>
 
         전화번호
-        <select name="user_phone_company" id="user_phone_company" >
-            <option value="none">통신사</option>
-            <option value="1">SKT</option>
+        <select name="user_phone_company" id="user_phone_company">
+            <option id="optionid" value="none">통신사</option>
+            <option value="1" >SKT</option>
             <option value="2">KT</option>
             <option value="3">LGU</option>
             <option value="4">알뜰폰</option>
@@ -33,7 +33,7 @@
 
         이메일
         <input type="text" name="user_email" id="user_email"> @
-        <select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
+        <select name="user_email_detail" id="user_email_detail" onchange="self_insert()" >
             <option value="none">메일 선택</option>
             <option value="naver.com">naver.com</option>
             <option value="gmail.com">gmail.com</option>
@@ -63,6 +63,24 @@
         const email_detail = document.getElementById('user_email_detail');
         user_email.value=emailsplit[0];
         email_detail.value=emailsplit[1];
+
+
+        const phone_company = [[${userdto?.user_phone_company}]];
+        switch (phone_company){
+            case "1":
+                document.querySelector('option[value="1"]').setAttribute("selected",true)
+                // phone_company_option.selected=true;
+                break;
+            case "2":
+                document.querySelector('option[value="2"]').setAttribute("selected",true)
+                break;
+            case "3":
+                document.querySelector('option[value="3"]').setAttribute("selected",true)
+                break;
+            case "4":
+                document.querySelector('option[value="4"]').setAttribute("selected",true)
+                break;
+        }
 
 
 

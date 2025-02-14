@@ -25,7 +25,11 @@ public interface UserDao {
 
     UserDto getInfoEngineer(UserDto userDto);
 
-    boolean updateInfo(UserDto userDto);
 
-    boolean update_engineerinfo(UserDto userDto);
+
+
+
+    boolean update_info(UserDto userDto);
+
+    boolean update_engineer_info(UserDto userDto);
 }
