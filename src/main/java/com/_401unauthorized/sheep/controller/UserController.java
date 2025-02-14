@@ -1,6 +1,12 @@
 package com._401unauthorized.sheep.controller;
 
+<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.UserDto;
+=======
+
+import com._401unauthorized.sheep.dto.UserDto;
+
+>>>>>>> origin/copyminyoung
 import com._401unauthorized.sheep.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

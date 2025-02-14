@@ -38,10 +38,16 @@ public class MyPageController {
         UserDto user = new UserDto();
         user.setUser_id(httpSession.getAttribute("user_id").toString());
         user.setUser_type(httpSession.getAttribute("user_type").toString());
+<<<<<<< HEAD
+=======
+        log.info(user.getUser_type());
+        log.info("유저{}", user.getUser_id());
+>>>>>>> origin/copyminyoung
         model.addAttribute("userdto", myPageService.getInfo(user));
         return "mypage/write";
     }
     @PostMapping("/write")
+<<<<<<< HEAD
     @ResponseBody
     public boolean write(@RequestBody UserDto userDto){
         if(userDto.getEngineer_regdate() != null) {
@@ -56,6 +62,31 @@ public class MyPageController {
             }
         }
         return false;
+=======
+//    @ResponseBody
+    public String write(UserDto userDto,HttpSession session){
+        log.info("테스트해보자");
+
+        userDto.setUser_id((String) session.getAttribute("user_id"));
+        if(userDto.getEngineer_regdate()!=null){
+            log.info("테스트해보자2");
+            if(myPageService.updateInfo(userDto)&&myPageService.updateEngineerInfo(userDto)){
+                return "/mypage/write";
+            }else{
+                return "/mypage/additional";
+            }
+        }else{
+            if(myPageService.updateInfo(userDto)){
+                log.info("true");
+                return "/mypage/write";
+            }else{
+                log.info("false");
+                return "/mypage/additional";
+            }
+        }
+
+
+>>>>>>> origin/copyminyoung
     }
 
 }

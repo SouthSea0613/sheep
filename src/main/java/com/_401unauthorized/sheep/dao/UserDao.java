@@ -1,7 +1,10 @@
 package com._401unauthorized.sheep.dao;
 
+<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.UserDto;
 import com._401unauthorized.sheep.dto.UserDto;
+=======
+>>>>>>> origin/copyminyoung
 import com._401unauthorized.sheep.dto.UserDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,4 +30,7 @@ public interface UserDao {
 
     UserDto get_info_engineer(UserDto userDto);
 
+    boolean updateInfo(UserDto userDto);
+
+    boolean update_engineerinfo(UserDto userDto);
 }

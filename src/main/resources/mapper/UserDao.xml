@@ -62,6 +62,16 @@
         SET USER_PW = #{user_pw}
         WHERE USER_ID = #{user_id}
     </update>
+    <update id="updateInfo">
+        UPDATE USER SET USER_NAME=#{user_name},USER_PHONE_COMPANY=#{user_phone_company},USER_PHONE=#{user_phone},USER_ADDR=#{user_addr},
+                        USER_EMAIL=#{user_email}
+        WHERE USER_ID=#{user_id}
+
+    </update>
+    <update id="update_engineerinfo">
+        UPDATE ENGINEER SET ENGINEER_REGDATE=#{engineer_regdate}
+        WHERE USER_ID=#{user_id}
+    </update>
 
 
     <select id="additional" resultType="java.lang.String">
@@ -70,6 +80,11 @@
         WHERE USER_ID = #{user_id}
     </select>
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/copyminyoung
     <!-- 회원정보수정 페이지 넘어갈 때 타입별로 가져오기! -->
     <select id="get_info_engineer" resultType="com._401unauthorized.sheep.dto.UserDto">
         SELECT U.USER_ID, U.USER_PW, U.USER_NAME, U.USER_PHONE_COMPANY, U.USER_PHONE, U.USER_ADDR, U.USER_EMAIL, U.USER_TYPE,
