@@ -44,9 +44,6 @@
         <span id="email_check"></span><br>
         <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
 
-    </form>
-    <!--기술자 영역-->
-    <form id="engineer_form" method="post" action="/mypage/write">
     <div class="engineer_info">
         자격증번호
         <input type="text" id="engineer_regnum" readonly><br>
@@ -54,11 +51,47 @@
         자격증 발급번호
         <input type="text" name="engineer_regdate" id="engineer_regdate">
     </div>
+        <div class="button-area">
+            <input type="button" id="write_button" value="수정완료" onclick="write()">
+        </div>
     </form>
-    <div class="button-area">
-        <input type="button" id="write_button" value="수정완료" onclick="write()">
-    </div>
- 
+<script>
+    function write() {
+        // const username = $('.user_name').val();
+        // const userid = $('.user_id').val();
+        // const userphonecompany = $('.user_phone_company').val();
+        // const userphone = $('.user_phone').val();
+        // const useraddr = $('.user_addr').val();
+        // const useremail = $('.user_email').val();
+        // const useremaildetail = $('.user_email_detail').val();
+        //
+        //기술자정보
+        const engineer_regnum =$('.engineer_regnum').val();
+        const engineer_regdate = $('.engineer_regdate').val();
+        const insertInfo = $('#insertInfo');
+        const engineer_form = $('#engineer_form')
+        console.log("엥"+insertInfo);
+        console.log(engineer_form);
+        // if(engineer_regnum!=null){
+        //     alert("수정이 완료되었습니다");
+        //     insertInfo.submit();
+        //     engineer_form.submit();
+        //
+        //
+        // }else{
+        //     alert("수정이 완료되었습니다");
+        //     insertInfo.submit();
+        //
+        // }
+
+
+
+
+
+
+
+    }
+</script>
 </div>
 </body>
 </html>

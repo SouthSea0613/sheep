@@ -46,18 +46,20 @@ public class MyPageController {
     }
     @PostMapping("/write")
     @ResponseBody
-    public boolean write(@RequestBody UserDto userDto){
+    public String write(@RequestBody UserDto userDto){
+        log.info("테스트해보자");
         if(userDto.getEngineer_regdate()!=null){
+            log.info("테스트해보자2");
             if(myPageService.updateInfo(userDto)&&myPageService.updateEngineerInfo(userDto)){
-                return true;
+                return "/mypage/additional";
             }else{
-                return false;
+                return "/mypage/write";
             }
         }else{
             if(myPageService.updateInfo(userDto)){
-                return true;
+                return "/mypage/additional";
             }else{
-                return false;
+                return "/mypage/write";
             }
         }
 
