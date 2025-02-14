@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 @Slf4j
@@ -28,74 +29,35 @@ public class MyPageService {
         }
     }
 
-
-
-
-<<<<<<< HEAD
     public UserDto get_info(UserDto userDto) {
-        UserDto user=new UserDto();
-        switch (userDto.getUser_type()){
+        UserDto user = new UserDto();
+        switch (userDto.getUser_type()) {
             case "0":
-              user = userDao.get_info(userDto);
-              user.setUser_type("회원");
+                user = userDao.get_info(userDto);
+                user.setUser_type("회원");
                 break;
             case "1":
                 user = userDao.get_info(userDto);
                 user.setUser_type("사장님");
                 break;
             case "2":
-                user =userDao.get_info_engineer(userDto);
+                user = userDao.get_info_engineer(userDto);
                 user.setUser_type("능력자님");
                 break;
         }
         return user;
-=======
-    public UserDto getInfo(UserDto userDto) {
-
-        UserDto user = new UserDto();
-        log.info("테스트");
-
-
-        switch (userDto.getUser_type()){
-            case "0":
-              user = userDao.getInfo(userDto);
-              user.setUser_type("회원님");
-                log.info("테스트{}", user);
-                break;
-            case "1":
-                user = userDao.getInfo(userDto);
-                user.setUser_type("사장님");
-                log.info("테스트{}", user);
-                break;
-            case "2":
-                user =userDao.getInfoEngineer(userDto);
-                user.setUser_type("기술자님");
-                log.info("테스트{}", user);
-                break;
-        }
-
-        
-
-        return userDto;
->>>>>>> origin/copyminyoung
     }
 
-    public boolean updateInfo(UserDto userDto) {
-        boolean result = userDao.updateInfo(userDto);
-        log.info("서비스"+userDto.getUser_id());
-        if(result){
-            return true;
-        }else{
-            return false;
-        }
-
-    }
-
-    public boolean updateEngineerInfo(UserDto userDto) {
-        boolean result = userDao.update_engineerinfo(userDto);
-        if(result){
+    @Transactional
+    public boolean update_info(UserDto userDto) {
+        log.info("서비스" + userDto.getUser_id());
+        if (userDao.update_info(userDto)) {
+            if (userDto.getUser_type().equals("2")) {
+                return userDao.update_engineer_info(userDto);
+            }
             return true;
         }
         return false;
     }
 }
+

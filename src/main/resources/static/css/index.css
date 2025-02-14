@@ -8,13 +8,22 @@ body {
     height: 8000px;
 }
 
+/* main */
+
 .main_content {
-    padding-top: 15%;
+    height: auto;
+    min-height: 100%;
+    padding-bottom: 58px;
 }
 
+/* header */
+
 header {
-    position: fixed;
+    position: sticky;
+    top: 0;
     width: 100%;
+    z-index: 100;
+
 }
 
 .header_top {
@@ -75,12 +84,13 @@ li {
     display: block;
 }
 
+
+
 /* footer */
 
 .footer_bottom {
+    height: 58px;
     position: absolute;
-    left: 0;
-    bottom: 0;
     width: 100%;
     background-color: lightgray;
     min-height: 58px;
@@ -100,5 +110,15 @@ li.seller{
 }
 
 li.engineer{
+    display: none;
+}
+
+.list_box {
+    display: none;
+    width: 180px;
+    background-color: lightslategrey;
+}
+
+.list_box div {
     display: none;
 }

@@ -5,31 +5,18 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<<<<<<< HEAD
-    <script th:src="@{/javascript/user.js}"></script>
-    <link rel="stylesheet" href="./css/index.css">
-=======
     <script th:src="@{/javascript/mypage.js}"></script>
->>>>>>> origin/copyminyoung
 </head>
 <body>
-<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>회원정보수정</h2><br>
 
 <div>
     <form th:action="@{/mypage/write}" method="post" id="insertInfo">
         아이디
-<<<<<<< HEAD
         <input type="text" id="user_id" th:value="${session?.user_id}" readonly><br>
 
         이름
-        <input type="text" name="user_name" id="user_name" th:value="${userdto?.user_name}"><br>
-=======
-        <input type="text" id="user_id" th:value="${session?.user_id}"  th:placeholder="${session?.user_id}" readonly><br>
-
-        이름
-        <input type="text" name="user_name" id="user_name" th:placeholder="${userdto.getUser_name()}"><br>
->>>>>>> origin/copyminyoung
+        <input type="text" name="user_name" id="user_name" th:value="${userdto.user_name}"><br>
 
         전화번호
         <select name="user_phone_company" id="user_phone_company">
@@ -39,14 +26,14 @@
             <option value="3">LGU</option>
             <option value="4">알뜰폰</option>
         </select>
-        <input type="text" name="user_phone" id="user_phone" th:value="${userdto?.user_phone}"><br>
+        <input type="text" name="user_phone" id="user_phone" th:value="${userdto.user_phone}"><br>
 
         주소
-        <input type="text" name="user_addr" id="user_addr" th:value="${userdto?.user_addr}"><br>
+        <input type="text" name="user_addr" id="user_addr" th:value="${userdto.user_addr}"><br>
 
         이메일
-        <input type="text" name="user_email" id="user_email" th:value="${userdto?.user_email}"> @
-        <select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
+        <input type="text" name="user_email" id="user_email"> @
+        <select name="user_email_detail" id="user_email_detail" onchange="self_insert()" >
             <option value="none">메일 선택</option>
             <option value="naver.com">naver.com</option>
             <option value="gmail.com">gmail.com</option>
@@ -55,35 +42,32 @@
             <option value="other">직접입력</option>
         </select>
         <span id="email_check"></span><br>
-        <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
+        <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()" ><br>
 
-<<<<<<< HEAD
-        <!--기술자 영역-->
+        <th:block th:unless="${#lists.isEmpty(userdto.engineer_regnum)}">
         <div class="engineer_info">
             자격증번호
-            <input type="text" id="engineer_regnum" th:value="${userdto?.engineer_regnum}" readonly><br>
+            <input type="text" id="engineer_regnum" th:value="${userdto.engineer_regnum}" readonly><br>
 
-            자격증 발급번호
-            <input type="text" name="engineer_regdate" id="engineer_regdate" th:value="${userdto?.engineer_regdate}">
+            자격증 발급일자
+            <input type="text" name="engineer_regdate" th:value="${userdto.engineer_regdate}" id="engineer_regdate">
         </div>
-        <div class="button-area">
-            <input type="button" id="write_button" value="수정완료" onclick="write()">
-        </div>
-=======
-    <div class="engineer_info">
-        자격증번호
-        <input type="text" id="engineer_regnum" readonly><br>
+        </th:block>
 
-        자격증 발급번호
-        <input type="text" name="engineer_regdate" id="engineer_regdate">
-    </div>
-
->>>>>>> origin/copyminyoung
     </form>
     <div class="button-area">
         <input type="button" id="write_button" value="수정완료" onclick="writebtn()">
     </div>
+    <script th:inline="javascript">
+        const email = [[${userdto?.user_email}]];
+        const emailsplit = email.split("@");
+        const user_email = document.getElementById('user_email');
+        const email_detail = document.getElementById('user_email_detail');
+        user_email.value=emailsplit[0];
+        email_detail.value=emailsplit[1];
+
+        // const phone_company = document.getElementById('user_phone_company');
+    </script>
 </div>
-<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
