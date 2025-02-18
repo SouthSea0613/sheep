@@ -25,16 +25,9 @@ public interface UserDao {
 
     UserDto get_info_engineer(UserDto userDto);
 
-<<<<<<< HEAD
-
-
-
 
     boolean update_info(UserDto userDto);
 
-=======
-    boolean update_info(UserDto userDto);
 
->>>>>>> origin/user_eunhye
     boolean update_engineer_info(UserDto userDto);
 }

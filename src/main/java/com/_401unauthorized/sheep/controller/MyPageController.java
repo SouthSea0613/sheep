@@ -51,37 +51,12 @@ public class MyPageController {
         log.info("테스트해보자");
         userDto.setUser_id((String) session.getAttribute("user_id"));
         userDto.setUser_type((String) session.getAttribute("user_type"));
-<<<<<<< HEAD
-        if(myPageService.update_info(userDto)){
-            return "redirect:/mypage/write";
-        }else{
-            return "redirect:/mypage/write";
-        }
 
-//        if(userDto.getEngineer_regdate()!=null){
-//            log.info("테스트해보자2");
-//            if(myPageService.updateInfo(userDto)&&myPageService.updateEngineerInfo(userDto)){
-//                return "/mypage/write";
-//            }else{
-//                return "/mypage/additional";
-//            }
-//        }else{
-//            if(myPageService.updateInfo(userDto)){
-//                log.info("true");
-//                return "/mypage/write";
-//            }else{
-//                log.info("false");
-//                return "/mypage/additional";
-//            }
-//        }
-
-
-=======
         if (myPageService.update_info(userDto)) {
             return "redirect:/mypage/write";
         } else {
             return "/mypage/additional";
         }
->>>>>>> origin/user_eunhye
+
     }
 }

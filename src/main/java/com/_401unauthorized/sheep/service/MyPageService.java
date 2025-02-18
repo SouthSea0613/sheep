@@ -45,25 +45,16 @@ public class MyPageService {
                 user.setUser_type("능력자님");
                 break;
         }
-<<<<<<< HEAD
-
-        
-
-=======
->>>>>>> origin/user_eunhye
         return user;
     }
 
     @Transactional
     public boolean update_info(UserDto userDto) {
-<<<<<<< HEAD
-        if(userDao.update_info(userDto)){
-            if(userDto.getUser_type().equals("2")){
-=======
+
         log.info("서비스" + userDto.getUser_id());
         if (userDao.update_info(userDto)) {
             if (userDto.getUser_type().equals("2")) {
->>>>>>> origin/user_eunhye
+
                 return userDao.update_engineer_info(userDto);
             }
             return true;
@@ -74,8 +65,3 @@ public class MyPageService {
 
 }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/user_eunhye
