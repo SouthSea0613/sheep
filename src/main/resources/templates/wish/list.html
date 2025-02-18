@@ -3,34 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="/javascript/wish.js"></script>
-    <link rel="stylesheet" href="./css/index.css">
+    <script>
+        function wish_write() {
+            location.href= "/wish/write"
+        }
+
+        function takeoff() {
+
+        }
+    </script>
 </head>
 <body>
-<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>위시리스트 목록</h2>
 
 <div class="list-area">
-    <th:block th:if="${#lists.isEmpty(wishList)}">
+    <th:block th:if="${#lists.isEmpty(wish_list)}">
         <div>
             <div>위시리스트가 없습니다</div>
             <div class="wishBarea">
-                <input type="button" id="wish_write" onclick="write()" value="글쓰기">
+                <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
             </div>
         </div>
     </th:block>
-    <th:block th:unless="${#lists.isEmpty(wishList)}">
-        <th:block th:each="wish:${wishList}">
-            <div th:text="${wish.wish_number}"></div>
+    <th:block th:unless="${#lists.isEmpty(wish_list)}">
+        <th:block th:each="wish:${wish_list}">
             <div>
-                <a th:href="@{/wish/detail(wish_number=${wish.wish_number})}" th:text="${wish.wish_title}"></a>
+                <a th:href="@{/wish/detail(wish_number=${wish.wish_number})}" th:text="${wish?.wish_title}"></a>
             </div>
-            <div class="takeoffarea">
+            <div th:if="${wish.apply_status}" th:text="${wish?.apply_status}">상태값</div>
+            <div th:unless="${wish.apply_status!=null}" class="takeoffarea">
                 <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
             </div>
         </th:block>
     </th:block>
 </div>
-<th:block th:replace="~{common/fragment::footer}"></th:block>
+
 </body>
 </html>
