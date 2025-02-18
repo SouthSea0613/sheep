@@ -9,13 +9,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import org.springframework.ui.Model;
-
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -37,10 +33,9 @@ public class WishController<session> {
         return "wish/write";
     }
     @PostMapping("/write")
-    public String wish(@RequestParam("major_category") List<MajorDto> major_category, @RequestParam("sub_category") List<SubDto> sub_category, HttpSession session, WishDto wishDto){
-        log.info(major_category.toString());
-        log.info(sub_category.toString());
+    public String wish(@RequestBody WishDto wishDto, HttpSession session){
 
+    log.info(String.valueOf(wishDto));
         return "wish/list";
     }
 
