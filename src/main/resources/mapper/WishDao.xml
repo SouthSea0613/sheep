@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.WishDao">
-
+    <!--리스트 가져오기-->
+    <select id="get_wish_list" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT W.WISH_TITLE, A.APPLY_STATUS
+        FROM WISH W
+                 JOIN APPLY_STATUS A
+                      ON W.WISH_NUMBER = A.WISH_NUMBER
+        WHERE W.USER_ID = #{user_id};
+    </select>
 </mapper>

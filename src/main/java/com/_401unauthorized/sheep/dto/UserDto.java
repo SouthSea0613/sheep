@@ -12,18 +12,18 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain = true)
 public class UserDto {
-    String user_id;
-    String user_pw;
-    String user_name;
-    String user_phone_company;
-    String user_phone;
-    String user_addr;
-    String user_email;
-    String user_type;
-    String seller_regnum;
-    String seller_company;
-    String seller_name;
-    String seller_addr;
-    String engineer_regnum;
-    String engineer_regdate;
+    private String user_id;
+    private String user_pw;
+    private String user_name;
+    private String user_phone_company;
+    private String user_phone;
+    private String user_addr;
+    private String user_email;
+    private String user_type;
+    private String seller_regnum;
+    private String seller_company;
+    private String seller_name;
+    private String seller_addr;
+    private String engineer_regnum;
+    private String engineer_regdate;
 }
