@@ -13,4 +13,5 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class SubDto {
     String category_number;
+    int wish_number;
 }

@@ -20,8 +20,9 @@ public class WishController {
 
     @GetMapping("/list")
     public String get_wish_list(HttpSession httpSession, Model model) {
+        // 아이디를 기준으로 리스를 찾아오는 거
         String user_id = httpSession.getAttribute("user_id").toString();
-        model.addAttribute("wish_list",wishService.get_wish_list(user_id));
+        model.addAttribute("wish_list", wishService.get_wish_list(user_id));
         return "wish/list";
     }
 
@@ -30,8 +31,17 @@ public class WishController {
         return "wish/write";
     }
 
-    @GetMapping("/detail")
-    public String detail() {
-        return "wish/detail";
+    @PostMapping("/write")
+    public String write(WishDto wishDto, HttpSession httpSession) {
+        if (wishService.write(wishDto)) {
+            return "wish/detail";
+        }
+        return "wish/write";
     }
+
+
+//    @GetMapping("/detail")
+//    public String detail() {
+//        return "wish/detail";
+//    }
 }
