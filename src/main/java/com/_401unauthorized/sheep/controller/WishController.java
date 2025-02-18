@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/wish")
 @Controller
-public class WishController<session> {
+public class WishController{
     private final WishService wishService;
 
     @GetMapping("/list")
