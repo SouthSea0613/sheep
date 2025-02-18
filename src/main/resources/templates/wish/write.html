@@ -12,30 +12,8 @@
     <script src="../../static/javascript/write.js"></script>
     <script>
         window.onload = () => {
-            function toggleUl(){
-
-
-                let checkbox = document.querySelectorAll(".chk")
-                let listul = document.querySelectorAll("ul")
-                for (let i = 0; i < checkbox.length; i++) {
-                    if (checkbox[i].checked) {
-                        listul[i].style.display = 'block';
-                    } else {
-                        listul[i].style.display = 'none';
-                        listul[i].querySelectorAll('input[type="checkbox"]').forEach(function (innerCheckbox) {
-                            innerCheckbox.checked = false;
-                        });
-                        listul[i].querySelectorAll('input[type="text"]').forEach(function (textBox) {
-                            textBox.value = '';
-                        });
-                    }
-                }
+            function toggleUl() {
             }
-            document.querySelectorAll('input[name="major_category_number"]').forEach(function (checkbox) {
-                checkbox.addEventListener('change', function () {
-                    toggleUl(this);
-                });
-            });
         }
     </script>
 </head>
@@ -80,7 +58,9 @@
             <div>
                 <div>예산</div>
                 <div>
-                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="money" id="money" placeholder="예산을 적어주세요.">만원
+                    <input type="text"
+                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                           name="money" id="money" placeholder="예산을 적어주세요.">만원
                 </div>
             </div>
             <br>
@@ -104,11 +84,14 @@
         <div class="wood">
             <div><input type="checkbox" name="major_category_number" value="2" id="2" class="chk">목공
                 <ul>
-                    <li><input type="checkbox" name="category_number" class="wood_class" value="17" id="wood_hot">단열</li>
-                    <li><input type="checkbox" name="category_number" class="wood_class" value="18" id="wood_ceiling">천장</li>
-                    <li><input type="checkbox" name="category_number" class="wood_class" value="19" id="wood_walls">벽</li>
+                    <li><input type="checkbox" name="category_number" class="wood_class" value="17" id="wood_hot">단열
+                    </li>
+                    <li><input type="checkbox" name="category_number" class="wood_class" value="18" id="wood_ceiling">천장
+                    </li>
+                    <li><input type="checkbox" name="category_number" class="wood_class" value="19" id="wood_walls">벽
+                    </li>
                     <li>
-                        <input type="checkbox" name="category_number" value="2"  id="wood_text_checkbox">
+                        <input type="checkbox" name="category_number" value="2" id="wood_text_checkbox">
                         <input type="text" name="major_text" id="wood_text" placeholder="상세설명을 작성해주세요.">
                     </li>
                 </ul>
@@ -154,9 +137,9 @@
             <div><input type="checkbox" name="major_category_number" value="7" id="7" class="chk">필름</div>
             <ul>
                 <li><input type="checkbox" name="category_number" value="20" id="film_fireguard">현관방화문</li>
-                <li><input type="checkbox" name="category_number" value="21"  id="film_middoor">중문</li>
-                <li><input type="checkbox" name="category_number" value="22"  id="film_ceilingmolding">천장몰딩</li>
-                <li><input type="checkbox" name="category_number" value="23"  id="film_molding">걸레받이몰딩</li>
+                <li><input type="checkbox" name="category_number" value="21" id="film_middoor">중문</li>
+                <li><input type="checkbox" name="category_number" value="22" id="film_ceilingmolding">천장몰딩</li>
+                <li><input type="checkbox" name="category_number" value="23" id="film_molding">걸레받이몰딩</li>
                 <li><input type="text" name="major_text" id="film_text" placeholder="상세설명을 작성해주세요."></li>
             </ul>
         </div>
@@ -257,7 +240,7 @@
         const category_numbers = $(`input[name=major_category_number]`);
         const major_text = $('input[name=major_text]');
 
-        for(i=0; i<16; i++){
+        for (i = 0; i < 16; i++) {
             let category_number = $(category_numbers[i]);
             if (category_number.is(':checked')) {
                 let data = {};
@@ -268,12 +251,12 @@
             }
         }
         const sub_category_number = $(`input[name=category_number]`);
-        let sub_category=[];
-        for(i=17; i<45; i++){
+        let sub_category = [];
+        for (i = 17; i < 45; i++) {
             let sub_category_checkbox = $(sub_category_number[i]);
-            if(sub_category_checkbox.is(':checked')){
+            if (sub_category_checkbox.is(':checked')) {
 
-                let category ={};
+                let category = {};
                 category.category_number = sub_category_checkbox.val();
                 // console.log(category)
                 sub_category.push(category);
