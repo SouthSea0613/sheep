@@ -1,6 +1,9 @@
 package com._401unauthorized.sheep.dto;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/user_eunhye
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +21,7 @@ public class WishDto {
     int wish_number;
     String user_id;
     String wish_title;
+<<<<<<< HEAD
      String wish_type;
      String wish_size;
      String wish_size_text;
@@ -26,4 +30,15 @@ public class WishDto {
      String wish_status;
      List<MajorDto> major_category;
      List<SubDto> sub_category;
+=======
+    String wish_type;
+    String wish_size;
+    String wish_size_text;
+    int wish_money;
+    String wish_addr;
+    String apply_status;
+
+    List<MajorDto> major_category;
+    List<SubDto> sub_category;
+>>>>>>> origin/user_eunhye
 }

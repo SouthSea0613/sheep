@@ -20,7 +20,11 @@ function toggleUl() {
             });
         }
     }
+<<<<<<< HEAD
     document.querySelectorAll('input[name="category_number"]').forEach(function (checkbox) {
+=======
+    document.querySelectorAll('input[name="category"]').forEach(function (checkbox) {
+>>>>>>> origin/user_eunhye
         checkbox.addEventListener('change', function () {
             toggleUl(this);
         });
