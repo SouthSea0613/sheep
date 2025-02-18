@@ -1,5 +1,7 @@
 package com._401unauthorized.sheep.controller;
 
+import com._401unauthorized.sheep.dto.MajorDto;
+import com._401unauthorized.sheep.dto.SubDto;
 import com._401unauthorized.sheep.dto.WishDto;
 import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
@@ -13,12 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.ui.Model;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/wish")
 @Controller
-public class WishController {
+public class WishController<session> {
     private final WishService wishService;
 
     @GetMapping("/list")
@@ -32,9 +37,11 @@ public class WishController {
         return "wish/write";
     }
     @PostMapping("/write")
-    public String wish(HttpSession session, WishDto wishDto){
+    public String wish(@RequestParam("major_category") List<MajorDto> major_category, @RequestParam("sub_category") List<SubDto> sub_category, HttpSession session, WishDto wishDto){
+        log.info(major_category.toString());
+        log.info(sub_category.toString());
 
-        return "";
+        return "wish/list";
     }
 
 
