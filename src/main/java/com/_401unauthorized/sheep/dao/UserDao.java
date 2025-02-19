@@ -25,9 +25,14 @@ public interface UserDao {
 
     UserDto get_info_engineer(UserDto userDto);
 
+<<<<<<< HEAD
 
     boolean update_info(UserDto userDto);
 
 
+=======
+    boolean update_info(UserDto userDto);
+
+>>>>>>> yoonsic2
     boolean update_engineer_info(UserDto userDto);
 }

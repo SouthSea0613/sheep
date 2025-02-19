@@ -37,15 +37,18 @@ public class MyPageController {
     public String write(HttpSession httpSession, Model model) {
         UserDto user = new UserDto();
         user.setUser_id(httpSession.getAttribute("user_id").toString());
-        log.info(user.toString());
         user.setUser_type(httpSession.getAttribute("user_type").toString());
+<<<<<<< HEAD
         log.info(user.getUser_type());
         log.info("유저{}", user.getUser_id());
+=======
+>>>>>>> yoonsic2
         model.addAttribute("userdto", myPageService.get_info(user));
         return "mypage/write";
     }
 
     @PostMapping("/write")
+<<<<<<< HEAD
 //    @ResponseBody
     public String write(UserDto userDto, HttpSession session) {
         log.info("테스트해보자");
@@ -58,5 +61,15 @@ public class MyPageController {
             return "/mypage/additional";
         }
 
+=======
+    public String write(UserDto userDto,HttpSession session) {
+        userDto.setUser_id((String) session.getAttribute("user_id"));
+        userDto.setUser_type((String) session.getAttribute("user_type"));
+            if (myPageService.update_info(userDto)) {
+                return "redirect:/mypage/write";
+            } else {
+                return "/mypage/additional";
+            }
+>>>>>>> yoonsic2
     }
 }

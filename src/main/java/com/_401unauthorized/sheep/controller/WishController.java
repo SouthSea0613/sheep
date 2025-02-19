@@ -7,7 +7,9 @@ import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+<<<<<<< HEAD
 
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,14 @@ import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
+=======
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+>>>>>>> yoonsic2
 
 @Slf4j
 @RequiredArgsConstructor
@@ -24,6 +34,7 @@ public class WishController{
     private final WishService wishService;
 
     @GetMapping("/list")
+<<<<<<< HEAD
     public String get_wish_list(HttpSession httpSession, Model model) {
         String user_id = httpSession.getAttribute("user_id").toString();
         model.addAttribute("wish_list", wishService.get_wish_list(user_id));
@@ -71,4 +82,47 @@ public class WishController{
 
 
 
+=======
+    public String list(HttpSession httpSession, Model model) {
+        String user_id = (httpSession.getAttribute("user_id").toString());
+        model.addAttribute("get_wish_list", wishService.get_wish_list(user_id));
+        return "wish/list";
+    }
+
+    @GetMapping("/write")
+    public String write() {
+        return "wish/write";
+    }
+
+    @PostMapping("/write")
+    public String write(WishDto wishDto,
+                        @RequestParam("category_number") List<Integer> category_number,
+                        @RequestParam("major_text") List<String> major_text,
+                        HttpSession httpSession) {
+        String user_id = (httpSession.getAttribute("user_id").toString());
+        wishDto.setUser_id(user_id);
+        List<MajorDto> major = new ArrayList<>();
+        List<SubDto> sub = new ArrayList<>();
+        log.info(category_number.toString());
+        log.info(major_text.toString());
+
+        for (int i = 0; i < category_number.size(); i++) {
+            if (category_number.get(i)<16) {
+                MajorDto majorDto = new MajorDto();
+                majorDto.setCategory_number(String.valueOf(category_number.get(i)));
+                majorDto.setMajor_text(major_text.get(category_number.get(i) - 1));
+                major.add(majorDto);
+            } else {
+                SubDto subDto = new SubDto();
+                subDto.setCategory_number(String.valueOf(category_number.get(i)));
+                sub.add(subDto);
+            }
+        }
+        wishDto.setMajor_category(major);
+        wishDto.setSub_category(sub);
+        log.info("wishDto: {}", wishDto);
+        return "wish/list";
+    }
+
+>>>>>>> yoonsic2
 }

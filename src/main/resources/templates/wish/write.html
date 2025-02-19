@@ -14,10 +14,17 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         window.onload = () => {
+<<<<<<< HEAD
             toggleUl()
             function toggleUl(){
 
                 let checkbox = document.querySelectorAll('input[class="major_category_number"]');
+=======
+            function toggleUl(){
+
+
+                let checkbox = document.querySelectorAll(".major_category_number")
+>>>>>>> yoonsic2
                 let listul = document.querySelectorAll("ul")
                 for (let i = 0; i < checkbox.length; i++) {
                     if (checkbox[i].checked) {
@@ -53,6 +60,7 @@
         <div>
             <!--  위 div는 필수 항목 묶음  -->
             <div>
+<<<<<<< HEAD
                 <div id="title">제목</div>
                 <div>
                     <input type="text" name="wish_title" class="title_class" placeholder="제목을 입력해주세요">
@@ -64,12 +72,20 @@
                     <input type="radio" class="wish_type" name="wish_type"value="1" >아파트
                     <input type="radio" class="wish_type" name="wish_type">단독주택
                     <input type="radio" class="wish_type" name="wish_type">빌라
+=======
+                <div id="type">주거형태</div>
+                <div>
+                    <input type="radio" name="wish_type"value="1" >아파트
+                    <input type="radio" name="wish_type">단독주택
+                    <input type="radio" name="wish_type">빌라
+>>>>>>> yoonsic2
                 </div>
             </div>
             <br>
             <div>
                 <div>평수</div>
                 <div>
+<<<<<<< HEAD
                     <input type="radio" class="wish_size" name="wish_size" value="10" >10평 대
                     <input type="radio" class="wish_size" name="wish_size" value="20">20평 대
                     <input type="radio" class="wish_size" name="wish_size" value="20">30평 대
@@ -77,6 +93,15 @@
                     <input type="radio" class="wish_size" name="wish_size" value="20">50평 이상
                     <div>
                         <input type="text" name="wish_size_text" id="size_text" placeholder="참고">
+=======
+                    <input type="radio" name="wish_size">10평 대
+                    <input type="radio" name="wish_size">20평 대
+                    <input type="radio" name="wish_size">30평 대
+                    <input type="radio" name="wish_size">40평 대
+                    <input type="radio" name="wish_size">50평 이상
+                    <div>
+                        <input type="text" name="wish_size_text" placeholder="참고">
+>>>>>>> yoonsic2
                     </div>
                     <div>
                         <p>평수를 모르신다면 참고란에 적어주세요.</p>
@@ -99,17 +124,26 @@
         <hr>
         <br>
         <!-- 아래부터 시공 선택 사항 -->
+<<<<<<< HEAD
 
         <div class="remove">
 
             <div><input type="checkbox" name="category_number" class="major_category_number" value="1">철거
                 <ul>
                     <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+        <div class="remove">
+
+            <div><input type="checkbox" class="major_category_number" value="1" name="category_number">철거
+                <ul>
+                    <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
                 </ul>
             </div>
         </div>
         <br>
         <div class="wood">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="2"  >목공
                 <ul>
                     <li><input type="checkbox"  name="category_number" class="category_number"  value="17" id="wood_hot">단열</li>
@@ -118,47 +152,84 @@
                     <li>
 
                         <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
+=======
+            <div><input type="checkbox" class="major_category_number" value="2" name="category_number">목공
+                <ul>
+                    <li><input type="checkbox" value="17" name="category_number">단열</li>
+                    <li><input type="checkbox" value="18" name="category_number">천장</li>
+                    <li><input type="checkbox" value="19" name="category_number">벽</li>
+                    <li>
+                        <input type="text" placeholder="상세설명을 작성해주세요." name="major_text">
+>>>>>>> yoonsic2
                     </li>
                 </ul>
             </div>
         </div>
         <br>
         <div class="paper">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="3">도배</div>
             <ul>
                 <li>
                     <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
+=======
+            <div><input type="checkbox" class="major_category_number" value="3" name="category_number">도배</div>
+            <ul>
+                <li>
+                    <input type="text" placeholder="상세설명을 작성해주세요." name="major_text">
+>>>>>>> yoonsic2
                 </li>
             </ul>
         </div>
         <br>
         <div class="elec">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="4">전기</div>
             <ul>
                 <li>
 
                     <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
+=======
+            <div><input type="checkbox" class="major_category_number" value="4" name="category_number">전기</div>
+            <ul>
+                <li>
+                    <input type="text" placeholder="상세설명을 작성해주세요." name="major_text">
+>>>>>>> yoonsic2
                 </li>
             </ul>
         </div>
         <br>
         <div class="light">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="5">조명</div>
             <ul>
                 <li>
                     <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
+=======
+            <div><input type="checkbox" class="major_category_number" value="5" name="category_number">조명</div>
+            <ul>
+                <li>
+                    <input type="text" placeholder="상세설명을 작성해주세요." name="major_text">
+>>>>>>> yoonsic2
                 </li>
             </ul>
         </div>
         <br>
         <div class="tile">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="6">타일</div>
             <ul>
                 <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="6" name="category_number">타일</div>
+            <ul>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
             </ul>
         </div>
         <br>
         <div class="film">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="7">필름</div>
             <ul>
                 <li><input type="checkbox" name="category_number" value="20">현관방화문</li>
@@ -166,46 +237,88 @@
                 <li><input type="checkbox" name="category_number" value="22">천장몰딩</li>
                 <li><input type="checkbox" name="category_number" value="23">걸레받이몰딩</li>
                 <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="7" name="category_number">필름</div>
+            <ul>
+                <li><input type="checkbox" value="20" name="category_number">현관방화문</li>
+                <li><input type="checkbox" value="21" name="category_number">중문</li>
+                <li><input type="checkbox" value="22" name="category_number">천장몰딩</li>
+                <li><input type="checkbox" value="23" name="category_number">걸레받이몰딩</li>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
             </ul>
         </div>
         <br>
         <div class="coating">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="8">도장</div>
             <ul>
                 <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="8" name="category_number">도장</div>
+            <ul>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
             </ul>
         </div>
         <br>
         <div class="kitchen">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="9">부엌</div>
             <ul>
                 <li><input type="checkbox" name="category_number" value="24">'ㅡ'자</li>
                 <li><input type="checkbox" name="category_number" value="25">'ㄱ'자</li>
                 <li><input type="checkbox" name="category_number" value="26">대면형</li>
                 <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="9" name="category_number">부엌</div>
+            <ul>
+                <li><input type="checkbox" value="24" name="category_number">'ㅡ'자</li>
+                <li><input type="checkbox" value="25" name="category_number">'ㄱ'자</li>
+                <li><input type="checkbox" value="26" name="category_number">대면형</li>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
             </ul>
         </div>
         <br>
         <div class="bath">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="10">욕실</div>
             <ul>
                 <li><input type="checkbox" name="category_number" value="27">욕조</li>
                 <li><input type="checkbox" name="category_number" value="28">샤워부스</li>
                 <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="10" name="category_number">욕실</div>
+            <ul>
+                <li><input type="checkbox" value="27" name="category_number">욕조</li>
+                <li><input type="checkbox" value="28" name="category_number">샤워부스</li>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
             </ul>
         </div>
         <br>
         <div class="storage">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="11">수납</div>
             <ul>
                 <li><input type="checkbox" name="category_number" value="29">드레스룸</li>
                 <li><input type="checkbox" name="category_number" value="30">붙박이장</li>
                 <li><input type="checkbox" name="category_number" value="31">현관장</li>
                 <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="11" name="category_number">수납</div>
+            <ul>
+                <li><input type="checkbox" value="29" name="category_number">드레스룸</li>
+                <li><input type="checkbox" value="30" name="category_number">붙박이장</li>
+                <li><input type="checkbox" value="31" name="category_number">현관장</li>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
             </ul>
         </div>
         <br>
         <div class="floor">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="12">바닥</div>
             <ul>
                 <li><input type="checkbox" name="category_number" value="32">장판</li>
@@ -213,27 +326,52 @@
                 <li><input type="checkbox" name="category_number" value="34">강마루</li>
                 <li><input type="checkbox" name="category_number" value="35">타일</li>
                 <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="12" name="category_number">바닥</div>
+            <ul>
+                <li><input type="checkbox" value="32" name="category_number">장판</li>
+                <li><input type="checkbox" value="33" name="category_number">강화마루</li>
+                <li><input type="checkbox" value="34" name="category_number">강마루</li>
+                <li><input type="checkbox" value="35" name="category_number">타일</li>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
             </ul>
         </div>
         <br>
         <div class="window">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="13">창호</div>
             <ul>
                 <li><input type="checkbox" name="category_number" value="36">일반창</li>
                 <li><input type="checkbox" name="category_number" value="37">터닝도어</li>
                 <li><input type="checkbox" name="category_number" value="38">폴딩도어</li>
                 <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="13" name="category_number">창호</div>
+            <ul>
+                <li><input type="checkbox" value="36" name="category_number">일반창</li>
+                <li><input type="checkbox" value="37" name="category_number">터닝도어</li>
+                <li><input type="checkbox" value="38" name="category_number">폴딩도어</li>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
             </ul>
         </div>
         <br>
         <div class="door">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="14">도어</div>
             <ul>
                 <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="14" name="category_number">도어</div>
+            <ul>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+>>>>>>> yoonsic2
             </ul>
         </div>
         <br>
         <div class="mdoor">
+<<<<<<< HEAD
             <div><input type="checkbox" name="category_number" class="major_category_number" value="15">중문</div>
             <ul>
                 <li><input type="checkbox" name="category_number" value="39">3연동</li>
@@ -248,6 +386,22 @@
                     <li><input type="checkbox" name="category_number" value="42">입주민동의서</li>
                     <li><input type="checkbox" name="category_number" value="43">EV보양 및 실내외 보양</li>
                     <li><input type="checkbox" name="category_number" value="44">입주청소</li>
+=======
+            <div><input type="checkbox" class="major_category_number" value="15" name="category_number">중문</div>
+            <ul>
+                <li><input type="checkbox" value="39" name="category_number">3연동</li>
+                <li><input type="checkbox" value="40" name="category_number">여닫이</li>
+                <li><input type="checkbox" value="41" name="category_number">슬라이딩</li>
+                <li><input type="text" placeholder="상세설명을 작성해주세요." name="major_text"></li>
+            </ul>
+            <br>
+            <div class="ready">
+                <div><input type="checkbox" class="major_category_number" value="16" name="category_number">공사준비/마감</div>
+                <ul>
+                    <li><input type="checkbox" value="42" name="category_number">입주민동의서</li>
+                    <li><input type="checkbox" value="43" name="category_number">EV보양 및 실내외 보양</li>
+                    <li><input type="checkbox" value="44" name="category_number">입주청소</li>
+>>>>>>> yoonsic2
                 </ul>
             </div>
         </div>
@@ -262,6 +416,7 @@
 <script>
 
     function clickbtn() {
+<<<<<<< HEAD
         const title_input = $('.title_class');
         const wish_type= $('.wish_type');
         const wish_size = $('.wish_size');
@@ -282,6 +437,10 @@
         }
 
 
+=======
+       $('#write_form').submit();
+    }
+>>>>>>> yoonsic2
 </script>
 </body>
 </html>
