@@ -28,23 +28,4 @@
         VALUES (#{category_number}, #{wish_number})
     </insert>
 
-<!--  위시리스트 작성 쿼리문  -->
-    <insert id="insert_wish" useGeneratedKeys="true" keyProperty="wish_number">
-        insert into wish values(null, #{user_id}, #{wish_title}, #{wish_type}, #{wish_size}, #{wish_size_text}, #{wish_money}, #{wish_addr})
-    </insert>
-    <insert id="insert_major">
-        insert into major_category_content values(#{category_number}, #{wish_number}, #{major_text})
-    </insert>
-    <insert id="insert_sub">
-        insert into sub_category values(#{category_number}, #{wish_number})
-    </insert>
-
-    <!--  위시리스트 제목 상태값 조인 셀렉트 쿼리문  -->
-    <select id="get_wish_list" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT W.WISH_TITLE, A.APPLY_STATUS
-        FROM WISH W
-                 JOIN APPLY_STATUS A
-                      ON W.WISH_NUMBER = A.WISH_NUMBER
-        WHERE W.USER_ID = #{user_id}
-    </select>
 </mapper>

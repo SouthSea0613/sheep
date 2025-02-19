@@ -42,8 +42,6 @@ public class WishService {
         }
         return wish_list;
     }
-<<<<<<< HEAD
-=======
 
     @Transactional
     public boolean write(WishDto wishDto) {
@@ -71,5 +69,4 @@ public class WishService {
         }
         return true;
     }
->>>>>>> jieun
 }

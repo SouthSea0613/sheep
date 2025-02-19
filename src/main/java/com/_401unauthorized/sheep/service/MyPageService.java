@@ -45,13 +45,8 @@ public class MyPageService {
 
     @Transactional
     public boolean update_info(UserDto userDto) {
-<<<<<<< HEAD
         if (userDao.update_info(userDto)) {
             if (userDto.getUser_type().equals("2")) {
-=======
-        if(userDao.update_info(userDto)){
-            if(userDto.getUser_type().equals("2")){
->>>>>>> jieun
                 return userDao.update_engineer_info(userDto);
             }
             return true;

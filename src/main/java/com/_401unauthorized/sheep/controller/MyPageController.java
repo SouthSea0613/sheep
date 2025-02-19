@@ -43,17 +43,9 @@ public class MyPageController {
     }
 
     @PostMapping("/write")
-<<<<<<< HEAD
-    public String write(UserDto userDto, HttpSession session) {
-        userDto.setUser_id((String) session.getAttribute("user_id"));
-        userDto.setUser_type((String) session.getAttribute("user_type"));
-
-=======
     public String write(UserDto userDto, HttpSession httpSession) {
-        log.info("테스트해보자");
         userDto.setUser_id((String) httpSession.getAttribute("user_id"));
         userDto.setUser_type((String) httpSession.getAttribute("user_type"));
->>>>>>> jieun
         if (myPageService.update_info(userDto)) {
             return "redirect:/mypage/write";
         } else {
