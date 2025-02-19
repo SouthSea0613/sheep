@@ -16,23 +16,9 @@ public interface UserDao {
     boolean join_additional_engineer(UserDto userDto);
     String id_find_check(String user_email);
     boolean pw_reset(UserDto userDto);
-
-//    mypage controller 영역
     String additional(String user_id);
-
-
     UserDto get_info(UserDto userDto);
-
     UserDto get_info_engineer(UserDto userDto);
-
-<<<<<<< HEAD
-
     boolean update_info(UserDto userDto);
-
-
-=======
-    boolean update_info(UserDto userDto);
-
->>>>>>> yoonsic2
     boolean update_engineer_info(UserDto userDto);
 }

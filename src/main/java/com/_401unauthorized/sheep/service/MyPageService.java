@@ -30,32 +30,19 @@ public class MyPageService {
     }
 
     public UserDto get_info(UserDto userDto) {
-<<<<<<< HEAD
         UserDto user = new UserDto();
         switch (userDto.getUser_type()) {
             case "0":
                 user = userDao.get_info(userDto);
                 user.setUser_type("회원");
-=======
-        UserDto user = new UserDto();   // 빈깡통
-        switch (userDto.getUser_type()){
-            case "0":
-              user = userDao.get_info(userDto);
-              user.setUser_type("회원");
->>>>>>> yoonsic2
                 break;
             case "1":
                 user = userDao.get_info(userDto);
                 user.setUser_type("사장님");
                 break;
             case "2":
-<<<<<<< HEAD
                 user = userDao.get_info_engineer(userDto);
                 user.setUser_type("능력자님");
-=======
-                user =userDao.get_info_engineer(userDto);
-                user.setUser_type("작업자");
->>>>>>> yoonsic2
                 break;
         }
         return user;
@@ -63,16 +50,8 @@ public class MyPageService {
 
     @Transactional
     public boolean update_info(UserDto userDto) {
-<<<<<<< HEAD
-
-        log.info("서비스" + userDto.getUser_id());
         if (userDao.update_info(userDto)) {
             if (userDto.getUser_type().equals("2")) {
-
-=======
-        if(userDao.update_info(userDto)){
-            if(userDto.getUser_type().equals("2")){
->>>>>>> yoonsic2
                 return userDao.update_engineer_info(userDto);
             }
             return true;

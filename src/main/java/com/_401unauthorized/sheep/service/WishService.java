@@ -15,7 +15,6 @@ import java.util.List;
 public class WishService {
     private final WishDao wishDao;
 
-<<<<<<< HEAD
     public List<WishDto> get_wish_list(String user_id) {
         List<WishDto> wish_list = wishDao.get_wish_list(user_id);
         for (WishDto wish : wish_list) {
@@ -35,16 +34,9 @@ public class WishService {
                 }
             }
             else {
-//                wish.setApply_status("");
                 wish.setApply_status(null);
             }
         }
         return wish_list;
     }
 }
-=======
-    public Object get_wish_list(String userId) {
-    return false;
-    }
-}
->>>>>>> yoonsic2
