@@ -22,6 +22,7 @@ public class WishDto {
     String wish_size_text;
     int wish_money;
     String wish_addr;
+
     String apply_status;
 
     List<MajorDto> major_category;
