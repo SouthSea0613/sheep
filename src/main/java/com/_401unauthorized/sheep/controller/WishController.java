@@ -40,10 +40,12 @@ public class WishController{
                         HttpSession httpSession) {
         String user_id = (httpSession.getAttribute("user_id").toString());
         wishDto.setUser_id(user_id);
+        //임의의 List들 생성
         List<MajorDto> major = new ArrayList<>();
         List<SubDto> sub = new ArrayList<>();
 
         for (int i = 0; i < category_number.size(); i++) {
+            //category_number를
             if (category_number.get(i)<16) {
                 MajorDto majorDto = new MajorDto();
                 majorDto.setCategory_number(String.valueOf(category_number.get(i)));
@@ -56,8 +58,13 @@ public class WishController{
             }
         }
 
+
+
         wishDto.setMajor_category(major);
         wishDto.setSub_category(sub);
-        return "wish/list";
+        if (wishService.write(wishDto)) {
+            return "wish/list";
+        }
+        return "redirect:/wish/write";
     }
 }
