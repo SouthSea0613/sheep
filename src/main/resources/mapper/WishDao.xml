@@ -5,7 +5,7 @@
     <select id="get_wish_list" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT W.WISH_TITLE, A.APPLY_STATUS
         FROM WISH W
-                 JOIN APPLY_STATUS A
+                 LEFT JOIN APPLY_STATUS A
                       ON W.WISH_NUMBER = A.WISH_NUMBER
         WHERE W.USER_ID = #{user_id};
     </select>
