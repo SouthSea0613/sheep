@@ -58,6 +58,9 @@ public class WishController{
 
         wishDto.setMajor_category(major);
         wishDto.setSub_category(sub);
-        return "wish/list";
+        if (wishService.write(wishDto)) {
+            return "redirect:/wish/list";
+        }
+        return "redirect:/wish/write";
     }
 }
