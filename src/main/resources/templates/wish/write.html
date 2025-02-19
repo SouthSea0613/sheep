@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<<<<<<< HEAD
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-=======
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
->>>>>>> user_eunhye
 <head>
     <meta charset="UTF-8">
     <title>Wish Write</title>
@@ -13,14 +9,12 @@
             list-style-type: none;
         }
     </style>
-<<<<<<< HEAD
     <script src="/javascript/write.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         window.onload = () => {
             function toggleUl(){
-
 
                 let checkbox = document.querySelectorAll(".chk")
                 let listul = document.querySelectorAll("ul")
@@ -43,13 +37,6 @@
                     toggleUl(this);
                 });
             });
-=======
-    <script src="../../static/javascript/write.js"></script>
-    <script>
-        window.onload = () => {
-            function toggleUl() {
-            }
->>>>>>> user_eunhye
         }
     </script>
 </head>
@@ -94,13 +81,7 @@
             <div>
                 <div>예산</div>
                 <div>
-<<<<<<< HEAD
                     <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="money" id="money" placeholder="예산을 적어주세요.">만원
-=======
-                    <input type="text"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                           name="money" id="money" placeholder="예산을 적어주세요.">만원
->>>>>>> user_eunhye
                 </div>
             </div>
             <br>
@@ -124,22 +105,11 @@
         <div class="wood">
             <div><input type="checkbox" name="major_category_number" value="2" id="2" class="chk">목공
                 <ul>
-<<<<<<< HEAD
                     <li><input type="checkbox" name="category_number" class="wood_class" value="17" id="wood_hot">단열</li>
                     <li><input type="checkbox" name="category_number" class="wood_class" value="18" id="wood_ceiling">천장</li>
                     <li><input type="checkbox" name="category_number" class="wood_class" value="19" id="wood_walls">벽</li>
                     <li>
                         <input type="checkbox" name="category_number" value="2"  id="wood_text_checkbox">
-=======
-                    <li><input type="checkbox" name="category_number" class="wood_class" value="17" id="wood_hot">단열
-                    </li>
-                    <li><input type="checkbox" name="category_number" class="wood_class" value="18" id="wood_ceiling">천장
-                    </li>
-                    <li><input type="checkbox" name="category_number" class="wood_class" value="19" id="wood_walls">벽
-                    </li>
-                    <li>
-                        <input type="checkbox" name="category_number" value="2" id="wood_text_checkbox">
->>>>>>> user_eunhye
                         <input type="text" name="major_text" id="wood_text" placeholder="상세설명을 작성해주세요.">
                     </li>
                 </ul>
@@ -185,15 +155,9 @@
             <div><input type="checkbox" name="major_category_number" value="7" id="7" class="chk">필름</div>
             <ul>
                 <li><input type="checkbox" name="category_number" value="20" id="film_fireguard">현관방화문</li>
-<<<<<<< HEAD
-                <li><input type="checkbox" name="category_number" value="21"  id="film_middoor">중문</li>
-                <li><input type="checkbox" name="category_number" value="22"  id="film_ceilingmolding">천장몰딩</li>
-                <li><input type="checkbox" name="category_number" value="23"  id="film_molding">걸레받이몰딩</li>
-=======
                 <li><input type="checkbox" name="category_number" value="21" id="film_middoor">중문</li>
                 <li><input type="checkbox" name="category_number" value="22" id="film_ceilingmolding">천장몰딩</li>
                 <li><input type="checkbox" name="category_number" value="23" id="film_molding">걸레받이몰딩</li>
->>>>>>> user_eunhye
                 <li><input type="text" name="major_text" id="film_text" placeholder="상세설명을 작성해주세요."></li>
             </ul>
         </div>
@@ -263,11 +227,7 @@
         </div>
         <br>
         <div class="mdoor">
-<<<<<<< HEAD
             <div><input type="checkbox" name="major_category_number" value="15" id="15" class="chk">창호</div>
-=======
-            <div><input type="checkbox" name="major_category_number" value="15" id="15" class="chk">중문</div>
->>>>>>> user_eunhye
             <ul>
                 <li><input type="checkbox" name="category_number" value="39" id="mdoor_three">3연동</li>
                 <li><input type="checkbox" name="category_number" value="40" id="mdoor_casement">여닫이</li>
@@ -293,72 +253,17 @@
     <!--   footer   -->
 </div>
 <script>
-<<<<<<< HEAD
-
-    // function clickbtn() {
-    //     let major_categort = [];
-    //     for (let i = 1; i < 17; i++) {
-    //         let currentElement = $('#' + i); // #1, #2, ... #16으로 ID 선택
-    //         if (currentElement.length) { // 요소가 존재할 때만
-    //             let data = {};
-    //             const category_number = currentElement.val(); // 해당 요소의 값 가져오기
-    //             const major_text = $('input[name="major_text"]').val(); // 모든 major_text input 값 가져오기
-    //             data.category_number = category_number;
-    //             data.major_text = major_text;
-    //             major_categort.push(data);
-    //         }
-    //     }
-    //     console.log(major_categort); // 결과 확인
-    // }
-
-=======
->>>>>>> user_eunhye
     function clickbtn() {
         let major_category = [];
         const category_numbers = $(`input[name=major_category_number]`);
         const major_text = $('input[name=major_text]');
 
-<<<<<<< HEAD
-        for(i=0; i<16; i++){
-=======
         for (i = 0; i < 16; i++) {
->>>>>>> user_eunhye
             let category_number = $(category_numbers[i]);
             if (category_number.is(':checked')) {
                 let data = {};
                 data.category_number = category_number.val();
                 data.major_text = $(major_text[i]).val()
-<<<<<<< HEAD
-                console.log(data)
-                major_category.push(data);
-            }
-        }
-
-        console.log(major_category)
-        $('#major_category').val(JSON.stringify(major_category));
-        console.log($('#major_category').val());
-    }
-    // const category_text = document.getElementById('category_number');
-    // const checkcategory = document.querySelector('input[type=checkbox]');
-    // const text_detail = document.querySelector('input[type=text]');
-    // console.log(checkcategory)
-    // const major_category = {};
-    // for(let i=0; i<16; i++){
-    //     if(checkcategory.checked){
-    //         major_category.category_number = i;
-    //         text_detail.major_text = text_detail.value()
-    //     }
-    //
-    // }
-    //     console.log(major_category);
-    // }
-    // if(){
-    //
-    // }
-
-
-=======
-                // console.log(data)
                 major_category.push(data);
             }
         }
@@ -367,23 +272,15 @@
         for (i = 17; i < 45; i++) {
             let sub_category_checkbox = $(sub_category_number[i]);
             if (sub_category_checkbox.is(':checked')) {
-
                 let category = {};
                 category.category_number = sub_category_checkbox.val();
-                // console.log(category)
                 sub_category.push(category);
             }
 
         }
-        // console.log(sub_category)
-        // console.log(major_category)
         $('#major_category').val(JSON.stringify(major_category));
-        console.log($('#major_category').val());
         $('#sub_category').val(JSON.stringify(sub_category));
-        console.log($('#sub_category').val())
-
     }
->>>>>>> user_eunhye
 </script>
 </body>
 </html>

@@ -11,6 +11,7 @@
         INSERT INTO SELLER
         VALUES (#{seller_regnum}, #{user_id}, #{seller_company}, #{seller_name}, #{seller_addr}, null)
     </insert>
+
     <insert id="join_additional_engineer">
         insert into engineer
         values (#{engineer_regnum}, #{user_id}, #{engineer_regdate})
@@ -45,6 +46,7 @@
         FROM SELLER
         WHERE  SELLER_REGNUM = #{seller_regnum}
     </select>
+
     <select id="engineer_regnum_check" resultType="java.lang.String">
         select *
         from engineer
@@ -62,6 +64,7 @@
         SET USER_PW = #{user_pw}
         WHERE USER_ID = #{user_id}
     </update>
+
     <update id="update_info">
         UPDATE USER SET USER_NAME=#{user_name},USER_PHONE_COMPANY=#{user_phone_company},USER_PHONE=#{user_phone},USER_ADDR=#{user_addr},
                         USER_EMAIL=#{user_email}
@@ -74,33 +77,21 @@
         WHERE USER_ID=#{user_id}
     </update>
 
-
     <select id="additional" resultType="java.lang.String">
         SELECT USER_PW
         FROM USER
         WHERE USER_ID = #{user_id}
     </select>
 
-
-
-    <!-- 회원정보수정 페이지 넘어갈 때 타입별로 가져오기! -->
-
     <select id="get_info_engineer" resultType="com._401unauthorized.sheep.dto.UserDto">
         SELECT U.USER_ID, U.USER_PW, U.USER_NAME, U.USER_PHONE_COMPANY, U.USER_PHONE, U.USER_ADDR, U.USER_EMAIL, U.USER_TYPE,
                E.ENGINEER_REGNUM, E.ENGINEER_REGDATE
         FROM USER U
-<<<<<<< HEAD
         JOIN ENGINEER E
         ON U.USER_ID = E.USER_ID
         WHERE U.USER_ID = #{user_id}
     </select>
 
-=======
-                 JOIN ENGINEER E
-                      ON U.USER_ID = E.USER_ID
-        WHERE U.USER_ID = #{user_id}
-    </select>
->>>>>>> user_eunhye
     <select id="get_info" resultType="com._401unauthorized.sheep.dto.UserDto">
         SELECT * FROM USER WHERE USER_ID=#{user_id}
     </select>

@@ -5,12 +5,8 @@ function toggleUl() {
 
     for (let i = 0; i < checkbox.length; i++) {
         if (checkbox[i].checked) {
-
             listul[i].style.display = 'block';
-
-
         } else {
-
             listul[i].style.display = 'none';
             listul[i].querySelectorAll('input[type="checkbox"]').forEach(function (innerCheckbox) {
                 innerCheckbox.checked = false;
@@ -20,13 +16,10 @@ function toggleUl() {
             });
         }
     }
+
     document.querySelectorAll('input[name="category"]').forEach(function (checkbox) {
         checkbox.addEventListener('change', function () {
             toggleUl(this);
         });
     });
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> user_eunhye

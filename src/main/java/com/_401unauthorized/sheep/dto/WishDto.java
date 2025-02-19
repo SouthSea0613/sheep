@@ -5,15 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-<<<<<<< HEAD
-import java.util.List;
-
-
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-=======
 
 import java.util.List;
 
@@ -21,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
->>>>>>> user_eunhye
 @Accessors(chain = true)
 public class WishDto {
     int wish_number;
@@ -32,16 +22,8 @@ public class WishDto {
     String wish_size_text;
     int wish_money;
     String wish_addr;
-<<<<<<< HEAD
-=======
-
->>>>>>> user_eunhye
     String apply_status;
 
     List<MajorDto> major_category;
     List<SubDto> sub_category;
-<<<<<<< HEAD
-
-=======
->>>>>>> user_eunhye
 }

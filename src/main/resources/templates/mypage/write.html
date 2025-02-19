@@ -57,8 +57,6 @@
         <span id="email_check"></span><br>
         <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
 
-<<<<<<< HEAD
-        <!--기술자 영역-->
         <th:block th:unless="${#lists.isEmpty(userdto.engineer_regnum)}">
         <div class="engineer_info">
             자격증번호
@@ -82,34 +80,6 @@
         </script>
 
     </form>
-=======
-        <th:block th:unless="${#lists.isEmpty(userdto.engineer_regnum)}">
-            <div class="engineer_info">
-                자격증번호
-                <input type="text" id="engineer_regnum" th:value="${userdto.engineer_regnum}" readonly><br>
-
-                자격증 발급일자
-                <input type="text" name="engineer_regdate" th:value="${userdto.engineer_regdate}" id="engineer_regdate">
-            </div>
-        </th:block>
-
-    </form>
-    <div class="button-area">
-        <input type="button" id="write_button" value="수정완료" onclick="writebtn()">
-    </div>
-    <script th:inline="javascript">
-        const email = [[${userdto?.user_email
-        }]]
-        ;
-        const emailsplit = email.split("@");
-        const user_email = document.getElementById('user_email');
-        const email_detail = document.getElementById('user_email_detail');
-        user_email.value = emailsplit[0];
-        email_detail.value = emailsplit[1];
-
-        // const phone_company = document.getElementById('user_phone_company');
-    </script>
->>>>>>> user_eunhye
 </div>
 </body>
 </html>
