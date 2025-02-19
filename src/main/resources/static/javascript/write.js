@@ -26,3 +26,7 @@ function toggleUl() {
         });
     });
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> user_eunhye

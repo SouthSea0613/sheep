@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <section>
     <div class="content">
         <th:block th:if="${#lists.ifEmpty(takeoffList)}">
@@ -22,5 +23,6 @@
         </form>
     </div>
 </section>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

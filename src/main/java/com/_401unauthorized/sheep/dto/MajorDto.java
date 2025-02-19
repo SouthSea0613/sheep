@@ -12,7 +12,12 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain = true)
 public class MajorDto {
+<<<<<<< HEAD
     String category_number;
     int wish_number;
+=======
+    int wish_number;
+    String category_number;
+>>>>>>> user_eunhye
     String major_text;
 }

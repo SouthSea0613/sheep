@@ -89,11 +89,18 @@
         SELECT U.USER_ID, U.USER_PW, U.USER_NAME, U.USER_PHONE_COMPANY, U.USER_PHONE, U.USER_ADDR, U.USER_EMAIL, U.USER_TYPE,
                E.ENGINEER_REGNUM, E.ENGINEER_REGDATE
         FROM USER U
+<<<<<<< HEAD
         JOIN ENGINEER E
         ON U.USER_ID = E.USER_ID
         WHERE U.USER_ID = #{user_id}
     </select>
 
+=======
+                 JOIN ENGINEER E
+                      ON U.USER_ID = E.USER_ID
+        WHERE U.USER_ID = #{user_id}
+    </select>
+>>>>>>> user_eunhye
     <select id="get_info" resultType="com._401unauthorized.sheep.dto.UserDto">
         SELECT * FROM USER WHERE USER_ID=#{user_id}
     </select>

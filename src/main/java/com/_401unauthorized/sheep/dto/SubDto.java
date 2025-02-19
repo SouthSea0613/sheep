@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Data
+<<<<<<< HEAD
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,4 +15,13 @@ import lombok.experimental.Accessors;
 public class SubDto {
     String category_number;
     int wish_number;
+=======
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Accessors(chain = true)
+public class SubDto {
+    int wish_number;
+    String category_number;
+>>>>>>> user_eunhye
 }

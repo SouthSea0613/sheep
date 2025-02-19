@@ -26,3 +26,25 @@ function userType() {
         $('.engineer').css('display', 'inline-block');
     }
 }
+
+function List() {
+    const div = document.getElementsByName('list_box');
+    const btn = document.getElementById('user_name');
+        $('.list_box').css('display', 'block');
+        if (type == 0 || type == null) {
+            $('.all2').css('display', 'block');
+            $('.user2').css('display', 'block');
+            $('.seller2').css('display', 'none');
+            $('.engineer2').css('display', 'none');
+        } else if (type == 1) {
+            $('.all2').css('display', 'block');
+            $('.user2').css('display', 'none');
+            $('.seller2').css('display', 'block');
+            $('.engineer2').css('display', 'none');
+        } else {
+            $('.all2').css('display', 'block');
+            $('.user2').css('display', 'none');
+            $('.seller2').css('display', 'none');
+            $('.engineer2').css('display', 'block');
+        }
+}

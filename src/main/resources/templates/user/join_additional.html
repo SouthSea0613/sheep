@@ -5,6 +5,7 @@
     <title>Title</title>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
   <script>
   function check(){
       const radio = $('input[name=join_additional]:checked').val();
@@ -109,6 +110,7 @@
 	</script>
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>추가인증.html</h2>
 
 
@@ -138,5 +140,6 @@
       <input type="button" value="인증요청" id="join_addBtn2" onclick="join_addCheck_engineer()">
     </div>
   </form>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

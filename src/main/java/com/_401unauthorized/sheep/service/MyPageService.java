@@ -7,6 +7,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+<<<<<<< HEAD
+=======
+import org.springframework.ui.Model;
+>>>>>>> user_eunhye
 
 @Slf4j
 @RequiredArgsConstructor
@@ -45,8 +49,14 @@ public class MyPageService {
 
     @Transactional
     public boolean update_info(UserDto userDto) {
+<<<<<<< HEAD
         if(userDao.update_info(userDto)){
             if(userDto.getUser_type().equals("2")){
+=======
+        log.info("서비스" + userDto.getUser_id());
+        if (userDao.update_info(userDto)) {
+            if (userDto.getUser_type().equals("2")) {
+>>>>>>> user_eunhye
                 return userDao.update_engineer_info(userDto);
             }
             return true;

@@ -5,8 +5,10 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>seller.list.html</h2>
 <div>
     <th:block th:if="${lists.isEmpty(seller_takeoff_list)}">
@@ -29,5 +31,6 @@
         </th:block>
     </th:block>
 </div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
