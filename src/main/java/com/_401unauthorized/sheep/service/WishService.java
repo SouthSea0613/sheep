@@ -45,6 +45,9 @@ public class WishService {
 
     @Transactional
     public boolean write(WishDto wishDto) {
+        // 컨트롤러에서 넘어온 wishDto는 major_category, sub_category까지 전부 들어있기 때문에 너무 무거워!!!!
+        // 필수요소를 빼서 좀 더 가볍게 넣어 필수항목 먼저 인서트! 필수요소 다음 카테고리들이 있을 경우 순차 진행
+        // 진행되는 동안 에러 날 경우 Transactional로 진행하던 데이터 인서트 중지
         WishDto wishdto = new WishDto();
         wishdto.setUser_id(wishDto.getUser_id());
         wishdto.setWish_title(wishDto.getWish_title());

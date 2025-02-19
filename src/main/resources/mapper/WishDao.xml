@@ -2,6 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.WishDao">
     <!--리스트 가져오기-->
+    <!--위시 제목과 현재 진행상태가 보여야하기 때문에 wish 테이블과 apply status 테이블을 조인하여 가져오는거야
+    LEFT조인을 한 이유는 오른쪽!!!!에 NULL 값이 있기 때문이야!-->
     <select id="get_wish_list" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT W.WISH_TITLE, A.APPLY_STATUS
         FROM WISH W
