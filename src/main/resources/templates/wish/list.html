@@ -20,11 +20,6 @@
     <th:block th:if="${#lists.isEmpty(wish_list)}">
         <div>
             <div>위시리스트가 없습니다</div>
-            <div class="wishBarea">
-
-                <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
-
-            </div>
         </div>
     </th:block>
     <th:block th:unless="${#lists.isEmpty(wish_list)}">
@@ -38,6 +33,9 @@
             </div>
         </th:block>
     </th:block>
+    <div class="wishBarea">
+        <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
+    </div>
 </div>
 
 </body>
