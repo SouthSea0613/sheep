@@ -1,23 +1,18 @@
 package com._401unauthorized.sheep.service;
 
-import com._401unauthorized.sheep.dao.MyPageDao;
 import com._401unauthorized.sheep.dao.UserDao;
 import com._401unauthorized.sheep.dto.UserDto;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 @Slf4j
 @RequiredArgsConstructor
 @Service
 public class MyPageService {
-    private final MyPageDao myPageDao;
     private final UserDao userDao;
-    private final HttpSession httpSession;
 
     public boolean additional(UserDto userDto) {
         String user_pw = userDao.additional(userDto.getUser_id());
@@ -50,8 +45,13 @@ public class MyPageService {
 
     @Transactional
     public boolean update_info(UserDto userDto) {
+<<<<<<< HEAD
         if (userDao.update_info(userDto)) {
             if (userDto.getUser_type().equals("2")) {
+=======
+        if(userDao.update_info(userDto)){
+            if(userDto.getUser_type().equals("2")){
+>>>>>>> jieun
                 return userDao.update_engineer_info(userDto);
             }
             return true;

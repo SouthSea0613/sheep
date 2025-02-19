@@ -1,17 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+<<<<<<< HEAD
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
 	<script th:src="@{/javascript/mypage.js}"></script>
+=======
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:src="@{/javascript/user.js}"></script>
+    <script th:src="@{/javascript/mypage.js}"></script>
+
+>>>>>>> jieun
 </head>
 <body>
 <h2>회원정보수정</h2><br>
 
 <div>
+<<<<<<< HEAD
 	<form th:action="@{/mypage/write}" method="post" id="insert_info">
 		아이디
 		<input type="text" id="user_id" th:value="${session?.user_id}" readonly><br>
@@ -85,6 +96,75 @@
 				break;
 		}
 	</script>
+=======
+    <form th:action="@{/mypage/write}" method="post" id="insert_info">
+        아이디
+        <input type="text" id="user_id" th:value="${session?.user_id}" readonly><br>
+
+        이름
+<<<<<<< HEAD
+        <input type="text" name="user_name" id="user_name" th:value="${userdto?.user_name}"><br>
+=======
+        <input type="text" name="user_name" id="user_name" th:value="${userdto.user_name}"><br>
+>>>>>>> user_eunhye
+
+        전화번호
+        <select name="user_phone_company" id="user_phone_company">
+            <option value="none">통신사</option>
+            <option value="1">SKT</option>
+            <option value="2">KT</option>
+            <option value="3">LGU</option>
+            <option value="4">알뜰폰</option>
+        </select>
+<<<<<<< HEAD
+        <input type="text" name="user_phone" id="user_phone" th:value="${userdto?.user_phone}"><br>
+
+        주소
+        <input type="text" name="user_addr" id="user_addr" th:value="${userdto?.user_addr}"><br>
+=======
+        <input type="text" name="user_phone" id="user_phone" th:value="${userdto.user_phone}"><br>
+
+        주소
+        <input type="text" name="user_addr" id="user_addr" th:value="${userdto.user_addr}"><br>
+>>>>>>> user_eunhye
+
+        이메일
+        <input type="text" name="user_email" id="user_email" th:value="${userdto?.user_email}"> @
+        <select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
+            <option value="none">메일 선택</option>
+            <option value="naver.com">naver.com</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="daum.net">daum.net</option>
+            <option value="nate.com">nate.com</option>
+            <option value="other">직접입력</option>
+        </select>
+        <span id="email_check"></span><br>
+        <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
+
+        <th:block th:unless="${#lists.isEmpty(userdto.engineer_regnum)}">
+        <div class="engineer_info">
+            자격증번호
+            <input type="text" id="engineer_regnum" th:value="${userdto?.engineer_regnum}" readonly><br>
+
+            자격증 발급번호
+            <input type="text" name="engineer_regdate" id="engineer_regdate" th:value="${userdto?.engineer_regdate}">
+        </div>
+        </th:block>
+        <div class="button-area">
+            <input type="button" id="write_button" value="수정완료" onclick="writebtn()">
+        </div>
+
+        <script th:inline="javascript">
+            const email = [[${userdto?.user_email}]];
+            const emailsplit = email.split("@");
+            const user_email = document.getElementById('user_email');
+            const email_detail = document.getElementById('user_email_detail');
+            user_email.value=emailsplit[0];
+            email_detail.value=emailsplit[1];
+        </script>
+
+    </form>
+>>>>>>> jieun
 </div>
 </body>
 </html>

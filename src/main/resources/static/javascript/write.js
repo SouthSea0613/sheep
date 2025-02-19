@@ -16,9 +16,19 @@ function toggleUl(){
             });
         }
     }
+<<<<<<< HEAD
 }
 document.querySelectorAll('input[class="major_category_number"]').forEach(function (checkbox) {
     checkbox.addEventListener('change', function () {
         toggleUl(this);
     });
 });
+=======
+
+    document.querySelectorAll('input[name="category"]').forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+            toggleUl(this);
+        });
+    });
+}
+>>>>>>> jieun

@@ -1,7 +1,10 @@
 package com._401unauthorized.sheep.controller;
 
+<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.MajorDto;
 import com._401unauthorized.sheep.dto.SubDto;
+=======
+>>>>>>> jieun
 import com._401unauthorized.sheep.dto.WishDto;
 import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
@@ -10,9 +13,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+<<<<<<< HEAD
 
 import java.util.ArrayList;
 import java.util.List;
+=======
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+>>>>>>> jieun
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,6 +34,7 @@ public class WishController{
     public String get_wish_list(HttpSession httpSession, Model model) {
         String user_id = httpSession.getAttribute("user_id").toString();
         model.addAttribute("wish_list", wishService.get_wish_list(user_id));
+<<<<<<< HEAD
         return "wish/list";
     }
 
@@ -58,6 +68,21 @@ public class WishController{
 
         wishDto.setMajor_category(major);
         wishDto.setSub_category(sub);
+=======
+>>>>>>> jieun
         return "wish/list";
+    }
+
+    @GetMapping("/write")
+    public String write() {
+        return "wish/write";
+    }
+
+    @PostMapping("/write")
+    public String write(WishDto wishDto, HttpSession httpSession) {
+        if (wishService.write(wishDto)) {
+            return "wish/detail";
+        }
+        return "wish/write";
     }
 }
