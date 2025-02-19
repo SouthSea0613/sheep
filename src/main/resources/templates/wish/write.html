@@ -55,6 +55,7 @@
 				<div id="title">제목</div>
 				<div>
 					<input type="text" name="wish_title" class="title_class" placeholder="제목을 입력해주세요">
+					<input type="text" name="wish_addr" class="addr_class" placeholder="상세주소 입력">
 				</div>
 			</div>
 			<div>
@@ -71,9 +72,9 @@
 				<div>
 					<input type="radio" class="wish_size" name="wish_size" value="10">10평 대
 					<input type="radio" class="wish_size" name="wish_size" value="20">20평 대
-					<input type="radio" class="wish_size" name="wish_size" value="20">30평 대
-					<input type="radio" class="wish_size" name="wish_size" value="20">40평 대
-					<input type="radio" class="wish_size" name="wish_size" value="20">50평 이상
+					<input type="radio" class="wish_size" name="wish_size" value="30">30평 대
+					<input type="radio" class="wish_size" name="wish_size" value="40">40평 대
+					<input type="radio" class="wish_size" name="wish_size" value="50">50평 이상
 					<div>
 						<input type="text" name="wish_size_text" id="size_text" placeholder="참고">
 					</div>
@@ -89,7 +90,7 @@
 				<div>
 					<input type="text"
 						   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-						   name="money" id="money" placeholder="예산을 적어주세요.">만원
+						   name="wish_money" id="money" placeholder="예산을 적어주세요.">만원
 				</div>
 			</div>
 			<br>

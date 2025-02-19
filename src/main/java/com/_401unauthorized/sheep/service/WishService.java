@@ -57,13 +57,15 @@ public class WishService {
             return false;
         }
         for (MajorDto majorDto : wishDto.getMajor_category()) {
-            if(!wishDao.insert_major(majorDto, wishdto.getWish_number())) {
+            majorDto.setWish_number(wishdto.getWish_number());
+            if(!wishDao.insert_major(majorDto)) {
                 return false;
             }
         }
 
         for (SubDto subDto : wishDto.getSub_category()) {
-            if(!wishDao.insert_sub(subDto, wishdto.getWish_number())) {
+            subDto.setWish_number(wishdto.getWish_number());
+            if(!wishDao.insert_sub(subDto)) {
                 return false;
             }
         }
