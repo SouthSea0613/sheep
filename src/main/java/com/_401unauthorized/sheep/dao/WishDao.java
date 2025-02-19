@@ -11,7 +11,7 @@ import java.util.List;
 public interface WishDao {
     List<WishDto> get_wish_list(String user_id);
     // 위시 작성 insert
-    boolean insert_wish(WishDto wishDto);
-    boolean insert_major(MajorDto majorDto);
-    boolean insert_sub(SubDto subDto);
+    boolean insert_wish(WishDto wishdto);
+    boolean insert_major(MajorDto majorDto, int wish_number);
+    boolean insert_sub(SubDto subDto, int wish_number);
 }

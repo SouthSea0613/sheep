@@ -13,18 +13,19 @@
     <!--글쓰기!(generateKey) 사용-->
     <insert id="insert_wish" useGeneratedKeys="true" keyProperty="wish_number">
         INSERT INTO WISH
-        VALUES (#{wish_number}, #{user_id}, #{wish_title}, #{wish_type}, #{wish_size}, #{wish_size_text}, #{wish_money}, #{wish_money})
+        VALUES (null, #{user_id}, #{wish_title}, #{wish_type}, #{wish_size}, #{wish_size_text}, #{wish_money}, #{wish_addr})
     </insert>
 
     <!--대분류 insert-->
-    <insert id="insert_major" useGeneratedKeys="true" keyProperty="wish_number">
-        INSERT INTO MAJORCATEGORYCONTENT
+    <insert id="insert_major">
+        INSERT INTO MAJOR_CATEGORY_CONTENT
         VALUES (#{category_number}, #{wish_number}, #{major_text})
     </insert>
 
     <!--중분류 insert-->
-    <insert id="insert_sub" useGeneratedKeys="true" keyProperty="wish_number">
-        INSERT INTO SUBCATEGORY
+    <insert id="insert_sub">
+        INSERT INTO SUB_CATEGORY
         VALUES (#{category_number}, #{wish_number})
     </insert>
+
 </mapper>
