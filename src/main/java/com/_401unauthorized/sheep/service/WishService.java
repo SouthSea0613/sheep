@@ -45,6 +45,7 @@ public class WishService {
 
     @Transactional
     public boolean write(WishDto wishDto) {
+        log.info(wishDto.toString());
         WishDto wishdto = new WishDto();
         wishdto.setUser_id(wishDto.getUser_id());
         wishdto.setWish_title(wishDto.getWish_title());
@@ -53,17 +54,23 @@ public class WishService {
         wishdto.setWish_size_text(wishDto.getWish_size_text());
         wishdto.setWish_money(wishDto.getWish_money());
         wishdto.setWish_addr(wishDto.getWish_addr());
+
         if(!wishDao.insert_wish(wishdto)) {
             return false;
         }
+
+        log.info(wishDto.toString());
+
         for (MajorDto majorDto : wishDto.getMajor_category()) {
-            if(!wishDao.insert_major(majorDto, wishdto.getWish_number())) {
+            majorDto.setWish_number(wishdto.getWish_number());
+            if(!wishDao.insert_major(majorDto)) {
                 return false;
             }
         }
 
         for (SubDto subDto : wishDto.getSub_category()) {
-            if(!wishDao.insert_sub(subDto, wishdto.getWish_number())) {
+            subDto.setWish_number(wishdto.getWish_number());
+            if(!wishDao.insert_sub(subDto)) {
                 return false;
             }
         }

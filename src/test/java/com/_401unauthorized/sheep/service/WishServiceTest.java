@@ -12,19 +12,4 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class WishServiceTest {
     @Autowired
     private WishService wishService;
-
-    @Test
-    public void write(WishDto wishDto) {
-        WishDao wishDao = null;
-        wishDao.insert_wish(wishDto);
-        for (MajorDto majorDto : wishDto.getMajor_category()) {
-            wishDao.insert_major(majorDto);
-        }
-
-        for (SubDto subDto : wishDto.getSub_category()) {
-            wishDao.insert_sub(subDto);
-        }
-        return true;
-    }
-
 }
