@@ -12,6 +12,6 @@ public class WishService {
     private final WishDao wishDao;
 
     public Object get_wish_list(String userId) {
-
+    return false;
     }
 }
