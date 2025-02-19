@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -33,9 +34,37 @@ public class WishController{
         return "wish/write";
     }
     @PostMapping("/write")
-    public String wish(@RequestBody WishDto wishDto, HttpSession session){
+    public String wish(@RequestParam("category_number") List<Integer> category_number,@RequestParam("major_text") List<String> major_text, HttpSession session,WishDto wishDto){
 
-    log.info(String.valueOf(wishDto));
+    log.info(String.valueOf(category_number));
+        log.info(major_text.toString());
+//        wishDto.setUser_id(session.getAttribute("user_id").toString());
+        List<MajorDto> major = new ArrayList<>();
+        List<SubDto> sub = new ArrayList<>();
+
+        for(int i=0; i<category_number.size(); i++){
+
+
+            if(category_number.get(i) <16){
+                MajorDto majorDto = new MajorDto();
+                majorDto.setCategory_number(String.valueOf(category_number.get(i)));
+                majorDto.setMajor_text(major_text.get(category_number.get(i)-1));
+                major.add(majorDto);
+
+            }else{
+                SubDto subDto = new SubDto();
+                subDto.setCategory_number(String.valueOf(category_number.get(i)));
+                sub.add(subDto);
+
+            }
+            log.info(wishDto.toString());
+
+        }
+        wishDto.setMajor_category(major);
+        wishDto.setSub_category(sub);
+        log.info(wishDto.toString());
+
+//
         return "wish/list";
     }
 
