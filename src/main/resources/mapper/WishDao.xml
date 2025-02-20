@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.WishDao">
     <!--리스트 가져오기-->
+<<<<<<< HEAD
     <!--  위시리스트에 갔을때 제목이랑 상태 값을 가지고 와야함으로 WISH_TITLE이랑 APPLY_STATUS를 select했다.  -->
     <!--  LEFT JOIN은 왼쪽의테이블을 중심으로 오른쪽테이블을 매치를 함으로 WISH_TITLE오른쪽에 APPLY_STATUS를 매치한다.  -->
     <!--  ON은 WISH 테이블과 APPLY_STATUS 테이블의 WISH_NUMBER로 조인했다.  -->
@@ -11,6 +12,15 @@
         FROM WISH W
         LEFT JOIN APPLY_STATUS A
         ON W.WISH_NUMBER = A.WISH_NUMBER
+=======
+    <!--위시 제목과 현재 진행상태가 보여야하기 때문에 wish 테이블과 apply status 테이블을 조인하여 가져오는거야
+    LEFT조인을 한 이유는 오른쪽!!!!에 NULL 값이 있기 때문이야!-->
+    <select id="get_wish_list" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT W.WISH_TITLE, A.APPLY_STATUS
+        FROM WISH W
+                LEFT JOIN APPLY_STATUS A
+                      ON W.WISH_NUMBER = A.WISH_NUMBER
+>>>>>>> jieun
         WHERE W.USER_ID = #{user_id};
     </select>
 
