@@ -78,15 +78,10 @@ public class WishController{
         //데이터를 넣어준 임시 리스트들을 wishDto에 major_category와 sub_category에 넣어준다
         wishDto.setMajor_category(major);
         wishDto.setSub_category(sub);
-<<<<<<< HEAD
-        if (wishService.write(wishDto)) {
-            return "wish/list";
-=======
         log.info(wishDto.toString());
 
         if (wishService.write(wishDto)) {
             return "redirect:/wish/list";
->>>>>>> copyminyoung
         }
         return "redirect:/wish/write";
     }
