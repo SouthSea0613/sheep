@@ -35,6 +35,7 @@ public class WishController{
 
     
     @PostMapping("/write")
+    //리스폰스바디는 비동기에 사용하는 것.
     //html상에서 폼으로 넘겨준 같은 name속성의 category_number들을 category_number의 리스트들안에 차례로 RequestParam으로 받아온다.
     //html상에서 폼으로 넘겨준 같은 name속성의 major_text들을 major_text의 리스트들안에 차례로 RequestParam으로 받아온다.
     public String write(WishDto wishDto,

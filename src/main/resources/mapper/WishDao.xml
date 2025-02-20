@@ -18,6 +18,7 @@
 
     <!--글쓰기!(generateKey) 사용-->
     <!--  WISH 테이블의 필수 값을 순서대로 write.html에 있는 틀에 맞춰 작성된 VALUE값을 불러온다. 아래 모두 같다.  -->
+    <!--  제너레이트키의 역할은 wish_number을 고정값으로 주기 위해서 절대 겹치는 값을 만들지 않는 역할로 오토인크리먼트랑 주로 쓴다.  -->
     <insert id="insert_wish" useGeneratedKeys="true" keyProperty="wish_number">
         INSERT INTO WISH
         VALUES (null, #{user_id}, #{wish_title}, #{wish_type}, #{wish_size}, #{wish_size_text}, #{wish_money}, #{wish_addr})
