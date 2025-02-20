@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 function id_check() {
 	let data = {};
 	const user_id = $('#user_id');
@@ -36,7 +34,6 @@ function pw_check() {
 	}
 }
 
->>>>>>> minyoung
 function join_check() {
 	const user_id = $('#user_id');
 	if (user_id.val() == '') {
@@ -120,8 +117,6 @@ function addPwCheck() {
 	}
 }
 
-<<<<<<< HEAD
-=======
 function test(user_email) {
 	let data = {};
 	data.user_email = user_email;
@@ -163,7 +158,6 @@ function self_insert_check() {
 	const user_email = user_email_id.val() + "@" + email_input.val();
 	test(user_email);
 }
->>>>>>> minyoung
 
 // 로그인 비동기
 function login() {
