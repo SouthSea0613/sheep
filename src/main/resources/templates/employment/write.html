@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <h2>구인글 작성하기</h2>
+    <form method="post" action="">
+    <input th:type="text" th:name="board_title" th:id="title" placeholder="제목 입력">
+    <textarea th:type="text" th:name="board_content" th:id="content">내용 입력</textarea>
+    <input type="button" value="등록하기" onclick="employmentsubmit()">
+    </form>
+    <script>
+        //비동기
+        function employmentsubmit(){
+            axios.post('',{
+
+            }).then((res)=>{
+                console.log(res)
+            })
+            location.href='detail.html'
+        }
+    </script>
+</body>
+</html>
