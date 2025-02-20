@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller main</title>
+</head>
+<body>
+<div>
+    <!--   header   -->
+</div>
+<h2>업체페이지 메인</h2>
+<div>
+    <!-- ?  -->
+    <div>
+        <div><p>000인테리어</p></div>
+        <div><input type="button" value="업체페이지 수정" onclick="location.href='write.html'"></div>
+        <div>
+            <p>
+                업체페이지 설명설명 주소 주소 어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구어쩌구저쩌구
+            </p>
+        </div>
+    </div>
+    <br>
+    <div>시공사례</div>
+    <div><input type="button" value="글쓰기"></div>
+    <br>
+    <div>
+        <div>
+            <div>
+                <div>이미지 들어갈 곳</div>
+                <div>글제목</div>
+                <div>작성일자</div>
+            </div>
+            <div>
+                <th:block th:if="${#lists.isEmpty(reviewList)}">
+                    <div>
+                        <div>출력할 데이터가 없습니다.</div>
+                    </div>
+                </th:block>
+                <th:block th:unless="${#lists.isEmpty(reviewList)}">
+                    <th:block th:each="board:${reviewList}">
+                        <div th:text="${board_number}"></div>
+                        <div><a th:href="@{/board/detail(board_number=${board.board_number})}"
+                                th:text="${board.board_title}"></a></div>
+                        <div th:text="${board.regdate}"></div>
+                    </th:block>
+                </th:block>
+            </div>
+        </div>
+        <div>
+            <div></div>
+        </div>
+    </div>
+</div>
+<div>
+    <!--   footer   -->
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller_Board_Detail</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script defer th:src="@{../../../static/javascript/review_detail.js}"></script>
+</head>
+<body>
+<div>
+    <div>
+        <!--   header   -->
+    </div>
+    <h2>업체 시공 후기 디테일</h2>
+    <div>
+        <section>
+            <div>       <!-- 글내용 전체 묶음 -->
+                <div>   <!-- 글내용 위 한줄 묶음 -->
+                    <div>
+                        <div>board_number</div>
+                        <div th:text="${board_number}">글번호</div>
+                    </div>
+                    <div>
+                        <div>board_writer</div>
+                        <div th:text="${user_id}">작성자</div>
+                    </div>
+                    <div>
+                        <div>board_title</div>
+                        <div th:text="${board_title}">글제목</div>
+                    </div>
+                    <div>
+                        <div>board_status</div>
+                        <div th:text="${board_status}">글상태</div>
+                    </div>
+                    <div>
+                        <div>board_regdate</div>
+                        <div th:text="${board_regdate}">작성일자</div>
+                    </div>
+                    <div>
+                        <button class="" th:onclick="'uploard_board('+${board.board_number}+')'">글수정</button>
+                    </div>
+                </div>
+                <div>
+                    <div>board_content</div>
+                    <div th:text="${board_content}">글내용</div>
+                    <img src="" alt="이미지">
+                </div>
+                <button class="" onclick="delete_board(this)">글삭제</button>
+                <button class="" onclick="backBtn()">글목록</button>
+            </div>
+            <br>
+            <form id="" class="">
+                <div>
+                    <input type="hidden" name="reply_number" id="reply_board_number" th:value="${board.board_number}">
+                    <textarea name="" cols="30" rows="2" placeholder="댓글을 남겨보세요."></textarea>
+                    <input type="button" value="댓글 작성" class="" onclick="replyInsert()">
+                </div>
+            </form>
+            <br>
+            <div>
+                <table  th:align="center">
+                    <tr>
+                        <td>작성자</td>
+                        <td>내용</td>
+                        <td>등록일시</td>
+                    </tr>
+                </table>
+            </div>
+            <table th:align="center">
+                <th:block>
+                    <th:block>
+                        <tr>
+                            <td class="" th:text="${user_id}"></td>
+                            <td class="" th:text="${reply_content}"></td>
+                            <td class="" th:text="${reply_regdate}"></td>
+                        </tr>
+                    </th:block>
+                </th:block>
+            </table>
+        </section>
+    </div> <!-- 첫 div 끝 -->
+    <div>
+        <!--   footer   -->
+    </div>
+</div>
+<template>
+    <tr>
+        <td class="">{user_id}</td>
+        <td class="">{reply_content}</td>
+        <td class="">{reply_regdate}</td>
+    </tr>
+</template>
+</body>
+</html>

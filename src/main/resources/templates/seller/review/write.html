@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller_Board_Write</title>
+</head>
+<body>
+<div>
+    <!--   header   -->
+</div>
+<h2>시공 리뷰 작성/수정</h2>
+<div>
+    <form th:action="" method="get">
+        <div>
+            <input type="text" name="" id="board_title" placeholder="제목을 입력하세요.">
+        </div>
+        <br>
+        <div>
+            <textarea name="board_content" cols="50" rows="10" placeholder="글을 작성해주세요."></textarea>
+        </div>
+        <br>
+        <div>
+            <input type="text" name="" id="UUID" placeholder="첨부파일 없음" readonly>
+            <input type="button" value="첨부파일" onclick="">
+        </div>
+        <br>
+        <div>
+            <input type="submit" value="글쓰기">
+        </div>
+    </form>
+</div>
+<div>
+    <!--   footer   -->
+</div>
+</body>
+</html>
