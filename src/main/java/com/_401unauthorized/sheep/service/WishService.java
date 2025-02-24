@@ -1,9 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.WishDao;
-import com._401unauthorized.sheep.dto.MajorDto;
-import com._401unauthorized.sheep.dto.SubDto;
-import com._401unauthorized.sheep.dto.WishDto;
+import com._401unauthorized.sheep.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -61,16 +59,12 @@ public class WishService {
         if(!wishDao.insert_wish(wishdto)) {
             return false;
         }
-
-        log.info(wishDto.toString());
-
         for (MajorDto majorDto : wishDto.getMajor_category()) {
             majorDto.setWish_number(wishdto.getWish_number());
             if(!wishDao.insert_major(majorDto)) {
                 return false;
             }
         }
-
         for (SubDto subDto : wishDto.getSub_category()) {
             subDto.setWish_number(wishdto.getWish_number());
             if(!wishDao.insert_sub(subDto)) {
@@ -79,4 +73,23 @@ public class WishService {
         }
         return true;
     }
+
+    //필수
+    public WishDto get_wish_detail(int wish_number){
+        return wishDao.get_wish_detail(wish_number);
+    }
+    //대 , 텍스트, 중
+    public List<CategoryListDto> get_category_detail(int wish_number){
+        List<CategoryDto> categorydto = wishDao.get_category_detail(wish_number);
+        List<CategoryListDto> categorylistdto = new ArrayList<>();
+        for (CategoryDto categoryDto : categorydto) {
+
+        }
+
+
+        return null;
+    }
+
+
+
 }

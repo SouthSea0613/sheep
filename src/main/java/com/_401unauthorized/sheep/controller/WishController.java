@@ -23,6 +23,7 @@ public class WishController{
 
     @GetMapping("/list")
     public String get_wish_list(HttpSession httpSession, Model model) {
+        // 내가 쓴 위시들이 필요하니까 세션에서 아이디 꺼내와
         String user_id = httpSession.getAttribute("user_id").toString();
         model.addAttribute("wish_list", wishService.get_wish_list(user_id));
         return "wish/list";
@@ -94,4 +95,5 @@ public class WishController{
         }
         return "redirect:/wish/write";
     }
+
 }
