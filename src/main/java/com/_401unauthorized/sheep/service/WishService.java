@@ -1,6 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.WishDao;
+import com._401unauthorized.sheep.dto.CategoryDto;
 import com._401unauthorized.sheep.dto.MajorDto;
 import com._401unauthorized.sheep.dto.SubDto;
 import com._401unauthorized.sheep.dto.WishDto;
@@ -78,5 +79,12 @@ public class WishService {
             }
         }
         return true;
+    }
+    public CategoryDto category(int wish_number){
+
+        return wishDao.category_detail(wish_number);
+    }
+    public WishDto essential(int wish_number){
+        return wishDao.detail(wish_number);
     }
 }

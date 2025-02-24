@@ -1,5 +1,6 @@
 package com._401unauthorized.sheep.dao;
 
+import com._401unauthorized.sheep.dto.CategoryDto;
 import com._401unauthorized.sheep.dto.MajorDto;
 import com._401unauthorized.sheep.dto.SubDto;
 import com._401unauthorized.sheep.dto.WishDto;
@@ -13,4 +14,8 @@ public interface WishDao {
     boolean insert_wish(WishDto wishdto);
     boolean insert_major(MajorDto majorDto);
     boolean insert_sub(SubDto subDto);
+
+    WishDto detail(int wishNumber);
+
+    CategoryDto category_detail(int wishNumber);
 }
