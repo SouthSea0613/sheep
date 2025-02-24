@@ -12,7 +12,6 @@ public interface WishDao {
     boolean insert_major(MajorDto majorDto);
     boolean insert_sub(SubDto subDto);
 
-    WishDto detail(int wishNumber);
-
-    List<CategoryDto> category_detail(int wishNumber);
+    WishDto detail(Integer wish_number);
+    List<CategoryDto> category_detail(Integer wish_number);
 }
