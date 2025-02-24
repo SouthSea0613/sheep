@@ -37,6 +37,7 @@ public class WishController{
     @PostMapping("/write")
     //html상에서 폼으로 넘겨준 같은 name속성의 category_number들을 category_number의 리스트들안에 차례로 RequestParam으로 받아온다.
     //html상에서 폼으로 넘겨준 같은 name속성의 major_text들을 major_text의 리스트들안에 차례로 RequestParam으로 받아온다.
+    // @ResponseBody - 비동기의 리턴을 위해 필요해!
     public String write(WishDto wishDto,
                         @RequestParam("category_number") List<Integer> category_number,
                         @RequestParam("major_text") List<String> major_text,
@@ -93,5 +94,19 @@ public class WishController{
             return "redirect:/wish/list";
         }
         return "redirect:/wish/write";
+    }
+
+    @GetMapping("/detail")
+    public String detail(@RequestParam("wish_number") Integer wish_number, HttpSession httpSession, Model model) {
+        if(wish_number == null || wish_number < 1) {
+            return "redirect:/wish/list";
+        }
+        WishDto wishDto = wishService.detail(wish_number);
+        if(wishDto != null) {
+            model.addAttribute("wishDto", wishDto);
+            return "wish/detail";
+        } else {
+            return "redirect:/wish/list";
+        }
     }
 }
