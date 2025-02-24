@@ -13,4 +13,6 @@ public interface WishDao {
     boolean insert_wish(WishDto wishdto);
     boolean insert_major(MajorDto majorDto);
     boolean insert_sub(SubDto subDto);
+
+    WishDto get_wish_detail(Integer wish_number);
 }

@@ -79,4 +79,11 @@ public class WishService {
         }
         return true;
     }
+
+    public WishDto get_wish_detail(Integer wish_number) {
+        if(wishDao.get_wish_detail(wish_number) != null) {
+            return get_wish_detail(wish_number);
+        }
+        return null;
+    }
 }
