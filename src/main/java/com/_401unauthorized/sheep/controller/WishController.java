@@ -1,8 +1,6 @@
 package com._401unauthorized.sheep.controller;
 
-import com._401unauthorized.sheep.dto.MajorDto;
-import com._401unauthorized.sheep.dto.SubDto;
-import com._401unauthorized.sheep.dto.WishDto;
+import com._401unauthorized.sheep.dto.*;
 import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -101,9 +99,13 @@ public class WishController{
         if(wish_number == null || wish_number < 1) {
             return "redirect:/wish/list";
         }
-        WishDto wishDto = wishService.detail(wish_number);
+        WishDto wishDto = wishService.essential(wish_number);
+        List<CategoryListDto> categoryListDto = wishService.category(wish_number);
+        log.info(String.valueOf(wishDto));
+        log.info(categoryListDto.toString());
         if(wishDto != null) {
             model.addAttribute("wishDto", wishDto);
+            model.addAttribute("categoryListDto",categoryListDto);
             return "wish/detail";
         } else {
             return "redirect:/wish/list";

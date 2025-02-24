@@ -79,6 +79,7 @@ public class WishService {
     }
     public List<CategoryListDto> category(Integer wish_number){
         List<CategoryDto> categoryDto =wishDao.category_detail(wish_number);
+        log.info(categoryDto.toString());
         List<CategoryListDto> categoryListDto = new ArrayList<>();
 
         for(CategoryDto category : categoryDto){
@@ -86,30 +87,21 @@ public class WishService {
             int tmp = 0;
             if (!categoryListDto.isEmpty()) {
                 for (int i = 0; i < categoryListDto.size(); i++) {
-                    if (categoryListDto.get(i).getMajor_category().equals(category.getMajor_category())) {
+                    if (categoryListDto.get(i).getMajor_category().equals(category.getCategory_parent())) {
                         check = true;
                         tmp = i;
                         break;
                     }
                 }
             }
-            else {
-                List<String> ttmmpp = new ArrayList<String>();
-                ttmmpp.add(category.getSub_category());
-                CategoryListDto tttmmmppp = new CategoryListDto(
-                        category.getMajor_category(),
-                        category.getMajor_text(),
-                        ttmmpp);
-                categoryListDto.add(tttmmmppp);
-            }
 
             if (check) {
-                categoryListDto.get(tmp).getSub_category().add(category.getSub_category());
+                categoryListDto.get(tmp).getSub_category().add(category.getCategory_number());
             }else{
                 List<String> ttmmpp = new ArrayList<String>();
-                ttmmpp.add(category.getSub_category());
+                ttmmpp.add(category.getCategory_number());
                 CategoryListDto tttmmmppp = new CategoryListDto(
-                        category.getMajor_category(),
+                        category.getCategory_parent(),
                         category.getMajor_text(),
                         ttmmpp);
                 categoryListDto.add(tttmmmppp);

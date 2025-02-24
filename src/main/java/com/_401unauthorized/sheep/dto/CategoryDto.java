@@ -12,8 +12,8 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain = true)
 public class CategoryDto {
-    String major_category;
+    String category_number;
     String major_text;
-    String sub_category;
+    String category_parent;
 
 }

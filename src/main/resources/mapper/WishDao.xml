@@ -7,7 +7,7 @@
     <!--  ON은 WISH 테이블과 APPLY_STATUS 테이블의 WISH_NUMBER로 조인했다.  -->
     <!--  WHERE은 조건문으로 WISH의 USER_ID와 값이 같은 USER_ID를 찾는다.  -->
     <select id="get_wish_list" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT W.WISH_TITLE, A.APPLY_STATUS
+        SELECT W.WISH_TITLE, A.APPLY_STATUS,W.WISH_NUMBER
         FROM WISH W
         LEFT JOIN APPLY_STATUS A
         ON W.WISH_NUMBER = A.WISH_NUMBER
@@ -17,8 +17,8 @@
         SELECT * FROM WISH WHERE WISH_NUMBER = #{wish_number};
 
     </select>
-    <select id="category_detail" resultType="com._401unauthorized.sheep.dto.CategoryListDto">
-        SELECT SC.CATEGORY_NUMBER,M.WISH_NUMBER,M.MAJOR_TEXT,SC.CATEGORY_PARENT
+    <select id="category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
+        SELECT SC.CATEGORY_NUMBER,M.MAJOR_TEXT,SC.CATEGORY_PARENT
         FROM MAJOR_CATEGORY_CONTENT M
                  JOIN(
             SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, S.CATEGORY_NUMBER
