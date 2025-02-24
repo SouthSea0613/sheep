@@ -95,4 +95,18 @@ public class WishController{
         }
         return "redirect:/wish/write";
     }
+
+    @GetMapping("/detail")
+    public String detail(@RequestParam("wish_number") Integer wish_number, HttpSession httpSession, Model model) {
+        if(wish_number == null || wish_number < 1) {
+            return "redirect:/wish/list";
+        }
+        WishDto wishDto = wishService.detail(wish_number);
+        if(wishDto != null) {
+            model.addAttribute("wishDto", wishDto);
+            return "wish/detail";
+        } else {
+            return "redirect:/wish/list";
+        }
+    }
 }
