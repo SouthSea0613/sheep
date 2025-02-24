@@ -1,9 +1,6 @@
 package com._401unauthorized.sheep.dao;
 
-import com._401unauthorized.sheep.dto.CategoryDto;
-import com._401unauthorized.sheep.dto.MajorDto;
-import com._401unauthorized.sheep.dto.SubDto;
-import com._401unauthorized.sheep.dto.WishDto;
+import com._401unauthorized.sheep.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -17,5 +14,5 @@ public interface WishDao {
 
     WishDto detail(int wishNumber);
 
-    CategoryDto category_detail(int wishNumber);
+    List<CategoryDto> category_detail(int wishNumber);
 }

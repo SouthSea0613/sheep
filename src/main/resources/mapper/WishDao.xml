@@ -19,7 +19,7 @@
         SELECT * FROM WISH WHERE WISH_NUMBER = #{wish_number};
 
     </select>
-    <select id="category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
+    <select id="category_detail" resultType="com._401unauthorized.sheep.dto.CategoryListDto">
         SELECT SC.CATEGORY_NUMBER,M.WISH_NUMBER,M.MAJOR_TEXT,SC.CATEGORY_PARENT
         FROM MAJOR_CATEGORY_CONTENT M
                  JOIN(
