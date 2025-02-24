@@ -79,7 +79,6 @@ public class WishService {
     }
     public List<CategoryListDto> category(Integer wish_number){
         List<CategoryDto> categoryDto =wishDao.category_detail(wish_number);
-        log.info(categoryDto.toString());
         List<CategoryListDto> categoryListDto = new ArrayList<>();
 
         for(CategoryDto category : categoryDto){
@@ -100,16 +99,20 @@ public class WishService {
             }else{
                 List<String> ttmmpp = new ArrayList<String>();
                 ttmmpp.add(category.getCategory_number());
-                CategoryListDto tttmmmppp = new CategoryListDto(
-                        category.getCategory_parent(),
-                        category.getMajor_text(),
-                        ttmmpp);
+
+                CategoryListDto tttmmmppp = new CategoryListDto();
+                tttmmmppp.setMajor_category(category.getCategory_parent());
+                tttmmmppp.setMajor_text(category.getMajor_text());
+                tttmmmppp.setSub_category(ttmmpp);
+
                 categoryListDto.add(tttmmmppp);
             }
         }
 
+
         return categoryListDto;
     }
+
     public WishDto essential(Integer wish_number){
         return wishDao.detail(wish_number);
     }
