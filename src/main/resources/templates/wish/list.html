@@ -3,13 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:inline="javascript">
+
         function wish_write() {
-            location.href= "/wish/write"
+            location.href = "/wish/write"
         }
+
         function takeoff() {
-            location.href="/takeoff/"
+            const callform = document.getElementById('call_form');
+            callform.submit();
+
         }
+
+        // const msg = [[${param.msg}]]
+        const msg = [[${msg}]]
+
+
+        // if(msg!=null && msg!==""){
+        //     alert(msg);
+        // }
+        alert(msg);
     </script>
     <link rel="stylesheet" href="/css/index.css">
 </head>
@@ -30,7 +45,10 @@
             </div>
             <div th:if="${wish?.apply_status}" th:text="${wish?.apply_status}">상태값</div>
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-                <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
+                <form id="call_form" method="post" action="/takeoff/call">
+                    <input type="hidden" th:value="${wish?.wish_number}" id="wish_number" name="wish_number">
+                    <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
+                </form>
             </div>
         </th:block>
     </th:block>
