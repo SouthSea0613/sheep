@@ -22,8 +22,8 @@
 		<div th:text="${wish_dto?.wish_size_text}">평수상세</div>
 		<div th:text="${wish_dto?.wish_money}+만원">예산</div>
 		<th:block th:each="category:${category_list_dto}">
-			`   <div th:text="${category.major_category}">대분류 넘버</div>
-			`   <div th:text="${category.major_text}">대분류 텍스트</div>
+			   <div th:text="${category.major_category}">대분류 넘버</div>
+			   <div th:text="${category.major_text}">대분류 텍스트</div>
 			<th:block th:each="subcategory:${category_list_dto}">
 				<div th:text="${subcategory.sub_category}">중분류 넘버</div>
 			</th:block>
