@@ -6,6 +6,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> yoonsic2
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +20,8 @@ public class CategoryDto {
     String category_number;
     String major_text;
     String category_parent;
+<<<<<<< HEAD
 
+=======
+>>>>>>> yoonsic2
 }

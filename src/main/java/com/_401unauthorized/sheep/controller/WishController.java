@@ -21,6 +21,7 @@ public class WishController{
 
     @GetMapping("/list")
     public String get_wish_list(HttpSession httpSession, Model model) {
+        // 내가 쓴 위시들이 필요하니까 세션에서 아이디 꺼내와
         String user_id = httpSession.getAttribute("user_id").toString();
         model.addAttribute("wish_list", wishService.get_wish_list(user_id));
         return "wish/list";
@@ -94,6 +95,7 @@ public class WishController{
         return "redirect:/wish/write";
     }
 
+<<<<<<< HEAD
     @GetMapping("/detail")
     public String detail(@RequestParam("wish_number") Integer wish_number, HttpSession httpSession, Model model) {
         if(wish_number == null || wish_number < 1) {
@@ -111,4 +113,6 @@ public class WishController{
             return "redirect:/wish/list";
         }
     }
+=======
+>>>>>>> yoonsic2
 }

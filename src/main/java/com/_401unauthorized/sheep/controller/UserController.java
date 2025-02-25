@@ -96,6 +96,8 @@ public class UserController {
 
     @PostMapping("/login")
     @ResponseBody
+    //비동기에만 필요함
+    //리턴값을 제이슨으로 바꿔주는것. / 받는애를 위해서 필요한건 리퀘스트파람
     public boolean login(@RequestBody UserDto userDto, HttpSession httpSession) {
         UserDto user = userService.login(userDto);
         if (user != null) {

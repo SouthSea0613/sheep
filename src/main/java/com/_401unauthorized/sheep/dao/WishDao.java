@@ -12,7 +12,12 @@ public interface WishDao {
     boolean insert_major(MajorDto majorDto);
     boolean insert_sub(SubDto subDto);
 
+<<<<<<< HEAD
     WishDto detail(int wishNumber);
 
     List<CategoryDto> category_detail(int wishNumber);
+=======
+    WishDto get_wish_detail(int wish_number);
+    List<CategoryDto> get_category_detail(int wish_number);
+>>>>>>> yoonsic2
 }

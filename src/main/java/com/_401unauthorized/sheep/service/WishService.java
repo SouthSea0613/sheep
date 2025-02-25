@@ -59,16 +59,12 @@ public class WishService {
         if(!wishDao.insert_wish(wishdto)) {
             return false;
         }
-
-        log.info(wishDto.toString());
-
         for (MajorDto majorDto : wishDto.getMajor_category()) {
             majorDto.setWish_number(wishdto.getWish_number());
             if(!wishDao.insert_major(majorDto)) {
                 return false;
             }
         }
-
         for (SubDto subDto : wishDto.getSub_category()) {
             subDto.setWish_number(wishdto.getWish_number());
             if(!wishDao.insert_sub(subDto)) {
@@ -78,6 +74,7 @@ public class WishService {
         return true;
     }
 
+<<<<<<< HEAD
 
     public List<CategoryListDto> category(Integer wish_number){
         List<CategoryDto> categorydto =wishDao.category_detail(wish_number);
@@ -90,11 +87,30 @@ public class WishService {
                 for (int i = 0; i < categorylistdto.size(); i++) {
                     if (categorylistdto.get(i).getMajor_category().equals(category.getCategory_parent())) {
                         check = true;
+=======
+    //필수
+    public WishDto get_wish_detail(int wish_number){
+        return wishDao.get_wish_detail(wish_number);
+    }
+    //대 , 텍스트, 중
+    public List<CategoryListDto> get_category_detail(int wish_number){
+        List<CategoryDto> categorydto = wishDao.get_category_detail(wish_number);
+        List<CategoryListDto> categorylistdto = new ArrayList<>();
+
+        for (CategoryDto categoryDto : categorydto) {
+            boolean ckeck = false;
+            int index = 0;
+            if(!categorylistdto.isEmpty()){
+                for(int i=0; i<categorylistdto.size(); i++){
+                    if(categorylistdto.get(i).getMajor_category().equals(categoryDto.getCategory_number())){
+                        ckeck = true;
+>>>>>>> yoonsic2
                         index = i;
                         break;
                     }
                 }
             }
+<<<<<<< HEAD
 
             if (check) {
                 categorylistdto.get(index).getSub_category().add(category.getCategory_number());
@@ -106,16 +122,36 @@ public class WishService {
                 category_list_dto.setMajor_category(category.getCategory_parent());
                 category_list_dto.setMajor_text(category.getMajor_text());
                 category_list_dto.setSub_category(categoryList);
+=======
+            if(ckeck){
+                categorylistdto.get(index).getSub_category().add(categoryDto.getCategory_number());
+            } else {
+                List<String> categorylist = new ArrayList<>();
+                categorylist.add(categoryDto.getCategory_number());
+
+                CategoryListDto category_list_dto = new CategoryListDto();
+                category_list_dto.setMajor_category(categoryDto.getCategory_parent());
+                category_list_dto.setMajor_text(categoryDto.getMajor_text());
+                category_list_dto.setSub_category(categorylist);
+>>>>>>> yoonsic2
 
                 categorylistdto.add(category_list_dto);
             }
         }
 
 
+<<<<<<< HEAD
         return categorylistdto;
     }
 
     public WishDto essential(Integer wish_number){
         return wishDao.detail(wish_number);
     }
+=======
+        return null;
+    }
+
+
+
+>>>>>>> yoonsic2
 }
