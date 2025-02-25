@@ -134,12 +134,8 @@ public class WishController{
 
     @GetMapping("/update")
     public String update(@RequestParam("wish_number") Integer wish_number, Model model) {
-        model.getAttribute("wish_dto");
-        model.getAttribute("category_list_dto");
-        log.info(model.getAttribute("wish_dto").toString());
-        log.info(model.getAttribute("category_list_dto").toString());
         model.addAttribute("wish_dto", wishService.essential(wish_number));
         model.addAttribute("category_list_dto", wishService.category(wish_number));
-        return "redirect:/wish/write";
+        return "wish/write";
     }
 }
