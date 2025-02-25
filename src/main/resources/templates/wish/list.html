@@ -7,9 +7,7 @@
         function wish_write() {
             location.href= "/wish/write"
         }
-
         function takeoff() {
-
         }
     </script>
 </head>
@@ -26,10 +24,10 @@
     <th:block th:unless="${#lists.isEmpty(wish_list)}">
         <th:block th:each="wish:${wish_list}">
             <div>
-                <a th:href="@{/wish/detail(wish_number=${wish.wish_number})}" th:text="${wish?.wish_title}"></a>
+                <a th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
             </div>
-            <div th:if="${wish.apply_status}" th:text="${wish?.apply_status}">상태값</div>
-            <div th:unless="${wish.apply_status!=null}" class="takeoffarea">
+            <div th:if="${wish?.apply_status}" th:text="${wish?.apply_status}">상태값</div>
+            <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
                 <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
             </div>
         </th:block>

@@ -1,9 +1,13 @@
 package com._401unauthorized.sheep.controller;
 
+<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.CategoryListDto;
 import com._401unauthorized.sheep.dto.MajorDto;
 import com._401unauthorized.sheep.dto.SubDto;
 import com._401unauthorized.sheep.dto.WishDto;
+=======
+import com._401unauthorized.sheep.dto.*;
+>>>>>>> minyoung
 import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +28,7 @@ public class WishController{
 
     @GetMapping("/list")
     public String get_wish_list(HttpSession httpSession, Model model) {
+        // 내가 쓴 위시들이 필요하니까 세션에서 아이디 꺼내와
         String user_id = httpSession.getAttribute("user_id").toString();
         model.addAttribute("wish_list", wishService.get_wish_list(user_id));
         return "wish/list";
@@ -54,6 +59,7 @@ public class WishController{
     //리스폰스바디는 비동기에 사용하는 것.
     //html상에서 폼으로 넘겨준 같은 name속성의 category_number들을 category_number의 리스트들안에 차례로 RequestParam으로 받아온다.
     //html상에서 폼으로 넘겨준 같은 name속성의 major_text들을 major_text의 리스트들안에 차례로 RequestParam으로 받아온다.
+    // @ResponseBody - 비동기의 리턴을 위해 필요해!
     public String write(WishDto wishDto,
                         @RequestParam("category_number") List<Integer> category_number,
                         @RequestParam("major_text") List<String> major_text,
@@ -110,5 +116,23 @@ public class WishController{
             return "redirect:/wish/list";
         }
         return "redirect:/wish/write";
+    }
+
+    @GetMapping("/detail")
+    public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
+        if(wish_number == null || wish_number < 1) {
+            return "redirect:/wish/list";
+        }
+        WishDto wishDto = wishService.essential(wish_number);
+        List<CategoryListDto> categoryListDto = wishService.category(wish_number);
+        log.info(String.valueOf(wishDto));
+        log.info(categoryListDto.toString());
+        if(wishDto != null) {
+            model.addAttribute("wish_dto", wishDto);
+            model.addAttribute("category_list_dto",categoryListDto);
+            return "wish/detail";
+        } else {
+            return "redirect:/wish/list";
+        }
     }
 }

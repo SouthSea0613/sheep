@@ -6,17 +6,59 @@
     <!--  LEFT JOIN은 왼쪽의테이블을 중심으로 오른쪽테이블을 매치를 함으로 WISH_TITLE오른쪽에 APPLY_STATUS를 매치한다.  -->
     <!--  ON은 WISH 테이블과 APPLY_STATUS 테이블의 WISH_NUMBER로 조인했다.  -->
     <!--  WHERE은 조건문으로 WISH의 USER_ID와 값이 같은 USER_ID를 찾는다.  -->
-    <!--  위시 제목과 현재 진행상태가 보여야하기 때문에 wish 테이블과 apply status 테이블을 조인하여 가져오는거야  -->
-    <!--  LEFT조인을 한 이유는 오른쪽!!!!에 NULL 값이 있기 때문이야!-->
     <select id="get_wish_list" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT W.WISH_TITLE, A.APPLY_STATUS
+        SELECT W.WISH_TITLE, A.APPLY_STATUS,W.WISH_NUMBER
         FROM WISH W
         LEFT JOIN APPLY_STATUS A
         ON W.WISH_NUMBER = A.WISH_NUMBER
         WHERE W.USER_ID = #{user_id};
     </select>
 
+    <select id="detail" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT * FROM WISH WHERE WISH_NUMBER = #{wish_number};
+
+    </select>
+
+    <select id="category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
+        SELECT SC.CATEGORY_NUMBER,M.MAJOR_TEXT,SC.CATEGORY_PARENT
+        FROM MAJOR_CATEGORY_CONTENT M
+                 JOIN(
+            SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, S.CATEGORY_NUMBER
+            FROM CATEGORY C
+                     JOIN SUB_CATEGORY S
+                          ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER) SC
+                     ON M.CATEGORY_NUMBER = SC.CATEGORY_PARENT
+                         AND M.WISH_NUMBER = SC.WISH_NUMBER WHERE M.WISH_NUMBER=#{wish_number}
+    </select>
+
+    <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT * FROM WISH
+        WHERE WISH_NUMBER = #{wish_number}
+    </select>
+
+    <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
+        SELECT
+            c.wish_number,
+            c.category_number,
+            c.category_parent,
+            mc.major_text
+        FROM major_category_content mc
+        JOIN(
+            SELECT
+                c.category_number,
+                c.category_parent,
+                s.wish_number
+            FROM category c
+            JOIN sub_category s
+            ON c.category_number = s.category_number) c
+        ON c.category_parent = mc.category_number
+        AND c.wish_number = mc.wish_number
+        WHERE mc.wish_number=#{wish_number}
+    </select>
+
+
     <!--글쓰기!(generateKey) 사용-->
+    <!--  wish_number(PK/ 오토인크리먼트) 로 작성하면서 겹치지 않게 지켜줌, 하위 친구들도 동일한 위시넘버로 계속 간다.  -->
     <!--  WISH 테이블의 필수 값을 순서대로 write.html에 있는 틀에 맞춰 작성된 VALUE값을 불러온다. 아래 모두 같다.  -->
     <!--  제너레이트키의 역할은 wish_number을 고정값으로 주기 위해서 절대 겹치는 값을 만들지 않는 역할로 오토인크리먼트랑 주로 쓴다.  -->
     <insert id="insert_wish" useGeneratedKeys="true" keyProperty="wish_number">
