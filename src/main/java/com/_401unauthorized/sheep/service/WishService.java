@@ -77,40 +77,42 @@ public class WishService {
         }
         return true;
     }
-    public List<CategoryListDto> category(Integer wish_number){
-        List<CategoryDto> categoryDto =wishDao.category_detail(wish_number);
-        List<CategoryListDto> categoryListDto = new ArrayList<>();
 
-        for(CategoryDto category : categoryDto){
+
+    public List<CategoryListDto> category(Integer wish_number){
+        List<CategoryDto> categorydto =wishDao.category_detail(wish_number);
+        List<CategoryListDto> categorylistdto = new ArrayList<>();
+
+        for(CategoryDto category : categorydto){
             boolean check = false;
-            int tmp = 0;
-            if (!categoryListDto.isEmpty()) {
-                for (int i = 0; i < categoryListDto.size(); i++) {
-                    if (categoryListDto.get(i).getMajor_category().equals(category.getCategory_parent())) {
+            int index = 0;
+            if (!categorylistdto.isEmpty()) {
+                for (int i = 0; i < categorylistdto.size(); i++) {
+                    if (categorylistdto.get(i).getMajor_category().equals(category.getCategory_parent())) {
                         check = true;
-                        tmp = i;
+                        index = i;
                         break;
                     }
                 }
             }
 
             if (check) {
-                categoryListDto.get(tmp).getSub_category().add(category.getCategory_number());
+                categorylistdto.get(index).getSub_category().add(category.getCategory_number());
             }else{
-                List<String> ttmmpp = new ArrayList<String>();
-                ttmmpp.add(category.getCategory_number());
+                List<String> categoryList = new ArrayList<String>();
+                categoryList.add(category.getCategory_number());
 
-                CategoryListDto tttmmmppp = new CategoryListDto();
-                tttmmmppp.setMajor_category(category.getCategory_parent());
-                tttmmmppp.setMajor_text(category.getMajor_text());
-                tttmmmppp.setSub_category(ttmmpp);
+                CategoryListDto category_list_dto = new CategoryListDto();
+                category_list_dto.setMajor_category(category.getCategory_parent());
+                category_list_dto.setMajor_text(category.getMajor_text());
+                category_list_dto.setSub_category(categoryList);
 
-                categoryListDto.add(tttmmmppp);
+                categorylistdto.add(category_list_dto);
             }
         }
 
 
-        return categoryListDto;
+        return categorylistdto;
     }
 
     public WishDto essential(Integer wish_number){
