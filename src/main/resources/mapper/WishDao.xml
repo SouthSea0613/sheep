@@ -15,14 +15,15 @@
     </select>
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT * FROM WISH
+        SELECT *
+        FROM WISH
         WHERE WISH_NUMBER = #{wish_number}
     </select>
 
     <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
-        SELECT C.WISH_NUMBER, C.CATEGORY_NUMBER, C.CATEGORY_PARENT, MC.MAJOR_TEXT
+        SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER, C.CATEGORY_PARENT, MC.MAJOR_TEXT
         FROM MAJOR_CATEGORY_CONTENT MC
-        JOIN(
+        LEFT JOIN(
             SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
             FROM CATEGORY C
             JOIN SUB_CATEGORY S
