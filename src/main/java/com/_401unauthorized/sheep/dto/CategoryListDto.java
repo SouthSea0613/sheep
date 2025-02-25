@@ -17,8 +17,4 @@ public class CategoryListDto {
     String major_category;
     String major_text;
     List<String> sub_category;
-<<<<<<< HEAD
-=======
-
->>>>>>> yoonsic2
 }

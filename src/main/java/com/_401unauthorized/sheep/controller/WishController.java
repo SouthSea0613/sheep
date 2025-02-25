@@ -95,9 +95,8 @@ public class WishController{
         return "redirect:/wish/write";
     }
 
-<<<<<<< HEAD
     @GetMapping("/detail")
-    public String detail(@RequestParam("wish_number") Integer wish_number, HttpSession httpSession, Model model) {
+    public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
         if(wish_number == null || wish_number < 1) {
             return "redirect:/wish/list";
         }
@@ -106,13 +105,11 @@ public class WishController{
         log.info(String.valueOf(wishDto));
         log.info(categoryListDto.toString());
         if(wishDto != null) {
-            model.addAttribute("wishDto", wishDto);
-            model.addAttribute("categoryListDto",categoryListDto);
+            model.addAttribute("wish_dto", wishDto);
+            model.addAttribute("category_list_dto",categoryListDto);
             return "wish/detail";
         } else {
             return "redirect:/wish/list";
         }
     }
-=======
->>>>>>> yoonsic2
 }

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Wish Detail</title>
+	<meta charset="UTF-8">
+	<title>Wish Detail</title>
 </head>
 <style>
     ul {
@@ -12,200 +12,202 @@
 <body>
 <h2>위시 디테일</h2>
 <div>
-<!--header-->
+	<!--header-->
 </div>
 <div>
-    <!--  위 div는 전체 묶음  -->
-    <form action="/takeoff/customer/list" method="get">
-        <div>
-            <!--  위 div는 필수 항목 묶음  -->
-            <div>
-                <div id="type">주거형태</div>
-<<<<<<< HEAD
-                <p th:text="${wishDto.wish_type}"></p>
-=======
-                <span th:text="${wishDto.wish_type}"></span>
-                <input type="radio" name="housingtype" id="apartment" checked onClick="return false;">아파트
-                <input type="radio" name="housingtype" id="house" onClick="return false;">단독주택
-                <input type="radio" name="housingtype" id="villa" onClick="return false;">빌라
->>>>>>> yoonsic2
-            </div>
-            <br>
-            <div>
-                <div>평수</div>
-                <div>
-                    <span th:text="${wishDto.wish_size}"></span>
-                    <span th:text="${wishDto?.wish_size_text}"></span>
-                </div>
-            </div>
-            <br>
-        </div>
-        <br>
-        <hr>
-        <br>
-        <!-- 아래부터 선택 사항 -->
-        <div class="remove">
-            <div>철거</div>
+	<!--  위 div는 전체 묶음  -->
+	<form action="/takeoff/customer/list" method="get">
+		<div>
+			<!--  위 div는 필수 항목 묶음  -->
+			<div>
+				<div id="type">주거형태</div>
+				<span th:text="${wishDto.wish_type}"></span>
+				<input type="radio" name="housingtype" id="apartment" checked onClick="return false;">아파트
+				<input type="radio" name="housingtype" id="house" onClick="return false;">단독주택
+				<input type="radio" name="housingtype" id="villa" onClick="return false;">빌라
+			</div>
+			<br>
+			<div>
+				<div>평수</div>
+				<div>
+					<span th:text="${wishDto.wish_size}"></span>
+					<span th:text="${wishDto?.wish_size_text}"></span>
+				</div>
+			</div>
+			<br>
+		</div>
+		<br>
+		<hr>
+		<br>
+		<!-- 아래부터 선택 사항 -->
+		<div class="remove">
+			<div>철거</div>
 
-        </div>
-        <br>
-        <div class=wood>
-            <div>목공</div>
-            <ul>
-                <li><input type="text" name="" id="wood_hot" value="단열" readonly></li>
-                <li><input type="text" name="" id="wood_ceiling" value="천장" readonly></li>
-                <li><input type="text" name="" id="wood_walls" value="벽" readonly></li>
-                <li><input type="text" name="wood" id="wood_text" placeholder="상세설명을 작성해주세요." value="목공 상세 작성" readonly>
-                </li>
-            </ul>
-        </div>
-        <br>
-        <div class="paper">
-            <div>도배</div>
-            <ul>
-                <li><input type="text" name="paper" id="paper_text" placeholder="상세설명을 작성해주세요." value="도배 상세 작성" readonly></li>
-            </ul>
-        </div>
-        <br>
-        <div class="elec">
-            <div>전기</div>
-            <ul>
-                <li><input type="text" name="elec" id="elec_text" placeholder="상세설명을 작성해주세요." value="전기 상세 작성" readonly>
-                </li>
-            </ul>
-        </div>
-        <br>
-        <div class="light">
-            <div>조명</div>
-            <ul>
-                <li><input type="text" name="light" id="light_text" placeholder="상세설명을 작성해주세요." value="조명 상세 작성" readonly></li>
-            </ul>
-        </div>
-        <br>
-        <div class="tile">
-            <div>타일</div>
-            <ul>
-                <li><input type="text" name="tile" id="tile_text" placeholder="상세설명을 작성해주세요." value="타일 상세 작성" readonly>
-                </li>
-            </ul>
-        </div>
-        <br>
-        <div class="film">
-            <div>필름</div>
-            <ul>
-                <li><input type="text" name="film" id="film_fireguard" value="현관방화문" readonly></li>
-                <li><input type="text" name="film" id="film_middoor" value="중문" readonly></li>
-                <li><input type="text" name="film" id="film_ceilingmolding" value="천장몰딩" readonly></li>
-                <li><input type="text" name="film" id="film_molding" value="걸레받이몰딩" readonly></li>
-                <li><input type="text" name="film" id="film_text" placeholder="상세설명을 작성해주세요." value="필름 상세 작성" readonly>
-                </li>
-            </ul>
-        </div>
-        <br>
-        <div class="coating">
-            <div>도장</div>
-            <ul>
-                <li><input type="text" name="coating" id="coating_text" placeholder="상세설명을 작성해주세요." value="도장 상세 작성" readonly></li>
-            </ul>
-        </div>
-        <br>
-        <div class="kitchen">
-            <div>부엌</div>
-            <ul>
-                <li><input type="text" name="kitchen" id="kitchen_one" value="'ㅡ'자" readonly></li>
-                <li><input type="text" name="kitchen" id="kitchen_curve" value="'ㄱ'자" readonly></li>
-                <li><input type="text" name="kitchen" id="kitchen_face" value="대면형" readonly></li>
-                <li><input type="text" name="kitchen" id="kitchen_text" placeholder="상세설명을 작성해주세요." value="부엌 상세 작성" readonly></li>
-            </ul>
-        </div>
-        <br>
-        <div class="bath">
-            <div>욕실</div>
-            <ul>
-                <li><input type="text" name="bath" id="bath_tub" value="욕조" readonly></li>
-                <li><input type="text" name="bath" id="bath_booth" value="샤워부스" readonly></li>
-                <li><input type="text" name="bath" id="bath_text" placeholder="상세설명을 작성해주세요." value="욕실 상세 작성" readonly>
-                </li>
-            </ul>
-        </div>
-        <br>
-        <div class="storage">
-            <div>수납</div>
-            <ul>
-                <li><input type="text" name="storage" id="storage_drassroom" value="드레스룸" readonly></li>
-                <li><input type="text" name="storage" id="storage_closet" value="붙박이장" readonly></li>
-                <li><input type="text" name="storage" id="storage_front" value="현관장" readonly></li>
-                <li><input type="text" name="storage" id="storage_text" placeholder="상세설명을 작성해주세요." value="수납 상세 작성" readonly></li>
-            </ul>
-        </div>
-        <br>
-        <div class="floor">
-            <div>바닥</div>
-            <ul>
-                <li><input type="text" name="floor" id="floor_paper" value="장판" readonly></li>
-                <li><input type="text" name="floor" id="floor_maru" value="강화마루" readonly></li>
-                <li><input type="text" name="floor" id="floor_wood" value="강마루" readonly></li>
-                <li><input type="text" name="floor" id="floor_tile" value="타일" readonly></li>
-                <li><input type="text" name="floor" id="floor_text" placeholder="상세설명을 작성해주세요." value="바닥 상세 작성" readonly></li>
-            </ul>
-        </div>
-        <br>
-        <div class="window">
-            <div>창호</div>
-            <ul>
-                <li><input type="text" name="window" id="window_normal" value="일반창" readonly></li>
-                <li><input type="text" name="window" id="window_turning" value="터닝도어" readonly></li>
-                <li><input type="text" name="window" id="window_folding" value="폴딩도어" readonly></li>
-                <li><input type="text" name="window" id="window_text" placeholder="상세설명을 작성해주세요." value="창호 상세 작성" readonly></li>
-            </ul>
-        </div>
-        <br>
-        <div class="door">
-            <div>도어</div>
-            <ul>
-                <li><input type="text" name="door" id="door_text" placeholder="상세설명을 작성해주세요." value="도어 상세 작성" readonly>
-                </li>
-            </ul>
-        </div>
-        <br>
-        <div class="mdoor">
-            <div>중문</div>
-            <ul>
-                <li><input type="text" name="mdoor" id="mdoor_three" value="3연동" readonly></li>
-                <li><input type="text" name="mdoor" id="mdoor_casement" value="여닫이" readonly></li>
-                <li><input type="text" name="mdoor" id="mdoor_sliding" value="슬라이딩" readonly></li>
-                <li><input type="text" name="mdoor" id="mdoor_text" placeholder="상세설명을 작성해주세요." value="중문 상세 작성"
-                           readonly></li>
-            </ul>
-            <br>
-            <div class="ready">
-                <div>공사준비/마감</div>
-                <ul>
-                    <li><input type="text" name="ready" id="ready_agree" value="입주민동의서" readonly></li>
-                    <li><input type="text" name="ready" id="ready_protect" value="EV보양 및 실내외 보양" readonly></li>
-                    <li><input type="text" name="ready" id="ready_clean" value="입주청소" readonly></li>
-                </ul>
-            </div>
-            <br>
-        </div>
-        <div>위 내용으로 견적을 받고 싶으시다면 견적받기 버튼을 눌러주세요.</div>
-        <div>*주의* 견적을 넣은 시점부터 수정은 불가능 합니다. 견적이 잘 작성 되었는지 확인해주세요.</div>
-        <br>
-        <input type="button" value="수정하기" onclick="location.href='write.html'">
-        <!--    위시 디테일로 넘어감    -->
-        <br>
-        <br>
-        <input type="submit" value="견적받기">
-        <!--    견적 받기 신청으로 넘어가서 주소 작성함    -->
-        <br>
-        <br>
-        <input type="button" value="목록으로" onclick="location.href='list.html'">
-        <!--    위시 리스트로 넘어감    -->
-    </form>
+		</div>
+		<br>
+		<div class=wood>
+			<div>목공</div>
+			<ul>
+				<li><input type="text" name="" id="wood_hot" value="단열" readonly></li>
+				<li><input type="text" name="" id="wood_ceiling" value="천장" readonly></li>
+				<li><input type="text" name="" id="wood_walls" value="벽" readonly></li>
+				<li><input type="text" name="wood" id="wood_text" placeholder="상세설명을 작성해주세요." value="목공 상세 작성" readonly>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div class="paper">
+			<div>도배</div>
+			<ul>
+				<li><input type="text" name="paper" id="paper_text" placeholder="상세설명을 작성해주세요." value="도배 상세 작성"
+						   readonly></li>
+			</ul>
+		</div>
+		<br>
+		<div class="elec">
+			<div>전기</div>
+			<ul>
+				<li><input type="text" name="elec" id="elec_text" placeholder="상세설명을 작성해주세요." value="전기 상세 작성" readonly>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div class="light">
+			<div>조명</div>
+			<ul>
+				<li><input type="text" name="light" id="light_text" placeholder="상세설명을 작성해주세요." value="조명 상세 작성"
+						   readonly></li>
+			</ul>
+		</div>
+		<br>
+		<div class="tile">
+			<div>타일</div>
+			<ul>
+				<li><input type="text" name="tile" id="tile_text" placeholder="상세설명을 작성해주세요." value="타일 상세 작성" readonly>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div class="film">
+			<div>필름</div>
+			<ul>
+				<li><input type="text" name="film" id="film_fireguard" value="현관방화문" readonly></li>
+				<li><input type="text" name="film" id="film_middoor" value="중문" readonly></li>
+				<li><input type="text" name="film" id="film_ceilingmolding" value="천장몰딩" readonly></li>
+				<li><input type="text" name="film" id="film_molding" value="걸레받이몰딩" readonly></li>
+				<li><input type="text" name="film" id="film_text" placeholder="상세설명을 작성해주세요." value="필름 상세 작성" readonly>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div class="coating">
+			<div>도장</div>
+			<ul>
+				<li><input type="text" name="coating" id="coating_text" placeholder="상세설명을 작성해주세요." value="도장 상세 작성"
+						   readonly></li>
+			</ul>
+		</div>
+		<br>
+		<div class="kitchen">
+			<div>부엌</div>
+			<ul>
+				<li><input type="text" name="kitchen" id="kitchen_one" value="'ㅡ'자" readonly></li>
+				<li><input type="text" name="kitchen" id="kitchen_curve" value="'ㄱ'자" readonly></li>
+				<li><input type="text" name="kitchen" id="kitchen_face" value="대면형" readonly></li>
+				<li><input type="text" name="kitchen" id="kitchen_text" placeholder="상세설명을 작성해주세요." value="부엌 상세 작성"
+						   readonly></li>
+			</ul>
+		</div>
+		<br>
+		<div class="bath">
+			<div>욕실</div>
+			<ul>
+				<li><input type="text" name="bath" id="bath_tub" value="욕조" readonly></li>
+				<li><input type="text" name="bath" id="bath_booth" value="샤워부스" readonly></li>
+				<li><input type="text" name="bath" id="bath_text" placeholder="상세설명을 작성해주세요." value="욕실 상세 작성" readonly>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div class="storage">
+			<div>수납</div>
+			<ul>
+				<li><input type="text" name="storage" id="storage_drassroom" value="드레스룸" readonly></li>
+				<li><input type="text" name="storage" id="storage_closet" value="붙박이장" readonly></li>
+				<li><input type="text" name="storage" id="storage_front" value="현관장" readonly></li>
+				<li><input type="text" name="storage" id="storage_text" placeholder="상세설명을 작성해주세요." value="수납 상세 작성"
+						   readonly></li>
+			</ul>
+		</div>
+		<br>
+		<div class="floor">
+			<div>바닥</div>
+			<ul>
+				<li><input type="text" name="floor" id="floor_paper" value="장판" readonly></li>
+				<li><input type="text" name="floor" id="floor_maru" value="강화마루" readonly></li>
+				<li><input type="text" name="floor" id="floor_wood" value="강마루" readonly></li>
+				<li><input type="text" name="floor" id="floor_tile" value="타일" readonly></li>
+				<li><input type="text" name="floor" id="floor_text" placeholder="상세설명을 작성해주세요." value="바닥 상세 작성"
+						   readonly></li>
+			</ul>
+		</div>
+		<br>
+		<div class="window">
+			<div>창호</div>
+			<ul>
+				<li><input type="text" name="window" id="window_normal" value="일반창" readonly></li>
+				<li><input type="text" name="window" id="window_turning" value="터닝도어" readonly></li>
+				<li><input type="text" name="window" id="window_folding" value="폴딩도어" readonly></li>
+				<li><input type="text" name="window" id="window_text" placeholder="상세설명을 작성해주세요." value="창호 상세 작성"
+						   readonly></li>
+			</ul>
+		</div>
+		<br>
+		<div class="door">
+			<div>도어</div>
+			<ul>
+				<li><input type="text" name="door" id="door_text" placeholder="상세설명을 작성해주세요." value="도어 상세 작성" readonly>
+				</li>
+			</ul>
+		</div>
+		<br>
+		<div class="mdoor">
+			<div>중문</div>
+			<ul>
+				<li><input type="text" name="mdoor" id="mdoor_three" value="3연동" readonly></li>
+				<li><input type="text" name="mdoor" id="mdoor_casement" value="여닫이" readonly></li>
+				<li><input type="text" name="mdoor" id="mdoor_sliding" value="슬라이딩" readonly></li>
+				<li><input type="text" name="mdoor" id="mdoor_text" placeholder="상세설명을 작성해주세요." value="중문 상세 작성"
+						   readonly></li>
+			</ul>
+			<br>
+			<div class="ready">
+				<div>공사준비/마감</div>
+				<ul>
+					<li><input type="text" name="ready" id="ready_agree" value="입주민동의서" readonly></li>
+					<li><input type="text" name="ready" id="ready_protect" value="EV보양 및 실내외 보양" readonly></li>
+					<li><input type="text" name="ready" id="ready_clean" value="입주청소" readonly></li>
+				</ul>
+			</div>
+			<br>
+		</div>
+		<div>위 내용으로 견적을 받고 싶으시다면 견적받기 버튼을 눌러주세요.</div>
+		<div>*주의* 견적을 넣은 시점부터 수정은 불가능 합니다. 견적이 잘 작성 되었는지 확인해주세요.</div>
+		<br>
+		<input type="button" value="수정하기" onclick="location.href='write.html'">
+		<!--    위시 디테일로 넘어감    -->
+		<br>
+		<br>
+		<input type="submit" value="견적받기">
+		<!--    견적 받기 신청으로 넘어가서 주소 작성함    -->
+		<br>
+		<br>
+		<input type="button" value="목록으로" onclick="location.href='list.html'">
+		<!--    위시 리스트로 넘어감    -->
+	</form>
 </div>
 <div>
-    <!--   footer   -->
+	<!--   footer   -->
 </div>
-
 </body>
 </html>
