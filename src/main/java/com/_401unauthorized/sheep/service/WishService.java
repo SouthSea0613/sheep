@@ -82,8 +82,32 @@ public class WishService {
     public List<CategoryListDto> get_category_detail(int wish_number){
         List<CategoryDto> categorydto = wishDao.get_category_detail(wish_number);
         List<CategoryListDto> categorylistdto = new ArrayList<>();
-        for (CategoryDto categoryDto : categorydto) {
 
+        for (CategoryDto categoryDto : categorydto) {
+            boolean ckeck = false;
+            int index = 0;
+            if(!categorylistdto.isEmpty()){
+                for(int i=0; i<categorylistdto.size(); i++){
+                    if(categorylistdto.get(i).getMajor_category().equals(categoryDto.getCategory_number())){
+                        ckeck = true;
+                        index = i;
+                        break;
+                    }
+                }
+            }
+            if(ckeck){
+                categorylistdto.get(index).getSub_category().add(categoryDto.getCategory_number());
+            } else {
+                List<String> categorylist = new ArrayList<>();
+                categorylist.add(categoryDto.getCategory_number());
+
+                CategoryListDto category_list_dto = new CategoryListDto();
+                category_list_dto.setMajor_category(categoryDto.getCategory_parent());
+                category_list_dto.setMajor_text(categoryDto.getMajor_text());
+                category_list_dto.setSub_category(categorylist);
+
+                categorylistdto.add(category_list_dto);
+            }
         }
 
 
