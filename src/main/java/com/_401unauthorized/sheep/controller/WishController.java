@@ -1,13 +1,9 @@
 package com._401unauthorized.sheep.controller;
 
-<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.CategoryListDto;
 import com._401unauthorized.sheep.dto.MajorDto;
 import com._401unauthorized.sheep.dto.SubDto;
 import com._401unauthorized.sheep.dto.WishDto;
-=======
-import com._401unauthorized.sheep.dto.*;
->>>>>>> minyoung
 import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

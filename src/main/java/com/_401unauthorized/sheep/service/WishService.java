@@ -73,15 +73,6 @@ public class WishService {
         return true;
     }
 
-<<<<<<< HEAD
-    public List<CategoryListDto> category(Integer wish_number){
-        List<CategoryDto> categoryDto =wishDao.category_detail(wish_number);
-        List<CategoryListDto> categoryListDto = new ArrayList<>();
-
-        for(CategoryDto category : categoryDto){
-            boolean check = false;
-            int tmp = 0;
-=======
     public WishDto essential(Integer wish_number) {
         WishDto wishDto = wishDao.get_wish_detail(wish_number);
             if (wishDto.getWish_type() != null) {
@@ -109,42 +100,15 @@ public class WishService {
         for (CategoryDto category : categoryDto) {
             boolean check = false;
             int index = 0;
->>>>>>> minyoung
             if (!categoryListDto.isEmpty()) {
                 for (int i = 0; i < categoryListDto.size(); i++) {
                     if (categoryListDto.get(i).getMajor_category().equals(category.getCategory_parent())) {
                         check = true;
-<<<<<<< HEAD
-                        tmp = i;
-=======
                         index = i;
->>>>>>> minyoung
                         break;
                     }
                 }
             }
-<<<<<<< HEAD
-            if (check) {
-                categoryListDto.get(tmp).getSub_category().add(category.getCategory_number());
-            }else{
-                List<String> ttmmpp = new ArrayList<String>();
-                ttmmpp.add(category.getCategory_number());
-
-                CategoryListDto tttmmmppp = new CategoryListDto();
-                tttmmmppp.setMajor_category(category.getCategory_parent());
-                tttmmmppp.setMajor_text(category.getMajor_text());
-                tttmmmppp.setSub_category(ttmmpp);
-
-                categoryListDto.add(tttmmmppp);
-            }
-        }
-        return categoryListDto;
-    }
-
-    public WishDto essential(Integer wish_number) {
-        return wishDao.detail(wish_number);
-    }
-=======
 
             if (category.getCategory_parent() != null) {
                 switch (category.getCategory_parent()) {
@@ -347,5 +311,4 @@ public class WishService {
 
         return categoryListDto;
     }
->>>>>>> minyoung
 }
