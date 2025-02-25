@@ -8,6 +8,8 @@
             location.href= "/wish/write"
         }
         function takeoff() {
+            const callform= document.getElementById('call_form');
+            callform.submit();
         }
     </script>
 </head>
@@ -28,7 +30,10 @@
             </div>
             <div th:if="${wish?.apply_status}" th:text="${wish?.apply_status}">상태값</div>
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-                <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
+
+                <form id="call_form" method="post" th:action="@{/takeoff/call(wish_number=${wish.wish_number})}">
+                    <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
+                </form>
             </div>
         </th:block>
     </th:block>

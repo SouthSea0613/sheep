@@ -22,15 +22,23 @@ public class WishService {
             if (wish.getApply_status() != null) {
                 switch (wish.getApply_status()) {
                     case "0":
-                        wish.setApply_status("취소");
+                        wish.setApply_status("대기중");
                         break;
 
                     case "1":
-                        wish.setApply_status("기간만료");
+                        wish.setApply_status("상담중");
                         break;
 
                     case "2":
-                        wish.setApply_status("견적신청중");
+                        wish.setApply_status("계약완료");
+                        break;
+
+                    case "3":
+                        wish.setApply_status("기간만료");
+                        break;
+
+                    case "4":
+                        wish.setApply_status("취소");
                         break;
                 }
             } else {

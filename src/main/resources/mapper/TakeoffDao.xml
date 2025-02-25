@@ -2,4 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.TakeoffDao">
 
+    <insert id="call">
+        INSERT INTO APPLY_STATUS VALUES(#{user_id},#{wish_number},#{apply_status})
+    </insert>
+
 </mapper>
