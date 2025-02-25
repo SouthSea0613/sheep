@@ -21,21 +21,27 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class TakeoffController {
     private final TakeoffService takeoffService;
 
-//    @GetMapping("/call")
+    //    @GetMapping("/call")
 //    public String call(){
 //        return "takeoff/call";
 //    }
-@PostMapping("/call")
-public String call(@RequestParam("wish_number") String wish_number, HttpSession httpSession, RedirectAttributes rttr,Model model){
-    log.info("살려줘");
-    ApplyDto applydto = new ApplyDto();
-    applydto.setUser_id((String) httpSession.getAttribute("user_id"));
-    applydto.setApply_status("0");
-    applydto.setWish_number(String.valueOf(wish_number));
-    takeoffService.call(applydto);
-//    rttr.addFlashAttribute("msg","견적 요청 완료되었습니다.");
-    model.addAttribute("msg","견적 요청이 완료되었습니다");
-    return "redirect:/wish/list";
+    @PostMapping("/call")
+    public String call(@RequestParam("wish_number") String wish_number, HttpSession httpSession, RedirectAttributes rttr, Model model) {
+        log.info("살려줘");
+        ApplyDto applydto = new ApplyDto();
+        applydto.setUser_id((String) httpSession.getAttribute("user_id"));
+        applydto.setApply_status("0");
+        applydto.setWish_number(String.valueOf(wish_number));
+        boolean result = takeoffService.call(applydto);
+        if (result) {
+            rttr.addAttribute("msg", "견적 요청 완료되었습니다.");
+            return "redirect:/wish/list";
+        } else {
+            rttr.addAttribute("msg", "견적 요청 실패했습니다.");
+            return "redirect:/wish/list";
+        }
 
-}
+
+    }
+
 }

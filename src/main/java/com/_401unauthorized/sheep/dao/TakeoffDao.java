@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface TakeoffDao {
-    void call(ApplyDto applyDto);
+    boolean call(ApplyDto applyDto);
 }

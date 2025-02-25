@@ -12,11 +12,13 @@ import org.springframework.stereotype.Service;
 public class TakeoffService {
     private final TakeoffDao takeoffDao;
 
-    public void call(ApplyDto applyDto) {
-      takeoffDao.call(applyDto);
-/*
-        if (applydto.getApply_status().equals("0")) {
-            applydto.setApply_status("진행");
-        }*/
+    public boolean call(ApplyDto applyDto) {
+      boolean result = takeoffDao.call(applyDto);
+        if(result){
+            return true;
+        }else{
+            return false;
+        }
+
     }
 }
