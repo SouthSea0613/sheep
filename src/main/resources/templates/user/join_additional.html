@@ -1,47 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script>
-  function check(){
-      const radio = $('input[name=join_additional]:checked').val();
-      const addForm_seller = $('#join_addForm_seller');
-      const addForm_engineer = $('#join_addForm_engineer');
-
-			if (radio === 'seller') {
-				addForm_seller.css('display', 'block')
-				addForm_engineer.css('display', 'none')
-
-			} else if (radio === 'engineer') {
-				addForm_engineer.css('display', 'block')
-				addForm_seller.css('display', 'none')
-			}
-		}
-
-		function seller_regnum_check() {
-			let data = {};
-			const seller_regnum = $('#seller_regnum');
-			data.seller_regnum = seller_regnum.val();
-			axios.post('/user/seller_regnum_check', data)
-				.then(res => {
-					console.log(res);
-					if (res.data) {
-						$('#seller_regnum_check').text('사용 가능한 사업자등록번호 입니다.');
-						$('#seller_regnum_val').val(1);
-					} else {
-						$('#seller_regnum_check').text('이미 사용중인 사업자등록번호 입니다.')
-						$('#seller_regnum_val').val(0);
-					}
-				})
-				.catch(err => {
-					$('#seller_regnum_check').text('');
-					$('#seller_regnum_val').val(0);
-				})
-		}
-
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script th:src="@{/javascript/user/join_additional.js}"></script>
+	<script>
 		function join_addCheck_seller() {
 			const seller_regnum = $('#seller_regnum');
 			if (seller_regnum.val() == '') {
@@ -70,42 +35,42 @@
 			$('#join_addForm_seller').submit();
 		}
 
-  function engineer_regnum_check() {
-      let data = {};
-      const engineer_regnum = $('#engineer_regnum');
-      data.engineer_regnum = engineer_regnum.val();
-      axios.post('/user/engineer_regnum_check', data)
-          .then(res => {
-              console.log(res);
-              if (res.data) {
-                  $('#engineer_regnum_check').text('사용 가능한 자격증번호입니다.');
-                  $('#engineer_regnum_val').val(1);
-              } else {
-                  $('#engineer_regnum_check').text('이미 사용중인 자격증번호입니다.');
-                  $('#engineer_regnum_val').val(0);
-              }
-          })
-          .catch(err => {
-              console.log(err);
-              $('#engineer_regnum_check').text('');
-              $('#engineer_regnum_val').val(0);
-          })
-  }
+		function engineer_regnum_check() {
+			let data = {};
+			const engineer_regnum = $('#engineer_regnum');
+			data.engineer_regnum = engineer_regnum.val();
+			axios.post('/user/engineer_regnum_check', data)
+				.then(res => {
+					console.log(res);
+					if (res.data) {
+						$('#engineer_regnum_check').text('사용 가능한 자격증번호입니다.');
+						$('#engineer_regnum_val').val(1);
+					} else {
+						$('#engineer_regnum_check').text('이미 사용중인 자격증번호입니다.');
+						$('#engineer_regnum_val').val(0);
+					}
+				})
+				.catch(err => {
+					console.log(err);
+					$('#engineer_regnum_check').text('');
+					$('#engineer_regnum_val').val(0);
+				})
+		}
 
-  function join_addCheck_engineer() {
-      const engineer_regnum = $('#engineer_regnum');
-      if (engineer_regnum.val() == '') {
-          alert('자격증번호를 입력해주세요.');
-          engineer_regnum.focus();
-          return false;
-      }
-      const engineer_regdate = $('#engineer_regdate');
-      if (engineer_regdate.val() == '') {
-          alert('취득일을 입력해주세요.');
-          engineer_regdate.focus();
-      }
-      $('#join_addForm_engineer').submit();
-  }
+		function join_addCheck_engineer() {
+			const engineer_regnum = $('#engineer_regnum');
+			if (engineer_regnum.val() == '') {
+				alert('자격증번호를 입력해주세요.');
+				engineer_regnum.focus();
+				return false;
+			}
+			const engineer_regdate = $('#engineer_regdate');
+			if (engineer_regdate.val() == '') {
+				alert('취득일을 입력해주세요.');
+				engineer_regdate.focus();
+			}
+			$('#join_addForm_engineer').submit();
+		}
 	</script>
 </head>
 <body>
@@ -128,15 +93,15 @@
 	</div>
 </form>
 
-  <form th:action="@{/user/join_additional_engineer}" method="post" id="join_addForm_engineer" style="display: none">
-    <div>
-        <input type="hidden" name="user_id" th:value="${param.user_id}">
-      자격증번호 <input type="text" name="engineer_regnum" id="engineer_regnum" onblur="engineer_regnum_check()">
-        <span id="engineer_regnum_check"></span><br>
-        <input type="hidden" id="engineer_regnum_val" value="0">
-      취득일 <input type="text" name="engineer_regdate" id="engineer_regdate"><br>
-      <input type="button" value="인증요청" id="join_addBtn2" onclick="join_addCheck_engineer()">
-    </div>
-  </form>
+<form th:action="@{/user/join_additional_engineer}" method="post" id="join_addForm_engineer" style="display: none">
+	<div>
+		<input type="hidden" name="user_id" th:value="${param.user_id}">
+		자격증번호 <input type="text" name="engineer_regnum" id="engineer_regnum" onblur="engineer_regnum_check()">
+		<span id="engineer_regnum_check"></span><br>
+		<input type="hidden" id="engineer_regnum_val" value="0">
+		취득일 <input type="text" name="engineer_regdate" id="engineer_regdate"><br>
+		<input type="button" value="인증요청" id="join_addBtn2" onclick="join_addCheck_engineer()">
+	</div>
+</form>
 </body>
 </html>
