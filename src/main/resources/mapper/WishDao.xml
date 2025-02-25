@@ -14,48 +14,23 @@
         WHERE W.USER_ID = #{user_id};
     </select>
 
-    <select id="detail" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT * FROM WISH WHERE WISH_NUMBER = #{wish_number};
-
-    </select>
-
-    <select id="category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
-        SELECT SC.CATEGORY_NUMBER,M.MAJOR_TEXT,SC.CATEGORY_PARENT
-        FROM MAJOR_CATEGORY_CONTENT M
-                 JOIN(
-            SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, S.CATEGORY_NUMBER
-            FROM CATEGORY C
-                     JOIN SUB_CATEGORY S
-                          ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER) SC
-                     ON M.CATEGORY_NUMBER = SC.CATEGORY_PARENT
-                         AND M.WISH_NUMBER = SC.WISH_NUMBER WHERE M.WISH_NUMBER=#{wish_number}
-    </select>
-
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT * FROM WISH
         WHERE WISH_NUMBER = #{wish_number}
     </select>
 
     <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
-        SELECT
-            c.wish_number,
-            c.category_number,
-            c.category_parent,
-            mc.major_text
-        FROM major_category_content mc
+        SELECT C.WISH_NUMBER, C.CATEGORY_NUMBER, C.CATEGORY_PARENT, MC.MAJOR_TEXT
+        FROM MAJOR_CATEGORY_CONTENT MC
         JOIN(
-            SELECT
-                c.category_number,
-                c.category_parent,
-                s.wish_number
-            FROM category c
-            JOIN sub_category s
-            ON c.category_number = s.category_number) c
-        ON c.category_parent = mc.category_number
-        AND c.wish_number = mc.wish_number
-        WHERE mc.wish_number=#{wish_number}
+            SELECT C.CATEORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
+            FROM CATEGORY C
+            JOIN SUB_CATEGORY S
+            ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER) C
+        ON C.CATEGORY PARENT = MC.CATEGORY_NUMBER
+        AND C.WISH_NUMBER = MC.WISH_NUMBER
+        WHERE MC.WISH_NUMBER = #{wish_number}
     </select>
-
 
     <!--글쓰기!(generateKey) 사용-->
     <!--  wish_number(PK/ 오토인크리먼트) 로 작성하면서 겹치지 않게 지켜줌, 하위 친구들도 동일한 위시넘버로 계속 간다.  -->
@@ -77,21 +52,4 @@
         INSERT INTO SUB_CATEGORY
         VALUES (#{category_number}, #{wish_number})
     </insert>
-
-    <select id="detail" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT * FROM WISH WHERE = #{wish_number}
-    </select>
-
-    <select id="category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
-        SELECT SC.CATEGORY_NUMBER,M.MAJOR_TEXT,SC.CATEGORY_PARENT
-        FROM MAJOR_CATEGORY_CONTENT M
-                 JOIN(
-            SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, S.CATEGORY_NUMBER
-            FROM CATEGORY C
-                     JOIN SUB_CATEGORY S
-                          ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER) SC
-                     ON M.CATEGORY_NUMBER = SC.CATEGORY_PARENT
-                         AND M.WISH_NUMBER = SC.WISH_NUMBER WHERE M.WISH_NUMBER=#{wish_number}
-    </select>
-
 </mapper>
