@@ -21,7 +21,7 @@
 			<!--  위 div는 필수 항목 묶음  -->
 			<div>
 				<div id="type">주거형태</div>
-				<span th:text="${wishDto.wish_type}"></span>
+				<span th:text="${wish_dto.wish_type}"></span>
 				<input type="radio" name="housingtype" id="apartment" checked onClick="return false;">아파트
 				<input type="radio" name="housingtype" id="house" onClick="return false;">단독주택
 				<input type="radio" name="housingtype" id="villa" onClick="return false;">빌라
@@ -30,8 +30,8 @@
 			<div>
 				<div>평수</div>
 				<div>
-					<span th:text="${wishDto.wish_size}"></span>
-					<span th:text="${wishDto?.wish_size_text}"></span>
+					<span th:text="${wish_dto.wish_size}"></span>
+					<span th:text="${wish_dto?.wish_size_text}"></span>
 				</div>
 			</div>
 			<br>
