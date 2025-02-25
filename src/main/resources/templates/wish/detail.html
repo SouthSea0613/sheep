@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Wish Detail</title>
+    <meta charset="UTF-8">
+    <title>Wish Detail</title>
 </head>
 <style>
     ul {
@@ -12,9 +12,10 @@
 <body>
 <h2>위시 디테일</h2>
 <div>
-	<!--header-->
+    <!--header-->
 </div>
 <div>
+<<<<<<< HEAD
 	<!--  위 div는 전체 묶음  -->
 	<form action="/wish/detail" method="get">
 		<div th:text="${wish_dto?.wish_type}">주거형태</div>
@@ -32,6 +33,49 @@
 </div>
 <div>
 	<!--   footer   -->
+=======
+    <!--  위 div는 전체 묶음  -->
+    <form action="/wish/detail" method="get">
+        <div>
+            <!--  위 div는 필수 항목 묶음  -->
+            <div>
+                <div id="type">주거형태</div>
+                <span th:text="${wish_dto?.wish_type}"></span>
+            </div>
+            <br>
+            <div>
+                <div>주소</div>
+                <div th:text="${wish_dto?.wish_addr}"></div>
+            </div>
+            <div>
+                <div>평수</div>
+                <div>
+                    <span th:text="${wishDto?.wish_size}"></span>
+                    <span th:text="${wishDto?.wish_size_text}"></span>
+                </div>
+            </div>
+            <br>
+            <div>
+                <div>예산</div>
+                <div>
+                    <span th:text="${wish_dto?.wish_money}"></span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <th:block th:each="category:${category_list_dto}">
+
+            <div th:text="${category.major_category}">대분류 넘버</div>
+
+            <div th:text="${category.major_text}">대분류 텍스트</div>
+
+            <th:block th:each="subcategory:${category_list_dto}">
+                <div th:text="${subcategory.sub_category}">중분류 넘버</div>
+            </th:block>
+
+        </th:block>
+    </form>
+>>>>>>> yoonsic2
 </div>
 </body>
 </html>
