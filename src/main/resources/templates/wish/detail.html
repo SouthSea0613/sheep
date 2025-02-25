@@ -15,19 +15,18 @@
 <div>
     <!--  위 div는 전체 묶음  -->
     <form action="/takeoff/customer/list" method="get">
-        <div>위 내용으로 견적을 받고 싶으시다면 견적받기 버튼을 눌러주세요.</div>
-        <div>*주의* 견적을 넣은 시점부터 수정은 불가능 합니다. 견적이 잘 작성 되었는지 확인해주세요.</div>
-        <br>
-        <input type="button" value="수정하기" onclick="location.href='write.html'">
-        <!--    위시 디테일로 넘어감    -->
-        <br>
-        <br>
-        <input type="submit" value="견적받기">
-        <!--    견적 받기 신청으로 넘어가서 주소 작성함    -->
-        <br>
-        <br>
-        <input type="button" value="목록으로" onclick="location.href='list.html'">
-        <!--    위시 리스트로 넘어감    -->
+        <div th:text="${wish_dto?.wish_type}">주거형태</div>
+        <div th:text="${wish_dto?.wish_size}">평수</div>
+        <div th:text="${wish_dto?.wish_size_text}">평수상세</div>
+        <div th:text="${wish_dto?.wish_money}">예산</div>
+        <th:block th:each="category:${category_list_dto}">
+            <div th:text="${category.major_category}">대분류 넘버</div>
+            <div th:text="${category.major_text}">대분류 텍스트</div>
+            <th:block th:each="subcategory:${category_list_dto}">
+                <div th:text="${subcategory.sub_category}">중분류 넘버</div>
+            </th:block>
+        </th:block>
+
     </form>
 </div>
 <div>

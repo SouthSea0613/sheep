@@ -1,5 +1,6 @@
 package com._401unauthorized.sheep.controller;
 
+import com._401unauthorized.sheep.dto.CategoryListDto;
 import com._401unauthorized.sheep.dto.MajorDto;
 import com._401unauthorized.sheep.dto.SubDto;
 import com._401unauthorized.sheep.dto.WishDto;
@@ -33,6 +34,21 @@ public class WishController{
         return "wish/write";
     }
 
+    @GetMapping("/get_wish_detail")
+    public String get_wish_detail(@RequestParam("wish_number") Integer wish_number, Model model) {
+        if(wish_number == null || wish_number < 1){
+            return "redirect:/wish/list";
+        }
+        WishDto wishDto = wishService.essential(wish_number);
+        List<CategoryListDto> categoryListDto = wishService.category(wish_number);
+        if(wishDto != null) {
+            model.addAttribute("wish", wishDto);
+            model.addAttribute("categoryListDto", categoryListDto);
+            return "wish/detail";
+        } else {
+            return "redirect:/wish/list";
+        }
+    }
     
     @PostMapping("/write")
     //리스폰스바디는 비동기에 사용하는 것.

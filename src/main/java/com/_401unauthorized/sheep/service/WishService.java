@@ -1,9 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.WishDao;
-import com._401unauthorized.sheep.dto.MajorDto;
-import com._401unauthorized.sheep.dto.SubDto;
-import com._401unauthorized.sheep.dto.WishDto;
+import com._401unauthorized.sheep.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -80,10 +78,40 @@ public class WishService {
         return true;
     }
 
-    public WishDto get_wish_detail(Integer wish_number) {
-        if(wishDao.get_wish_detail(wish_number) != null) {
-            return get_wish_detail(wish_number);
+    public List<CategoryListDto> category(Integer wish_number){
+        List<CategoryDto> categoryDto =wishDao.category_detail(wish_number);
+        List<CategoryListDto> categoryListDto = new ArrayList<>();
+
+        for(CategoryDto category : categoryDto){
+            boolean check = false;
+            int tmp = 0;
+            if (!categoryListDto.isEmpty()) {
+                for (int i = 0; i < categoryListDto.size(); i++) {
+                    if (categoryListDto.get(i).getMajor_category().equals(category.getCategory_parent())) {
+                        check = true;
+                        tmp = i;
+                        break;
+                    }
+                }
+            }
+            if (check) {
+                categoryListDto.get(tmp).getSub_category().add(category.getCategory_number());
+            }else{
+                List<String> ttmmpp = new ArrayList<String>();
+                ttmmpp.add(category.getCategory_number());
+
+                CategoryListDto tttmmmppp = new CategoryListDto();
+                tttmmmppp.setMajor_category(category.getCategory_parent());
+                tttmmmppp.setMajor_text(category.getMajor_text());
+                tttmmmppp.setSub_category(ttmmpp);
+
+                categoryListDto.add(tttmmmppp);
+            }
         }
-        return null;
+        return categoryListDto;
+    }
+
+    public WishDto essential(Integer wish_number) {
+        return wishDao.detail(wish_number);
     }
 }

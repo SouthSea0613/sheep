@@ -36,4 +36,20 @@
         VALUES (#{category_number}, #{wish_number})
     </insert>
 
+    <select id="detail" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT * FROM WISH WHERE = #{wish_number}
+    </select>
+
+    <select id="category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
+        SELECT SC.CATEGORY_NUMBER,M.MAJOR_TEXT,SC.CATEGORY_PARENT
+        FROM MAJOR_CATEGORY_CONTENT M
+                 JOIN(
+            SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, S.CATEGORY_NUMBER
+            FROM CATEGORY C
+                     JOIN SUB_CATEGORY S
+                          ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER) SC
+                     ON M.CATEGORY_NUMBER = SC.CATEGORY_PARENT
+                         AND M.WISH_NUMBER = SC.WISH_NUMBER WHERE M.WISH_NUMBER=#{wish_number}
+    </select>
+
 </mapper>
