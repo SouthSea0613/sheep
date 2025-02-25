@@ -21,22 +21,14 @@
             <!--  위 div는 필수 항목 묶음  -->
             <div>
                 <div id="type">주거형태</div>
-                <input type="radio" name="housingtype" id="apartment" checked onClick="return false;">아파트
-                <input type="radio" name="housingtype" id="house" onClick="return false;">단독주택
-                <input type="radio" name="housingtype" id="villa" onClick="return false;">빌라
+                <p th:text="${wishDto.wish_type}"></p>
             </div>
             <br>
             <div>
                 <div>평수</div>
                 <div>
-                    <input type="radio" name="housingsize" id="10" onClick="return false;">10평 대
-                    <input type="radio" name="housingsize" id="20" onClick="return false;">20평 대
-                    <input type="radio" name="housingsize" id="30" checked onClick="return false;">30평 대
-                    <input type="radio" name="housingsize" id="40" onClick="return false;">40평 대
-                    <input type="radio" name="housingsize" id="50" onClick="return false;">50평 이상
-                    <div>
-                        <input type="text" name="" id="size_text" placeholder="참고" value="38평" readonly>
-                    </div>
+                    <span th:text="${wishDto.wish_size}"></span>
+                    <span th:text="${wishDto?.wish_size_text}"></span>
                 </div>
             </div>
             <br>
@@ -47,9 +39,7 @@
         <!-- 아래부터 선택 사항 -->
         <div class="remove">
             <div>철거</div>
-            <ul>
-                <li><input type="text" name="remove" id="remove_text" placeholder="상세설명을 작성해주세요." value="철거 상세 작성" readonly></li>
-            </ul>
+
         </div>
         <br>
         <div class=wood>
@@ -209,5 +199,6 @@
 <div>
     <!--   footer   -->
 </div>
+
 </body>
 </html>
