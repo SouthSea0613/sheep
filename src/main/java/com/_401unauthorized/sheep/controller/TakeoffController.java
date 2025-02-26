@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class TakeoffController {
     private final TakeoffService takeoffService;
 
-    @PostMapping("/call")
+    @GetMapping("/call")
     public String call(@RequestParam("wish_number") Integer wish_number, HttpSession httpSession, Model model) {
         log.info("살려줘");
         ApplyDto applydto = new ApplyDto();

@@ -3,13 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         function wish_write() {
             location.href= "/wish/write"
         }
         function takeoff() {
-            const callform= document.getElementById('call_form');
-            callform.submit();
+            const call_form= $('#call_form');
+            // console.log(call_form);
+            // console.log(call_form.method);
+            console.log(call_form.attr("action"));
+            axios.get(call_form.attr("action"))
+                .then(res => {
+                    console.log(res.status);
+                    if(res.status === 200) {
+                      alert("성공이요");
+                    }else{
+                      alert("실패");
+                    }
+                })
+
+
+            // callform.submit();
         }
     </script>
 </head>
