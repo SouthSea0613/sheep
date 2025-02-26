@@ -5,21 +5,13 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<<<<<<< HEAD
     <script th:inline="javascript">
-
-=======
-    <script>
->>>>>>> jieun
         function wish_write() {
             location.href = "/wish/write"
         }
 
         function takeoff() {
-<<<<<<< HEAD
-            // const callform = document.getElementById('call_form');
-            // callform.submit();
-            const wishnumber = document.querySelectorAll('.wish_number')
+            const wishnumber = document.querySelectorAll('.wish_number');
 
             console.log(wishnumber)
             axios.post('/takeoff/call',{
@@ -34,33 +26,8 @@
                     alert("견적 요청이 실패되었습니다");
                     location.href="/wish/list";
                 }
-            })
-=======
-            const call_form= $('#call_form');
-            // console.log(call_form);
-            // console.log(call_form.method);
-            console.log(call_form.attr("action"));
-            axios.get(call_form.attr("action"))
-                .then(res => {
-                    console.log(res.status);
-                    if(res.status === 200) {
-                      alert("성공이요");
-                    }else{
-                      alert("실패");
-                    }
-                })
-
-
-            // callform.submit();
->>>>>>> jieun
+            });
         }
-
-        //
-        // const msg = [[${param.msg}]]
-        // if(msg!=null && msg!==""){
-        //     alert(msg);
-        // }
-        // alert(msg);
     </script>
     <link rel="stylesheet" href="/css/index.css">
 </head>
@@ -81,17 +48,8 @@
             </div>
             <div th:if="${wish?.apply_status}" th:text="${wish?.apply_status}">상태값</div>
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-<<<<<<< HEAD
-<!--                <form id="call_form" method="post" action="/takeoff/call">-->
                     <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
                     <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
-<!--                </form>-->
-=======
-
-                <form id="call_form" method="post" th:action="@{/takeoff/call(wish_number=${wish.wish_number})}">
-                    <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
-                </form>
->>>>>>> jieun
             </div>
         </th:block>
     </th:block>

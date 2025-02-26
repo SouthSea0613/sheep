@@ -1,52 +1,49 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Wish Write</title>
-    <style>
+	<meta charset="UTF-8">
+	<title>Wish Write</title>
+	<style>
         ul {
             display: none;
             list-style-type: none;
         }
-    </style>
-    <script src="/javascript/write.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        window.onload = () => {
-            function toggleUl() {
-                let checkbox = document.querySelectorAll('input[class="major_category_number"]');
-                let listul = document.querySelectorAll("ul")
-                for (let i = 0; i < checkbox.length; i++) {
-                    if (checkbox[i].checked) {
-                        listul[i].style.display = 'block';
-                    } else {
-                        listul[i].style.display = 'none';
-                        listul[i].querySelectorAll('input[type="checkbox"]').forEach(function (innerCheckbox) {
-                            innerCheckbox.checked = false;
-                        });
-                        listul[i].querySelectorAll('input[type="text"]').forEach(function (textBox) {
-                            textBox.value = '';
-                        });
-                    }
-                }
-            }
-            document.querySelectorAll('input[class="major_category_number"]').forEach(function (checkbox) {
-                checkbox.addEventListener('change', function () {
-                    toggleUl(this);
-                });
-            });
-        }
-    </script>
+	</style>
+	<script src="/javascript/write.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script>
+		window.onload = () => {
+			function toggleUl() {
+				let checkbox = document.querySelectorAll('input[class="major_category_number"]');
+				let listul = document.querySelectorAll("ul")
+				for (let i = 0; i < checkbox.length; i++) {
+					if (checkbox[i].checked) {
+						listul[i].style.display = 'block';
+					} else {
+						listul[i].style.display = 'none';
+						listul[i].querySelectorAll('input[type="checkbox"]').forEach(function (innerCheckbox) {
+							innerCheckbox.checked = false;
+						});
+						listul[i].querySelectorAll('input[type="text"]').forEach(function (textBox) {
+							textBox.value = '';
+						});
+					}
+				}
+			}
+
+			document.querySelectorAll('input[class="major_category_number"]').forEach(function (checkbox) {
+				checkbox.addEventListener('change', function () {
+					toggleUl(this);
+				});
+			});
+		}
+	</script>
 </head>
 <body>
-<<<<<<< HEAD
-=======
-<!--헤더-->
->>>>>>> jieun
 <h2>위시작성</h2>
 <div>
-    <!--   header   -->
+	<!--   header   -->
 </div>
 <div>
 	<!--  위 div는 전체 묶음  -->
@@ -264,28 +261,28 @@
 	</form>
 </div>
 <div>
-    <!--   footer   -->
+	<!--   footer   -->
 </div>
 <script>
-    function clickbtn() {
-        const title_input = $('.title_class');
-        const wish_type = $('.wish_type');
-        const wish_size = $('.wish_size');
-        const money = $('#money')
-        if (title_input.val() === '') {
-            alert("제목을 입력해주세요")
-            title_input.focus();
-        } else if (!wish_type.is(":checked")) {
-            alert("주거형태를 선택해주세요")
-        } else if (!wish_size.is(":checked")) {
-            alert("평수를 선택해주세요")
-        } else if (money.val() === '') {
-            alert("예산을 적어주세요")
-            money.focus();
-        } else {
-            $('#write_form').submit();
-        }
-    }
+	function clickbtn() {
+		const title_input = $('.title_class');
+		const wish_type = $('.wish_type');
+		const wish_size = $('.wish_size');
+		const money = $('#money')
+		if (title_input.val() === '') {
+			alert("제목을 입력해주세요")
+			title_input.focus();
+		} else if (!wish_type.is(":checked")) {
+			alert("주거형태를 선택해주세요")
+		} else if (!wish_size.is(":checked")) {
+			alert("평수를 선택해주세요")
+		} else if (money.val() === '') {
+			alert("예산을 적어주세요")
+			money.focus();
+		} else {
+			$('#write_form').submit();
+		}
+	}
 </script>
 </body>
 </html>
