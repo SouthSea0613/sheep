@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="./css/index.css">
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>seller.list.html</h2>
 <div>
-    <th:block th:if="${lists.isEmpty(seller_takeoff_list)}">
-        <a th:href="@{takeoff/seller/location_insert}"></a>
-    </th:block>
+	<th:block th:if="${lists.isEmpty(seller_takeoff_list)}">
+		<a th:href="@{takeoff/seller/location_insert}"></a>
+	</th:block>
 </div>
 <div>
-    <th:block th:unless="${lists.isEmpty(seller_takeoff_list)}">
-        <th:block th:each="takeoff_list : ${wishdtolist}">
+	<th:block th:unless="${lists.isEmpty(seller_takeoff_list)}">
+		<th:block th:each="takeoff_list : ${wishdtolist}">
 
-            <div th:text="${takeoff_list.user_name} + '고객님'"></div>
-            <div th:text="'연락처: ' + ${takeoff_list.user_phone}"></div>
-            <div th:text="'시공주소: ' + ${takeoff_list.wish_addr}"></div>
-            <div th:text="시공분야"></div>
+			<div th:text="${takeoff_list.user_name} + '고객님'"></div>
+			<div th:text="'연락처: ' + ${takeoff_list.user_phone}"></div>
+			<div th:text="'시공주소: ' + ${takeoff_list.wish_addr}"></div>
+			<div th:text="시공분야"></div>
 
-                <th:block th:each="takeoff_category : ${takeoff_list.major_category_content_list}">
-                    <div th:text="takeoff_category.category_number"></div>
-                </th:block>
+			<th:block th:each="takeoff_category : ${takeoff_list.major_category_content_list}">
+				<div th:text="takeoff_category.category_number"></div>
+			</th:block>
 
-        </th:block>
-    </th:block>
+		</th:block>
+	</th:block>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>

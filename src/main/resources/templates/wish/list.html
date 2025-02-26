@@ -3,13 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script th:inline="javascript">
         function wish_write() {
-            location.href= "/wish/write"
+            location.href = "/wish/write"
         }
+
         function takeoff() {
+            const wishnumber = document.querySelectorAll('.wish_number');
+
+            console.log(wishnumber)
+            axios.post('/takeoff/call',{
+                user_id: '[[${session.user_id}]]',
+                wish_number: wishnumber,
+                apply_status: "0",
+            }).then((res)=>{
+                if(res){
+                    alert("견적 요청이 완료되었습니다")
+                    location.href="/wish/list";
+                }else{
+                    alert("견적 요청이 실패되었습니다");
+                    location.href="/wish/list";
+                }
+            });
         }
     </script>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
@@ -28,7 +48,8 @@
             </div>
             <div th:if="${wish?.apply_status}" th:text="${wish?.apply_status}">상태값</div>
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-                <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
+                    <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                    <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
             </div>
         </th:block>
     </th:block>
