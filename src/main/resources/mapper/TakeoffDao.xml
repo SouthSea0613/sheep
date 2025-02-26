@@ -4,4 +4,20 @@
     <insert id="call">
         insert into apply_status values(#{user_id},#{wish_number},#{apply_status})
     </insert>
+<<<<<<< HEAD
+=======
+
+    <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
+        SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+        FROM MAJOR_CATEGORY_CONTENT MC
+                 LEFT JOIN(
+            SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
+            FROM CATEGORY C
+                     JOIN SUB_CATEGORY S
+                          ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER) C
+                          ON C.CATEGORY_PARENT = MC.CATEGORY_NUMBER
+                              AND C.WISH_NUMBER = MC.WISH_NUMBER
+        WHERE MC.WISH_NUMBER = #{wish_number}
+    </select>
+>>>>>>> jieun
 </mapper>

@@ -202,7 +202,7 @@ public class WishService {
                             major.getSub_category().set(i, "현관방화문");
                             break;
                         case "21":
-                            major.getSub_category().set(i, "중문");
+                            major.getSub_category().set(i, "중문필름");
                             break;
                         case "22":
                             major.getSub_category().set(i, "천장몰딩");
