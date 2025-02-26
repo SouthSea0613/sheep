@@ -18,6 +18,7 @@ public class TakeoffController {
     private final TakeoffService takeoffService;
 
     @PostMapping("/call")
+    @ResponseBody
     public boolean call(@RequestBody ApplyDto applydto, HttpSession httpSession, RedirectAttributes rttr, Model model) {
         log.info("살려줘");
         log.info(String.valueOf(applydto));
@@ -29,5 +30,9 @@ public class TakeoffController {
             log.info("컨트롤러 false");
             return false;
         }
+    }
+    @GetMapping("/seller/list")
+    public String seller(){
+        return "/takeoff/seller/list";
     }
 }

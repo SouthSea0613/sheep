@@ -13,6 +13,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class ApplyDto {
     String user_id;
-    String apply_status;
     String wish_number;
+    String apply_status;
 }
