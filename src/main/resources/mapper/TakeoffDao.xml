@@ -4,9 +4,4 @@
     <insert id="call">
         insert into apply_status values(#{user_id},#{wish_number},#{apply_status})
     </insert>
-
-    <insert id="call">
-        INSERT INTO APPLY_STATUS VALUES(#{user_id},#{wish_number},#{apply_status})
-    </insert>
-
 </mapper>
