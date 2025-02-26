@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 public class TakeoffService {
     private final TakeoffDao takeoffDao;
 
+<<<<<<< HEAD
     public boolean call(ApplyDto applyDto) {
       boolean result = takeoffDao.call(applyDto);
         if(result){
@@ -22,5 +23,9 @@ public class TakeoffService {
             return false;
         }
 
+=======
+    public void call(ApplyDto applyDto) {
+        takeoffDao.call(applyDto);
+>>>>>>> jieun
     }
 }
