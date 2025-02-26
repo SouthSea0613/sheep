@@ -131,4 +131,11 @@ public class WishController{
             return "redirect:/wish/list";
         }
     }
+
+    @GetMapping("/update")
+    public String update(@RequestParam("wish_number") Integer wish_number, Model model) {
+        model.addAttribute("wish_dto", wishService.essential(wish_number));
+        model.addAttribute("category_list_dto", wishService.category(wish_number));
+        return "wish/write";
+    }
 }
