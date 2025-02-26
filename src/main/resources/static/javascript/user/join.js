@@ -8,11 +8,11 @@ function id_check() {
 				$('#id_check').text('사용 가능한 아이디 입니다.');
 				$('#id_check_val').val(1);
 			} else {
-				$('#id_check').text('이미 사용중인 아이디 입니다.')
+				$('#id_check').text('이미 사용중인 아이디 입니다.');
 				$('#id_check_val').val(0);
 			}
 		})
-		.catch(err => {
+		.catch(() => {
 			$('#id_check').text('');
 			$('#id_check_val').val(0);
 		});
@@ -38,7 +38,7 @@ function email_assemble() {
 	let user_email = $('#user_email');
 	let user_email_id = $('#user_email_id');
 	let user_email_detail = $('#user_email_detail');
-	let email_input = $('#email_input')
+	let email_input = $('#email_input');
 
 	if (user_email_detail.val() === 'other') {
 		user_email.val(user_email_id.val() + '@' + email_input.val());
