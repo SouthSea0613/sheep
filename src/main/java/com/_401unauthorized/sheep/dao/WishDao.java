@@ -13,4 +13,6 @@ public interface WishDao {
     boolean insert_sub(SubDto subDto);
     WishDto get_wish_detail(int wish_number);
     List<CategoryDto> get_category_detail(int wish_number);
+
+    int get_apply_count(int wishNumber);
 }
