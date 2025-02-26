@@ -15,8 +15,10 @@ public class TakeoffService {
     public boolean call(ApplyDto applyDto) {
       boolean result = takeoffDao.call(applyDto);
         if(result){
+            log.info("서비스 true");
             return true;
         }else{
+            log.info("서비스 false");
             return false;
         }
 
