@@ -37,11 +37,11 @@ public class TakeoffController {
             return false;
         }
     }
-<<<<<<< HEAD
+
     @GetMapping("/seller/list")
-    public String seller(){
+    public String seller() {
         return "/takeoff/seller/list";
-=======
+    }
 
     @GetMapping("/detail")
     public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
@@ -57,6 +57,5 @@ public class TakeoffController {
         } else {
             return "redirect:/list";
         }
->>>>>>> jieun
     }
 }
