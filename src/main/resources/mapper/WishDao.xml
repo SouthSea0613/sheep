@@ -56,4 +56,11 @@
         INSERT INTO SUB_CATEGORY
         VALUES (#{category_number}, #{wish_number})
     </insert>
+    <!-- 삭제 요청 -->
+    <delete id="delete_wish">
+        DELETE FROM WISH
+    </delete>
+    <delete id="delete_major_category">
+
+    </delete>
 </mapper>

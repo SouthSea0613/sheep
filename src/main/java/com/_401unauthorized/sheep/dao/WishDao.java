@@ -15,4 +15,8 @@ public interface WishDao {
     List<CategoryDto> get_category_detail(int wish_number);
 
     int get_apply_count(int wishNumber);
+
+    boolean delete_wish(Integer wish_number);
+
+    boolean delete_major_category(Integer wishNumber);
 }

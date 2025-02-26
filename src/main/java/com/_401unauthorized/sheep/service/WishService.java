@@ -279,4 +279,18 @@ public class WishService {
         }
         return categoryListDto;
     }
+
+    @Transactional
+    public boolean delete_wish(Integer wish_number) {
+        if (wishDao.delete_wish(wish_number)) {
+            return true;
+        }
+        if (wishDao.delete_major_category(wish_number)){
+            return true;
+        }
+        if (wishDao.delete_sub_category(wish_number)) {
+            return true;
+        }
+        return false;
+    }
 }

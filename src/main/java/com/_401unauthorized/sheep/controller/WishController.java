@@ -138,4 +138,17 @@ public class WishController{
         model.addAttribute("category_list_dto", wishService.category(wish_number));
         return "wish/write";
     }
+    @PostMapping("/delete")
+    public String delete(@RequestParam("wish_number") Integer wish_number, Model model) {
+        log.info("delete wish number: " + wish_number);
+        if(wish_number == null || wish_number < 1) {
+            return "redirect:/wish/list";
+        }
+        if(wishService.delete_wish(wish_number)) {
+            return "redirect:/wish/list";
+        }else{
+            return "redirect:/wish/detail";
+        }
+
+    }
 }

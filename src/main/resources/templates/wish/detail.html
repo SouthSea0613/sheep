@@ -30,8 +30,11 @@
                 <div th:text="${subcategory}">중분류 넘버</div>
             </th:block>
         </th:block>
-        <div>
+        <div th:if="${wish_dto?.apply_status!=null}" class="takeoffarea">
+            <input type="hidden" th:value="${wish_dto?.wish_number}" class="wish_number" name="wish_number">
+            <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
+            <input type="button" onclick="location.href='/wish/delete'" value="삭제하기">
             <input type="submit" value="위시 수정">
         </div>
     </form>
@@ -40,6 +43,25 @@
     <!--   footer   -->
 </div>
 <script th:inline="javascript">
+    function deletewish(){
+
+    }
+    function takeoff(btn) {
+        const wishnumber = btn.previousElementSibling.value
+        axios.post('/takeoff/call',{
+            user_id: [[${session.user_id}]],
+            wish_number: wishnumber,
+            apply_status: "0",
+        }).then((res)=>{
+            if(res){
+                alert("견적 요청이 완료되었습니다")
+                location.href="/wish/list";
+            }else{
+                alert("견적 요청이 실패되었습니다");
+                location.href="/wish/list";
+            }
+        });
+    }
 </script>
 </body>
 </html>
