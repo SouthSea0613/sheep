@@ -40,6 +40,16 @@
         function selecttakeoff(){
             axios.post('')
         }
+        function takeofflist(){
+            axios.get('/takeoff/list',{
+
+            }).then((res)=>{
+                if(res){
+
+                }
+            })
+        }
+
     </script>
 </head>
 <body>
@@ -55,6 +65,7 @@
     <th:block th:unless="${#lists.isEmpty(wish_list)}">
         <th:block th:each="wish:${wish_list}">
             <div>
+
                 <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
             </div>
             <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}">상태값</div>
@@ -62,6 +73,14 @@
                     <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
                     <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             </div>
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(takeoff_list)}">
+            <th:block th:each="takeoff:${takeoff_list}">
+                <input type="button" value="버튼" onclick="takeofflist()">
+                <div class="">
+                    <div th:text="${takeoff}"></div>
+                </div>
+            </th:block>
         </th:block>
     </th:block>
     <div class="wishBarea">
