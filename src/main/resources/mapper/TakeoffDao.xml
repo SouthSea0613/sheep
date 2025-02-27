@@ -19,6 +19,6 @@
         WHERE MC.WISH_NUMBER = #{wish_number}
     </select>
     <select id="list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
-        SELECT DISTINCT USER_ID FROM WISH_CATEGORY_SELLER WHERE WISH_NUMBER=#{wishNumber}
+        SELECT USER_ID,SUM(WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE FROM WISH_CATEGORY_SELLER WHERE WISH_NUMBER=#{wishNumber} GROUP BY USER_ID
     </select>
 </mapper>
