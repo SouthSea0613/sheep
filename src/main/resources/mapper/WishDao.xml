@@ -57,10 +57,13 @@
         VALUES (#{category_number}, #{wish_number})
     </insert>
     <!-- 삭제 요청 -->
-    <delete id="delete_wish">
-        DELETE FROM WISH
+    <delete id="delete_sub_category">
+        DELETE FROM SUB_CATEGORY WHERE = #{wish_number}
     </delete>
     <delete id="delete_major_category">
-
+        DELETE FROM MAJOR_CATEGORY_CONTENT WHERE = #{wish_number}
+    </delete>
+    <delete id="delete_wish">
+        DELETE FROM WISH WHERE = #{wish_number}
     </delete>
 </mapper>

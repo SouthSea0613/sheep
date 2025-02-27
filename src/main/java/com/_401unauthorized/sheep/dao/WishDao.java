@@ -19,4 +19,6 @@ public interface WishDao {
     boolean delete_wish(Integer wish_number);
 
     boolean delete_major_category(Integer wishNumber);
+
+    boolean delete_sub_category(Integer wishNumber);
 }
