@@ -22,10 +22,10 @@ public class WishService {
             if (wish.getApply_status() != null) {
                 switch (wish.getApply_status()) {
                     case "0":
-                        if(wishDao.get_apply_count(wish.getWish_number())>1){
-                            wish.setApply_status("진행중");
-                        }
-                        wish.setApply_status("대기중");
+//                        if(wishDao.get_apply_count(wish.getWish_number())){
+//                            wish.setApply_status("진행중");
+//                        }
+                        wish.setApply_status("진행중");
                         break;
 
                     case "1":

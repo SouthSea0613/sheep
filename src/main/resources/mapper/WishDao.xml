@@ -32,7 +32,7 @@
         AND C.WISH_NUMBER = MC.WISH_NUMBER
         WHERE MC.WISH_NUMBER = #{wish_number}
     </select>
-    <select id="get_apply_count" resultType="java.lang.Integer">
+    <select id="get_apply_count" resultType="java.lang.Boolean">
         SELECT COUNT(*) FROM APPLY_STATUS WHERE WISH_NUMBER = #{wishNumber}
     </select>
 

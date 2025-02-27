@@ -14,5 +14,5 @@ public interface WishDao {
     WishDto get_wish_detail(int wish_number);
     List<CategoryDto> get_category_detail(int wish_number);
 
-    int get_apply_count(int wishNumber);
+    boolean get_apply_count(int wishNumber);
 }
