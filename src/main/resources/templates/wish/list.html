@@ -41,21 +41,38 @@
             axios.post('')
         }
         function takeofflist(btn){
+            const takeofflist = document.querySelector('.takeoff_list');
+            const openbtn = document.getElementById('openbtn');
+            const closebtn = document.getElementById('closebtn');
 
-            const wishnumber = btn.previousElementSibling.value
-            console.log(wishnumber);
-            axios.post('/takeoff/list',{
-                wish_number: wishnumber
-            }).then((res)=>{
-                console.log(res);
-                if(res!=null){
-                    const takeofflist = document.querySelector('.takeoff_list');
-                    res.data.forEach(resp=>{
-                        takeofflist.innerHTML=resp.user_id;
+            if (btn===openbtn) {
+                const wishnumber = btn.previousElementSibling.value
+                console.log(wishnumber);
+                axios.post('/takeoff/list', {
+                    wish_number: wishnumber
+                }).then((res) => {
+                    console.log(res);
+
+                    console.log("테스트");
+                    closebtn.style.display = 'block';
+                    btn.style.display = 'none';
+                    res.data.forEach(resp => {
+                        takeofflist.innerHTML += '<div id="takeoffdiv">' + '<span>' + resp.user_id + '</span>';
+                        takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
                     })
-
+                })
+            }
+                if (btn === closebtn) {
+                    console.log("closebtn");
+                    btn.style.display = 'none';
+                    openbtn.style.display='block';
+                    takeofflist.innerHTML="";
                 }
-            })
+
+
+
+
+
         }
 
     </script>
@@ -85,10 +102,14 @@
 
         <div class="">
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
-                <input type="button" value="버튼" onclick="takeofflist(this)">
-                <div class="takeoff_list">
+                <input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">
+                <input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">
+
+            <div class="test">
+            <div class="takeoff_list">
 
                 </div>
+            </div>
         </div>
             ---------------------------------
         </th:block>
