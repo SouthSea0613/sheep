@@ -40,11 +40,19 @@
         function selecttakeoff(){
             axios.post('')
         }
-        function takeofflist(){
-            axios.get('/takeoff/list',{
+        function takeofflist(btn){
 
+            const wishnumber = btn.previousElementSibling.value
+            console.log(wishnumber);
+            axios.post('/takeoff/list',{
+                wish_number: wishnumber
             }).then((res)=>{
-                if(res){
+                console.log(res);
+                if(res!=null){
+                    const takeofflist = document.querySelector('.takeoff_list');
+                    res.data.forEach(resp=>{
+                        takeofflist.innerHTML=resp.user_id;
+                    })
 
                 }
             })
@@ -65,28 +73,29 @@
     <th:block th:unless="${#lists.isEmpty(wish_list)}">
         <th:block th:each="wish:${wish_list}">
             <div>
-
                 <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
             </div>
+
             <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}">상태값</div>
+
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
                     <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
                     <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             </div>
-        </th:block>
-        <th:block th:unless="${#lists.isEmpty(takeoff_list)}">
-            <th:block th:each="takeoff:${takeoff_list}">
-                <input type="button" value="버튼" onclick="takeofflist()">
-                <div class="">
-                    <div th:text="${takeoff}"></div>
+
+        <div class="">
+                <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
+                <input type="button" value="버튼" onclick="takeofflist(this)">
+                <div class="takeoff_list">
+
                 </div>
-            </th:block>
+        </div>
+            ---------------------------------
         </th:block>
-    </th:block>
     <div class="wishBarea">
         <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
     </div>
-
+    </th:block>
 </div>
 </body>
 </html>

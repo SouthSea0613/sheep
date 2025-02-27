@@ -2,6 +2,7 @@ package com._401unauthorized.sheep.controller;
 
 import com._401unauthorized.sheep.dto.ApplyDto;
 import com._401unauthorized.sheep.dto.CategoryListDto;
+import com._401unauthorized.sheep.dto.TakeoffDto;
 import com._401unauthorized.sheep.dto.WishDto;
 import com._401unauthorized.sheep.service.TakeoffService;
 import com._401unauthorized.sheep.service.WishService;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -57,5 +59,13 @@ public class TakeoffController {
         } else {
             return "redirect:/list";
         }
+    }
+    @PostMapping("/list")
+    @ResponseBody
+    public List<TakeoffDto> list(@RequestBody TakeoffDto takeoffDto){
+        log.info("컨트롤러 테스트");
+        List<TakeoffDto> takeoffdtolist = takeoffService.list(takeoffDto.getWish_number());
+        log.info(takeoffdtolist+"테스트");
+        return takeoffdtolist;
     }
 }

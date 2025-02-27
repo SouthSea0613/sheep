@@ -4,6 +4,7 @@ import com._401unauthorized.sheep.dao.TakeoffDao;
 import com._401unauthorized.sheep.dto.ApplyDto;
 import com._401unauthorized.sheep.dto.CategoryDto;
 import com._401unauthorized.sheep.dto.CategoryListDto;
+import com._401unauthorized.sheep.dto.TakeoffDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -32,5 +33,9 @@ public class TakeoffService {
         List<CategoryDto> categoryDto = takeoffDao.get_category_detail(wish_number);
         List<CategoryListDto> categoryListDto = new ArrayList<>();
         return categoryListDto;
+    }
+
+    public List<TakeoffDto> list(Integer wishNumber) {
+        return takeoffDao.list(wishNumber);
     }
 }
