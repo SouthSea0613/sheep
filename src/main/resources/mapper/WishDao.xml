@@ -35,6 +35,9 @@
     <select id="get_apply_count" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM APPLY_STATUS WHERE WISH_NUMBER = #{wishNumber}
     </select>
+    <select id="check_sub_category" resultType="java.lang.Boolean">
+        SELECT COUNT(*) FROM SUB_CATEGORY WHERE WISH_NUMBER = #{wishNumber}
+    </select>
 
     <!--글쓰기!(generateKey) 사용-->
     <!--  wish_number(PK/ 오토인크리먼트) 로 작성하면서 겹치지 않게 지켜줌, 하위 친구들도 동일한 위시넘버로 계속 간다.  -->
@@ -58,12 +61,12 @@
     </insert>
     <!-- 삭제 요청 -->
     <delete id="delete_sub_category">
-        DELETE FROM SUB_CATEGORY WHERE = #{wish_number}
+        DELETE FROM SUB_CATEGORY WHERE WISH_NUMBER = #{wish_number}
     </delete>
     <delete id="delete_major_category">
-        DELETE FROM MAJOR_CATEGORY_CONTENT WHERE = #{wish_number}
+        DELETE FROM MAJOR_CATEGORY_CONTENT WHERE WISH_NUMBER = #{wish_number}
     </delete>
     <delete id="delete_wish">
-        DELETE FROM WISH WHERE = #{wish_number}
+        DELETE FROM WISH WHERE WISH_NUMBER = #{wish_number}
     </delete>
 </mapper>

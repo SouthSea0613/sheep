@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/wish")
 @Controller
-public class WishController{
+public class WishController {
     private final WishService wishService;
 
     @GetMapping("/list")
@@ -31,18 +31,18 @@ public class WishController{
     }
 
     @GetMapping("/write")
-    public String write(){
+    public String write() {
         return "wish/write";
     }
 
     @GetMapping("/get_wish_detail")
     public String get_wish_detail(@RequestParam("wish_number") Integer wish_number, Model model) {
-        if(wish_number == null || wish_number < 1){
+        if (wish_number == null || wish_number < 1) {
             return "redirect:/wish/list";
         }
         WishDto wishDto = wishService.essential(wish_number);
         List<CategoryListDto> categoryListDto = wishService.category(wish_number);
-        if(wishDto != null) {
+        if (wishDto != null) {
             model.addAttribute("wish", wishDto);
             model.addAttribute("categoryListDto", categoryListDto);
             return "wish/detail";
@@ -50,7 +50,7 @@ public class WishController{
             return "redirect:/wish/list";
         }
     }
-    
+
     @PostMapping("/write")
     //리스폰스바디는 비동기에 사용하는 것.
     //html상에서 폼으로 넘겨준 같은 name속성의 category_number들을 category_number의 리스트들안에 차례로 RequestParam으로 받아온다.
@@ -73,7 +73,7 @@ public class WishController{
 
         for (int i = 0; i < category_number.size(); i++) {
 
-            if (category_number.get(i)<16) {
+            if (category_number.get(i) < 16) {
                 //MajorDto 객체 생성
                 // i가 0번 부터 15번 까지 총 16번 돌거야~
                 //메이져디티오 를 새로선언(초기화)
@@ -116,16 +116,16 @@ public class WishController{
 
     @GetMapping("/detail")
     public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
-        if(wish_number == null || wish_number < 1) {
+        if (wish_number == null || wish_number < 1) {
             return "redirect:/wish/list";
         }
         WishDto wishDto = wishService.essential(wish_number);
         List<CategoryListDto> categoryListDto = wishService.category(wish_number);
         log.info(String.valueOf(wishDto));
         log.info(categoryListDto.toString());
-        if(wishDto != null) {
+        if (wishDto != null) {
             model.addAttribute("wish_dto", wishDto);
-            model.addAttribute("category_list_dto",categoryListDto);
+            model.addAttribute("category_list_dto", categoryListDto);
             return "wish/detail";
         } else {
             return "redirect:/wish/list";
@@ -138,15 +138,17 @@ public class WishController{
         model.addAttribute("category_list_dto", wishService.category(wish_number));
         return "wish/write";
     }
+
     @GetMapping("/delete")
-    public String delete(@RequestParam("wish_number") Integer wish_number, Model model) {
+    public String delete(@RequestParam("wish_number") Integer wish_number) {
         log.info("delete wish number: " + wish_number);
-        if(wish_number == null || wish_number < 1) {
+        if (wish_number == null || wish_number < 1) {
             return "redirect:/wish/list";
         }
-        if(wishService.delete_wish(wish_number)) {
+        if (wishService.delete_wish(wish_number)) {
+            log.info("delete wish number: " + wish_number);
             return "redirect:/wish/list";
-        }else{
+        } else {
             return "redirect:/wish/detail";
         }
     }
