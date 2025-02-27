@@ -6,16 +6,29 @@
         VALUES (#{user_id}, #{wish_number}, #{apply_status})
     </insert>
 
-    <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
-        SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
-        FROM MAJOR_CATEGORY_CONTENT MC
-        LEFT JOIN(
-            SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
-            FROM CATEGORY C
-            JOIN SUB_CATEGORY S
-            ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER) C
-        ON C.CATEGORY_PARENT = MC.CATEGORY_NUMBER
-        AND C.WISH_NUMBER = MC.WISH_NUMBER
-        WHERE MC.WISH_NUMBER = #{wish_number}
+    <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT * FROM WISH
+        WHERE USER_ID = #{user_id}
+          AND WISH_NUMBER = #{wish_number}
     </select>
+
+    <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
+        SELECT SELLER.CATEGORY_NUMBER,
+               WISH.CATEGORY_NUMBER, WISH.MAJOR_TEXT, SELLER.WISH_CATEGORY_SELLER_ANSWER, SELLER.WISH_CATEGORY_SELLER_PRICE
+        FROM WISH_CATEGORY_SELLER AS SELLER
+                 LEFT JOIN
+             (SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+              FROM MAJOR_CATEGORY_CONTENT MC
+                       LEFT JOIN(
+                  SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
+                  FROM CATEGORY C
+                           JOIN SUB_CATEGORY S
+                                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER) C
+                                ON C.CATEGORY_PARENT = MC.CATEGORY_NUMBER
+                                    AND C.WISH_NUMBER = MC.WISH_NUMBER) AS WISH
+             ON WISH.WISH_NUMBER = SELLER.WISH_NUMBER
+                 AND WISH.CATEGORY_PARENT = SELLER.CATEGORY_NUMBER
+        WHERE WISH.WISH_NUMBER = #{wish_number};
+    </select>
+
 </mapper>

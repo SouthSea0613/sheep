@@ -2,6 +2,7 @@ package com._401unauthorized.sheep.controller;
 
 import com._401unauthorized.sheep.dto.ApplyDto;
 import com._401unauthorized.sheep.dto.CategoryListDto;
+import com._401unauthorized.sheep.dto.TakeoffSellerDto;
 import com._401unauthorized.sheep.dto.WishDto;
 import com._401unauthorized.sheep.service.TakeoffService;
 import com._401unauthorized.sheep.service.WishService;
@@ -48,12 +49,12 @@ public class TakeoffController {
         if (wish_number == null || wish_number < 1) {
             return "redirect:/list";
         }
-        WishDto wishDto = wishService.essential(wish_number);
-        List<CategoryListDto> categoryListDtoList = takeoffService.category(wish_number);
-        if (wishDto != null) {
-            model.addAttribute("wishDto", wishDto);
-            model.addAttribute("categoryListDtoList", categoryListDtoList);
-            return "/detail";
+        WishDto takeoffDto = takeoffService.essential(wish_number);
+        List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number);
+        if (takeoffDto != null) {
+            model.addAttribute("takeoffDto", takeoffDto);
+            model.addAttribute("takeoffSellerDto", takeoffSellerDto);
+            return "/takeoff/detail";
         } else {
             return "redirect:/list";
         }

@@ -6,18 +6,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Accessors(chain = true)
-public class CategoryListDto {
+public class TakeoffSellerDto {
     String major_category;
+    String category_number;
     String major_text;
-    List<String> sub_category;
-    String wish_category_seller_answer;
-    int wish_category_seller_price;
+    String apply_status;
+
+
 
 }
