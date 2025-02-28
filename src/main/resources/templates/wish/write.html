@@ -55,10 +55,8 @@
             <div>
                 <div id="title">주소</div>
                 <div>
-                    <input type="text" name="wish_title" class="title_class" th:value="${wish_dto?.wish_title}"
-                           placeholder="제목을 입력해주세요">
-                    <input type="text" name="wish_addr" class="addr_class" th:value="${wish_dto?.wish_addr}"
-                           placeholder="상세주소 입력">
+                    <input type="text" name="wish_title" class="title_class" th:value="${wish_dto?.wish_title}" placeholder="제목을 입력해주세요">
+                    <input type="text" name="wish_addr" class="addr_class" th:value="${wish_dto?.wish_addr}" placeholder="상세주소 입력">
                 </div>
             </div>
             <div>
@@ -79,8 +77,7 @@
                     <input type="radio" class="wish_size" name="wish_size" value="40">40평 대
                     <input type="radio" class="wish_size" name="wish_size" value="50">50평 이상
                     <div>
-                        <input type="text" name="wish_size_text" id="size_text" th:value="${wish_dto?.wish_size_text}"
-                               placeholder="참고">
+                        <input type="text" name="wish_size_text" id="size_text" th:value="${wish_dto?.wish_size_text}" placeholder="참고">
                     </div>
                     <div>
                         <p>평수를 모르신다면 참고란에 적어주세요.</p>
@@ -92,9 +89,7 @@
             <div>
                 <div>예산</div>
                 <div>
-                    <input type="text"
-                           oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                           name="wish_money" id="money" th:value="${wish_dto?.wish_money}" placeholder="예산을 적어주세요.">만원
+                    <input type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" name="wish_money" id="money" th:value="${wish_dto?.wish_money}" placeholder="예산을 적어주세요.">만원
                 </div>
             </div>
             <br>
@@ -117,18 +112,10 @@
         <div class="wood">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="2">목공
                 <ul>
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="17"
-                               id="wood_hot">단열
-                    </li>
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="18"
-                               id="wood_ceiling">천장
-                    </li>
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="19"
-                               id="wood_walls">벽
-                    </li>
-                    <li>
-                        <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
-                    </li>
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="17" id="wood_hot">단열</li>
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="18" id="wood_ceiling">천장</li>
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="19" id="wood_walls">벽</li>
+                    <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
         </div>
@@ -146,9 +133,7 @@
         <div class="elec">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="4">전기
                 <ul>
-                    <li>
-                        <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
-                    </li>
+                    <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
         </div>
@@ -156,9 +141,7 @@
         <div class="light">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="5">조명
                 <ul>
-                    <li>
-                        <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
-                    </li>
+                    <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
         </div>

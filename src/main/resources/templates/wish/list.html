@@ -59,15 +59,14 @@
             </div>
             <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}">상태값</div>
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-                    <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
-                    <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+                <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             </div>
         </th:block>
     </th:block>
     <div class="wishBarea">
         <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
     </div>
-
 </div>
 </body>
 </html>
