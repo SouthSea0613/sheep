@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.TakeoffDao">
     <insert id="call">
-<<<<<<< HEAD
         insert into apply_status values (#{user_id}, #{wish_number}, #{apply_status})
     </insert>
 
@@ -12,10 +11,6 @@
     </insert>
 
     <insert id="status">
-        INSERT INTO APPLY_STATUS
-        VALUES (#{user_id}, #{wish_number}, 0)
-    </insert>
-=======
         INSERT INTO APPLY_STATUS
         VALUES (#{user_id}, #{wish_number}, #{apply_status})
     </insert>
@@ -32,5 +27,4 @@
         AND C.WISH_NUMBER = MC.WISH_NUMBER
         WHERE MC.WISH_NUMBER = #{wish_number}
     </select>
->>>>>>> eunhye
 </mapper>

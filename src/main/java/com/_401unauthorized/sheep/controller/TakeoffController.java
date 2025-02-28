@@ -2,10 +2,7 @@ package com._401unauthorized.sheep.controller;
 
 import com._401unauthorized.sheep.dto.ApplyDto;
 import com._401unauthorized.sheep.dto.CategoryListDto;
-<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.TakeoffSellerDto;
-=======
->>>>>>> eunhye
 import com._401unauthorized.sheep.dto.WishDto;
 import com._401unauthorized.sheep.service.TakeoffService;
 import com._401unauthorized.sheep.service.WishService;
@@ -17,10 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-<<<<<<< HEAD
 import java.util.ArrayList;
-=======
->>>>>>> eunhye
 import java.util.List;
 
 @Slf4j
@@ -46,7 +40,6 @@ public class TakeoffController {
         }
     }
 
-<<<<<<< HEAD
     @GetMapping("seller/write")
     public String write(@RequestParam("wish_number") Integer wish_number, Model model) {
         WishDto wishDto = wishService.essential(wish_number);
@@ -129,11 +122,12 @@ public class TakeoffController {
 
             takeoffsellerdto.add(takeoff_seller_dto);
         }
-        if(takeoffService.write(takeoffsellerdto, user_id, wish_number)){
+        if (takeoffService.write(takeoffsellerdto, user_id, wish_number)) {
             return "redirect:/seller/my_list";
         }
-        return "redirect:/seller/write>wish_number="+wish_number;
-=======
+        return "redirect:/seller/write>wish_number=" + wish_number;
+    }
+
     @GetMapping("/seller/list")
     public String seller() {
         return "/takeoff/seller/list";
@@ -153,7 +147,6 @@ public class TakeoffController {
         } else {
             return "redirect:/list";
         }
->>>>>>> eunhye
     }
 }
 
