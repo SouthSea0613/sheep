@@ -5,17 +5,25 @@
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/css/index.css">
+    <script defer src="/javascript/common.js"></script>
     <script th:inline="javascript">
+        const user = [[${session?.user_id}]];
+        const type = [[${session?.user_type}]];
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+        })
         function wish_write() {
             location.href = "/wish/write"
         }
 
-        function takeoff() {
-            const wishnumber = document.querySelectorAll('.wish_number');
-
-            console.log(wishnumber)
+        function takeoff(btn) {
+            const wishnumber = btn.previousElementSibling.value
             axios.post('/takeoff/call',{
-                user_id: '[[${session.user_id}]]',
+                user_id: [[${session.user_id}]],
                 wish_number: wishnumber,
                 apply_status: "0",
             }).then((res)=>{
@@ -27,9 +35,12 @@
                     location.href="/wish/list";
                 }
             });
+
+        }
+        function selecttakeoff(){
+            axios.post('')
         }
     </script>
-    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
@@ -44,18 +55,19 @@
     <th:block th:unless="${#lists.isEmpty(wish_list)}">
         <th:block th:each="wish:${wish_list}">
             <div>
-                <a th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
+                <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
             </div>
-            <div th:if="${wish?.apply_status}" th:text="${wish?.apply_status}">상태값</div>
+            <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}">상태값</div>
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
                     <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
-                    <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
+                    <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             </div>
         </th:block>
     </th:block>
     <div class="wishBarea">
         <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
     </div>
+
 </div>
 </body>
 </html>

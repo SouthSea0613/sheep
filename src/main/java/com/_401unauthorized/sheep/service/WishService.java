@@ -15,13 +15,17 @@ import java.util.List;
 @Service
 public class WishService {
     private final WishDao wishDao;
-//--------------------------------------------------------------------------------------------
+
+    //--------------------------------------------------------------------------------------------
     public List<WishDto> get_wish_list(String user_id) {
         List<WishDto> wish_list = wishDao.get_wish_list(user_id);
         for (WishDto wish : wish_list) {
             if (wish.getApply_status() != null) {
                 switch (wish.getApply_status()) {
                     case "0":
+                        if (wishDao.get_apply_count(wish.getWish_number()) > 1) {
+                            wish.setApply_status("진행중");
+                        }
                         wish.setApply_status("대기중");
                         break;
 
@@ -48,7 +52,7 @@ public class WishService {
         return wish_list;
     }
 
-//--------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------
     @Transactional
     public boolean write(WishDto wishDto) {
         log.info(wishDto.toString());
@@ -82,26 +86,26 @@ public class WishService {
         return true;
     }
 
-//--------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------
     public WishDto essential(Integer wish_number) {
         WishDto wishDto = wishDao.get_wish_detail(wish_number);
-            if (wishDto.getWish_type() != null) {
-                switch (wishDto.getWish_type()) {
-                    case "1":
-                        wishDto.setWish_type("아파트");
-                        break;
-                    case "2":
-                        wishDto.setWish_type("단독주택");
-                        break;
-                    case "3":
-                        wishDto.setWish_type("빌라");
-                        break;
-                }
+        if (wishDto.getWish_type() != null) {
+            switch (wishDto.getWish_type()) {
+                case "1":
+                    wishDto.setWish_type("아파트");
+                    break;
+                case "2":
+                    wishDto.setWish_type("단독주택");
+                    break;
+                case "3":
+                    wishDto.setWish_type("빌라");
+                    break;
             }
+        }
         return wishDto;
     }
 
-//--------------------------------------------------------------------------------------------
+    //--------------------------------------------------------------------------------------------
     public List<CategoryListDto> category(Integer wish_number) {
         List<CategoryDto> categoryDto = wishDao.get_category_detail(wish_number);
         List<CategoryListDto> categoryListDto = new ArrayList<>();
@@ -120,7 +124,7 @@ public class WishService {
             }
             if (check) {
                 categoryListDto.get(index).getSub_category().add(category.getCategory_number());
-            }else{
+            } else {
                 List<String> categoryList = new ArrayList<>();
                 categoryList.add(category.getCategory_number());
 
@@ -199,7 +203,7 @@ public class WishService {
                             major.getSub_category().set(i, "현관방화문");
                             break;
                         case "21":
-                            major.getSub_category().set(i, "중문");
+                            major.getSub_category().set(i, "중문필름");
                             break;
                         case "22":
                             major.getSub_category().set(i, "천장몰딩");
@@ -275,5 +279,26 @@ public class WishService {
             }
         }
         return categoryListDto;
+    }
+
+    @Transactional
+    public boolean delete_wish(Integer wish_number) {
+        if (wishDao.check_sub_category(wish_number)) {
+
+            if (!wishDao.delete_sub_category(wish_number)) {
+                log.info("삭제테스트");
+                return false;
+            }
+            return false;
+        }
+
+
+        if (!wishDao.delete_major_category(wish_number)) {
+            return false;
+        }
+        if (!wishDao.delete_wish(wish_number)) {
+            return false;
+        }
+        return true;
     }
 }

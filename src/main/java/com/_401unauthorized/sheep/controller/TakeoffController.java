@@ -2,7 +2,10 @@ package com._401unauthorized.sheep.controller;
 
 import com._401unauthorized.sheep.dto.ApplyDto;
 import com._401unauthorized.sheep.dto.CategoryListDto;
+<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.TakeoffSellerDto;
+=======
+>>>>>>> eunhye
 import com._401unauthorized.sheep.dto.WishDto;
 import com._401unauthorized.sheep.service.TakeoffService;
 import com._401unauthorized.sheep.service.WishService;
@@ -14,7 +17,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+>>>>>>> eunhye
 import java.util.List;
 
 @Slf4j
@@ -26,6 +32,7 @@ public class TakeoffController {
     private final WishService wishService;
 
     @PostMapping("/call")
+    @ResponseBody
     public boolean call(@RequestBody ApplyDto applydto, HttpSession httpSession, RedirectAttributes rttr, Model model) {
         log.info("살려줘");
         log.info(String.valueOf(applydto));
@@ -39,6 +46,7 @@ public class TakeoffController {
         }
     }
 
+<<<<<<< HEAD
     @GetMapping("seller/write")
     public String write(@RequestParam("wish_number") Integer wish_number, Model model) {
         WishDto wishDto = wishService.essential(wish_number);
@@ -125,6 +133,27 @@ public class TakeoffController {
             return "redirect:/seller/my_list";
         }
         return "redirect:/seller/write>wish_number="+wish_number;
+=======
+    @GetMapping("/seller/list")
+    public String seller() {
+        return "/takeoff/seller/list";
+    }
+
+    @GetMapping("/detail")
+    public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
+        if (wish_number == null || wish_number < 1) {
+            return "redirect:/list";
+        }
+        WishDto wishDto = wishService.essential(wish_number);
+        List<CategoryListDto> categoryListDtoList = takeoffService.category(wish_number);
+        if (wishDto != null) {
+            model.addAttribute("wishDto", wishDto);
+            model.addAttribute("categoryListDtoList", categoryListDtoList);
+            return "/detail";
+        } else {
+            return "redirect:/list";
+        }
+>>>>>>> eunhye
     }
 }
 
