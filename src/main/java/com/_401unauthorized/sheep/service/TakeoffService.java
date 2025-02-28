@@ -81,7 +81,8 @@ public class TakeoffService {
             switch (major.getMajor_category()) {
                 case "1":
                     major.setMajor_category("철거");
-                case "2":
+                    break;
+                    case "2":
                     major.setMajor_category("목공");
                     break;
                 case "3":
