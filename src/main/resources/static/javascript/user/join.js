@@ -61,7 +61,7 @@ function email_check() {
 				$('#email_check_val').val(0);
 			}
 		})
-		.catch(err => {
+		.catch(() => {
 			$('#id_check').text('');
 			$('#id_check_val').val(0);
 		});
