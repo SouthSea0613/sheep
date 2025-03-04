@@ -16,16 +16,18 @@
 <section>
 <div>
     <!--  위 div는 전체 묶음  -->
-    <form action="/wish/update" method="get">
-        <div th:text="${wish_dto?.wish_addr}">주소</div><br>
-        <div th:text="${wish_dto?.wish_type}">주거형태</div><br>
-        <div th:text="${wish_dto?.wish_size}">평수</div><br>
-        <div th:text="${wish_dto?.wish_size_text}">평수상세</div><br>
-        <div th:text="${wish_dto?.wish_money}+만원">예산</div><br>
+    <form action="/takeoff/complete" method="get">
+        <div th:text="${takeoffDto?.wish_addr}">주소</div><br>
+        <div th:text="${takeoffDto?.wish_type}">주거형태</div><br>
+        <div th:text="${takeoffDto?.wish_size}">평수</div><br>
+        <div th:text="${takeoffDto?.wish_size_text}">평수상세</div><br>
+        <div th:text="${takeoffDto?.wish_money}+만원">예산</div><br>
 
-        <th:block th:each="category:${category_list_dto}">
-            <div th:text="${category.major_category}">대분류 넘버</div>
-            <div th:text="${category.major_text}">대분류 텍스트</div><br>
+        <th:block th:each="takeoffSeller:${takeoffSellerDto}">
+            <div th:text="${takeoffSeller?.major_category}">대분류 넘버</div>
+            <div th:text="${takeoffSeller?.major_text}">대분류 텍스트</div><br>
+            <div th:text="${takeoffSeller?.wish_category_seller_price}">견적금액</div><br>
+            <div th:text="${takeoffSeller?.wish_category_seller_answer}">판매자답변</div><br>
             <th:block th:each="subcategory:${category.sub_category}">
                 <div th:text="${subcategory}">중분류 넘버</div>
             </th:block>
