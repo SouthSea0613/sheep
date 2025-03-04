@@ -1,10 +1,15 @@
 package com._401unauthorized.sheep.controller;
 
 import com._401unauthorized.sheep.service.SellerService;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -12,4 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SellerController {
     private final SellerService sellerService;
+
+
 }

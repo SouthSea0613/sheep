@@ -36,7 +36,17 @@ public class TakeoffService {
     }
 
     public List<TakeoffDto> list(Integer wishNumber) {
-//        List<TakeoffDto> takeoffdtolist =
+      List<TakeoffDto> takeoffdtolist = takeoffDao.list(wishNumber);
+        switch(takeoffdtolist.get(1).getApply_status()){
+            case "1" :
+//                takeoffdtolist.set(7,"상담중");
+                break;
+            case "2" :
+                break;
+            
+                
+        }
+
         return takeoffDao.list(wishNumber);
     }
 

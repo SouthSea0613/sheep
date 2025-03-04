@@ -4,6 +4,7 @@ import com._401unauthorized.sheep.dto.ApplyDto;
 import com._401unauthorized.sheep.dto.CategoryListDto;
 import com._401unauthorized.sheep.dto.TakeoffDto;
 import com._401unauthorized.sheep.dto.WishDto;
+import com._401unauthorized.sheep.service.SellerService;
 import com._401unauthorized.sheep.service.TakeoffService;
 import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
@@ -24,6 +25,7 @@ import java.util.List;
 public class TakeoffController {
     private final TakeoffService takeoffService;
     private final WishService wishService;
+    private final SellerService sellerService;
 
     @PostMapping("/call")
     @ResponseBody
@@ -41,8 +43,11 @@ public class TakeoffController {
     }
 
     @GetMapping("/seller/list")
-    public String seller() {
-        return "/takeoff/seller/list";
+    public String seller(HttpSession httpsession, Model model) {
+        List<String> sellerlist = sellerService.seller_list(httpsession.getAttribute("user_id").toString());
+        model.addAttribute("seller_takeoff_list",sellerlist);
+        log.info(sellerlist.toString());
+        return "takeoff/seller/list";
     }
 
     @GetMapping("/detail")
