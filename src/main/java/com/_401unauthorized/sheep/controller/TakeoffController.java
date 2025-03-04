@@ -68,4 +68,9 @@ public class TakeoffController {
         log.info(takeoffdtolist+"테스트");
         return takeoffdtolist;
     }
+    @PostMapping("/changestatus")
+    @ResponseBody
+    public boolean status(@RequestBody TakeoffDto takeoffdto){
+        return takeoffService.update_status(takeoffdto.getWish_number(),takeoffdto.getApply_status());
+    }
 }

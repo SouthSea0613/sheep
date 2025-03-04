@@ -36,6 +36,11 @@ public class TakeoffService {
     }
 
     public List<TakeoffDto> list(Integer wishNumber) {
+//        List<TakeoffDto> takeoffdtolist =
         return takeoffDao.list(wishNumber);
+    }
+
+    public boolean update_status(Integer wishNumber, String applyStatus) {
+        return takeoffDao.update_status(wishNumber,applyStatus);
     }
 }

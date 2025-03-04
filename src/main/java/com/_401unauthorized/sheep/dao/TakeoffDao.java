@@ -13,4 +13,6 @@ public interface TakeoffDao {
     List<CategoryDto> get_category_detail(Integer wish_number);
 
     List<TakeoffDto> list(Integer wishNumber);
+
+    boolean update_status(Integer wishNumber, String applyStatus);
 }
