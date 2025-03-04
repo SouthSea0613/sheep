@@ -2,16 +2,20 @@
 
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script type="text/javascript"
-			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
-	<link rel="stylesheet" href="./css/index.css">
-	<script defer src="/javascript/common.js"></script>
-	<script th:inline="javascript">
-		const user = [[${session?.user_id}]];
-		const type = [[${session?.user_type}]];
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
+    <link rel="stylesheet" href="./css/index.css">
+    <script defer src="/javascript/common.js"></script>
+    <script th:inline="javascript">
+        const user = [[${session?.user_id
+        }]]
+        ;
+        const type = [[${session?.user_type
+        }]]
+        ;
 
         $(() => {
             console.log(type)
@@ -19,14 +23,46 @@
             loginStatus();
         })
     </script>
+    <style>
+        body {
+            background-color: #FAFBFD;
+        }
+    </style>
 </head>
 <body>
 
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
-    <h1>index.html</h1>
-
-    <div id="map" style="width:500px;height:400px;">
+    <div class="banner">베너~
+        <div class="banner_content"></div>
+    </div>
+    <div class="brand_ex">
+        <h3>우편인이란?</h3>
+        <div>블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 </div>
+    </div>
+    <div class="seller_content">
+        <h1>업체게시판</h1>
+        <div class="seller_subcontent">
+            <div><img src="" alt="" class="seller_img"></div>
+            <div class="seller_text">
+                <h2>제목입니다람쥐람람</h2>
+                <div>ㅇㅇ디자인</div>
+            </div>
+        </div>
+        <div class="seller_subcontent">
+            <div><img src="" alt="" class="seller_img"></div>
+            <div class="seller_text">
+                <h2>제목입니다람쥐람람</h2>
+                <div>ㅇㅇ디자인</div>
+            </div>
+        </div>
+        <div class="seller_subcontent">
+            <div><img src="" alt="" class="seller_img"></div>
+            <div class="seller_text">
+                <h2>제목입니다람쥐람람</h2>
+                <div>ㅇㅇ디자인</div>
+            </div>
+        </div>
     </div>
 </div>
 
