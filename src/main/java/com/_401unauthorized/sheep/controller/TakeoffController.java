@@ -44,19 +44,19 @@ public class TakeoffController {
         return "/takeoff/seller/list";
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/seller/detail")
     public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
         if (wish_number == null || wish_number < 1) {
-            return "redirect:/list";
+            return "redirect:/takeoff/seller/list";
         }
         WishDto takeoffDto = takeoffService.essential(wish_number);
         List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number);
         if (takeoffDto != null) {
             model.addAttribute("takeoffDto", takeoffDto);
             model.addAttribute("takeoffSellerDto", takeoffSellerDto);
-            return "/takeoff/detail";
+            return "/takeoff/seller/detail";
         } else {
-            return "redirect:/list";
+            return "redirect:/takeoff/seller/list";
         }
     }
 }
