@@ -5,6 +5,7 @@
 	<title>Title</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
 	<link rel="stylesheet" href="/css/index.css">
 </head>
@@ -41,7 +42,15 @@
 	<input type="text" name="user_phone" id="user_phone"><br>
 
 	주소
-	<input type="text" name="user_addr" id="user_addr"><br>
+	<input type="hidden" name="user_addr" id="user_addr">
+
+	<input type="hidden" id="sample4_postcode" readonly placeholder="우편번호">
+	<input type="button" onclick="find_addr()" value="주소검색"><br>
+	<input type="text" id="sample4_roadAddress" placeholder="도로명주소">
+	<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소">
+	<span id="guide" style="color:#999;display:none"></span>
+	<input type="text" id="sample4_detailAddress" placeholder="상세주소"><br>
+
 
 	메일
 	<input type="text" name="user_email" id="user_email"> @
