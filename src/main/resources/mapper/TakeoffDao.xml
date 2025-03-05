@@ -2,7 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.TakeoffDao">
     <insert id="call">
-        insert into apply_status values (#{user_id}, #{wish_number}, #{apply_status})
+        insert into apply_status
+        values (#{user_id}, #{wish_number}, #{apply_status})
     </insert>
 
     <insert id="write">
@@ -16,7 +17,9 @@
     </insert>
 
     <update id="update_status">
-        UPDATE APPLY_STATUS SET APPLY_STATUS = #{wish_number} WHERE WISH_NUMBER = #{wish_number}
+        UPDATE APPLY_STATUS
+        SET APPLY_STATUS = #{wish_number}
+        WHERE WISH_NUMBER = #{wish_number}
     </update>
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
@@ -25,45 +28,47 @@
     </select>
 
     <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
-        SELECT SELLER.WISH_NUMBER, SELLER.CATEGORY_PARENT, SELLER.CATEGORY_NUMBER, SELLER.MAJOR_TEXT,
-               WCS.WISH_CATEGORY_SELLER_ANSWER, WCS.WISH_CATEGORY_SELLER_PRICE
+        SELECT SELLER.WISH_NUMBER, SELLER.CATEGORY_PARENT, SELLER.CATEGORY_NUMBER, SELLER.MAJOR_TEXT, WCS.WISH_CATEGORY_SELLER_ANSWER, WCS.WISH_CATEGORY_SELLER_PRICE
         FROM WISH_CATEGORY_SELLER WCS
-                 RIGHT JOIN
-             (
-                 SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
-                 FROM MAJOR_CATEGORY_CONTENT MC
-                          LEFT JOIN (
-                     SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
-                     FROM CATEGORY C
-                              RIGHT JOIN SUB_CATEGORY S
-                                         ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
-                     WHERE C.CATEGORY_PARENT IS NOT NULL) C
-                                    ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
-                 WHERE MC.WISH_NUMBER = #{wish_number}
-                 UNION
-                 SELECT C.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
-                 FROM MAJOR_CATEGORY_CONTENT MC
-                          RIGHT JOIN (
-                     SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
-                     FROM CATEGORY C
-                              RIGHT JOIN SUB_CATEGORY S
-                                         ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
-                     WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
-                                     ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER) SELLER
-             ON SELLER.WISH_NUMBER = WCS.WISH_NUMBER AND SELLER.CATEGORY_PARENT = WCS.CATEGORY_NUMBER
+        RIGHT JOIN (
+            SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+            FROM MAJOR_CATEGORY_CONTENT MC
+            LEFT JOIN (
+                SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
+                FROM CATEGORY C
+                RIGHT JOIN SUB_CATEGORY S
+                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+                WHERE C.CATEGORY_PARENT IS NOT NULL) C
+            ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+            WHERE MC.WISH_NUMBER = #{wish_number}
+            UNION
+            SELECT C.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+            FROM MAJOR_CATEGORY_CONTENT MC
+            RIGHT JOIN (
+                SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
+                FROM CATEGORY C
+                RIGHT JOIN SUB_CATEGORY S
+                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+                WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
+            ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER) SELLER
+        ON SELLER.WISH_NUMBER = WCS.WISH_NUMBER AND SELLER.CATEGORY_PARENT = WCS.CATEGORY_NUMBER
     </select>
 
     <select id="list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
         SELECT W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
         FROM WISH_CATEGORY_SELLER W
-            JOIN APPLY_STATUS A
-                ON W.USER_ID=A.USER_ID
-                       AND W.WISH_NUMBER = A.WISH_NUMBER
+        JOIN APPLY_STATUS A
+        ON W.USER_ID=A.USER_ID
+        AND W.WISH_NUMBER = A.WISH_NUMBER
         WHERE W.WISH_NUMBER=#{wishNumber}
         GROUP BY W.USER_ID,W.WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS;
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
-        SELECT W.WISH_TITLE FROM WISH W JOIN WISH_CATEGORY_SELLER S ON W.WISH_NUMBER = S.WISH_NUMBER WHERE S.USER_ID=#{userid};
+        SELECT W.WISH_TITLE
+        FROM WISH W
+        JOIN WISH_CATEGORY_SELLER S
+        ON W.WISH_NUMBER = S.WISH_NUMBER
+        WHERE S.USER_ID=#{userid};
     </select>
 </mapper>

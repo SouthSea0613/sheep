@@ -23,15 +23,6 @@
     <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
         SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
         FROM MAJOR_CATEGORY_CONTENT MC
-<<<<<<< HEAD
-                 LEFT JOIN (
-            SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
-            FROM CATEGORY C
-                     RIGHT JOIN SUB_CATEGORY S
-                                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
-            WHERE C.CATEGORY_PARENT IS NOT NULL) C
-                           ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
-=======
         LEFT JOIN (
             SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
             FROM CATEGORY C
@@ -39,35 +30,29 @@
             ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
             WHERE C.CATEGORY_PARENT IS NOT NULL) C
         ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
->>>>>>> yoonsic2
         WHERE MC.WISH_NUMBER = #{wish_number}
         UNION
         SELECT C.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
         FROM MAJOR_CATEGORY_CONTENT MC
-<<<<<<< HEAD
-                 RIGHT JOIN (
-            SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
-            FROM CATEGORY C
-                     RIGHT JOIN SUB_CATEGORY S
-                                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
-            WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
-                            ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
-=======
         RIGHT JOIN (
             SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
             FROM CATEGORY C
             RIGHT JOIN SUB_CATEGORY S
             ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
             WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
-        ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER;
->>>>>>> yoonsic2
+        ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
     </select>
 
     <select id="get_apply_count" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM APPLY_STATUS WHERE WISH_NUMBER = #{wishNumber}
+        SELECT COUNT(*)
+        FROM APPLY_STATUS
+        WHERE WISH_NUMBER = #{wishNumber}
     </select>
+
     <select id="check_sub_category" resultType="java.lang.Boolean">
-        SELECT COUNT(*) FROM SUB_CATEGORY WHERE WISH_NUMBER = #{wishNumber}
+        SELECT COUNT(*)
+        FROM SUB_CATEGORY
+        WHERE WISH_NUMBER = #{wishNumber}
     </select>
 
     <!--글쓰기!(generateKey) 사용-->
@@ -92,12 +77,17 @@
     </insert>
     <!-- 삭제 요청 -->
     <delete id="delete_sub_category">
-        DELETE FROM SUB_CATEGORY WHERE WISH_NUMBER = #{wish_number}
+        DELETE FROM SUB_CATEGORY
+        WHERE WISH_NUMBER = #{wish_number}
     </delete>
+
     <delete id="delete_major_category">
-        DELETE FROM MAJOR_CATEGORY_CONTENT WHERE WISH_NUMBER = #{wish_number}
+        DELETE FROM MAJOR_CATEGORY_CONTENT
+        WHERE WISH_NUMBER = #{wish_number}
     </delete>
+
     <delete id="delete_wish">
-        DELETE FROM WISH WHERE WISH_NUMBER = #{wish_number}
+        DELETE FROM WISH
+        WHERE WISH_NUMBER = #{wish_number}
     </delete>
 </mapper>

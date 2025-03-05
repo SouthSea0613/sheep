@@ -1,14 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.TakeoffDao;
-<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.*;
-=======
-import com._401unauthorized.sheep.dto.ApplyDto;
-import com._401unauthorized.sheep.dto.TakeoffSellerDto;
-import com._401unauthorized.sheep.dto.CategoryDto;
-import com._401unauthorized.sheep.dto.CategoryListDto;
->>>>>>> yoonsic2
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -34,7 +27,6 @@ public class TakeoffService {
         }
     }
 
-<<<<<<< HEAD
     public WishDto essential(Integer wish_number) {
         WishDto takeoffDto = takeoffDao.get_wish_detail(wish_number);
         if (takeoffDto.getWish_type() != null) {
@@ -251,7 +243,8 @@ public class TakeoffService {
 
     public List<TakeoffDto> my_list(String userid) {
         return takeoffDao.my_list(userid);
-=======
+    }
+
     @Transactional
     public boolean write(List<TakeoffSellerDto> takeoffsellerdto, String user_id, String wish_number) {
         boolean result1 = takeoffDao.status(user_id, wish_number);
@@ -265,12 +258,5 @@ public class TakeoffService {
             }
         }
         return true;
-    }
-
-    public List<CategoryListDto> category(Integer wish_number) {
-        List<CategoryDto> categoryDto = takeoffDao.get_category_detail(wish_number);
-        List<CategoryListDto> categoryListDto = new ArrayList<>();
-        return categoryListDto;
->>>>>>> yoonsic2
     }
 }

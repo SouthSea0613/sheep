@@ -12,19 +12,9 @@ import lombok.experimental.Accessors;
 @Builder
 @Accessors(chain = true)
 public class TakeoffSellerDto {
-<<<<<<< HEAD
-    String major_category;
-    String category_number;
-    String major_text;
-    String apply_status;
-
-
-
-=======
     String user_id;
     String category_number;
     String wish_number;
     String wish_category_seller_answer;
     String wish_category_seller_price;
->>>>>>> yoonsic2
 }

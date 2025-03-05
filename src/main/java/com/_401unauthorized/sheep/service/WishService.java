@@ -16,24 +16,16 @@ import java.util.List;
 public class WishService {
     private final WishDao wishDao;
 
-    //--------------------------------------------------------------------------------------------
     public List<WishDto> get_wish_list(String user_id) {
         List<WishDto> wish_list = wishDao.get_wish_list(user_id);
         for (WishDto wish : wish_list) {
             if (wish.getApply_status() != null) {
                 switch (wish.getApply_status()) {
                     case "0":
-<<<<<<< HEAD
-//                        if(wishDao.get_apply_count(wish.getWish_number())){
-//                            wish.setApply_status("진행중");
-//                        }
-                        wish.setApply_status("진행중");
-=======
                         if (wishDao.get_apply_count(wish.getWish_number()) > 1) {
                             wish.setApply_status("진행중");
                         }
                         wish.setApply_status("대기중");
->>>>>>> yoonsic2
                         break;
 
                     case "1":
@@ -60,7 +52,6 @@ public class WishService {
         return wish_list;
     }
 
-    //--------------------------------------------------------------------------------------------
     @Transactional
     public boolean write(WishDto wishDto) {
         log.info(wishDto.toString());
@@ -79,12 +70,14 @@ public class WishService {
         if (!wishDao.insert_wish(wishdto)) {
             return false;
         }
+
         for (MajorDto majorDto : wishDto.getMajor_category()) {
             majorDto.setWish_number(wishdto.getWish_number());
             if (!wishDao.insert_major(majorDto)) {
                 return false;
             }
         }
+
         for (SubDto subDto : wishDto.getSub_category()) {
             subDto.setWish_number(wishdto.getWish_number());
             if (!wishDao.insert_sub(subDto)) {
@@ -94,7 +87,6 @@ public class WishService {
         return true;
     }
 
-    //--------------------------------------------------------------------------------------------
     public WishDto essential(Integer wish_number) {
         WishDto wishDto = wishDao.get_wish_detail(wish_number);
         if (wishDto.getWish_type() != null) {
@@ -113,7 +105,6 @@ public class WishService {
         return wishDto;
     }
 
-    //--------------------------------------------------------------------------------------------
     public List<CategoryListDto> category(Integer wish_number) {
         List<CategoryDto> categoryDto = wishDao.get_category_detail(wish_number);
         List<CategoryListDto> categoryListDto = new ArrayList<>();
@@ -144,6 +135,7 @@ public class WishService {
                 categoryListDto.add(category_list_dto);
             }
         }
+
         for (CategoryListDto major : categoryListDto) {
             switch (major.getMajor_category()) {
                 case "1":
@@ -195,6 +187,7 @@ public class WishService {
                     major.setMajor_category("공사준비/마감");
                     break;
             }
+
             if (major.getSub_category().get(0) != null) {
                 for (int i = 0; i < major.getSub_category().size(); i++) {
                     switch (major.getSub_category().get(i)) {
@@ -286,13 +279,13 @@ public class WishService {
                 }
             }
         }
+
         return categoryListDto;
     }
 
     @Transactional
     public boolean delete_wish(Integer wish_number) {
         if (wishDao.check_sub_category(wish_number)) {
-
             if (!wishDao.delete_sub_category(wish_number)) {
                 log.info("삭제테스트");
                 return false;
@@ -300,13 +293,14 @@ public class WishService {
             return false;
         }
 
-
         if (!wishDao.delete_major_category(wish_number)) {
             return false;
         }
+
         if (!wishDao.delete_wish(wish_number)) {
             return false;
         }
+
         return true;
     }
 }

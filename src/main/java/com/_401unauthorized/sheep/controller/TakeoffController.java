@@ -2,11 +2,8 @@ package com._401unauthorized.sheep.controller;
 
 import com._401unauthorized.sheep.dto.ApplyDto;
 import com._401unauthorized.sheep.dto.CategoryListDto;
-<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.TakeoffDto;
-=======
 import com._401unauthorized.sheep.dto.TakeoffSellerDto;
->>>>>>> yoonsic2
 import com._401unauthorized.sheep.dto.WishDto;
 import com._401unauthorized.sheep.service.SellerService;
 import com._401unauthorized.sheep.service.TakeoffService;
@@ -17,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,15 +29,11 @@ public class TakeoffController {
 
     @PostMapping("/call")
     @ResponseBody
-    public boolean call(@RequestBody ApplyDto applydto, HttpSession httpSession, RedirectAttributes rttr, Model model) {
-        log.info("살려줘");
-        log.info(String.valueOf(applydto));
+    public boolean call(@RequestBody ApplyDto applydto) {
         boolean result = takeoffService.call(applydto);
         if (result) {
-            log.info("컨트롤러 true");
             return true;
         } else {
-            log.info("컨트롤러 false");
             return false;
         }
     }
@@ -58,11 +50,7 @@ public class TakeoffController {
     }
 
     @PostMapping("seller/write")
-    public String write(@RequestParam("wish_number") String wish_number,
-                        @RequestParam("category_number") List<String> category_number,
-                        @RequestParam("takeoff_content") List<String> takeoff_content,
-                        @RequestParam("takeoff_money") List<String> takeoff_money,
-                        HttpSession httpSession) {
+    public String write(@RequestParam("wish_number") String wish_number, @RequestParam("category_number") List<String> category_number, @RequestParam("takeoff_content") List<String> takeoff_content, @RequestParam("takeoff_money") List<String> takeoff_money, HttpSession httpSession) {
         String user_id = (httpSession.getAttribute("user_id").toString());
         TakeoffSellerDto takeoffsellerDto = new TakeoffSellerDto();
         takeoffsellerDto.setUser_id(user_id);
@@ -137,7 +125,6 @@ public class TakeoffController {
     @GetMapping("/seller/list")
     public String seller(HttpSession httpsession, Model model) {
         model.addAttribute("seller_takeoff_list",sellerService.seller_list(httpsession.getAttribute("user_id").toString()));
-        log.info(String.valueOf(sellerService.seller_list(httpsession.getAttribute("user_id").toString())));
         return "takeoff/seller/list";
     }
 
@@ -160,17 +147,14 @@ public class TakeoffController {
     @PostMapping("/list")
     @ResponseBody
     public List<TakeoffDto> list(@RequestBody TakeoffDto takeoffDto){
-        log.info("컨트롤러 테스트");
         List<TakeoffDto> takeoffdtolist = takeoffService.list(takeoffDto.getWish_number());
-        log.info(takeoffdtolist+"테스트");
         return takeoffdtolist;
     }
 
     @PostMapping("/seller/my_list")
     @ResponseBody
-    public List<TakeoffDto> writelist(@RequestBody TakeoffDto takeoffDto,HttpSession httpsession){
+    public List<TakeoffDto> writelist(HttpSession httpsession){
         List<TakeoffDto> takeoffdtolist = takeoffService.my_list(httpsession.getAttribute("user_id").toString());
-        log.info(takeoffdtolist+"테스트");
         return takeoffdtolist;
     }
 
