@@ -16,32 +16,52 @@ body {
     padding-bottom: 58px;
 }
 
-.banner {
-    margin: 50px auto;
-    width: 80%;
-    height: 380px;
-    color: white;
-    font-size: 36px;
-    text-align: center;
-    background-color: lightslategrey;
-}
+/* 배너 */
 
+
+/* 브랜드 */
 .brand_ex {
-    margin: 50px auto;
+    margin: 100px auto;
     width: 80%;
-    font-size: 20px;
+    font-size: 16px;
 }
 
+.brand_content {
+    margin: 30px 0;
+}
+
+.brand_title {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 10px;
+}
+
+.brand_title h2 {
+    margin: 0 3px;
+    color: #3678c7;
+}
+
+.brand_text {
+    display: flex;
+}
+
+.b_text1 {
+    flex-shrink: 0;
+    font-weight: bold;
+    color: #3678c7;
+}
+
+/* 업체페이지 */
 .seller_img {
     margin: 20px 10px;
-    width: 280px;
-    height: 180px;
+    width: 400px;
+    height: 220px;
     background-color: #B6C2CE;
     flex-shrink: 0;
 }
 
 .seller_content {
-    margin: 20px auto;
+    margin: 150px auto;
     width: 80%;
 }
 
@@ -50,7 +70,7 @@ body {
 }
 
 .seller_text {
-    margin: auto 0;
+    margin: auto 20px;
     font-size: 16px;
 }
 

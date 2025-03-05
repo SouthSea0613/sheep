@@ -10,12 +10,8 @@
     <link rel="stylesheet" href="./css/index.css">
     <script defer src="/javascript/common.js"></script>
     <script th:inline="javascript">
-        const user = [[${session?.user_id
-        }]]
-        ;
-        const type = [[${session?.user_type
-        }]]
-        ;
+        const user = [[${session?.user_id}]];
+        const type = [[${session?.user_type}]];
 
         $(() => {
             console.log(type)
@@ -33,38 +29,55 @@
 
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
-    <div class="banner">베너~
-        <div class="banner_content"></div>
-    </div>
+<!--  슬라이드 배너  -->
+
+
+<!--  브랜드 설명  -->
     <div class="brand_ex">
-        <h3>우편인이란?</h3>
-        <div>블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 블라블라 </div>
+        <hr>
+        <div class="brand_content">
+            <div class="brand_title"><h2>우</h2>리들의 <h2>편</h2>리한 <h2>인</h2>테리어</div>
+            <div class="brand_text">
+                <div class="b_text1">우편인</div>
+                <div>은 인테리어 견적을 어디에서나 쉽고 간편하게 여러 업체에서 받아볼 수 있습니다.</div>
+            </div>
+            <div>그리고 이웃집 또는 다른 집들의 인테리어를 지도에서 한눈에 확인 할 수 있습니다.</div>
+        </div>
+        <hr>
     </div>
+
+<!--  업체 게시판  -->
     <div class="seller_content">
-        <h1>업체게시판</h1>
+        <h3>업체게시판</h3>
+        <br>
+        <hr>
+        <br>
         <div class="seller_subcontent">
             <div><img src="" alt="" class="seller_img"></div>
             <div class="seller_text">
-                <h2>제목입니다람쥐람람</h2>
-                <div>ㅇㅇ디자인</div>
+                <h3> "30년된 구축아파트, 트렌디한 화이트인테리어로!" </h3>
+                <div>짱돌디자인</div>
             </div>
         </div>
         <div class="seller_subcontent">
             <div><img src="" alt="" class="seller_img"></div>
             <div class="seller_text">
-                <h2>제목입니다람쥐람람</h2>
-                <div>ㅇㅇ디자인</div>
+                <h3>제목입니다</h3>
+                <div>부싯돌디자인</div>
             </div>
         </div>
         <div class="seller_subcontent">
             <div><img src="" alt="" class="seller_img"></div>
             <div class="seller_text">
-                <h2>제목입니다람쥐람람</h2>
-                <div>ㅇㅇ디자인</div>
+                <h3>제목입니다</h3>
+                <div>돌덩이디자인</div>
             </div>
         </div>
+        <br>
+        <hr>
     </div>
 </div>
+
 
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 
