@@ -117,7 +117,7 @@ public class TakeoffController {
             takeoffsellerdto.add(takeoff_seller_dto);
         }
         if (takeoffService.write(takeoffsellerdto, user_id, wish_number)) {
-            return "redirect:/seller/my_list";
+            return "redirect:/takeoff/seller/list";
         }
         return "redirect:/seller/write>wish_number=" + wish_number;
     }

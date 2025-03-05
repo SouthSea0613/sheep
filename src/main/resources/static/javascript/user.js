@@ -78,12 +78,6 @@ function join_check() {
 		user_phone.focus();
 		return false;
 	}
-	const user_addr = $('#user_addr');
-	if (user_addr.val() == '') {
-		alert('주소를 입력해주세요.');
-		user_addr.focus();
-		return false;
-	}
 
 	let user_email = $('#user_email');
 	const user_email_detail = $('#user_email_detail');
@@ -98,6 +92,11 @@ function join_check() {
 			user_email.val(user_email.val() + "@" + user_email_detail.val());
 		}
 	}
+
+	const road_address = $('#sample4_roadAddress');
+	const detail_address = $('#sample4_detailAddress');
+	const  user_addr = $('#user_addr');
+	user_addr.val(road_address.val() +' '+ detail_address.val());
 
 	$('#join_form').submit();
 }
@@ -180,4 +179,48 @@ function login() {
 			$('#error_user').text('');
 			$('#error_user_val').val(0);
 		});
+}
+
+function find_addr(){
+	new daum.Postcode({
+		oncomplete: function(data) {
+			var roadAddr = data.roadAddress;
+			var extraRoadAddr = '';
+
+			if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+				extraRoadAddr += data.bname;
+			}
+			if(data.buildingName !== '' && data.apartment === 'Y'){
+				extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+			}
+			if(extraRoadAddr !== ''){
+				extraRoadAddr = ' (' + extraRoadAddr + ')';
+			}
+
+			document.getElementById('sample4_postcode').value = data.zonecode;
+			document.getElementById("sample4_roadAddress").value = roadAddr;
+			document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+			if(roadAddr !== ''){
+				document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+			} else {
+				document.getElementById("sample4_extraAddress").value = '';
+			}
+
+			var guideTextBox = document.getElementById("guide");
+			if(data.autoRoadAddress) {
+				var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+				guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+				guideTextBox.style.display = 'block';
+
+			} else if(data.autoJibunAddress) {
+				var expJibunAddr = data.autoJibunAddress;
+				guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+				guideTextBox.style.display = 'block';
+			} else {
+				guideTextBox.innerHTML = '';
+				guideTextBox.style.display = 'none';
+			}
+		}
+	}).open();
 }
