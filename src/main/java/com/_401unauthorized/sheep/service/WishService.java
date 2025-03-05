@@ -21,27 +21,11 @@ public class WishService {
         for (WishDto wish : wish_list) {
             if (wish.getApply_status() != null) {
                 switch (wish.getApply_status()) {
-                    case "0":
-                        if (wishDao.get_apply_count(wish.getWish_number()) > 1) {
-                            wish.setApply_status("진행중");
-                        }
-                        wish.setApply_status("대기중");
+                    case "0","1":
+                        wish.setApply_status("진행중");
                         break;
-
-                    case "1":
-                        wish.setApply_status("상담중");
-                        break;
-
-                    case "2":
-                        wish.setApply_status("계약완료");
-                        break;
-
-                    case "3":
-                        wish.setApply_status("기간만료");
-                        break;
-
-                    case "4":
-                        wish.setApply_status("취소");
+                    case "2","3","4":
+                        wish.setApply_status("완료");
                         break;
                 }
             } else {

@@ -228,7 +228,6 @@ public class TakeoffService {
       List<TakeoffDto> takeoffdtolist = takeoffDao.list(wishNumber);
         switch(takeoffdtolist.get(1).getApply_status()){
             case "1" :
-//                takeoffdtolist.set(7,"상담중");
                 break;
             case "2" :
                 break;
