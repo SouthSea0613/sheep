@@ -3,6 +3,6 @@
 <mapper namespace="com._401unauthorized.sheep.dao.SellerDao">
 
     <select id="seller_list" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT W.USER_ID,W.WISH_TITLE FROM WISH W JOIN SELLER S WHERE W.WISH_TITLE LIKE CONCAT(S.SELLER_AREA,'%') AND S.USER_ID=#{userId};
+        SELECT W.WISH_NUMBER,W.USER_ID,W.WISH_TITLE FROM WISH W JOIN SELLER S WHERE W.WISH_TITLE LIKE CONCAT(S.SELLER_AREA,'%') AND S.USER_ID=#{userId};
     </select>
 </mapper>

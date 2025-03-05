@@ -48,6 +48,7 @@
 <div id="enterlist">
 	<th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
 		<th:block th:each="takeofflist : ${seller_takeoff_list}">
+			<a th:href="@{takeoff/seller/detail(wish_number=${takeofflist.wish_number})}"></a>
 			<div th:if="${takeofflist.user_id}"></div>
 			<div th:text="${takeofflist.user_id}"></div>
 			<div th:text="'시공주소: ' + ${takeofflist.wish_title}"></div>
