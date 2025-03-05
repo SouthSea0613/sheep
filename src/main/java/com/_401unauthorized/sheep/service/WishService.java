@@ -48,6 +48,7 @@ public class WishService {
                 wish.setApply_status(null);
             }
         }
+        log.info(wish_list.toString());
         return wish_list;
     }
 

@@ -27,6 +27,7 @@ public class WishController{
         // 내가 쓴 위시들이 필요하니까 세션에서 아이디 꺼내와
         String user_id = httpSession.getAttribute("user_id").toString();
         model.addAttribute("wish_list", wishService.get_wish_list(user_id));
+        log.info(wishService.get_wish_list(user_id).toString());
         return "wish/list";
     }
 

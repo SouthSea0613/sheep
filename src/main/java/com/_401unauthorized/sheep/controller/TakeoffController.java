@@ -44,9 +44,8 @@ public class TakeoffController {
 
     @GetMapping("/seller/list")
     public String seller(HttpSession httpsession, Model model) {
-        List<String> sellerlist = sellerService.seller_list(httpsession.getAttribute("user_id").toString());
-        model.addAttribute("seller_takeoff_list",sellerlist);
-        log.info(sellerlist.toString());
+        model.addAttribute("seller_takeoff_list",sellerService.seller_list(httpsession.getAttribute("user_id").toString()));
+        log.info(String.valueOf(sellerService.seller_list(httpsession.getAttribute("user_id").toString())));
         return "takeoff/seller/list";
     }
 

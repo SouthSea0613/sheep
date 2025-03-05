@@ -17,17 +17,11 @@
 </div>
 <div>
 	<th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
-		<th:block th:each="takeoff_list : ${seller_takeoff_list}">
-
-<!--			<div th:text="${takeoff_list.user_id} + '고객님'"></div>-->
-<!--			<div th:text="'연락처: ' + ${takeoff_list.user_phone}"></div>-->
-<!--			<div th:text="'시공주소: ' + ${takeoff_list.wish_addr}"></div>-->
-<!--			<div th:text="시공분야"></div>-->
-
-<!--			<th:block th:each="takeoff_category : ${takeoff_list.major_category_content_list}">-->
-<!--				<div th:text="takeoff_category.category_number"></div>-->
-<!--			</th:block>-->
-
+		<th:block th:each="takeofflist : ${seller_takeoff_list}">
+			<div th:if="${takeofflist.user_id}"></div>
+			<div th:text="${takeofflist.user_id}"></div>
+			<div th:text="'시공주소: ' + ${takeofflist.wish_title}"></div>
+			<div th:text="시공분야"></div>
 		</th:block>
 	</th:block>
 </div>
