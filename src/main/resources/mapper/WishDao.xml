@@ -40,7 +40,7 @@
                      RIGHT JOIN SUB_CATEGORY S
                                 ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
             WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
-                            ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER;
+                            ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
     </select>
     <select id="get_apply_count" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM APPLY_STATUS WHERE WISH_NUMBER = #{wishNumber}
