@@ -5,6 +5,7 @@
         INSERT INTO APPLY_STATUS
         VALUES (#{user_id}, #{wish_number}, #{apply_status})
     </insert>
+
     <update id="update_status">
         UPDATE APPLY_STATUS SET APPLY_STATUS = #{wish_number} WHERE WISH_NUMBER = #{wish_number}
     </update>
@@ -42,6 +43,7 @@
                                      ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER) SELLER
              ON SELLER.WISH_NUMBER = WCS.WISH_NUMBER AND SELLER.CATEGORY_PARENT = WCS.CATEGORY_NUMBER
     </select>
+
     <select id="list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
         SELECT W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
         FROM WISH_CATEGORY_SELLER W
@@ -51,6 +53,7 @@
         WHERE W.WISH_NUMBER=#{wishNumber}
         GROUP BY W.USER_ID,W.WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS;
     </select>
+
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
         SELECT W.WISH_TITLE FROM WISH W JOIN WISH_CATEGORY_SELLER S ON W.WISH_NUMBER = S.WISH_NUMBER WHERE S.USER_ID=#{userid};
     </select>

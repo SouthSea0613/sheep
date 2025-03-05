@@ -2,11 +2,7 @@ package com._401unauthorized.sheep.controller;
 
 import com._401unauthorized.sheep.dto.ApplyDto;
 import com._401unauthorized.sheep.dto.CategoryListDto;
-<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.TakeoffDto;
-=======
-import com._401unauthorized.sheep.dto.TakeoffSellerDto;
->>>>>>> jieun
 import com._401unauthorized.sheep.dto.WishDto;
 import com._401unauthorized.sheep.service.SellerService;
 import com._401unauthorized.sheep.service.TakeoffService;
@@ -19,7 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -68,6 +63,7 @@ public class TakeoffController {
             return "redirect:/takeoff/seller/list";
         }
     }
+
     @PostMapping("/list")
     @ResponseBody
     public List<TakeoffDto> list(@RequestBody TakeoffDto takeoffDto){
@@ -76,10 +72,10 @@ public class TakeoffController {
         log.info(takeoffdtolist+"테스트");
         return takeoffdtolist;
     }
+
     @PostMapping("/seller/my_list")
     @ResponseBody
     public List<TakeoffDto> writelist(@RequestBody TakeoffDto takeoffDto,HttpSession httpsession){
-        log.info("컨트롤러 테스트");
         List<TakeoffDto> takeoffdtolist = takeoffService.my_list(httpsession.getAttribute("user_id").toString());
         log.info(takeoffdtolist+"테스트");
         return takeoffdtolist;
@@ -90,6 +86,4 @@ public class TakeoffController {
     public boolean status(@RequestBody TakeoffDto takeoffdto){
         return takeoffService.update_status(takeoffdto.getWish_number(),takeoffdto.getApply_status());
     }
-
-
 }

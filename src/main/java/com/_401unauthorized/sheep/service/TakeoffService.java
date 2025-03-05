@@ -1,14 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.TakeoffDao;
-<<<<<<< HEAD
-import com._401unauthorized.sheep.dto.ApplyDto;
-import com._401unauthorized.sheep.dto.CategoryDto;
-import com._401unauthorized.sheep.dto.CategoryListDto;
-import com._401unauthorized.sheep.dto.TakeoffDto;
-=======
 import com._401unauthorized.sheep.dto.*;
->>>>>>> jieun
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -238,10 +231,8 @@ public class TakeoffService {
                 break;
             case "2" :
                 break;
-            
                 
         }
-
         return takeoffDao.list(wishNumber);
     }
 
