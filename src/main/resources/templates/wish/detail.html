@@ -48,9 +48,9 @@
 <div>
     <!--   footer   -->
 </div>
-<script th:inline="javascript">
+<script>
     function delete_wish() {
-        let wish_number = [[${wish_dto?.wish_number}]]
+        let wish_number = "[[${wish_dto?.wish_number}]]"
         console.log(wish_number)
         location.href = "/wish/delete?wish_number=" + wish_number
     }
@@ -58,7 +58,7 @@
     function takeoff(btn) {
         const wishnumber = btn.previousElementSibling.value
         axios.post('/takeoff/call', {
-            user_id: [[${session.user_id}]],
+            user_id: "[[${session.user_id}]]",
             wish_number: wishnumber,
             apply_status: "0",
         }).then((res) => {

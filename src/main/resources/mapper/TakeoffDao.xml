@@ -12,7 +12,7 @@
 
     <insert id="status">
         INSERT INTO APPLY_STATUS
-        VALUES (#{user_id}, #{wish_number}, #{apply_status})
+        VALUES (#{user_id}, #{wish_number}, 0)
     </insert>
 
     <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">

@@ -41,27 +41,40 @@
     </script>
 </head>
 <body>
-<!--<th:block th:replace="~{common/fragment::header}"></th:block>-->
 <h2>위시작성</h2>
 <div>
     <!--   header   -->
 </div>
 <div>
-    <!--  위 div는 전체 묶음  -->
-    <!--    아래는 컨트롤러 작성해야함    -->
     <form action="/wish/write" method="post" id="write_form">
-        <div>
-            <!--  위 div는 필수 항목 묶음  -->
+        <div><!---------------------------------------------------------------------------------------------->
+
             <div>
                 <div id="title">주소</div>
                 <div>
-                    <input type="text" name="wish_title" class="title_class" th:value="${wish_dto?.wish_title}"
-                           placeholder="제목을 입력해주세요">
-                    <input type="text" name="wish_addr" class="addr_class" th:value="${wish_dto?.wish_addr}"
-                           placeholder="상세주소 입력">
+                    <input type="text" name="wish_title" class="title_class" th:value="${wish_dto?.wish_title}" placeholder="제목을 입력해주세요">
+                    <input type="text" name="wish_addr" class="addr_class" th:value="${wish_dto?.wish_addr}" placeholder="상세주소 입력">
                 </div>
             </div>
+
+            <br><!---------------------------------------------------------------------------------------------->
+
             <div>
+                <script>
+                    const wish_type = "[[${wish_dto?.wish_type}]]";
+                    const wish_Type = document.querySelectorAll('input[type=radio]');
+                    switch (wish_type) {
+                        case "아파트":
+                            wish_Type[0].setAttribute("checked", true)
+                            break;
+                        case "단독주택":
+                            wish_Type[1].setAttribute("checked", true)
+                            break;
+                        case "빌라":
+                            wish_Type[2].setAttribute("checked", true)
+                            break;
+                    }
+                </script>
                 <div id="type">주거형태</div>
                 <div>
                     <input type="radio" class="wish_type" name="wish_type" value="1">아파트
@@ -69,8 +82,31 @@
                     <input type="radio" class="wish_type" name="wish_type" value="3">빌라
                 </div>
             </div>
-            <br>
+
+            <br><!---------------------------------------------------------------------------------------------->
+
             <div>
+                <script>
+                    const wish_size = "[[${wish_dto?.wish_size}]]";
+                    const wish_Size = document.querySelectorAll('input[type=radio]');
+                    switch (wish_size) {
+                        case "10":
+                            wish_Size[3].setAttribute("checked", true)
+                            break;
+                        case "20":
+                            wish_Size[4].setAttribute("checked", true)
+                            break;
+                        case "30":
+                            wish_Size[5].setAttribute("checked", true)
+                            break;
+                        case "40":
+                            wish_Size[6].setAttribute("checked", true)
+                            break;
+                        case "50":
+                            wish_Size[7].setAttribute("checked", true)
+                            break;
+                    }
+                </script>
                 <div>평수</div>
                 <div>
                     <input type="radio" class="wish_size" name="wish_size" value="10">10평 대
@@ -79,16 +115,16 @@
                     <input type="radio" class="wish_size" name="wish_size" value="40">40평 대
                     <input type="radio" class="wish_size" name="wish_size" value="50">50평 이상
                     <div>
-                        <input type="text" name="wish_size_text" id="size_text" th:value="${wish_dto?.wish_size_text}"
-                               placeholder="참고">
+                        <input type="text" name="wish_size_text" id="size_text" th:value="${wish_dto?.wish_size_text}" placeholder="참고">
                     </div>
                     <div>
-                        <p>평수를 모르신다면 참고란에 적어주세요.</p>
-                        <p>평수를 정확히 알고 계신다면 참고란에 적어주세요.</p>
+                        <p>정확한 평수를 알고 계신다면 적어주세요.</p>
                     </div>
                 </div>
             </div>
-            <br>
+
+            <br><!---------------------------------------------------------------------------------------------->
+
             <div>
                 <div>예산</div>
                 <div>
@@ -97,14 +133,18 @@
                            name="wish_money" id="money" th:value="${wish_dto?.wish_money}" placeholder="예산을 적어주세요.">만원
                 </div>
             </div>
-            <br>
-            <div>견적부분은 전체 인테리어 형식으로 작성됩니다.</div>
-            <div>부분 및 상세조정은 참고란에 작성해주세요.</div>
-        </div>
+
+             <br><!---------------------------------------------------------------------------------------------->
+
+            <div>견적요청시 작성하신 내용으로 신청되오니, 최대한 정확히 작성해주세요.</div>
+            <div>참고란에는 최대한 구체적으로 작성해주세요.</div>
+        </div><!---------------------------------------------------------------------------------------------->
+
         <br>
         <hr>
         <br>
         <!-- 아래부터 시공 선택 사항 -->
+        <!---------------------------------------------------------------------------------------------->
         <div class="remove">
             <div>
                 <input type="checkbox" name="category_number" class="major_category_number" value="1">철거
@@ -113,56 +153,42 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="wood">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="2">목공
                 <ul>
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="17"
-                               id="wood_hot">단열
-                    </li>
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="18"
-                               id="wood_ceiling">천장
-                    </li>
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="19"
-                               id="wood_walls">벽
-                    </li>
-                    <li>
-                        <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
-                    </li>
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="17" id="wood_hot">단열</li>
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="18" id="wood_ceiling">천장</li>
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="19" id="wood_walls">벽</li>
+                    <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="paper">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="3">도배
                 <ul>
-                    <li>
-                        <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
-                    </li>
+                    <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="elec">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="4">전기
                 <ul>
-                    <li>
-                        <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
-                    </li>
+                    <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="light">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="5">조명
                 <ul>
-                    <li>
-                        <input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요.">
-                    </li>
+                    <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="tile">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="6">타일
                 <ul>
@@ -170,7 +196,7 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="film">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="7">필름
                 <ul>
@@ -182,7 +208,7 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="coating">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="8">도장
                 <ul>
@@ -190,7 +216,7 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="kitchen">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="9">부엌
                 <ul>
@@ -201,7 +227,7 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="bath">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="10">욕실
                 <ul>
@@ -211,7 +237,7 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="storage">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="11">수납
                 <ul>
@@ -222,7 +248,7 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="floor">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="12">바닥
                 <ul>
@@ -234,7 +260,7 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="window">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="13">창호
                 <ul>
@@ -245,7 +271,7 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="door">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="14">도어
                 <ul>
@@ -253,7 +279,7 @@
                 </ul>
             </div>
         </div>
-        <br>
+        <br><!---------------------------------------------------------------------------------------------->
         <div class="mdoor">
             <div><input type="checkbox" class="major_category_number" value="15" name="category_number">중문
                 <ul>
@@ -263,10 +289,9 @@
                     <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
-            <br>
+            <br><!---------------------------------------------------------------------------------------------->
             <div class="ready">
-                <div><input type="checkbox" class="major_category_number" value="16" name="category_number">공사준비/마감
-                </div>
+                <div><input type="checkbox" class="major_category_number" value="16" name="category_number">공사준비/마감</div>
                 <ul>
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="42">입주민동의서</li>
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="43">EV보양 및 실내외 보양</li>
@@ -274,15 +299,15 @@
                 </ul>
             </div>
         </div>
+        <br><!---------------------------------------------------------------------------------------------->
         <!--  여기서 버튼 누르면 DB로 넘어감  -->
-        <br>
         <div><input type="button" value="위시 저장" onclick="clickbtn()"></div>
     </form>
 </div>
 <div>
     <!--   footer   -->
 </div>
-<script th:inline="javascript">
+<script>
     function clickbtn() {
         const title_input = $('.title_class');
         const wish_type = $('.wish_type');
@@ -303,48 +328,13 @@
         }
     }
 
-    // 주거형태
-    const wish_type = [[${wish_dto?.wish_type}]];
-    switch (wish_type) {
-        case "아파트":
-            document.querySelectorAll('input[type=radio]')[0].setAttribute("checked", true)
-            break;
-        case "단독주택":
-            document.querySelectorAll('input[type=radio]')[1].setAttribute("checked", true)
-            break;
-        case "빌라":
-            document.querySelectorAll('input[type=radio]')[2].setAttribute("checked", true)
-            break;
-    }
-    // 평형대
-    const wish_size = [[${wish_dto?.wish_size}]];
-    switch (wish_size) {
-        case "10":
-            document.querySelectorAll('input[type=radio]')[3].setAttribute("checked", true)
-            break;
-        case "20":
-            document.querySelectorAll('input[type=radio]')[4].setAttribute("checked", true)
-            break;
-        case "30":
-            document.querySelectorAll('input[type=radio]')[5].setAttribute("checked", true)
-            break;
-        case "40":
-            document.querySelectorAll('input[type=radio]')[6].setAttribute("checked", true)
-            break;
-        case "50":
-            document.querySelectorAll('input[type=radio]')[7].setAttribute("checked", true)
-            break;
-    }
-
-    const categorys = [[${category_list_dto}]];
-    console.log(document.querySelectorAll(".major_category_number")[0])
+    const categorys = "[[${category_list_dto}]]";
     categorys.forEach(category => {
         category.sub_category.forEach(sub => {
             console.log(category)
             switch (category.major_category) {
                 case "철거":
                     document.querySelectorAll(".major_category_number")[0].setAttribute("checked", true)
-                    console.log(document.querySelectorAll(".major_category_number")[0].nextElementSibling)
                     document.querySelectorAll(".major_category_number")[0].nextElementSibling.style.display = "block";
                     document.querySelectorAll(".major_text")[0].value = category.major_text;
                     break;
