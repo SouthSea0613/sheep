@@ -7,7 +7,10 @@
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<link rel="stylesheet" href="/css/index.css">
 	<script th:inline="javascript">
+		let num = 0;
 		function writetab(){
+
+			if(num===0){
 			axios.post('/takeoff/seller/my_list',{
 				user_id : [[${session.user_id}]]
 			}).then((res)=>{
@@ -17,19 +20,19 @@
 					const content = document.getElementById('writetakeoff')
 					enterlist.style.display = 'none';
 					res.data.forEach(list=>{
-						content.innerHTML+='<div>'+list.wish_title+'</div>'
+						content.innerHTML+='<div id="entercontent">'+list.wish_title+'</div>'
 					})
-
-
+					num=1;
 				}
 			})
-
+			}
 		}
 		function entertab(){
 			const enterlist = document.getElementById('enterlist')
 			const content = document.getElementById('writetakeoff')
 			enterlist.style.display ='block';
 			content.textContent="";
+			num=0;
 		}
 	</script>
 </head>
@@ -51,7 +54,7 @@
 			<a th:href="@{takeoff/seller/detail(wish_number=${takeofflist.wish_number})}"></a>
 			<div th:if="${takeofflist.user_id}"></div>
 			<div th:text="${takeofflist.user_id}"></div>
-			<div th:text="'시공주소: ' + ${takeofflist.wish_title}"></div>
+			<div th:text="${takeofflist.wish_title}"></div>
 		</th:block>
 	</th:block>
 </div>
