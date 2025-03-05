@@ -3,14 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+	<link rel="stylesheet" href="/css/headerfooter.css">
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
 	<script th:src="@{/javascript/mypage.js}"></script>
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>회원정보수정</h2><br>
-
 <div>
 	<form th:action="@{/mypage/write}" method="post" id="insert_info">
 		아이디
@@ -86,6 +87,7 @@
 		}
 	</script>
 </div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
 <script th:inline="javascript">

@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 1000px;
+}
+
+/* header */
+
+header {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+
+}
+
+.header_top {
+    background-color: #B6C2CE;
+    min-height: 58px;
+    line-height: 58px;
+}
+
+.header_left {
+    text-align:center;
+}
+
+.header_right {
+    float: right !important;
+}
+
+.header_right li {
+    float: right;
+    list-style: none;
+}
+
+.header_left ul {
+
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.header_left li {
+    display: inline-block;
+    list-style: none;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+li {
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.logo {
+    float: left;
+    width: 75px;
+    height: 58px;
+    background-color: cornflowerblue;
+}
+
+.header_content {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.success {
+    display: none;
+}
+
+.before {
+    display: block;
+}
+
+/* footer */
+
+.footer_bottom {
+    height: 58px;
+    position: absolute;
+    width: 100%;
+    background-color: lightgray;
+    min-height: 58px;
+    line-height: 58px;
+}
+
+.footer_content {
+    text-align: center;
+}
+
+li.user {
+    display: none;
+}
+
+li.seller{
+    display: none;
+}
+
+li.engineer{
+    display: none;
+}
+
+.list_box {
+    display: none;
+    width: 180px;
+    background-color: lightslategrey;
+}
+
+.list_box div {
+    display: none;
+}

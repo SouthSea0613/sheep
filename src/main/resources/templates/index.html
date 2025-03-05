@@ -4,10 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/index.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.17/jquery.bxslider.min.js"
+            integrity="sha512-LaBO0tZh1+6Ebk+EnHt/WsGM0UnmkCXfQ1rfhGmpa5MXUdslNuSSELBRcteHKz4k4ny+Op10Ax2fPoTNq+VcUg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
-    <link rel="stylesheet" href="./css/index.css">
     <script defer src="/javascript/common.js"></script>
     <script th:inline="javascript">
         const user = [[${session?.user_id}]];
@@ -17,6 +21,11 @@
             console.log(type)
             userType();
             loginStatus();
+
+            $(".slider").bxSlider({
+                auto: true,
+                slideWidth: 600,
+            })
         })
     </script>
     <style>
@@ -30,7 +39,22 @@
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
 <!--  슬라이드 배너  -->
-
+    <div class="content-home">
+        <div class="slider">
+            <div>
+                <img src="/image/malrangcow.jpg">
+            </div>
+            <div>
+                <img src="/image/sky.jpg">
+            </div>
+            <div>
+                <img src="">
+            </div>
+            <div>
+                <img src="">
+            </div>
+        </div>
+    </div>
 
 <!--  브랜드 설명  -->
     <div class="brand_ex">
@@ -77,10 +101,7 @@
         <hr>
     </div>
 </div>
-
-
 <th:block th:replace="~{common/fragment::footer}"></th:block>
-
 <script>
     var container = document.getElementById('map');
     var options = {

@@ -3,10 +3,10 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+	<link rel="stylesheet" href="/css/headerfooter.css">
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
-	<link rel="stylesheet" href="./css/index.css">
 	<script>
 		function id_check2() {
 			let data = {};
@@ -75,7 +75,7 @@
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<section>
+<div class="main_content">
 	<h2>비밀번호 재설정</h2>
 
 	<form th:action="@{/user/pw_reset}" th:method="post" id="pw_reset_form">
@@ -95,8 +95,7 @@
 
 		<input type="button" value="비밀번호 재설정" onclick="pw_reset()">
 	</form>
-
-</section>
+</div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
