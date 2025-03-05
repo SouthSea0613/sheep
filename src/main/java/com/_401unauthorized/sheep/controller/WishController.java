@@ -153,4 +153,20 @@ public class WishController {
             return "redirect:/wish/detail";
         }
     }
+
+    @GetMapping("/takeoffDetail")
+    public String takeoffDetail(@RequestParam("wish_number") Integer wish_number, Model model) {
+        if (wish_number == null || wish_number < 1) {
+            return "redirect:/takeoff/seller/list";
+        }
+        WishDto takeoffDto = wishService.essential(wish_number);
+        List<CategoryListDto> takeoffSellerDto = wishService.takeoff(wish_number);
+        if (takeoffDto != null) {
+            model.addAttribute("takeoffDto", takeoffDto);
+            model.addAttribute("takeoffSellerDto", takeoffSellerDto);
+            return "takeoff/seller/detail";
+        } else {
+            return "redirect:/takeoff/seller/list";
+        }
+    }
 }

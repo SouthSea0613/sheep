@@ -61,7 +61,7 @@
         ON W.USER_ID=A.USER_ID
         AND W.WISH_NUMBER = A.WISH_NUMBER
         WHERE W.WISH_NUMBER=#{wishNumber}
-        GROUP BY W.USER_ID,W.WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS;
+        GROUP BY W.USER_ID,W.WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
@@ -69,6 +69,6 @@
         FROM WISH W
         JOIN WISH_CATEGORY_SELLER S
         ON W.WISH_NUMBER = S.WISH_NUMBER
-        WHERE S.USER_ID=#{userid};
+        WHERE S.USER_ID=#{userid}
     </select>
 </mapper>
