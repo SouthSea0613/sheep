@@ -15,4 +15,5 @@ public interface TakeoffDao {
     List<TakeoffDto> list(Integer wishNumber);
     boolean update_status(Integer wishNumber, String applyStatus);
     List<TakeoffDto> my_list(String userid);
+    boolean complete(Integer wish_number);
 }

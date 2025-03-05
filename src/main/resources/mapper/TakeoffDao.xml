@@ -18,8 +18,14 @@
 
     <update id="update_status">
         UPDATE APPLY_STATUS
-        SET APPLY_STATUS = 2
+        SET APPLY_STATUS = 1
         WHERE WISH_NUMBER = #{wish_number}
+    </update>
+
+    <update id="complete">
+        UPDATE APPLY_STATUS
+        SET APPLY_STATUS = 2
+            WHERE WISH_NUMBER = #{wish_number}
     </update>
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">

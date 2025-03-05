@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        function complete() {
+            location.href="/takeoff/complete";
+        }
+    </script>
 </head>
 <style>
     ul {
@@ -32,9 +37,9 @@
                 <div th:text="${subcategory}">중분류 넘버</div>
             </th:block>
         </th:block>
-        <div>
+        <div th:if="${takeoffDto?.apply_status == '1'}">
             <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
-            <input type="submit" value="계약완료">
+            <input type="submit" onclick="complete()" value="계약완료">
         </div>
     </form>
 </div>
