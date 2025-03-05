@@ -7,7 +7,11 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<<<<<<< HEAD
 	<link rel="stylesheet" href="/css/index.css">
+=======
+	<link rel="stylesheet" href="./css/index.css">
+>>>>>>> yoonsic2
 	<style>
 		.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
 		.wrap * {padding: 0;margin: 0;}
@@ -42,17 +46,10 @@
 <span id="guide" style="color:#999;display:none"></span>
 <input type="text" id="sample4_detailAddress" placeholder="상세주소">
 <input type="text" id="sample4_extraAddress" placeholder="참고항목">
+<<<<<<< HEAD
 
+=======
+>>>>>>> yoonsic2
 <th:block th:replace="~{common/fragment::footer}"></th:block>
-
-<script>
-    var container = document.getElementById('map');
-    var options = {
-        center: new kakao.maps.LatLng(37.43887833749142, 126.67511828936453),
-        level: 3
-    };
-
-    var map = new kakao.maps.Map(container, options);
-</script>
 </body>
 </html>
