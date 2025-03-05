@@ -54,7 +54,7 @@ public class TakeoffController {
         if (takeoffDto != null) {
             model.addAttribute("takeoffDto", takeoffDto);
             model.addAttribute("takeoffSellerDto", takeoffSellerDto);
-            return "/takeoff/seller/detail";
+            return "takeoff/seller/detail";
         } else {
             return "redirect:/takeoff/seller/list";
         }

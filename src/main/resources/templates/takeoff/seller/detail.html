@@ -28,7 +28,7 @@
             <div th:text="${takeoffSeller?.major_text}">대분류 텍스트</div><br>
             <div th:text="${takeoffSeller?.wish_category_seller_price}">견적금액</div><br>
             <div th:text="${takeoffSeller?.wish_category_seller_answer}">판매자답변</div><br>
-            <th:block th:each="subcategory:${category.sub_category}">
+            <th:block th:each="subcategory:${takeoffDto.sub_category}">
                 <div th:text="${subcategory}">중분류 넘버</div>
             </th:block>
         </th:block>

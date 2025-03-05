@@ -19,5 +19,4 @@ public class CategoryListDto {
     List<String> sub_category;
     String wish_category_seller_answer;
     int wish_category_seller_price;
-
 }

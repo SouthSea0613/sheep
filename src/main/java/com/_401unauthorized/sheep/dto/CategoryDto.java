@@ -15,4 +15,6 @@ public class CategoryDto {
     String category_number;
     String major_text;
     String category_parent;
+    String wish_category_seller_answer;
+    int wish_category_seller_price;
 }

@@ -67,12 +67,12 @@ public class TakeoffService {
             } else {
                 List<String> takeoffCategoryList = new ArrayList<>();
                 takeoffCategoryList.add(takeCategory.getCategory_number());
-
                 CategoryListDto takeoff_list_category = new CategoryListDto();
                 takeoff_list_category.setMajor_category(takeCategory.getCategory_parent());
                 takeoff_list_category.setMajor_text(takeCategory.getMajor_text());
                 takeoff_list_category.setSub_category(takeoffCategoryList);
-
+                takeoff_list_category.setWish_category_seller_answer((takeCategory.getWish_category_seller_answer()));
+                takeoff_list_category.setWish_category_seller_price(takeCategory.getWish_category_seller_price());
                 takeoffSellerDto.add(takeoff_list_category);
             }
         }
@@ -82,7 +82,7 @@ public class TakeoffService {
                 case "1":
                     major.setMajor_category("철거");
                     break;
-                    case "2":
+                case "2":
                     major.setMajor_category("목공");
                     break;
                 case "3":
