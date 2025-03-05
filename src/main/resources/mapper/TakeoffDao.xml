@@ -69,6 +69,10 @@
         FROM WISH W
         JOIN WISH_CATEGORY_SELLER S
         ON W.WISH_NUMBER = S.WISH_NUMBER
+<<<<<<< HEAD
         WHERE S.USER_ID=#{userid} GROUP BY W.WISH_NUMBER
+=======
+        WHERE S.USER_ID=#{userid}
+>>>>>>> jieun
     </select>
 </mapper>
