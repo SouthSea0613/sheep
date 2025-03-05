@@ -6,6 +6,32 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<link rel="stylesheet" href="/css/index.css">
+	<script th:inline="javascript">
+		function writetab(){
+			axios.post('/takeoff/seller/my_list',{
+				user_id : [[${session.user_id}]]
+			}).then((res)=>{
+				console.log(res);
+				if(res.data!=null){
+					const enterlist = document.getElementById('enterlist')
+					const content = document.getElementById('writetakeoff')
+					enterlist.style.display = 'none';
+					res.data.forEach(list=>{
+						content.innerHTML+='<div>'+list.wish_title+'</div>'
+					})
+
+
+				}
+			})
+
+		}
+		function entertab(){
+			const enterlist = document.getElementById('enterlist')
+			const content = document.getElementById('writetakeoff')
+			enterlist.style.display ='block';
+			content.textContent="";
+		}
+	</script>
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
@@ -15,15 +41,21 @@
 		<a th:href="@{takeoff/seller/location_insert}"></a>
 	</th:block>
 </div>
-<div>
+<div class="">
+	<input type="button" class="" value="들어온 견적" onclick="entertab()">
+	<input type="button" class="" value="작성한 견적" onclick="writetab()">
+</div>
+<div id="enterlist">
 	<th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
 		<th:block th:each="takeofflist : ${seller_takeoff_list}">
 			<div th:if="${takeofflist.user_id}"></div>
 			<div th:text="${takeofflist.user_id}"></div>
 			<div th:text="'시공주소: ' + ${takeofflist.wish_title}"></div>
-			<div th:text="시공분야"></div>
 		</th:block>
 	</th:block>
+</div>
+<div id="writetakeoff">
+
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>

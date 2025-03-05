@@ -72,9 +72,20 @@ public class TakeoffController {
         log.info(takeoffdtolist+"테스트");
         return takeoffdtolist;
     }
+    @PostMapping("/seller/my_list")
+    @ResponseBody
+    public List<TakeoffDto> writelist(@RequestBody TakeoffDto takeoffDto,HttpSession httpsession){
+        log.info("컨트롤러 테스트");
+        List<TakeoffDto> takeoffdtolist = takeoffService.my_list(httpsession.getAttribute("user_id").toString());
+        log.info(takeoffdtolist+"테스트");
+        return takeoffdtolist;
+    }
+
     @PostMapping("/changestatus")
     @ResponseBody
     public boolean status(@RequestBody TakeoffDto takeoffdto){
         return takeoffService.update_status(takeoffdto.getWish_number(),takeoffdto.getApply_status());
     }
+
+
 }

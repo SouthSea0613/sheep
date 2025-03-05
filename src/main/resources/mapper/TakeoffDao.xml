@@ -30,4 +30,7 @@
         WHERE W.WISH_NUMBER=#{wishNumber}
         GROUP BY W.USER_ID,W.WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS;
     </select>
+    <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
+        SELECT W.WISH_TITLE FROM WISH W JOIN WISH_CATEGORY_SELLER S ON W.WISH_NUMBER = S.WISH_NUMBER WHERE S.USER_ID=#{userid};
+    </select>
 </mapper>

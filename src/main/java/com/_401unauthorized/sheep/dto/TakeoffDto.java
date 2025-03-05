@@ -16,6 +16,7 @@ import lombok.experimental.Accessors;
 public class TakeoffDto {
     String user_id;
     Integer wish_number;
+    String wish_title;
     String major_category;
     String major_text;
     List<String> sub_category;
