@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    ul {
+        list-style-type: none;
+    }
+</style>
+<body>
+<div>
+    <!--header-->
+</div>
+<section>
+<div>
+    <!--  위 div는 전체 묶음  -->
+    <form action="/takeoff/complete" method="get">
+        <div th:text="${takeoffDto?.wish_addr}">주소</div><br>
+        <div th:text="${takeoffDto?.wish_type}">주거형태</div><br>
+        <div th:text="${takeoffDto?.wish_size}">평수</div><br>
+        <div th:text="${takeoffDto?.wish_size_text}">평수상세</div><br>
+        <div th:text="${takeoffDto?.wish_money}+만원">예산</div><br>
+
+        <th:block th:each="takeoffSeller:${takeoffSellerDto}">
+            <div th:text="${takeoffSeller?.major_category}">대분류 넘버</div>
+            <div th:text="${takeoffSeller?.major_text}">대분류 텍스트</div><br>
+            <div th:text="${takeoffSeller?.wish_category_seller_price}">견적금액</div><br>
+            <div th:text="${takeoffSeller?.wish_category_seller_answer}">판매자답변</div><br>
+            <th:block th:each="subcategory:${takeoffDto.sub_category}">
+                <div th:text="${subcategory}">중분류 넘버</div>
+            </th:block>
+        </th:block>
+        <div>
+            <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
+            <input type="submit" value="계약완료">
+        </div>
+    </form>
+</div>
+</section>
+<div>
+    <!--   footer   -->
+</div>
+</body>
+</html>

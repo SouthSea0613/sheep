@@ -11,10 +11,12 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Builder
 @Accessors(chain = true)
-public class CategoryDto {
+public class TakeoffSellerDto {
+    String major_category;
     String category_number;
     String major_text;
-    String category_parent;
-    String wish_category_seller_answer;
-    int wish_category_seller_price;
+    String apply_status;
+
+
+
 }

@@ -2,7 +2,11 @@ package com._401unauthorized.sheep.controller;
 
 import com._401unauthorized.sheep.dto.ApplyDto;
 import com._401unauthorized.sheep.dto.CategoryListDto;
+<<<<<<< HEAD
 import com._401unauthorized.sheep.dto.TakeoffDto;
+=======
+import com._401unauthorized.sheep.dto.TakeoffSellerDto;
+>>>>>>> jieun
 import com._401unauthorized.sheep.dto.WishDto;
 import com._401unauthorized.sheep.service.SellerService;
 import com._401unauthorized.sheep.service.TakeoffService;
@@ -49,19 +53,19 @@ public class TakeoffController {
         return "takeoff/seller/list";
     }
 
-    @GetMapping("/detail")
+    @GetMapping("/seller/detail")
     public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
         if (wish_number == null || wish_number < 1) {
-            return "redirect:/list";
+            return "redirect:/takeoff/seller/list";
         }
-        WishDto wishDto = wishService.essential(wish_number);
-        List<CategoryListDto> categoryListDtoList = takeoffService.category(wish_number);
-        if (wishDto != null) {
-            model.addAttribute("wishDto", wishDto);
-            model.addAttribute("categoryListDtoList", categoryListDtoList);
-            return "/detail";
+        WishDto takeoffDto = takeoffService.essential(wish_number);
+        List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number);
+        if (takeoffDto != null) {
+            model.addAttribute("takeoffDto", takeoffDto);
+            model.addAttribute("takeoffSellerDto", takeoffSellerDto);
+            return "takeoff/seller/detail";
         } else {
-            return "redirect:/list";
+            return "redirect:/takeoff/seller/list";
         }
     }
     @PostMapping("/list")
