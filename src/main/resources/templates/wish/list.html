@@ -57,8 +57,8 @@
                     closebtn.style.display = 'block';
                     btn.style.display = 'none';
                     res.data.forEach(resp => {
-                        takeofflist.innerHTML +=  '<div id="takeoffdiv">' + '<span>'+ '<a  href="/takeoff/detail?wish_number=" th:href="@{/takeoff/detail(wish_number='+wishnumber+')}">' +resp.user_id + '</span>'
-                        takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" +'</a>'+ '</span>' + '</div>';
+                        takeofflist.innerHTML +=  '<div id="takeoffdiv">' + '<span>'+ '<a href="/takeoff/seller/detail?wish_number='+ wishnumber +'" th:href="@{/takeoff/detail(wish_number='+wishnumber+')}" th:text="' + resp.user_id + '">'+resp.user_id+'</a>' + '</span>'
+                        takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
                         takeofflist.innerHTML += '<span>' + resp.apply_status + '</span>';
                     })
                 })
