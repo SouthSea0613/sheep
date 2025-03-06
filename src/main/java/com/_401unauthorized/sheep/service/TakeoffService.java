@@ -27,8 +27,8 @@ public class TakeoffService {
         }
     }
 
-    public WishDto essential(Integer wish_number) {
-        WishDto takeoffDto = takeoffDao.get_wish_detail(wish_number);
+    public WishDto essential(Integer wish_number, String user_id) {
+        WishDto takeoffDto = takeoffDao.get_wish_detail(wish_number,user_id);
         if (takeoffDto.getWish_type() != null) {
             switch (takeoffDto.getWish_type()) {
                 case "1":
@@ -72,8 +72,8 @@ public class TakeoffService {
         return takeoffDto;
     }
 
-    public List<CategoryListDto> takeoff(Integer wish_number) {
-        List<CategoryDto> takeoffCategoryDto = takeoffDao.get_category_detail(wish_number);
+    public List<CategoryListDto> takeoff(Integer wish_number, String user_id) {
+        List<CategoryDto> takeoffCategoryDto = takeoffDao.get_category_detail(wish_number, user_id);
         List<CategoryListDto> takeoffSellerDto = new ArrayList<>();
 
         for (CategoryDto takeCategory : takeoffCategoryDto) {

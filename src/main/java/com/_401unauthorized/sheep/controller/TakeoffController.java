@@ -129,12 +129,12 @@ public class TakeoffController {
     }
 
     @GetMapping("/seller/detail")
-    public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
+    public String detail(@RequestParam("wish_number") Integer wish_number, @RequestParam("user_id") String user_id, Model model) {
         if (wish_number == null || wish_number < 1) {
             return "takeoff/seller/list";
         }
-        WishDto takeoffDto = takeoffService.essential(wish_number);
-        List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number);
+        WishDto takeoffDto = takeoffService.essential(wish_number,user_id);
+        List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number, user_id);
         if (takeoffDto != null) {
             model.addAttribute("takeoffDto", takeoffDto);
             model.addAttribute("takeoffSellerDto", takeoffSellerDto);

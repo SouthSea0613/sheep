@@ -17,6 +17,7 @@ public class CategoryListDto {
     String major_category;
     String major_text;
     List<String> sub_category;
+    String user_id;
     String wish_category_seller_answer;
     int wish_category_seller_price;
 }
