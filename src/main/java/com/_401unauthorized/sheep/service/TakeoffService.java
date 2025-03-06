@@ -229,17 +229,12 @@ public class TakeoffService {
       List<TakeoffDto> takeoffdtolist = takeoffDao.list(wishNumber);
         switch(takeoffdtolist.get(1).getApply_status()){
             case "1" :
-//                takeoffdtolist.set(7,"상담중");
                 break;
             case "2" :
                 break;
 
         }
         return takeoffDao.list(wishNumber);
-    }
-
-    public boolean update_status(Integer wishNumber, String applyStatus) {
-        return takeoffDao.update_status(wishNumber,applyStatus);
     }
 
     public List<TakeoffDto> my_list(String userid) {
@@ -255,6 +250,13 @@ public class TakeoffService {
         for (TakeoffSellerDto takeoffsellerDto : takeoffsellerdto) {
             boolean result2 = takeoffDao.write(takeoffsellerDto);
             if (!result2) {
+                return false;
+            }
+        }
+        Integer result3 = takeoffDao.counttakeoff(wish_number);
+        if(result3>0){
+            boolean result4 = takeoffDao.updatestatus(wish_number);
+            if(!result4){
                 return false;
             }
         }

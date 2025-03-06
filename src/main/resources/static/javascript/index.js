@@ -46,10 +46,15 @@ function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete : data => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             $('#sample6_postcode').val(data.zonecode);
 
 >>>>>>> 96fee67ee035d4c5c2096191f09af631cc010720
+=======
+            $('#sample6_postcode').val(data.zonecode);
+
+>>>>>>> 31d63d6d9c58ef1c132e61806f16cb791a989a08
             if (data.userSelectedType === 'R') {
                 $("#sample6_address").val(data.roadAddress);
             }
@@ -59,7 +64,10 @@ function sample6_execDaumPostcode() {
 <<<<<<< HEAD
 =======
 
+<<<<<<< HEAD
 >>>>>>> 96fee67ee035d4c5c2096191f09af631cc010720
+=======
+>>>>>>> 31d63d6d9c58ef1c132e61806f16cb791a989a08
             $("#sample6_detailAddress").focus();
         }
     }).open();

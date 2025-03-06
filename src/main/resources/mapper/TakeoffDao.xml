@@ -16,6 +16,7 @@
         VALUES (#{user_id}, #{wish_number}, 0)
     </insert>
 
+<<<<<<< HEAD
     <update id="update_status">
         UPDATE APPLY_STATUS
         SET APPLY_STATUS = 1
@@ -26,6 +27,10 @@
         UPDATE APPLY_STATUS
         SET APPLY_STATUS = 2
         WHERE WISH_NUMBER = #{wish_number}
+=======
+    <update id="updatestatus">
+        UPDATE APPLY_STATUS SET APPLY_STATUS=1 WHERE WISH_NUMBER = #{wishNumber}
+>>>>>>> 31d63d6d9c58ef1c132e61806f16cb791a989a08
     </update>
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
@@ -80,5 +85,8 @@
         JOIN WISH_CATEGORY_SELLER S
         ON W.WISH_NUMBER = S.WISH_NUMBER
         WHERE S.USER_ID=#{userid} GROUP BY W.WISH_NUMBER
+    </select>
+    <select id="counttakeoff" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM WISH_CATEGORY_SELLER WHERE WISH_NUMBER=#{wishNumber} GROUP BY WISH_NUMBER;
     </select>
 </mapper>

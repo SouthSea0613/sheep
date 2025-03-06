@@ -57,8 +57,8 @@
                     closebtn.style.display = 'block';
                     btn.style.display = 'none';
                     res.data.forEach(resp => {
-                        takeofflist.innerHTML +=  '<div id="takeoffdiv">' + '<span>'+ '<a  href="/takeoff/detail?wish_number=" th:href="@{/takeoff/detail(wish_number='+wishnumber+')}">' +resp.user_id + '</span>'
-                        takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" +'</a>'+ '</span>' + '</div>';
+                        takeofflist.innerHTML +=  '<div id="takeoffdiv">' + '<span>'+ '<a href="/takeoff/seller/detail?wish_number='+ wishnumber +'" th:href="@{/takeoff/detail(wish_number='+wishnumber+')}" th:text="' + resp.user_id + '">'+resp.user_id+'</a>' + '</span>'
+                        takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
                         takeofflist.innerHTML += '<span>' + resp.apply_status + '</span>';
                     })
                 })
@@ -71,13 +71,7 @@
                 }
         }
         function confirm(){
-            const wishnumber = btn.previousElementSibling.value
-            const applystatus = document.getElementById('applystatus');
-            axios.post('/takeoff/changestatus',{
-                wish_number :wishnumber,
-                apply_status: 1,
-            }).then(()=>{
-            })
+
         }
     </script>
 </head>
@@ -105,10 +99,11 @@
             </div>
 
         <div class="">
+            <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
                 <input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">
                 <input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">
-
+            </div>
             <div class="test">
             <div class="takeoff_list">
 
