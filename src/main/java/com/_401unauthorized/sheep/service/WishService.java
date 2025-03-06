@@ -99,6 +99,30 @@ public class WishService {
                     break;
             }
         }
+            if (wishDto.getApply_status() != null) {
+                switch (wishDto.getApply_status()) {
+                    case "0":
+                        wishDto.setApply_status("대기중");
+                        break;
+
+                    case "1":
+                        wishDto.setApply_status("상담중");
+                        break;
+
+                    case "2":
+                        wishDto.setApply_status("계약완료");
+                        break;
+
+                    case "3":
+                        wishDto.setApply_status("취소");
+                        break;
+
+                    case "4":
+                        wishDto.setApply_status("기간만료");
+                        break;
+                }
+            }
+        log.info("지금 상태는?" + wishDto.getApply_status());
         return wishDto;
     }
 

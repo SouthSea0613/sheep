@@ -25,16 +25,20 @@
     <update id="complete">
         UPDATE APPLY_STATUS
         SET APPLY_STATUS = 2
-            WHERE WISH_NUMBER = #{wish_number}
+        WHERE WISH_NUMBER = #{wish_number}
     </update>
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT * FROM WISH
-        WHERE WISH_NUMBER = #{wish_number}
+        SELECT WISH_TITLE, WISH_TYPE, WISH_SIZE, WISH_SIZE_TEXT, WISH_MONEY, WISH_ADDR, A.APPLY_STATUS
+        FROM APPLY_STATUS A
+                 LEFT JOIN
+             WISH W
+             ON W.WISH_NUMBER = A.WISH_NUMBER
+        WHERE W.WISH_NUMBER = #{wish_number};
     </select>
 
     <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
-        SELECT SELLER.WISH_NUMBER, SELLER.CATEGORY_PARENT, SELLER.CATEGORY_NUMBER, SELLER.MAJOR_TEXT, WCS.WISH_CATEGORY_SELLER_ANSWER, WCS.WISH_CATEGORY_SELLER_PRICE
+        SELECT SELLER.CATEGORY_PARENT, SELLER.CATEGORY_NUMBER, SELLER.MAJOR_TEXT, WCS.WISH_CATEGORY_SELLER_ANSWER, WCS.WISH_CATEGORY_SELLER_PRICE
         FROM WISH_CATEGORY_SELLER WCS
         RIGHT JOIN (
             SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
