@@ -15,8 +15,8 @@ import java.util.List;
 public class SellerService {
     private final SellerDao sellerDao;
 
-    public List<WishDto> seller_list(String userId) {
-        List<WishDto> sellerlist = sellerDao.seller_list(userId);
+    public List<WishDto> seller_list(String user_id) {
+        List<WishDto> sellerlist = sellerDao.seller_list(user_id);
         for (WishDto seller : sellerlist) {
             log.info(seller.toString());
         }

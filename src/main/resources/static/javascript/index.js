@@ -56,8 +56,8 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
-function userType(user_id, type_id) {
-    if (user_id) {
+function userType(common_user_id, type_id) {
+    if (common_user_id) {
         $('#user_name').val(`${user}님`);
         $('.success').css('display','block');
         $('.before').css('display', 'none');

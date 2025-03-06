@@ -2,13 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.SellerDao">
     <select id="seller_list" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT W.WISH_NUMBER,W.USER_ID,W.WISH_TITLE,SA.APPLY_STATUS FROM WISH W
+        SELECT WA.WISH_NUMBER,WA.WISH_TITLE,WA.USER_ID,WA.APPLY_STATUS
+        FROM SELLER S
         JOIN
-            (
-            SELECT S.SELLER_AREA,A.APPLY_STATUS,A.USER_ID FROM SELLER S
-            JOIN APPLY_STATUS A
-            ON S.USER_ID = A.USER_ID
-            WHERE A.APPLY_STATUS=0) AS SA
-        WHERE W.WISH_TITLE LIKE CONCAT(SA.SELLER_AREA,'%') GROUP BY W.WISH_NUMBER
+            (SELECT W.WISH_NUMBER,W.USER_ID,W.WISH_TITLE,A.APPLY_STATUS FROM WISH W JOIN APPLY_STATUS A ON W.WISH_NUMBER = A.WISH_NUMBER WHERE A.APPLY_STATUS=0) AS WA
+            WHERE WA.WISH_TITLE LIKE CONCAT(S.SELLER_AREA,'%')
+        AND S.USER_ID=#{user_id}
+        GROUP BY WA.WISH_NUMBER
     </select>
 </mapper>

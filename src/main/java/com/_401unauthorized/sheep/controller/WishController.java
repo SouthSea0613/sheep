@@ -153,22 +153,4 @@ public class WishController {
             return "redirect:/wish/detail";
         }
     }
-
-    // 소비자가 견적서보는거야!
-    @GetMapping("/takeoffDetail")
-    public String takeoffDetail(@RequestParam("wish_number") Integer wish_number, Model model) {
-        if (wish_number == null || wish_number < 1) {
-            return "wish/list";
-        }
-        WishDto takeoffDto = wishService.essential(wish_number);
-        List<CategoryListDto> takeoffSellerDto = wishService.takeoff(wish_number);
-        if (takeoffDto != null) {
-            model.addAttribute("takeoffDto", takeoffDto);
-            log.info("##현재 지금 상태는? "+takeoffDto.getApply_status());
-            model.addAttribute("takeoffSellerDto", takeoffSellerDto);
-            return "wish/takeoffDetail";
-        } else {
-            return "redirect:/wish/list";
-        }
-    }
 }

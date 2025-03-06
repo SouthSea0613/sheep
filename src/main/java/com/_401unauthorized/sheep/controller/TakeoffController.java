@@ -27,6 +27,7 @@ public class TakeoffController {
     private final WishService wishService;
     private final SellerService sellerService;
 
+    // (소비자) 위시리스트 에서 <견적요청>! -----------------------------
     @PostMapping("/call")
     @ResponseBody
     public boolean call(@RequestBody ApplyDto applydto) {
@@ -37,7 +38,9 @@ public class TakeoffController {
             return false;
         }
     }
+    //--------------------------------------------------------------
 
+    // (업체) 들어온 위시리스트 에서 <견적쓰기>! -------------------------------------------------
     @GetMapping("seller/write")
     public String write(@RequestParam("wish_number") Integer wish_number, Model model) {
         WishDto wishDto = wishService.essential(wish_number);
@@ -48,9 +51,15 @@ public class TakeoffController {
         }
         return "takeoff/seller/write";
     }
+    //----------------------------------------------------------------------------------------
 
+    // (업체) <견적쓰기> 에서 다 작성하고, <견적작성>! --------------------------------------------------
     @PostMapping("seller/write")
-    public String write(@RequestParam("wish_number") String wish_number, @RequestParam("category_number") List<String> category_number, @RequestParam("takeoff_content") List<String> takeoff_content, @RequestParam("takeoff_money") List<String> takeoff_money, HttpSession httpSession) {
+    public String write(@RequestParam("wish_number") String wish_number,
+                        @RequestParam("category_number") List<String> category_number,
+                        @RequestParam("takeoff_content") List<String> takeoff_content,
+                        @RequestParam("takeoff_money") List<String> takeoff_money,
+                        HttpSession httpSession) {
         String user_id = (httpSession.getAttribute("user_id").toString());
         TakeoffSellerDto takeoffsellerDto = new TakeoffSellerDto();
         takeoffsellerDto.setUser_id(user_id);
@@ -121,13 +130,9 @@ public class TakeoffController {
         }
         return "redirect:/seller/write?wish_number=" + wish_number;
     }
+    //-------------------------------------------------------------------------------------------
 
-    @GetMapping("/seller/list")
-    public String seller(HttpSession httpsession, Model model) {
-        model.addAttribute("seller_takeoff_list",sellerService.seller_list(httpsession.getAttribute("user_id").toString()));
-        return "takeoff/seller/list";
-    }
-
+    // (판매자 & 소비자) 판: 내가준 견적리스트 / 소: 들어온 견적리스트---------------------------------
     @GetMapping("/seller/detail")
     public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
         if (wish_number == null || wish_number < 1) {
@@ -143,21 +148,32 @@ public class TakeoffController {
             return "redirect:/takeoff/seller/list";
         }
     }
+    //-------------------------------------------------------------------------------------------
 
+    // 들어온 위시리스트 & 내가준 견적리스트 (화면)----------------------------------------------------------------------------------------------
+    @GetMapping("/seller/list")
+    public String seller(HttpSession httpsession, Model model) {
+        model.addAttribute("seller_takeoff_list",sellerService.seller_list(httpsession.getAttribute("user_id").toString()));
+        return "takeoff/seller/list";
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------
+
+    // 들어온 위시리스트 & 내가준 견적리스트 (axios) 리스트 최신화----------------------------------------------------------
     @PostMapping("/list")
     @ResponseBody
     public List<TakeoffDto> list(@RequestBody TakeoffDto takeoffDto){
         List<TakeoffDto> takeoffdtolist = takeoffService.list(takeoffDto.getWish_number());
         return takeoffdtolist;
     }
-
     @PostMapping("/seller/my_list")
     @ResponseBody
     public List<TakeoffDto> writelist(HttpSession httpsession){
         List<TakeoffDto> takeoffdtolist = takeoffService.my_list(httpsession.getAttribute("user_id").toString());
         return takeoffdtolist;
     }
+    //----------------------------------------------------------------------------------------------------------------
 
+    // (판매자) 내가준 견적리스트 에서 <계약완료>! ---------------------------------------
     @GetMapping("/complete")
     public String complete(@RequestParam("wish_number") Integer wish_number) {
         if (takeoffService.complete(wish_number)) {
@@ -166,5 +182,6 @@ public class TakeoffController {
             return "takeoff/seller/detail";
         }
     }
+    //--------------------------------------------------------------------------------
 }
 

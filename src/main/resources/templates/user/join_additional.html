@@ -5,6 +5,7 @@
 	<title>Title</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<link rel="stylesheet" href="./css/index.css">
 	<script>
 		function check() {
@@ -25,22 +26,28 @@
 		function seller_regnum_check() {
 			let data = {};
 			const seller_regnum = $('#seller_regnum');
-			data.seller_regnum = seller_regnum.val();
-			axios.post('/user/seller_regnum_check', data)
-				.then(res => {
-					console.log(res);
-					if (res.data) {
-						$('#seller_regnum_check').text('사용 가능한 사업자등록번호 입니다.');
-						$('#seller_regnum_val').val(1);
-					} else {
-						$('#seller_regnum_check').text('이미 사용중인 사업자등록번호 입니다.')
-						$('#seller_regnum_val').val(0);
-					}
-				})
-				.catch(err => {
-					$('#seller_regnum_check').text('');
-					$('#seller_regnum_val').val(0);
-				})
+			if (seller_regnum.val() !== '') {
+				data.seller_regnum = seller_regnum.val();
+				axios.post('/user/seller_regnum_check', data)
+						.then(res => {
+							console.log(res);
+							if (res.data) {
+								$('#seller_regnum_check').text('사용 가능한 사업자등록번호 입니다.');
+								$('#seller_regnum_val').val(1);
+							} else {
+								$('#seller_regnum_check').text('이미 사용중인 사업자등록번호 입니다.')
+								$('#seller_regnum_val').val(0);
+							}
+						})
+						.catch(() => {
+							$('#seller_regnum_check').text('');
+							$('#seller_regnum_val').val(0);
+						})
+			}
+			else {
+				$('#seller_regnum_check').text('');
+				$('#seller_regnum_val').val(0);
+			}
 		}
 
 		function join_addCheck_seller() {
@@ -56,6 +63,12 @@
 				seller_regnum.focus();
 				return false;
 			}
+			const seller_company = $('#seller_company');
+			if (seller_company.val() == '') {
+				alert('업체명을 입력하세요.');
+				seller_company.focus();
+				return false;
+			}
 			const seller_name = $('#seller_name');
 			if (seller_name.val() == '') {
 				alert('대표자 성함을 입력하세요.');
@@ -63,11 +76,20 @@
 				return false;
 			}
 			const seller_addr = $('#seller_addr');
-			if (seller_addr.val() == '') {
+			const address = $('#sample6_address');
+			const detail_address = $('#sample6_detailAddress');
+			seller_addr.val(address.val() +'@'+ detail_address.val());
+
+			if (address.val() == '') {
 				alert('사업자 주소를 입력하세요.');
-				seller_addr.focus();
 				return false;
 			}
+			if (detail_address.val() == '') {
+				alert('사업자 상세주소를 입력하세요.');
+				detail_address.focus();
+				return false;
+			}
+
 			$('#join_addForm_seller').submit();
 		}
 
@@ -86,8 +108,7 @@
 						$('#engineer_regnum_val').val(0);
 					}
 				})
-				.catch(err => {
-					console.log(err);
+				.catch(() => {
 					$('#engineer_regnum_check').text('');
 					$('#engineer_regnum_val').val(0);
 				})
@@ -119,13 +140,33 @@
 
 <form th:action="@{/user/join_additional_seller}" method="post" id="join_addForm_seller">
 	<div>
-		<input type="hidden" name="user_id" th:value="${param.user_id}">
-		사업자등록번호 <input type="text" name="seller_regnum" id="seller_regnum" onblur="seller_regnum_check()">
+		<input type="hidden" name="user_id" th:value="${param.user_id}"><br>
+		사업자등록번호 <input type="text" name="seller_regnum" id="seller_regnum" onblur="seller_regnum_check()"><br>
 		<span id="seller_regnum_check"></span><br>
 		<input id="seller_regnum_val" type="hidden" value="0">
 		업체명 <input type="text" id="seller_company" name="seller_company"><br>
 		대표자 <input type="text" id="seller_name" name="seller_name"><br>
-		주소 <input type="text" id="seller_addr" name="seller_addr"><br>
+
+		업체주소 <input type="hidden" id="seller_addr" name="seller_addr"><br>
+		<input type="button" onclick="find_addr()" value="주소 찾기"><br>
+		<input type="text" id="sample6_address" readonly placeholder="주소"><br>
+		<input type="text" id="sample6_detailAddress" placeholder="상세주소"><br>
+		<script>
+			function find_addr(){
+				new daum.Postcode({
+					oncomplete : data => {
+						if (data.userSelectedType === 'R') {
+							$("#sample6_address").val(data.roadAddress);
+						}
+						else {
+							$("#sample6_address").val(data.jibunAddress);
+						}
+						$("#sample6_detailAddress").focus();
+					}
+				}).open();
+			}
+		</script>
+
 		<input type="button" value="인증요청" id="join_addBtn" onclick="join_addCheck_seller()">
 	</div>
 </form>

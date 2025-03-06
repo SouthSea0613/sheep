@@ -1,21 +1,27 @@
 function id_check() {
 	let data = {};
 	const user_id = $('#user_id');
-	data.user_id = user_id.val();
-	axios.post('/user/id_check', data)
-		.then(res => {
-			if (res.data) {
-				$('#id_check').text('사용 가능한 아이디 입니다.');
-				$('#id_check_val').val(1);
-			} else {
-				$('#id_check').text('이미 사용중인 아이디 입니다.')
+	if(user_id.val() !== '') {
+		data.user_id = user_id.val();
+		axios.post('/user/id_check', data)
+			.then(res => {
+				if (res.data) {
+					$('#id_check').text('사용 가능한 아이디 입니다.');
+					$('#id_check_val').val(1);
+				} else {
+					$('#id_check').text('이미 사용중인 아이디 입니다.')
+					$('#id_check_val').val(0);
+				}
+			})
+			.catch(() => {
+				$('#id_check').text('');
 				$('#id_check_val').val(0);
-			}
-		})
-		.catch(err => {
-			$('#id_check').text('');
-			$('#id_check_val').val(0);
-		})
+			})
+	}
+	else {
+		$('#id_check').text('');
+		$('#id_check_val').val(0);
+	}
 }
 
 function pw_check() {
@@ -60,7 +66,7 @@ function join_check() {
 		return false;
 	}
 	const user_name = $('#user_name');
-	if (user_name.val() == '') {
+	if (user_name.val() === '') {
 		alert('이름을 입력해주세요.');
 		user_name.focus();
 		return false;
@@ -79,6 +85,21 @@ function join_check() {
 		return false;
 	}
 
+	const address = $('#sample6_address');
+	const detail_address = $('#sample6_detailAddress');
+	const  user_addr = $('#user_addr');
+	user_addr.val(address.val() +'@'+ detail_address.val());
+
+	if (address.val() == '') {
+		alert('사업자 주소를 입력하세요.');
+		return false;
+	}
+	if (detail_address.val() == '') {
+		alert('사업자 상세주소를 입력하세요.');
+		detail_address.focus();
+		return false;
+	}
+
 	let user_email = $('#user_email');
 	const user_email_detail = $('#user_email_detail');
 	if (user_email.val() == '' || user_email_detail.val() == 'none') {
@@ -93,27 +114,7 @@ function join_check() {
 		}
 	}
 
-	const address = $('#sample6_address');
-	const detail_address = $('#sample6_detailAddress');
-	const  user_addr = $('#user_addr');
-	user_addr.val(address.val() +'@'+ detail_address.val());
-
 	$('#join_form').submit();
-}
-
-// 회원정보수정(추가인증)
-function addPwCheck() {
-	const user_pw = $('#user_pw');
-	if (user_pw.val() != '') {
-		if (user_pw.val() == $('#user_pw')) {
-			alert('추가 인증이 완료되었습니다.');
-			location.hfef = "/user/";    // 컨트롤러 주소 나오면 수정 예정
-		} else {
-			alert('추가 인증이 실패되었습니다.');
-			user_pw.focus();
-			return false;
-		}
-	}
 }
 
 function test(user_email) {
