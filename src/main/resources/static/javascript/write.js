@@ -1,17 +1,18 @@
 function toggleUl(){
     console.log("테스트")
     let checkbox = document.querySelectorAll('input[class="major_category_number"]');
-    let listul = document.querySelectorAll("ul")
+    let listdl = document.querySelectorAll("dl")
     console.log(checkbox)
     for (let i = 0; i < checkbox.length; i++) {
         if (checkbox[i].checked) {
-            listul[i].style.display = 'block';
+            listdl[i].style.display = 'block';
+            console.log(listdl[i])
         } else {
-            listul[i].style.display = 'none';
-            listul[i].querySelectorAll('input[type="checkbox"]').forEach(function (innerCheckbox) {
+            listdl[i].style.display = 'none';
+            listdl[i].querySelectorAll('input[type="checkbox"]').forEach(function (innerCheckbox) {
                 innerCheckbox.checked = false;
             });
-            listul[i].querySelectorAll('input[type="text"]').forEach(function (textBox) {
+            listdl[i].querySelectorAll('input[type="text"]').forEach(function (textBox) {
                 textBox.value = '';
             });
         }

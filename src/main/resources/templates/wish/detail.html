@@ -42,7 +42,7 @@
         <br>
 
         <th:block th:each="category:${category_list_dto}">
-            <div th:text="${category.major_category}">대분류 넘버</div>
+            <div th:text="'<'+${category.major_category}+'>'">대분류 넘버</div>
             <th:block th:each="subcategory:${category.sub_category}">
                 <div th:text="${subcategory}">중분류 넘버</div>
             </th:block>
