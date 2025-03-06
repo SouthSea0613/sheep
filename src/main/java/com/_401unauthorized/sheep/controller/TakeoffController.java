@@ -168,7 +168,7 @@ public class TakeoffController {
     }
     @PostMapping("/count")
     @ResponseBody
-    public boolean takeoffcount(@RequestBody Integer wish_number){
+    public boolean takeoffcount(@RequestParam("wish_number") Integer wish_number,@RequestParam("user_id") String user_id){
         log.info("카운트");
         if(takeoffService.count(wish_number,user_id)){
             return true;
