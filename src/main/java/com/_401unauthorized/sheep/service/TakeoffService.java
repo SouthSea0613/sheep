@@ -44,6 +44,31 @@ public class TakeoffService {
                     break;
             }
         }
+
+        if (takeoffDto.getApply_status() != null) {
+            switch (takeoffDto.getApply_status()) {
+                case "0":
+                    takeoffDto.setApply_status("대기중");
+                    break;
+
+                case "1":
+                    takeoffDto.setApply_status("상담중");
+                    break;
+
+                case "2":
+                    takeoffDto.setApply_status("계약완료");
+                    break;
+
+                case "3":
+                    takeoffDto.setApply_status("취소");
+                    break;
+
+                case "4":
+                    takeoffDto.setApply_status("기간만료");
+                    break;
+            }
+        }
+        log.info("######현재 상태는? "+takeoffDto.getApply_status());
         return takeoffDto;
     }
 

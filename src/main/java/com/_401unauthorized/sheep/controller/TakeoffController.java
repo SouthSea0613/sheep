@@ -131,7 +131,7 @@ public class TakeoffController {
     @GetMapping("/seller/detail")
     public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
         if (wish_number == null || wish_number < 1) {
-            return "redirect:/takeoff/seller/list";
+            return "takeoff/seller/list";
         }
         WishDto takeoffDto = takeoffService.essential(wish_number);
         List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number);
