@@ -13,5 +13,23 @@ body {
 .main_content {
     height: auto;
     min-height: 100%;
-    padding: 30px 0;
+    padding: 3vh 0;
+}
+
+/* 머릿글 */
+h2 {
+    margin: 2vh 2vh;
+}
+
+
+.wish-list-area {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.wish_list_block {
+    border-bottom: 1px solid #6e6e6e;
+}
+.container{
+    display: flex;
 }

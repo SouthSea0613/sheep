@@ -80,14 +80,14 @@
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<h2>위시리스트 목록</h2>
 <div class="main_content">
-    <div class="list-area">
+    <h2>위시리스트</h2>
+    <div class="wish-list-area">
         <th:block th:if="${#lists.isEmpty(wish_list)}">
             <div>
                 <div>위시리스트가 없습니다</div>
             </div>
-        <div class="">
+        <div>
             <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
                 <input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">
@@ -107,14 +107,17 @@
         </th:block>
         <th:block th:unless="${#lists.isEmpty(wish_list)}">
             <th:block th:each="wish:${wish_list}">
-                <div>
-                    <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
-                       th:text="${wish?.wish_title}"></a>
-                </div>
-                <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}">상태값</div>
-                <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-                    <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
-                    <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+                <div class="wish_list_block">
+                    <div class="container">
+                    <div>
+                        <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
+                    </div>
+                    <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}">상태값</div>
+                    </div>
+                    <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
+                        <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                        <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+                    </div>
                 </div>
             </th:block>
         </th:block>

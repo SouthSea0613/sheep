@@ -1,6 +1,6 @@
 function loginStatus() {
     if (user) {
-        $('#user_name').val(`${user}님`);
+        $('#common_user_name').val(`${user}님`);
         $('.success').css('display','block');
         $('.before').css('display', 'none');
     } else {
@@ -29,7 +29,7 @@ function userType() {
 
 function List() {
     const div = document.getElementsByName('list_box');
-    const btn = document.getElementById('user_name');
+    const btn = document.getElementById('common_user_name');
         $('.list_box').css('display', 'block');
         if (type == 0 || type == null) {
             $('.all2').css('display', 'block');
