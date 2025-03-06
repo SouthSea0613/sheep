@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/css/headerfooter.css">
-    <link rel="stylesheet" href="/css/index.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.17/jquery.bxslider.min.js"
             integrity="sha512-LaBO0tZh1+6Ebk+EnHt/WsGM0UnmkCXfQ1rfhGmpa5MXUdslNuSSELBRcteHKz4k4ny+Op10Ax2fPoTNq+VcUg=="
@@ -13,8 +11,10 @@
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
     <script defer src="/javascript/common.js"></script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/index.css">
     <script th:inline="javascript">
-        const user = [[${session?.user_id}]];
+        const user = [[${session?.user_name}]];
         const type = [[${session?.user_type}]];
 
         $(() => {
@@ -46,9 +46,6 @@
             </div>
             <div>
                 <img src="/image/sky.jpg">
-            </div>
-            <div>
-                <img src="">
             </div>
             <div>
                 <img src="">
