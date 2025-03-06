@@ -16,7 +16,7 @@
         VALUES (#{user_id}, #{wish_number}, 0)
     </insert>
 
-    <update id="updatestatue">
+    <update id="updatestatus">
         UPDATE APPLY_STATUS SET APPLY_STATUS=1 WHERE WISH_NUMBER = #{wishNumber}
     </update>
 

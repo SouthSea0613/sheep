@@ -18,5 +18,5 @@ public interface TakeoffDao {
 
     Integer counttakeoff(String wishNumber);
 
-    boolean updatestatue(String wishNumber);
+    boolean updatestatus(String wishNumber);
 }

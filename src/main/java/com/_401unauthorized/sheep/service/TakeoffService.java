@@ -254,7 +254,7 @@ public class TakeoffService {
         }
         Integer result3 = takeoffDao.counttakeoff(wish_number);
         if(result3>0){
-            boolean result4 = takeoffDao.updatestatue(wish_number);
+            boolean result4 = takeoffDao.updatestatus(wish_number);
             if(!result4){
                 return false;
             }
