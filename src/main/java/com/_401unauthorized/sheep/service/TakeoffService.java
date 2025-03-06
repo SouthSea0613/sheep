@@ -236,10 +236,6 @@ public class TakeoffService {
         return takeoffDao.list(wishNumber);
     }
 
-    public boolean update_status(Integer wishNumber, String applyStatus) {
-        return takeoffDao.update_status(wishNumber,applyStatus);
-    }
-
     public List<TakeoffDto> my_list(String userid) {
         return takeoffDao.my_list(userid);
     }
@@ -253,6 +249,13 @@ public class TakeoffService {
         for (TakeoffSellerDto takeoffsellerDto : takeoffsellerdto) {
             boolean result2 = takeoffDao.write(takeoffsellerDto);
             if (!result2) {
+                return false;
+            }
+        }
+        Integer result3 = takeoffDao.counttakeoff(wish_number);
+        if(result3>0){
+            boolean result4 = takeoffDao.updatestatue(wish_number);
+            if(!result4){
                 return false;
             }
         }

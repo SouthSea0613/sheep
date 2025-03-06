@@ -13,6 +13,10 @@ public interface TakeoffDao {
     boolean status(String user_id, String wish_number);
     List<CategoryDto> get_category_detail(Integer wish_number);
     List<TakeoffDto> list(Integer wishNumber);
-    boolean update_status(Integer wishNumber, String applyStatus);
+
     List<TakeoffDto> my_list(String userid);
+
+    Integer counttakeoff(String wishNumber);
+
+    boolean updatestatue(String wishNumber);
 }

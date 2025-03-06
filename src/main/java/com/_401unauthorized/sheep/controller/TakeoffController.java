@@ -119,7 +119,7 @@ public class TakeoffController {
         if (takeoffService.write(takeoffsellerdto, user_id, wish_number)) {
             return "redirect:/takeoff/seller/list";
         }
-        return "redirect:/seller/write>wish_number=" + wish_number;
+        return "redirect:/seller/write?wish_number=" + wish_number;
     }
 
     @GetMapping("/seller/list")
@@ -158,10 +158,5 @@ public class TakeoffController {
         return takeoffdtolist;
     }
 
-    @PostMapping("/changestatus")
-    @ResponseBody
-    public boolean status(@RequestBody TakeoffDto takeoffdto){
-        return takeoffService.update_status(takeoffdto.getWish_number(),takeoffdto.getApply_status());
-    }
 }
 
