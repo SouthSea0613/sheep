@@ -269,4 +269,11 @@ public class TakeoffService {
         }
         return false;
     }
+
+    public boolean count(Integer wish_number) {
+        if(takeoffDao.count(wish_number)){
+            return true;
+        }
+        return false;
+    }
 }

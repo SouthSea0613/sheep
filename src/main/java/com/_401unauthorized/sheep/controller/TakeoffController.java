@@ -131,14 +131,14 @@ public class TakeoffController {
     @GetMapping("/seller/detail")
     public String detail(@RequestParam("wish_number") Integer wish_number, Model model) {
         if (wish_number == null || wish_number < 1) {
-            return "redirect:/takeoff/seller/list";
+            return "takeoff/seller/list";
         }
         WishDto takeoffDto = takeoffService.essential(wish_number);
         List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number);
         if (takeoffDto != null) {
             model.addAttribute("takeoffDto", takeoffDto);
             model.addAttribute("takeoffSellerDto", takeoffSellerDto);
-            return "takeoff/seller/detail?wish_number=" + wish_number;
+            return "takeoff/seller/detail";
         } else {
             return "redirect:/takeoff/seller/list";
         }
@@ -165,6 +165,15 @@ public class TakeoffController {
         } else {
             return "takeoff/seller/detail";
         }
+    }
+    @PostMapping("/count")
+    @ResponseBody
+    public boolean takeoffcount(@RequestBody Integer wish_number){
+        log.info("카운트");
+        if(takeoffService.count(wish_number)){
+            return true;
+        }
+        return false;
     }
 }
 

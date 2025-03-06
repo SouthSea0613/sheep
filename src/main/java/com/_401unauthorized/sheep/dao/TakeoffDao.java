@@ -17,4 +17,6 @@ public interface TakeoffDao {
     boolean complete(Integer wish_number);
     Integer counttakeoff(String wish_number);
     boolean update_status(String wish_number);
+
+    boolean count(Integer wishNumber);
 }

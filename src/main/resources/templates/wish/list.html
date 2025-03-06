@@ -15,7 +15,9 @@
             console.log(type)
             userType();
             loginStatus();
+            createbtn()
         })
+
         function wish_write() {
             location.href = "/wish/write"
         }
@@ -70,6 +72,22 @@
                     takeofflist.innerHTML="";
                 }
         }
+        function createbtn(){
+
+            const btndiv = document.querySelectorAll('.status_wish_number')
+            btndiv.forEach(btn=>{
+                console.log(btn.value)
+                axios.post('/takeoff/count',{
+                    wish_number:btn.value
+                }).then((res)=>{
+                    if(res){
+                        btndiv.innerHTML+='<input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">'
+                        btndiv.innerHTML+='<input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">'
+                    }
+                })
+            })
+
+        }
         function confirm(){
 
         }
@@ -78,6 +96,7 @@
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>위시리스트 목록</h2>
+
 
 <div class="list-area">
     <th:block th:if="${#lists.isEmpty(wish_list)}">
@@ -99,18 +118,17 @@
             </div>
 
         <div class="">
-            <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
+            <div th:if="${wish?.apply_status=='진행중'}">
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
-                <input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">
-                <input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">
+                <div id="listbtn"></div>
             </div>
             <div class="test">
-            <div class="takeoff_list">
+                <div class="takeoff_list">
 
                 </div>
             </div>
             <div class="">
-                <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
+                <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number" name="wish_number">
                 <input type="button" value="확정" onclick="confirm()">
             </div>
         </div>

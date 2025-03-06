@@ -7,5 +7,5 @@ import java.util.List;
 
 @Mapper
 public interface SellerDao {
-    List<WishDto> seller_list(String userId);
+    List<WishDto> seller_list(String user_id);
 }

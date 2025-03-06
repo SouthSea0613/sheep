@@ -3,18 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script>
-        function all_money() {
-            // let total = 0;
-            // const money_input = document.querySelectorAll(".takeoff_money");
-            // money_input.forEach(money => {
-            //     total += parseInt(money.value) || 0;
-            // })
-            // const all_money_input = document.getElementById("takeoff_all_money")
-            // all_money_input.value = total;
-
-        }
-    </script>
 </head>
 <style>
     ul {
@@ -26,9 +14,8 @@
     <!--header-->
 </div>
 <section>
-<div>
-    <!--  위 div는 전체 묶음  -->
-    <form action="/takeoff/complete" method="get">
+    <div>
+        <!--  위 div는 전체 묶음  -->
         <div th:text="${takeoffDto?.wish_addr}">주소</div><br>
         <div th:text="${takeoffDto?.wish_type}">주거형태</div><br>
         <div th:text="${takeoffDto?.wish_size}">평수</div><br>
@@ -36,26 +23,19 @@
         <div th:text="${takeoffDto?.wish_money}+만원">예산</div><br>
 
         <th:block th:each="takeoffSeller:${takeoffSellerDto}">
-            <div th:text="'<'+${takeoffSeller?.major_category}+'>'">대분류 넘버</div>
+            <div th:text="${takeoffSeller?.major_category}">대분류 넘버</div>
             <th:block th:each="subcategory:${takeoffSeller.sub_category}">
                 <div th:text="${subcategory}">중분류 넘버</div>
             </th:block>
             <div th:text="${takeoffSeller?.major_text}">대분류 텍스트</div><br>
             <div th:text="${takeoffSeller?.wish_category_seller_answer}">판매자답변</div>
-            <div class="money" th:text="${takeoffSeller?.wish_category_seller_price}+만원">견적금액</div><br>
+            <div th:text="${takeoffSeller?.wish_category_seller_price}+만원">견적금액</div><br>
         </th:block>
-        <div class="takeoff_all_money">
-            합계: <input type="text" id="takeoff_all_money" readonly name="takeoff_all_money">만원
-        </div>
-        <div th:if="${takeoffDto?.apply_status == 1}">
+        <div th:if="${takeoffDto?.apply_status == 대기중}">
             <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
-            <input type="submit" onclick="complete()" value="계약완료">
+            <input type="submit" value="계약완료">
         </div>
-    </form>
-</div>
-    <script th:inline="javascript">
-       // console.log([[${takeoffSellerDto.wish_category_seller_price}]])
-    </script>
+    </div>
 </section>
 <div>
     <!--   footer   -->
