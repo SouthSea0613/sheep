@@ -163,5 +163,15 @@ public class TakeoffController {
     public boolean status(@RequestBody TakeoffDto takeoffdto){
         return takeoffService.update_status(takeoffdto.getWish_number(),takeoffdto.getApply_status());
     }
+
+    // 계약완료야
+    @GetMapping("/complete")
+    public String complete(@RequestParam("wish_number") Integer wish_number) {
+        if (takeoffService.complete(wish_number)) {
+            return "redirect:/takeoff/seller/list";
+        } else {
+            return "takeoff/seller/detail";
+        }
+    }
 }
 

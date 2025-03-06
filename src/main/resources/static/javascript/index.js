@@ -45,12 +45,21 @@ function closeOverlay() {
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete : data => {
+<<<<<<< HEAD
+=======
+            $('#sample6_postcode').val(data.zonecode);
+
+>>>>>>> 96fee67ee035d4c5c2096191f09af631cc010720
             if (data.userSelectedType === 'R') {
                 $("#sample6_address").val(data.roadAddress);
             }
             else {
                 $("#sample6_address").val(data.jibunAddress);
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 96fee67ee035d4c5c2096191f09af631cc010720
             $("#sample6_detailAddress").focus();
         }
     }).open();

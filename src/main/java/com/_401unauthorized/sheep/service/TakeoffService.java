@@ -65,6 +65,7 @@ public class TakeoffService {
             }
             if (check) {
                 takeoffSellerDto.get(index).getSub_category().add(takeCategory.getCategory_number());
+                log.info("#####서브란? "+takeoffSellerDto.get(index).getSub_category());
             } else {
                 List<String> takeoffCategoryList = new ArrayList<>();
                 takeoffCategoryList.add(takeCategory.getCategory_number());
@@ -232,7 +233,7 @@ public class TakeoffService {
                 break;
             case "2" :
                 break;
-                
+
         }
         return takeoffDao.list(wishNumber);
     }
@@ -258,5 +259,12 @@ public class TakeoffService {
             }
         }
         return true;
+    }
+
+    public boolean complete(Integer wish_number) {
+        if (takeoffDao.complete(wish_number)) {
+            return true;
+        }
+        return false;
     }
 }
