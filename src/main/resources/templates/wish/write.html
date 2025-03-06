@@ -55,19 +55,10 @@
     </script>
 </head>
 <body>
-<<<<<<< HEAD
-<h2>위시작성</h2>
-<div>
-    <!--   header   -->
-</div>
-<div>
-=======
-<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>위시작성</h2>
 <div class="main_content">
     <!--  위 div는 전체 묶음  -->
     <!--    아래는 컨트롤러 작성해야함    -->
->>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
     <form action="/wish/write" method="post" id="write_form">
         <div><!---------------------------------------------------------------------------------------------->
 
@@ -179,21 +170,9 @@
         <div class="wood">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="2">목공
                 <ul>
-<<<<<<< HEAD
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="17" id="wood_hot">단열</li>
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="18" id="wood_ceiling">천장</li>
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="19" id="wood_walls">벽</li>
-=======
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="17"
-                               id="wood_hot">단열
-                    </li>
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="18"
-                               id="wood_ceiling">천장
-                    </li>
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="19"
-                               id="wood_walls">벽
-                    </li>
->>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
                     <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
@@ -340,15 +319,8 @@
         <div><input type="button" value="위시 저장" onclick="clickbtn()"></div>
     </form>
 </div>
-<<<<<<< HEAD
-<div>
-    <!--   footer   -->
-</div>
-<script>
-=======
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 <script th:inline="javascript">
->>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
     function clickbtn() {
         const title_input = $('.title_class');
         const wish_type = $('.wish_type');
