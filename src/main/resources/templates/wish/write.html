@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Wish Write</title>
+    <script defer src="/javascript/common.js"></script>
+    <script src="/javascript/write.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/wish.css">
     <style>
         ul {
             display: none;
             list-style-type: none;
         }
     </style>
-    <script src="/javascript/write.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
+    <script th:inline="javascript">
         window.onload = () => {
             function toggleUl() {
                 let checkbox = document.querySelectorAll('input[class="major_category_number"]');
@@ -30,6 +33,14 @@
                         });
                     }
                 }
+                const user = [[${session?.user_id}]];
+                const type = [[${session?.user_type}]];
+
+                $(() => {
+                    console.log(type)
+                    userType();
+                    loginStatus();
+                })
             }
 
             document.querySelectorAll('input[class="major_category_number"]').forEach(function (checkbox) {
@@ -39,13 +50,24 @@
             });
         }
     </script>
+    <script th:inline="javascript">
+
+    </script>
 </head>
 <body>
+<<<<<<< HEAD
 <h2>위시작성</h2>
 <div>
     <!--   header   -->
 </div>
 <div>
+=======
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<h2>위시작성</h2>
+<div class="main_content">
+    <!--  위 div는 전체 묶음  -->
+    <!--    아래는 컨트롤러 작성해야함    -->
+>>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
     <form action="/wish/write" method="post" id="write_form">
         <div><!---------------------------------------------------------------------------------------------->
 
@@ -149,7 +171,7 @@
             <div>
                 <input type="checkbox" name="category_number" class="major_category_number" value="1">철거
                 <ul>
-                    <li><input type="text" name="major_text" class="major_text"  placeholder="상세설명을 작성해주세요."></li>
+                    <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
         </div>
@@ -157,9 +179,21 @@
         <div class="wood">
             <div><input type="checkbox" name="category_number" class="major_category_number" value="2">목공
                 <ul>
+<<<<<<< HEAD
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="17" id="wood_hot">단열</li>
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="18" id="wood_ceiling">천장</li>
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="19" id="wood_walls">벽</li>
+=======
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="17"
+                               id="wood_hot">단열
+                    </li>
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="18"
+                               id="wood_ceiling">천장
+                    </li>
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="19"
+                               id="wood_walls">벽
+                    </li>
+>>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
                     <li><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></li>
                 </ul>
             </div>
@@ -294,7 +328,9 @@
                 <div><input type="checkbox" class="major_category_number" value="16" name="category_number">공사준비/마감</div>
                 <ul>
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="42">입주민동의서</li>
-                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="43">EV보양 및 실내외 보양</li>
+                    <li><input type="checkbox" name="category_number" class="sub_category_number" value="43">EV보양 및 실내외
+                        보양
+                    </li>
                     <li><input type="checkbox" name="category_number" class="sub_category_number" value="44">입주청소</li>
                 </ul>
             </div>
@@ -304,10 +340,15 @@
         <div><input type="button" value="위시 저장" onclick="clickbtn()"></div>
     </form>
 </div>
+<<<<<<< HEAD
 <div>
     <!--   footer   -->
 </div>
 <script>
+=======
+<th:block th:replace="~{common/fragment::footer}"></th:block>
+<script th:inline="javascript">
+>>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
     function clickbtn() {
         const title_input = $('.title_class');
         const wish_type = $('.wish_type');
@@ -356,62 +397,62 @@
                 case "조명":
                     document.querySelectorAll(".major_category_number")[4].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[4].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[4].value=category.major_text;
+                    document.querySelectorAll(".major_text")[4].value = category.major_text;
                     break;
                 case "타일":
                     document.querySelectorAll(".major_category_number")[5].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[5].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[5].value=category.major_text;
+                    document.querySelectorAll(".major_text")[5].value = category.major_text;
                     break;
                 case "필름":
                     document.querySelectorAll(".major_category_number")[6].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[6].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[6].value=category.major_text;
+                    document.querySelectorAll(".major_text")[6].value = category.major_text;
                     break;
                 case "도장":
                     document.querySelectorAll(".major_category_number")[7].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[7].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[7].value=category.major_text;
+                    document.querySelectorAll(".major_text")[7].value = category.major_text;
                     break;
                 case "부엌":
                     document.querySelectorAll(".major_category_number")[8].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[8].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[8].value=category.major_text;
+                    document.querySelectorAll(".major_text")[8].value = category.major_text;
                     break;
                 case "욕실":
                     document.querySelectorAll(".major_category_number")[9].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[9].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[9].value=category.major_text;
+                    document.querySelectorAll(".major_text")[9].value = category.major_text;
                     break;
                 case "수납":
                     document.querySelectorAll(".major_category_number")[10].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[10].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[10].value=category.major_text;
+                    document.querySelectorAll(".major_text")[10].value = category.major_text;
                     break;
                 case "바닥":
                     document.querySelectorAll(".major_category_number")[11].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[11].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[11].value=category.major_text;
+                    document.querySelectorAll(".major_text")[11].value = category.major_text;
                     break;
                 case "창호":
                     document.querySelectorAll(".major_category_number")[12].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[12].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[12].value=category.major_text;
+                    document.querySelectorAll(".major_text")[12].value = category.major_text;
                     break;
                 case "도어":
                     document.querySelectorAll(".major_category_number")[13].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[13].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[13].value=category.major_text;
+                    document.querySelectorAll(".major_text")[13].value = category.major_text;
                     break;
                 case "중문":
                     document.querySelectorAll(".major_category_number")[14].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[14].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[14].value=category.major_text;
+                    document.querySelectorAll(".major_text")[14].value = category.major_text;
                     break;
                 case "공사준비/마감":
                     document.querySelectorAll(".major_category_number")[15].setAttribute("checked", true)
                     document.querySelectorAll(".major_category_number")[15].nextElementSibling.style.display = "block";
-                    document.querySelectorAll(".major_text")[15].value=category.major_text;
+                    document.querySelectorAll(".major_text")[15].value = category.major_text;
                     break;
             }
             // sub_category

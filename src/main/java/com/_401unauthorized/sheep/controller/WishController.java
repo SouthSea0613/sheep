@@ -121,6 +121,7 @@ public class WishController {
             return "redirect:/wish/list";
         }
         WishDto wishDto = wishService.essential(wish_number);
+
         List<CategoryListDto> categoryListDto = wishService.category(wish_number);
         log.info(String.valueOf(wishDto));
         log.info(categoryListDto.toString());

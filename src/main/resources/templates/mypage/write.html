@@ -3,15 +3,28 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+	<link rel="stylesheet" href="/css/headerfooter.css">
+	<link rel="stylesheet" href="/css/mypage.css">
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script defer src="/javascript/common.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
 	<script th:src="@{/javascript/mypage.js}"></script>
+	<script th:inline="javascript">
+		const user = [[${session?.user_id}]];
+		const type = [[${session?.user_type}]];
+
+		$(() => {
+			console.log(type)
+			userType();
+			loginStatus();
+		})
+	</script>
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>회원정보수정</h2><br>
-
-<div>
+<div class="main_content">
 	<form th:action="@{/mypage/write}" method="post" id="insert_info">
 		아이디
 		<input type="text" id="user_id" th:value="${session?.user_id}" readonly><br>
@@ -86,6 +99,7 @@
 		}
 	</script>
 </div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
 <script th:inline="javascript">

@@ -16,13 +16,15 @@
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT *
-        FROM WISH
-        WHERE WISH_NUMBER = #{wish_number}
+        FROM WISH W LEFT JOIN APPLY_STATUS A
+        ON W.WISH_NUMBER = A.WISH_NUMBER
+        WHERE W.WISH_NUMBER = #{wish_number}
     </select>
 
     <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
         SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
         FROM MAJOR_CATEGORY_CONTENT MC
+<<<<<<< HEAD
         LEFT JOIN (
             SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
             FROM CATEGORY C
@@ -30,10 +32,20 @@
             ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
             WHERE C.CATEGORY_PARENT IS NOT NULL) C
         ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+=======
+                 LEFT JOIN (
+            SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
+            FROM CATEGORY C
+                     RIGHT JOIN SUB_CATEGORY S
+                                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+            WHERE C.CATEGORY_PARENT IS NOT NULL) C
+                           ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+>>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
         WHERE MC.WISH_NUMBER = #{wish_number}
         UNION
         SELECT C.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
         FROM MAJOR_CATEGORY_CONTENT MC
+<<<<<<< HEAD
         RIGHT JOIN (
             SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
             FROM CATEGORY C
@@ -41,6 +53,15 @@
             ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
             WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
         ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+=======
+                 RIGHT JOIN (
+            SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
+            FROM CATEGORY C
+                     RIGHT JOIN SUB_CATEGORY S
+                                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+            WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
+                            ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+>>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
     </select>
 
     <select id="get_apply_count" resultType="java.lang.Integer">

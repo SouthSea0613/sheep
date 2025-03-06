@@ -2,6 +2,7 @@
 
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
+<<<<<<< HEAD
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -28,10 +29,44 @@
 	<script>
 		userType("[[${session.user_id}]]", "[[${session.user_type}]]");
 	</script>
+=======
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.17/jquery.bxslider.min.js"
+            integrity="sha512-LaBO0tZh1+6Ebk+EnHt/WsGM0UnmkCXfQ1rfhGmpa5MXUdslNuSSELBRcteHKz4k4ny+Op10Ax2fPoTNq+VcUg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
+    <script defer src="/javascript/common.js"></script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script th:inline="javascript">
+        const user = [[${session?.user_id}]];
+        const type = [[${session?.user_type}]];
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+
+            $(".slider").bxSlider({
+                auto: true,
+                slideWidth: 600,
+            })
+        })
+    </script>
+    <style>
+        body {
+            background-color: #FAFBFD;
+        }
+    </style>
+>>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
 </head>
 <body>
 
 <th:block th:replace="~{common/fragment::header}"></th:block>
+<<<<<<< HEAD
 <h1>index.html</h1>
 <div id="map" style="width:100%;height:350px;"></div>
 <div id="clickLatlng"></div>
@@ -40,5 +75,78 @@
 <input type="text" id="sample6_address" readonly placeholder="주소"><br>
 <input type="text" id="sample6_detailAddress" placeholder="상세주소">
 <th:block th:replace="~{common/fragment::footer}"></th:block>
+=======
+<div class="main_content">
+<!--  슬라이드 배너  -->
+    <div class="content-home">
+        <div class="slider">
+            <div>
+                <img src="/image/malrangcow.jpg">
+            </div>
+            <div>
+                <img src="/image/sky.jpg">
+            </div>
+            <div>
+                <img src="">
+            </div>
+        </div>
+    </div>
+
+<!--  브랜드 설명  -->
+    <div class="brand_ex">
+        <hr>
+        <div class="brand_content">
+            <div class="brand_title"><h2>우</h2>리들의 <h2>편</h2>리한 <h2>인</h2>테리어</div>
+            <div class="brand_text">
+                <div class="b_text1">우편인</div>
+                <div>은 인테리어 견적을 어디에서나 쉽고 간편하게 여러 업체에서 받아볼 수 있습니다.</div>
+            </div>
+            <div>그리고 이웃집 또는 다른 집들의 인테리어를 지도에서 한눈에 확인 할 수 있습니다.</div>
+        </div>
+        <hr>
+    </div>
+
+<!--  업체 게시판  -->
+    <div class="seller_content">
+        <h3>업체게시판</h3>
+        <br>
+        <hr>
+        <br>
+        <div class="seller_subcontent">
+            <div><img src="" alt="" class="seller_img"></div>
+            <div class="seller_text">
+                <h3> "30년된 구축아파트, 트렌디한 화이트인테리어로!" </h3>
+                <div>짱돌디자인</div>
+            </div>
+        </div>
+        <div class="seller_subcontent">
+            <div><img src="" alt="" class="seller_img"></div>
+            <div class="seller_text">
+                <h3>제목입니다</h3>
+                <div>부싯돌디자인</div>
+            </div>
+        </div>
+        <div class="seller_subcontent">
+            <div><img src="" alt="" class="seller_img"></div>
+            <div class="seller_text">
+                <h3>제목입니다</h3>
+                <div>돌덩이디자인</div>
+            </div>
+        </div>
+        <br>
+        <hr>
+    </div>
+</div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
+<script>
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(37.43887833749142, 126.67511828936453),
+        level: 3
+    };
+
+    var map = new kakao.maps.Map(container, options);
+</script>
+>>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
 </body>
 </html>

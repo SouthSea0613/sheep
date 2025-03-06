@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
+<<<<<<< HEAD
 	<meta charset="UTF-8">
 	<title>Title</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -35,10 +36,20 @@
 			num=0;
 		}
 	</script>
+=======
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/takeoff.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="/javascript/common.js"></script>
+>>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>seller.list.html</h2>
+<<<<<<< HEAD
 <div>
 	<th:block th:if="${#lists.isEmpty(seller_takeoff_list)}">
 		<a th:href="@{takeoff/seller/location_insert}"></a>
@@ -55,6 +66,30 @@
 			<div th:text="${takeofflist.user_id}"></div>
 		</th:block>
 	</th:block>
+=======
+<div class="main_content">
+    <div>
+        <th:block th:if="${lists.isEmpty(seller_takeoff_list)}">
+            <a th:href="@{takeoff/seller/location_insert}"></a>
+        </th:block>
+    </div>
+    <div>
+        <th:block th:unless="${lists.isEmpty(seller_takeoff_list)}">
+            <th:block th:each="takeoff_list : ${wishdtolist}">
+
+                <div th:text="${takeoff_list.user_name} + '고객님'"></div>
+                <div th:text="'연락처: ' + ${takeoff_list.user_phone}"></div>
+                <div th:text="'시공주소: ' + ${takeoff_list.wish_addr}"></div>
+                <div th:text="시공분야"></div>
+
+                <th:block th:each="takeoff_category : ${takeoff_list.major_category_content_list}">
+                    <div th:text="takeoff_category.category_number"></div>
+                </th:block>
+
+            </th:block>
+        </th:block>
+    </div>
+>>>>>>> e0e6aeaf525e66d5578d6ac74851310ed83ad7b9
 </div>
 <div id="writetakeoff">
 
