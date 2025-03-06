@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 1000px;
+}
+
+/* main */
+
+.main_content {
+    height: auto;
+    min-height: 100%;
+    padding: 30px 0;
+}
