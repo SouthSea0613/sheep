@@ -51,10 +51,8 @@
 <div id="enterlist">
 	<th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
 		<th:block th:each="takeofflist : ${seller_takeoff_list}">
-			<a th:href="@{takeoff/seller/detail(wish_number=${takeofflist.wish_number})}"></a>
-			<div th:if="${takeofflist.user_id}"></div>
+			<a th:href="@{/takeoff/seller/detail(wish_number=${takeofflist.wish_number})}" th:text="${takeofflist.wish_title}"></a>
 			<div th:text="${takeofflist.user_id}"></div>
-			<div th:text="${takeofflist.wish_title}"></div>
 		</th:block>
 	</th:block>
 </div>

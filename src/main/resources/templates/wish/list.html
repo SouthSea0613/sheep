@@ -99,7 +99,7 @@
             </div>
 
         <div class="">
-            <div th:if="${wish?.apply_status==1}">
+            <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
                 <input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">
                 <input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">
