@@ -42,13 +42,34 @@
         function selecttakeoff(){
             axios.post('')
         }
+
+        function createbtn(){
+            console.log("테스트")
+            const btndiv = document.querySelectorAll('.status_wish_number')
+            const listdiv = document.querySelectorAll('.listbtn')
+                // btndiv.forEach(wishnumber=>{
+                //     console.log(wishnumber.value)
+            for(let i=0;i<btndiv.length; i++){
+                axios.post('/takeoff/count', null, {params : {wish_number : btndiv[i].value, user_id : [[${session.user_id}]]}})
+                // axios.get('/takeoff/count?wish_number='+ btndiv[i].value)
+                    .then((res)=>{
+                    if(res.data){
+                            listdiv[i].innerHTML+='<input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">'
+                            listdiv[i].innerHTML+='<input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">'
+                    }else{
+                        console.log("실패")
+                    }
+                })
+
+        }
+        }
         function takeofflist(btn){
             const takeofflist = document.querySelector('.takeoff_list');
             const openbtn = document.getElementById('openbtn');
             const closebtn = document.getElementById('closebtn');
 
             if (btn===openbtn) {
-                const wishnumber = btn.previousElementSibling.value
+                const wishnumber = btn.parentElement.previousElementSibling.value
                 console.log(wishnumber);
                 axios.post('/takeoff/list', {
                     wish_number: wishnumber
@@ -65,28 +86,12 @@
                     })
                 })
             }
-                if (btn === closebtn) {
-                    console.log("closebtn");
-                    btn.style.display = 'none';
-                    openbtn.style.display='block';
-                    takeofflist.innerHTML="";
-                }
-        }
-        function createbtn(){
-
-            const btndiv = document.querySelectorAll('.status_wish_number')
-            btndiv.forEach(btn=>{
-                console.log(btn.value)
-                axios.post('/takeoff/count',{
-                    wish_number:btn.value
-                }).then((res)=>{
-                    if(res){
-                        btndiv.innerHTML+='<input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">'
-                        btndiv.innerHTML+='<input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">'
-                    }
-                })
-            })
-
+            if (btn === closebtn) {
+                console.log("closebtn");
+                btn.style.display = 'none';
+                openbtn.style.display='block';
+                takeofflist.innerHTML="";
+            }
         }
         function confirm(){
 
@@ -120,7 +125,7 @@
         <div class="">
             <div th:if="${wish?.apply_status=='진행중'}">
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
-                <div id="listbtn"></div>
+                <div class="listbtn"></div>
             </div>
             <div class="test">
                 <div class="takeoff_list">

@@ -270,8 +270,8 @@ public class TakeoffService {
         return false;
     }
 
-    public boolean count(Integer wish_number) {
-        if(takeoffDao.count(wish_number)){
+    public boolean count(Integer wish_number,String user_id) {
+        if(takeoffDao.count(wish_number,user_id)){
             return true;
         }
         return false;

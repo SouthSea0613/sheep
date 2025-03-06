@@ -170,7 +170,7 @@ public class TakeoffController {
     @ResponseBody
     public boolean takeoffcount(@RequestBody Integer wish_number){
         log.info("카운트");
-        if(takeoffService.count(wish_number)){
+        if(takeoffService.count(wish_number,user_id)){
             return true;
         }
         return false;
