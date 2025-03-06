@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.TakeoffDao">
+
     <insert id="call">
         insert into apply_status
         values (#{user_id}, #{wish_number}, #{apply_status})
@@ -16,10 +17,9 @@
         VALUES (#{user_id}, #{wish_number}, 0)
     </insert>
 
-<<<<<<< HEAD
     <update id="update_status">
         UPDATE APPLY_STATUS
-        SET APPLY_STATUS = 1
+        SET APPLY_STATUS=1
         WHERE WISH_NUMBER = #{wish_number}
     </update>
 
@@ -27,19 +27,14 @@
         UPDATE APPLY_STATUS
         SET APPLY_STATUS = 2
         WHERE WISH_NUMBER = #{wish_number}
-=======
-    <update id="updatestatus">
-        UPDATE APPLY_STATUS SET APPLY_STATUS=1 WHERE WISH_NUMBER = #{wishNumber}
->>>>>>> 31d63d6d9c58ef1c132e61806f16cb791a989a08
     </update>
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT WISH_TITLE, WISH_TYPE, WISH_SIZE, WISH_SIZE_TEXT, WISH_MONEY, WISH_ADDR, A.APPLY_STATUS
         FROM APPLY_STATUS A
-                 LEFT JOIN
-             WISH W
-             ON W.WISH_NUMBER = A.WISH_NUMBER
-        WHERE W.WISH_NUMBER = #{wish_number};
+        LEFT JOIN WISH W
+        ON W.WISH_NUMBER = A.WISH_NUMBER
+        WHERE W.WISH_NUMBER = #{wish_number}
     </select>
 
     <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
@@ -75,7 +70,7 @@
         JOIN APPLY_STATUS A
         ON W.USER_ID=A.USER_ID
         AND W.WISH_NUMBER = A.WISH_NUMBER
-        WHERE W.WISH_NUMBER=#{wishNumber}
+        WHERE W.WISH_NUMBER=#{wish_number}
         GROUP BY W.USER_ID,W.WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
     </select>
 
@@ -84,9 +79,15 @@
         FROM WISH W
         JOIN WISH_CATEGORY_SELLER S
         ON W.WISH_NUMBER = S.WISH_NUMBER
-        WHERE S.USER_ID=#{userid} GROUP BY W.WISH_NUMBER
+        WHERE S.USER_ID=#{userid}
+        GROUP BY W.WISH_NUMBER
     </select>
+
     <select id="counttakeoff" resultType="java.lang.Integer">
-        SELECT COUNT(*) FROM WISH_CATEGORY_SELLER WHERE WISH_NUMBER=#{wishNumber} GROUP BY WISH_NUMBER;
+        SELECT COUNT(*)
+        FROM WISH_CATEGORY_SELLER
+        WHERE WISH_NUMBER=#{wish_number}
+        GROUP BY WISH_NUMBER
     </select>
+
 </mapper>

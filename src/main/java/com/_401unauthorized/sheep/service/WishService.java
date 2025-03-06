@@ -21,13 +21,8 @@ public class WishService {
         for (WishDto wish : wish_list) {
             if (wish.getApply_status() != null) {
                 switch (wish.getApply_status()) {
-<<<<<<< HEAD
-                    case "0":
-                        wish.setApply_status("대기중");
-=======
                     case "":
                         wish.setApply_status("");
->>>>>>> 31d63d6d9c58ef1c132e61806f16cb791a989a08
                         break;
                     case "0","1":
                         wish.setApply_status("진행중");
