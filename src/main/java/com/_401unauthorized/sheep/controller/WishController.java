@@ -33,7 +33,7 @@ public class WishController {
 
     @GetMapping("/write")
     public String write() {
-        return "wish/write";
+        return "write";
     }
 
     @GetMapping("/get_wish_detail")
@@ -138,7 +138,7 @@ public class WishController {
     public String update(@RequestParam("wish_number") Integer wish_number, Model model) {
         model.addAttribute("wish_dto", wishService.essential(wish_number));
         model.addAttribute("category_list_dto", wishService.category(wish_number));
-        return "wish/write";
+        return "write";
     }
 
     @GetMapping("/delete")
