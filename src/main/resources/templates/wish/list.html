@@ -8,12 +8,11 @@
     <script defer src="/javascript/common.js"></script>
     <link rel="stylesheet" href="/css/headerfooter.css">
     <link rel="stylesheet" href="/css/wish.css">
-    <script th:inline="javascript">
-        const user = [[${session?.user_id}]];
-        const type = [[${session?.user_type}]];
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
 
         $(() => {
-            console.log(type)
             userType();
             loginStatus();
             createbtn()
@@ -26,7 +25,7 @@
         function takeoff(btn) {
             const wishnumber = btn.previousElementSibling.value
             axios.post('/takeoff/call', {
-                user_id: [[${session.user_id}]],
+                user_id: "[[${session.user_id}]]",
                 wish_number: wishnumber,
                 apply_status: "0",
             }).then((res) => {
@@ -40,15 +39,8 @@
             });
 
         }
-<<<<<<< HEAD
 
-        function selecttakeoff() {
-            axios.post('')
-        }
         function takeofflist(btn){
-=======
-        function takeofflist(btn) {
->>>>>>> minyoung
             const takeofflist = document.querySelector('.takeoff_list');
             const openbtn = document.getElementById('openbtn');
             const closebtn = document.getElementById('closebtn');
@@ -72,26 +64,23 @@
                 })
             }
             if (btn === closebtn) {
-                console.log("closebtn");
                 btn.style.display = 'none';
                 openbtn.style.display = 'block';
                 takeofflist.innerHTML = "";
             }
         }
+
         function createbtn() {
-            console.log("테스트")
             const btndiv = document.querySelectorAll('.status_wish_number')
             const listdiv = document.querySelectorAll('.listbtn')
-            // btndiv.forEach(wishnumber=>{
-            //     console.log(wishnumber.value)
+
             for (let i = 0; i < btndiv.length; i++) {
                 axios.post('/takeoff/count', null, {
                     params: {
                         wish_number: btndiv[i].value,
-                        user_id: [[${session.user_id}]]
+                        user_id: "[[${session.user_id}]]"
                     }
                 })
-                    // axios.get('/takeoff/count?wish_number='+ btndiv[i].value)
                     .then((res) => {
                         if (res.data) {
                             listdiv[i].innerHTML += '<input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">'
@@ -101,14 +90,11 @@
                         }
                     })
             }
-            function confirm() {
-            }
         }
     </script>
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<<<<<<< HEAD
 <div class="main_content">
     <h2>위시리스트</h2>
     <div class="wish-list-area">
@@ -118,32 +104,6 @@
             </div>
         <div>
             <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
-=======
-<h2>위시리스트 목록</h2>
-
-
-<div class="list-area">
-    <th:block th:if="${#lists.isEmpty(wish_list)}">
-        <div>
-            <div>위시리스트가 없습니다</div>
-        </div>
-    </th:block>
-    <th:block th:unless="${#lists.isEmpty(wish_list)}">
-        <th:block th:each="wish:${wish_list}">
-            <div>
-                <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
-            </div>
-
-            <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}">상태값</div>
-
-            <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-                    <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
-                    <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
-            </div>
-
-        <div class="">
-            <div th:if="${wish?.apply_status=='진행중'}">
->>>>>>> minyoung
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
                 <div class="listbtn"></div>
             </div>
