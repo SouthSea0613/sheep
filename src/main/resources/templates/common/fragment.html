@@ -5,9 +5,9 @@
     <title>common</title>
     <script defer src="/javascript/common.js"></script>
 </head>
-<script th:inline="javascript">
-    const user = [[${session?.user_id}]];
-    const type = [[${session?.user_type}]];
+<script>
+    const user = "[[${session?.user_id}]]";
+    const type = "[[${session?.user_type}]]";
 
     $(() => {
         console.log(type)
@@ -17,7 +17,6 @@
 </script>
 <body>
 <header th:fragment="header">
-<<<<<<< HEAD
 	<div class="header_top">
 		<h2 class="header_left">header.html</h2>
 		<nav>
@@ -63,47 +62,6 @@
 			</nav>
 		</div>
 	</div>
-=======
-    <div class="header_top">
-        <nav>
-            <ul class="header_right">
-                <li class="success user_pf"><input type="button" id="common_user_name" onclick="List()" value="테스트님">
-                    <div class="list_box">
-                        <div class="seller2"><a th:href="@{/}">업체페이지</a></div>
-                        <div class="all2"><a th:href="@{/mypage/write}">회원정보수정 전체</a></div>
-                        <div class="user2"><a th:href="@{/wish/list}">위시리스트 소비자</a></div>
-                        <div class="seller2"><a th:href="@{/takeoff/seller/list}">견적리스트</a></div>
-                        <div class="seller2"><a th:href="@{/}">내가 쓴 글 리스트 시공사</a></div>
-                        <div class="engineer2"><a th:href="@{/}">내가 쓴 글 리스트 기술사</a></div>
-                        <div class="all2">
-                            <form th:action="@{/user/logout}" method="post">
-                                <button>로그아웃</button>
-                            </form>
-                        </div>
-                    </div>
-                </li>
-                <li class="before">
-                    <a th:href="@{/user/join}" th:text="회원가입"></a>
-                </li>
-                <li class="before">
-                    <a th:href="@{/user/login}" th:text="로그인"></a>
-                </li>
-            </ul>
-        </nav>
-        <div class="header_content">
-            <div class="logo"><img src="" alt=""></div>
-            <nav class="header_left">
-                <ul>
-                    <li class="all"><a th:href="@{/}">지도 공통</a></li>
-                    <li class="null"><a th:href="@{/wish/list}">위시리스트</a></li>
-                    <li class="seller"><a th:href="@{/takeoff/seller/list}">견적서확인 시공사</a></li>
-                    <li class="engineer"><a th:href="@{/employment/list}">구인구직 기술자</a></li>
-                    <li class="seller"><a th:href="@{/employment/list}">구인구직 시공사</a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
->>>>>>> minyoung
 </header>
 <footer th:fragment="footer">
     <div class="footer_bottom">

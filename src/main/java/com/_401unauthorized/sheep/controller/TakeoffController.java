@@ -38,7 +38,6 @@ public class TakeoffController {
             return false;
         }
     }
-    //--------------------------------------------------------------
 
     // (업체) 들어온 위시리스트 에서 <견적쓰기>! -------------------------------------------------
     @GetMapping("seller/write")
@@ -51,7 +50,6 @@ public class TakeoffController {
         }
         return "takeoff/seller/write";
     }
-    //----------------------------------------------------------------------------------------
 
     // (업체) <견적쓰기> 에서 다 작성하고, <견적작성>! --------------------------------------------------
     @PostMapping("seller/write")
@@ -130,7 +128,6 @@ public class TakeoffController {
         }
         return "redirect:/seller/write?wish_number=" + wish_number;
     }
-    //-------------------------------------------------------------------------------------------
 
     // (판매자 & 소비자) 판: 내가준 견적리스트 / 소: 들어온 견적리스트---------------------------------
     @GetMapping("/seller/detail")
@@ -148,7 +145,6 @@ public class TakeoffController {
             return "redirect:/takeoff/seller/list";
         }
     }
-    //-------------------------------------------------------------------------------------------
 
     // 들어온 위시리스트 & 내가준 견적리스트 (화면)----------------------------------------------------------------------------------------------
     @GetMapping("/seller/list")
@@ -156,7 +152,6 @@ public class TakeoffController {
         model.addAttribute("seller_takeoff_list",sellerService.seller_list(httpsession.getAttribute("user_id").toString()));
         return "takeoff/seller/list";
     }
-    //---------------------------------------------------------------------------------------------------------------------------------------
 
     // 들어온 위시리스트 & 내가준 견적리스트 (axios) 리스트 최신화----------------------------------------------------------
     @PostMapping("/list")
@@ -165,13 +160,13 @@ public class TakeoffController {
         List<TakeoffDto> takeoffdtolist = takeoffService.list(takeoffDto.getWish_number());
         return takeoffdtolist;
     }
+
     @PostMapping("/seller/my_list")
     @ResponseBody
     public List<TakeoffDto> writelist(HttpSession httpsession){
         List<TakeoffDto> takeoffdtolist = takeoffService.my_list(httpsession.getAttribute("user_id").toString());
         return takeoffdtolist;
     }
-    //----------------------------------------------------------------------------------------------------------------
 
     // (판매자) 내가준 견적리스트 에서 <계약완료>! ---------------------------------------
     @GetMapping("/complete")
@@ -182,9 +177,7 @@ public class TakeoffController {
             return "takeoff/seller/detail";
         }
     }
-<<<<<<< HEAD
-    //--------------------------------------------------------------------------------
-=======
+
     @PostMapping("/count")
     @ResponseBody
     public boolean takeoffcount(@RequestParam("wish_number") Integer wish_number,@RequestParam("user_id") String user_id){
@@ -194,6 +187,5 @@ public class TakeoffController {
         }
         return false;
     }
->>>>>>> minyoung
 }
 
