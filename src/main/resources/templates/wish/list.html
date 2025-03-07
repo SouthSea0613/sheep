@@ -16,6 +16,7 @@
             console.log(type)
             userType();
             loginStatus();
+            createbtn()
         })
 
         function wish_write() {
@@ -39,17 +40,21 @@
             });
 
         }
+<<<<<<< HEAD
 
         function selecttakeoff() {
             axios.post('')
         }
         function takeofflist(btn){
+=======
+        function takeofflist(btn) {
+>>>>>>> minyoung
             const takeofflist = document.querySelector('.takeoff_list');
             const openbtn = document.getElementById('openbtn');
             const closebtn = document.getElementById('closebtn');
 
-            if (btn===openbtn) {
-                const wishnumber = btn.previousElementSibling.value
+            if (btn === openbtn) {
+                const wishnumber = btn.parentElement.previousElementSibling.value
                 console.log(wishnumber);
                 axios.post('/takeoff/list', {
                     wish_number: wishnumber
@@ -60,26 +65,50 @@
                     closebtn.style.display = 'block';
                     btn.style.display = 'none';
                     res.data.forEach(resp => {
-                        takeofflist.innerHTML +=  '<div id="takeoffdiv">' + '<span>'+ '<a href="/takeoff/seller/detail?wish_number='+ wishnumber +'" th:href="@{/takeoff/detail(wish_number='+wishnumber+')}" th:text="' + resp.user_id + '">'+resp.user_id+'</a>' + '</span>'
+                        takeofflist.innerHTML += '<div id="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.user_id + '">' + resp.user_id + '</a>' + '</span>'
                         takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
                         takeofflist.innerHTML += '<span>' + resp.apply_status + '</span>';
                     })
                 })
             }
-                if (btn === closebtn) {
-                    console.log("closebtn");
-                    btn.style.display = 'none';
-                    openbtn.style.display='block';
-                    takeofflist.innerHTML="";
-                }
+            if (btn === closebtn) {
+                console.log("closebtn");
+                btn.style.display = 'none';
+                openbtn.style.display = 'block';
+                takeofflist.innerHTML = "";
+            }
         }
-        function confirm(){
-
+        function createbtn() {
+            console.log("테스트")
+            const btndiv = document.querySelectorAll('.status_wish_number')
+            const listdiv = document.querySelectorAll('.listbtn')
+            // btndiv.forEach(wishnumber=>{
+            //     console.log(wishnumber.value)
+            for (let i = 0; i < btndiv.length; i++) {
+                axios.post('/takeoff/count', null, {
+                    params: {
+                        wish_number: btndiv[i].value,
+                        user_id: [[${session.user_id}]]
+                    }
+                })
+                    // axios.get('/takeoff/count?wish_number='+ btndiv[i].value)
+                    .then((res) => {
+                        if (res.data) {
+                            listdiv[i].innerHTML += '<input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">'
+                            listdiv[i].innerHTML += '<input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">'
+                        } else {
+                            console.log("실패")
+                        }
+                    })
+            }
+            function confirm() {
+            }
         }
     </script>
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
+<<<<<<< HEAD
 <div class="main_content">
     <h2>위시리스트</h2>
     <div class="wish-list-area">
@@ -89,17 +118,42 @@
             </div>
         <div>
             <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
+=======
+<h2>위시리스트 목록</h2>
+
+
+<div class="list-area">
+    <th:block th:if="${#lists.isEmpty(wish_list)}">
+        <div>
+            <div>위시리스트가 없습니다</div>
+        </div>
+    </th:block>
+    <th:block th:unless="${#lists.isEmpty(wish_list)}">
+        <th:block th:each="wish:${wish_list}">
+            <div>
+                <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
+            </div>
+
+            <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}">상태값</div>
+
+            <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
+                    <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                    <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+            </div>
+
+        <div class="">
+            <div th:if="${wish?.apply_status=='진행중'}">
+>>>>>>> minyoung
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
-                <input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">
-                <input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">
+                <div class="listbtn"></div>
             </div>
             <div class="test">
-            <div class="takeoff_list">
+                <div class="takeoff_list">
 
                 </div>
             </div>
             <div class="">
-                <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
+                <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number" name="wish_number">
                 <input type="button" value="확정" onclick="confirm()">
             </div>
         </div>

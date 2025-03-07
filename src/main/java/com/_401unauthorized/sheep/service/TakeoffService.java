@@ -27,8 +27,8 @@ public class TakeoffService {
         }
     }
 
-    public WishDto essential(Integer wish_number) {
-        WishDto takeoffDto = takeoffDao.get_wish_detail(wish_number);
+    public WishDto essential(Integer wish_number, String user_id) {
+        WishDto takeoffDto = takeoffDao.get_wish_detail(wish_number,user_id);
         if (takeoffDto.getWish_type() != null) {
             switch (takeoffDto.getWish_type()) {
                 case "1":
@@ -44,11 +44,36 @@ public class TakeoffService {
                     break;
             }
         }
+
+        if (takeoffDto.getApply_status() != null) {
+            switch (takeoffDto.getApply_status()) {
+                case "0":
+                    takeoffDto.setApply_status("대기중");
+                    break;
+
+                case "1":
+                    takeoffDto.setApply_status("상담중");
+                    break;
+
+                case "2":
+                    takeoffDto.setApply_status("계약완료");
+                    break;
+
+                case "3":
+                    takeoffDto.setApply_status("취소");
+                    break;
+
+                case "4":
+                    takeoffDto.setApply_status("기간만료");
+                    break;
+            }
+        }
+        log.info("######현재 상태는? "+takeoffDto.getApply_status());
         return takeoffDto;
     }
 
-    public List<CategoryListDto> takeoff(Integer wish_number) {
-        List<CategoryDto> takeoffCategoryDto = takeoffDao.get_category_detail(wish_number);
+    public List<CategoryListDto> takeoff(Integer wish_number, String user_id) {
+        List<CategoryDto> takeoffCategoryDto = takeoffDao.get_category_detail(wish_number, user_id);
         List<CategoryListDto> takeoffSellerDto = new ArrayList<>();
 
         for (CategoryDto takeCategory : takeoffCategoryDto) {
@@ -227,13 +252,17 @@ public class TakeoffService {
 
     public List<TakeoffDto> list(Integer wishNumber) {
       List<TakeoffDto> takeoffdtolist = takeoffDao.list(wishNumber);
+      for(TakeoffDto takeoffdto : takeoffdtolist){
         switch(takeoffdtolist.get(1).getApply_status()){
-            case "1" :
+            case "0" :
+                takeoffdto.setApply_status("대기중");
                 break;
-            case "2" :
+            case "1" :
+                takeoffdto.setApply_status("상담중");
                 break;
 
         }
+      }
         return takeoffDao.list(wishNumber);
     }
 
@@ -265,6 +294,13 @@ public class TakeoffService {
 
     public boolean complete(Integer wish_number) {
         if (takeoffDao.complete(wish_number)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean count(Integer wish_number,String user_id) {
+        if(takeoffDao.count(wish_number,user_id)){
             return true;
         }
         return false;
