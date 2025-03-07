@@ -78,7 +78,7 @@
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
-        SELECT W.WISH_TITLE
+        SELECT W.WISH_TITLE, W.WISH_NUMBER,S.USER_ID
         FROM WISH W
         JOIN WISH_CATEGORY_SELLER S
         ON W.WISH_NUMBER = S.WISH_NUMBER
