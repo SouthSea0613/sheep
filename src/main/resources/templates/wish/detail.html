@@ -46,7 +46,7 @@
         </th:block>
 
         <div th:if="${wish_dto?.apply_status==null}" class="takeoffarea">
-            <input type="hidden" th:value="${wish_dto?.wish_number}" class="wish_number" name="wish_number">
+<!--            <input type="hidden" th:value="${wish_dto?.wish_number}" class="wish_number" name="wish_number">-->
             <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
             <input type="submit" value="위시 수정">

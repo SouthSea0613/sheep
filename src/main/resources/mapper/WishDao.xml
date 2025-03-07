@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.WishDao">
+    <update id="update">
+    </update>
     <!--리스트 가져오기-->
     <!--  위시리스트에 갔을때 제목이랑 상태 값을 가지고 와야함으로 WISH_TITLE이랑 APPLY_STATUS를 select했다.  -->
     <!--  LEFT JOIN은 왼쪽의테이블을 중심으로 오른쪽테이블을 매치를 함으로 WISH_TITLE오른쪽에 APPLY_STATUS를 매치한다.  -->

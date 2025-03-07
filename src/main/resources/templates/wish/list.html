@@ -40,7 +40,7 @@
 
         }
 
-        function takeofflist(btn){
+        function takeofflist(btn) {
             const takeofflist = document.querySelector('.takeoff_list');
             const openbtn = document.getElementById('openbtn');
             const closebtn = document.getElementById('closebtn');
@@ -73,7 +73,7 @@
         function createbtn() {
             const btndiv = document.querySelectorAll('.status_wish_number')
             const listdiv = document.querySelectorAll('.listbtn')
-
+            console.log("테스트2")
             for (let i = 0; i < btndiv.length; i++) {
                 axios.post('/takeoff/count', null, {
                     params: {
@@ -102,44 +102,52 @@
             <div class="non_wish">
                 <div>위시리스트가 없습니다</div>
             </div>
-        <div>
-            <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
-                <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status" name="wish_number">
-                <div class="listbtn"></div>
-            </div>
-            <div class="test">
-                <div class="takeoff_list">
-
-                </div>
-            </div>
-            <div class="">
-                <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number" name="wish_number">
-                <input type="button" value="확정" onclick="confirm()">
-            </div>
-        </div>
-            ---------------------------------
         </th:block>
         <div class="wishBarea wish_write_btn">
             <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
         </div>
-        <th:block th:unless="${#lists.isEmpty(wish_list)}">
-            <th:block th:each="wish:${wish_list}">
-                <div class="wish_list_block">
-                    <div class="wish_container">
-                        <div>
-                            <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
+
+            <th:block th:unless="${#lists.isEmpty(wish_list)}">
+                <th:block th:each="wish:${wish_list}">
+                    <div>
+                    <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
+                        <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
+                               name="wish_number">
+                        <div class="listbtn"></div>
+                    </div>
+                    <div class="test">
+                        <div class="takeoff_list">
+
                         </div>
-                        <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}" class="wish_apply_status">상태값</div>
+                        <div class="">
+                            <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
+                                   name="wish_number">
+                            <input type="button" value="확정" onclick="confirm()">
+                        </div>
                     </div>
-                    <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-                        <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
-                        <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
-                    </div>
+
+        </div>
+        <div class="wish_list_block">
+            <div class="wish_container">
+                <div>
+                    <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
+                       th:text="${wish?.wish_title}"></a>
                 </div>
-            </th:block>
+                <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}"
+                     class="wish_apply_status">상태값
+                </div>
+
+            </div>
+            <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
+                <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+            </div>
+        </div>
+
+        </th:block>
         </th:block>
     </div>
 </div>
-    <th:block th:replace="~{common/fragment::footer}"></th:block>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

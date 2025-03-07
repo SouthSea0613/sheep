@@ -314,5 +314,9 @@ public class WishService {
 
         return true;
     }
+
+    public boolean update(WishDto wishdto) {
+        return wishDao.update(wishdto);
+    }
 }
 

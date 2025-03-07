@@ -7,6 +7,7 @@
 	<script src="/javascript/write.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<link rel="stylesheet" href="/css/headerfooter.css">
 	<link rel="stylesheet" href="/css/wish.css">
 	<style>
@@ -58,7 +59,7 @@
 <div class="main_content">
 	<!--  위 div는 전체 묶음  -->
 	<!--    아래는 컨트롤러 작성해야함    -->
-	<form action="/wish/write" method="post" id="write_form">
+	<form action="/wish/update" method="post" id="write_form">
 		<div><!---------------------------------------------------------------------------------------------->
 
 			<div>
@@ -82,28 +83,14 @@
 					<input type="hidden" id="wish_list_addr" name="wish_addr" th:value="${wish_dto?.wish_addr}">
 					<input type="text" id="sample6_address" name="wish_title" class="title_class"
 						   th:value="${wish_dto?.wish_title}" readonly placeholder="주소"><br>
-					<input type="text" id="sample6_detailAddress" class="addr_class" placeholder="상세주소"><br>
+					<input type="text" th:value="${wish_dto?.wish_addr}" id="sample6_detailAddress" class="addr_class" placeholder="상세주소"><br>
 				</div>
 			</div>
 
 			<br><!---------------------------------------------------------------------------------------------->
 
 			<div>
-				<script>
-					const wish_type = "[[${wish_dto?.wish_type}]]";
-					const wish_Type = document.querySelectorAll('input[type=radio]');
-					switch (wish_type) {
-						case "아파트":
-							wish_Type[0].setAttribute("checked", true)
-							break;
-						case "단독주택":
-							wish_Type[1].setAttribute("checked", true)
-							break;
-						case "빌라":
-							wish_Type[2].setAttribute("checked", true)
-							break;
-					}
-				</script>
+
 				<div id="type">주거형태</div>
 				<div>
 					<input type="radio" class="wish_type" name="wish_type" value="1">아파트
@@ -111,31 +98,24 @@
 					<input type="radio" class="wish_type" name="wish_type" value="3">빌라
 				</div>
 			</div>
-
+			<script>
+				const wish_type = "[[${wish_dto?.wish_type}]]";
+				const wish_Type = document.querySelectorAll('input[type=radio]');
+				switch (wish_type) {
+					case "아파트":
+						wish_Type[0].setAttribute("checked", true)
+						break;
+					case "단독주택":
+						wish_Type[1].setAttribute("checked", true)
+						break;
+					case "빌라":
+						wish_Type[2].setAttribute("checked", true)
+						break;
+				}
+			</script>
 			<br><!---------------------------------------------------------------------------------------------->
 
 			<div>
-				<script>
-					const wish_size = "[[${wish_dto?.wish_size}]]";
-					const wish_Size = document.querySelectorAll('input[type=radio]');
-					switch (wish_size) {
-						case "10":
-							wish_Size[3].setAttribute("checked", true)
-							break;
-						case "20":
-							wish_Size[4].setAttribute("checked", true)
-							break;
-						case "30":
-							wish_Size[5].setAttribute("checked", true)
-							break;
-						case "40":
-							wish_Size[6].setAttribute("checked", true)
-							break;
-						case "50":
-							wish_Size[7].setAttribute("checked", true)
-							break;
-					}
-				</script>
 				<div>평수</div>
 				<div>
 					<input type="radio" class="wish_size" name="wish_size" value="10">10평 대
@@ -152,7 +132,27 @@
 					</div>
 				</div>
 			</div>
-
+			<script>
+				const wish_size = "[[${wish_dto?.wish_size}]]";
+				const wish_Size = document.querySelectorAll('input[type=radio]');
+				switch (wish_size) {
+					case "10":
+						wish_Size[3].setAttribute("checked", true)
+						break;
+					case "20":
+						wish_Size[4].setAttribute("checked", true)
+						break;
+					case "30":
+						wish_Size[5].setAttribute("checked", true)
+						break;
+					case "40":
+						wish_Size[6].setAttribute("checked", true)
+						break;
+					case "50":
+						wish_Size[7].setAttribute("checked", true)
+						break;
+				}
+			</script>
 			<br><!---------------------------------------------------------------------------------------------->
 
 			<div>
@@ -327,8 +327,8 @@
 			</div>
 			<br><!---------------------------------------------------------------------------------------------->
 			<div class="ready">
-				<div><input type="checkbox" class="major_category_number" value="16" name="category_number">공사준비/마감
-				</div>
+				<div>
+					<input type="checkbox" class="major_category_number" value="16" name="category_number">공사준비/마감
 				<dl>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="42">입주민동의서</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="43">EV보양 및 실내외
@@ -336,6 +336,7 @@
 					</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="44">입주청소</dd>
 				</dl>
+				</div>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
@@ -369,7 +370,7 @@
 		}
 	}
 
-	const categorys = "[[${category_list_dto}]]";
+	const categorys = [[${category_list_dto}]];
 	categorys.forEach(category => {
 		category.sub_category.forEach(sub => {
 			console.log(category)
@@ -452,7 +453,6 @@
 				case "공사준비/마감":
 					document.querySelectorAll(".major_category_number")[15].setAttribute("checked", true)
 					document.querySelectorAll(".major_category_number")[15].nextElementSibling.style.display = "block";
-					document.querySelectorAll(".major_text")[15].value = category.major_text;
 					break;
 			}
 			// sub_category

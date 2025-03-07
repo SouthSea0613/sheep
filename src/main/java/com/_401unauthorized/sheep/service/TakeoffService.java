@@ -305,4 +305,11 @@ public class TakeoffService {
         }
         return false;
     }
+
+    public boolean checkarea(String user_id) {
+        if(takeoffDao.checkarea(user_id)){
+            return true;
+        }
+        return false;
+    }
 }

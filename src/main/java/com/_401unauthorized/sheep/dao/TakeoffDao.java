@@ -19,4 +19,6 @@ public interface TakeoffDao {
     boolean update_status(Integer wish_number);
 
     boolean count(Integer wish_number, String user_id);
+
+    boolean checkarea(String userId);
 }

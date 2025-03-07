@@ -183,5 +183,14 @@ public class TakeoffController {
         }
         return false;
     }
+    @PostMapping("/checkarea")
+    @ResponseBody
+    public boolean checkarea(HttpSession httpSession){
+        log.info("테스트");
+        if(takeoffService.checkarea(httpSession.getAttribute("user_id").toString())){
+            return true;
+        }
+        return false;
+    }
 }
 

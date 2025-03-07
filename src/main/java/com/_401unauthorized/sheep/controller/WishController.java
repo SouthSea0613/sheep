@@ -154,4 +154,15 @@ public class WishController {
             return "redirect:/wish/detail";
         }
     }
+    @PostMapping("/update")
+    public String update(WishDto wishdto,HttpSession httpSession){
+        wishdto.setUser_id(httpSession.getAttribute("user_id").toString());
+        if(wishService.update(wishdto)){
+            return "redirect:/wish/detail";
+        }else{
+            return "redirect:/wish/list";
+        }
+
+    }
+
 }

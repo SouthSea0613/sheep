@@ -7,6 +7,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<link rel="stylesheet" href="/css/index.css">
 	<script>
+		onload=()=>{
+			checkarea()
+		}
 		let num = 0;
 		function writetab(){
 
@@ -34,9 +37,40 @@
 			content.textContent="";
 			num=0;
 		}
+		function checkarea(){
+			// axios.post('/takeoff/checkarea',null,{
+			// 	param:{user_id : "[[${session.user_id}]]"}
+			// }).then(res=>{
+			// 	const areadiv = document.getElementById('area')
+			// 	if(res.data){
+			// 		areadiv.style.display="block";
+			// 	}
+			// })
+			axios.post('/takeoff/checkarea',{
+			}).then(res=>{
+					const areadiv = document.getElementById('area')
+				console.log(res.data)
+					if(res.data) {
+						areadiv.style.display = "block";
+					}
+			})
+		}
 	</script>
+	<style>
+		.area{
+			position : absolute;
+			border: 1px solid black;
+			width: 30%;
+			height : 50%;
+			background-color : green;
+			left :50%;
+			top : 50%;
+		}
+	</style>
 </head>
 <body>
+<div class="area">
+</div>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>seller.list.html</h2>
 <div>

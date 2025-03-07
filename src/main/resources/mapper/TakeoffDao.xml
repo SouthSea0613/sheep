@@ -95,5 +95,8 @@
     <select id="count" resultType="java.lang.Boolean">
         SELECT COUNT(*) FROM APPLY_STATUS WHERE WISH_NUMBER = #{wish_number} AND USER_ID != #{user_id} AND APPLY_STATUS=1
     </select>
+    <select id="checkarea" resultType="java.lang.Boolean">
+        SELECT COUNT(SELLER_AREA) FROM SELLER WHERE USER_ID = #{user_id}
+    </select>
 
 </mapper>
