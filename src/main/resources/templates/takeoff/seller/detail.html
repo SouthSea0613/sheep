@@ -3,6 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        function complete () {
+
+        }
+
+        function selecttakeoff() {
+            axios.post('')
+        }
+    </script>
 </head>
 <style>
     ul {
@@ -13,6 +22,7 @@
 <div>
     <!--header-->
 </div>
+
 <section>
     <div>
         <!--  위 div는 전체 묶음  -->
@@ -38,18 +48,19 @@
             <div th:text="${takeoffSeller?.wish_category_seller_price}+만원">견적금액</div>
             <br>
         </th:block>
-        <form>
-            <div th:if="${takeoffDto?.apply_status == 대기중}">
-                <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
-                <input type="submit" value="계약완료">
-            </div>
-        </form>
-        <form action="/takeoff/changestatus" method="post">
+
+        <div th:if="${takeoffDto?.apply_status == 대기중}">
             <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
-            <input type="submit" value="계약선택">
-        </form>
+            <input type="submit" onclick="complete()" value="계약완료">
+        </div>
+
+        <div>
+            <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
+            <input type="submit" onclick="selecttakeoff()" value="계약선택">
+        </div>
     </div>
 </section>
+
 <div>
     <!--   footer   -->
 </div>
