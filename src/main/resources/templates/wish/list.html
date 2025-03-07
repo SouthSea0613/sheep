@@ -39,36 +39,12 @@
             });
 
         }
-        function selecttakeoff(){
-            axios.post('')
-        }
-
-        function createbtn(){
-            console.log("테스트")
-            const btndiv = document.querySelectorAll('.status_wish_number')
-            const listdiv = document.querySelectorAll('.listbtn')
-                // btndiv.forEach(wishnumber=>{
-                //     console.log(wishnumber.value)
-            for(let i=0;i<btndiv.length; i++){
-                axios.post('/takeoff/count', null, {params : {wish_number : btndiv[i].value, user_id : [[${session.user_id}]]}})
-                // axios.get('/takeoff/count?wish_number='+ btndiv[i].value)
-                    .then((res)=>{
-                    if(res.data){
-                            listdiv[i].innerHTML+='<input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">'
-                            listdiv[i].innerHTML+='<input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">'
-                    }else{
-                        console.log("실패")
-                    }
-                })
-
-        }
-        }
-        function takeofflist(btn){
+        function takeofflist(btn) {
             const takeofflist = document.querySelector('.takeoff_list');
             const openbtn = document.getElementById('openbtn');
             const closebtn = document.getElementById('closebtn');
 
-            if (btn===openbtn) {
+            if (btn === openbtn) {
                 const wishnumber = btn.parentElement.previousElementSibling.value
                 console.log(wishnumber);
                 axios.post('/takeoff/list', {
@@ -80,7 +56,7 @@
                     closebtn.style.display = 'block';
                     btn.style.display = 'none';
                     res.data.forEach(resp => {
-                        takeofflist.innerHTML +=  '<div id="takeoffdiv">' + '<span>'+ '<a href="/takeoff/seller/detail?wish_number='+ wishnumber +'" th:href="@{/takeoff/detail(wish_number='+wishnumber+')}" th:text="' + resp.user_id + '">'+resp.user_id+'</a>' + '</span>'
+                        takeofflist.innerHTML += '<div id="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.user_id + '">' + resp.user_id + '</a>' + '</span>'
                         takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
                         takeofflist.innerHTML += '<span>' + resp.apply_status + '</span>';
                     })
@@ -89,12 +65,35 @@
             if (btn === closebtn) {
                 console.log("closebtn");
                 btn.style.display = 'none';
-                openbtn.style.display='block';
-                takeofflist.innerHTML="";
+                openbtn.style.display = 'block';
+                takeofflist.innerHTML = "";
             }
         }
-        function confirm(){
-
+        function createbtn() {
+            console.log("테스트")
+            const btndiv = document.querySelectorAll('.status_wish_number')
+            const listdiv = document.querySelectorAll('.listbtn')
+            // btndiv.forEach(wishnumber=>{
+            //     console.log(wishnumber.value)
+            for (let i = 0; i < btndiv.length; i++) {
+                axios.post('/takeoff/count', null, {
+                    params: {
+                        wish_number: btndiv[i].value,
+                        user_id: [[${session.user_id}]]
+                    }
+                })
+                    // axios.get('/takeoff/count?wish_number='+ btndiv[i].value)
+                    .then((res) => {
+                        if (res.data) {
+                            listdiv[i].innerHTML += '<input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">'
+                            listdiv[i].innerHTML += '<input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">'
+                        } else {
+                            console.log("실패")
+                        }
+                    })
+            }
+            function confirm() {
+            }
         }
     </script>
 </head>
