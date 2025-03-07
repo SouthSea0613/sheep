@@ -12,6 +12,7 @@
     <script src="/javascript/write.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
         window.onload = () => {
             function toggleUl() {
@@ -50,10 +51,27 @@
         <div><!---------------------------------------------------------------------------------------------->
 
             <div>
-                <div id="title">주소</div>
+                <script>
+                    function find_addr(){
+                        new daum.Postcode({
+                            oncomplete : data => {
+                                if (data.userSelectedType === 'R') {
+                                    $("#sample6_address").val(data.roadAddress);
+                                }
+                                else {
+                                    $("#sample6_address").val(data.jibunAddress);
+                                }
+                                $("#sample6_detailAddress").focus();
+                            }
+                        }).open();
+                    }
+                </script>
+                <div id="title">시공주소</div>
                 <div>
-                    <input type="text" name="wish_title" class="title_class" th:value="${wish_dto?.wish_title}" placeholder="제목을 입력해주세요">
-                    <input type="text" name="wish_addr" class="addr_class" th:value="${wish_dto?.wish_addr}" placeholder="상세주소 입력">
+                    <input type="button" onclick="find_addr()" value="주소 찾기"><br>
+                    <input type="hidden" id="wish_list_addr" name="wish_addr" th:value="${wish_dto?.wish_addr}">
+                    <input type="text" id="sample6_address" name="wish_title" class="title_class" th:value="${wish_dto?.wish_title}" readonly placeholder="주소"><br>
+                    <input type="text" id="sample6_detailAddress" class="addr_class" placeholder="상세주소"><br>
                 </div>
             </div>
 
@@ -309,13 +327,13 @@
 </div>
 <script>
     function clickbtn() {
-        const title_input = $('.title_class');
+        const addr_class = $('.addr_class');
         const wish_type = $('.wish_type');
         const wish_size = $('.wish_size');
         const money = $('#money')
-        if (title_input.val() === '') {
-            alert("제목을 입력해주세요")
-            title_input.focus();
+        if (addr_class.val() === '') {
+            alert("주소를 입력해주세요")
+            addr_class.focus();
         } else if (!wish_type.is(":checked")) {
             alert("주거형태를 선택해주세요")
         } else if (!wish_size.is(":checked")) {
@@ -324,6 +342,10 @@
             alert("예산을 적어주세요")
             money.focus();
         } else {
+            const wish_list_addr = $('#wish_list_addr');
+            const address = $('#sample6_address');
+            const detail_address = $('#sample6_detailAddress');
+            wish_list_addr.val(address.val() +'@'+ detail_address.val());
             $('#write_form').submit();
         }
     }

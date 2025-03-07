@@ -6,13 +6,13 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<link rel="stylesheet" href="/css/index.css">
-	<script th:inline="javascript">
+	<script>
 		let num = 0;
 		function writetab(){
 
 			if(num===0){
 			axios.post('/takeoff/seller/my_list',{
-				user_id : [[${session.user_id}]]
+				user_id : "[[${session.user_id}]]"
 			}).then((res)=>{
 				console.log(res);
 				if(res.data!=null){
