@@ -53,15 +53,7 @@ public class TakeoffController {
 
     // (업체) <견적쓰기> 에서 다 작성하고, <견적작성>! --------------------------------------------------
     @PostMapping("seller/write")
-<<<<<<< HEAD
-    public String write(@RequestParam("wish_number") String wish_number,
-                        @RequestParam("category_number") List<String> category_number,
-                        @RequestParam("takeoff_content") List<String> takeoff_content,
-                        @RequestParam("takeoff_money") List<String> takeoff_money,
-                        HttpSession httpSession) {
-=======
     public String write(@RequestParam("wish_number") Integer wish_number, @RequestParam("category_number") List<String> category_number, @RequestParam("takeoff_content") List<String> takeoff_content, @RequestParam("takeoff_money") List<String> takeoff_money, HttpSession httpSession) {
->>>>>>> jieun
         String user_id = (httpSession.getAttribute("user_id").toString());
         TakeoffSellerDto takeoffsellerDto = new TakeoffSellerDto();
         takeoffsellerDto.setUser_id(user_id);

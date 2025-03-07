@@ -8,9 +8,9 @@
     <script defer src="/javascript/common.js"></script>
 <link rel="stylesheet" href="/css/headerfooter.css">
 <link rel="stylesheet" href="/css/wish.css">
-    <script th:inline="javascript">
-        const user = [[${session?.user_id}]];
-        const type = [[${session?.user_type}]];
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
 
         $(() => {
             console.log(type)
@@ -24,24 +24,18 @@
     }
 </style>
 </head>
+
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>위시 디테일</h2>
 <div class="main_content">
-    <!--  위 div는 전체 묶음  -->
     <form action="/wish/update" method="get">
-        <div th:text="${wish_dto?.wish_addr}">주소</div>
-        <br>
-        <div th:text="${wish_dto?.wish_type}">주거형태</div>
-        <br>
-        <div th:text="${wish_dto?.wish_size}">평수</div>
-        <br>
-        <div th:text="${wish_dto?.wish_size_text}">평수상세</div>
-        <br>
-        <div th:text="${wish_dto?.wish_money}+만원">예산</div>
-        <br>
+        <div th:text="${wish_dto?.wish_addr}">주소</div><br>
+        <div th:text="${wish_dto?.wish_type}">주거형태</div><br>
+        <div th:text="${wish_dto?.wish_size}">평수</div><br>
+        <div th:text="${wish_dto?.wish_size_text}">평수상세</div><br>
+        <div th:text="${wish_dto?.wish_money}+만원">예산</div><br>
 
-<<<<<<< HEAD
         <th:block th:each="category:${category_list_dto}">
             <div th:text="'<'+${category.major_category}+'>'">대분류 넘버</div>
             <th:block th:each="subcategory:${category.sub_category}">
@@ -50,63 +44,34 @@
             <div th:text="${category.major_text}">대분류 텍스트</div>
             <br>
         </th:block>
+
         <div th:if="${wish_dto?.apply_status==null}" class="takeoffarea">
             <input type="hidden" th:value="${wish_dto?.wish_number}" class="wish_number" name="wish_number">
             <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
             <input type="submit" value="위시 수정">
-            <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
             <input type="button" onclick="delete_wish()" th:value="삭제하기">
         </div>
-    </form>
-</div>
-<th:block th:replace="~{common/fragment::footer}"></th:block>
-<script th:inline="javascript">
-    function delete_wish() {
-        let wish_number = [[${wish_dto?.wish_number}]]
-        console.log(wish_number)
-        location.href = "/wish/delete?wish_number=" + wish_number
-    }
-=======
-		<th:block th:each="category:${category_list_dto}">
-			<div th:text="${category.major_category}">대분류 넘버</div>
-			<div th:text="${category.major_text}">대분류 텍스트</div>
-			<br>
-			<th:block th:each="subcategory:${category.sub_category}">
-				<div th:text="${subcategory}">중분류 넘버</div>
-			</th:block>
-		</th:block>
-		<div th:if="${session?.user_type == 0 and wish_dto?.apply_status==null}" class="takeoffarea">
-			<input type="hidden" th:value="${wish_dto?.wish_number}" class="wish_number" name="wish_number">
-			<input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
-			<input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
-			<input type="button" onclick="delete_wish()" th:value="삭제하기">
-			<input type="submit" value="위시 수정">
-		</div>
 
 		<div th:if="${session?.user_type == 1}" class="sellerWrite">
 			<input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number">
 			<input type="button" onclick="seller_write()" value="작성하기">
 		</div>
-	</form>
+    </form>
 </div>
-<div>
-	<!--   footer   -->
-</div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 <script>
-	function seller_write() {
-		location.href = "/takeoff/seller/write";
-	}
+    function seller_write() {
+        location.href = "/takeoff/seller/write";
+    }
 
-	function delete_wish() {
-		let wish_number = "[[${wish_dto?.wish_number}]]"
-		console.log(wish_number)
-		location.href = "/wish/delete?wish_number=" + wish_number
-	}
->>>>>>> jieun
+    function delete_wish() {
+        let wish_number = "[[${wish_dto?.wish_number}]]";
+        location.href = "/wish/delete?wish_number=" + wish_number;
+    }
 
 	function takeoff(btn) {
-		const wishnumber = btn.previousElementSibling.value
+		const wishnumber = btn.previousElementSibling.value;
 		axios.post('/takeoff/call', {
 			user_id: "[[${session.user_id}]]",
 			wish_number: wishnumber,
