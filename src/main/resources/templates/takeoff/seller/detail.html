@@ -43,8 +43,9 @@
             <div th:text="${takeoffSeller?.wish_category_seller_price}+만원">견적금액</div>
             <br>
         </th:block>
+            <div th:text="|합계: ${all_money}만원|">합계</div>
 
-        <div th:if="${session?.user_type == 1 && takeoffDto?.apply_status == 상담중}">
+        <div th:if="${session?.user_type == '1' && takeoffDto?.apply_status == 상담중}">
             <form th:action="@{/takeoff/complete}" method="get">
             <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
             <input type="hidden" name="user_id" th:value="${session?.user_id}">
@@ -52,7 +53,7 @@
             </form>
         </div>
 
-        <div th:if="${session?.user_type == 0 && takeoffDto?.apply_status == 대기중}">
+        <div th:if="${session?.user_type == '0' && takeoffDto?.apply_status == 대기중}">
             <form th:action="@{/takeoff/changestatus}">
             <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
             <input type="hidden" name="user_id" th:value="${takeoffDto?.user_id}">

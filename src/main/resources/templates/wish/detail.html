@@ -44,7 +44,6 @@
             <div th:text="${category.major_text}">대분류 텍스트</div>
             <br>
         </th:block>
-
         <div th:if="${wish_dto?.apply_status==null}" class="takeoffarea">
             <input type="hidden" th:value="${wish_dto?.wish_number}" class="wish_number" name="wish_number">
             <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
@@ -53,16 +52,17 @@
             <input type="button" onclick="delete_wish()" th:value="삭제하기">
         </div>
 
-		<div th:if="${session?.user_type == 1}" class="sellerWrite">
-			<input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number">
+            <div th:if="${session.user_type == '1'}">
+			<input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number" id="wish_number">
 			<input type="button" onclick="seller_write()" value="작성하기">
-		</div>
+            </div>
     </form>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 <script>
     function seller_write() {
-        location.href = "/takeoff/seller/write";
+        const wish_number = $('#wish_number').val()
+        location.href = "/takeoff/seller/write?wish_number=" + wish_number;
     }
 
     function delete_wish() {
