@@ -34,34 +34,37 @@
         FROM APPLY_STATUS A
         LEFT JOIN WISH W
         ON W.WISH_NUMBER = A.WISH_NUMBER
-        WHERE W.WISH_NUMBER = #{wish_number}
+        WHERE W.WISH_NUMBER = #{wish_number} AND A.USER_ID = #{user_id}
     </select>
 
     <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
-        SELECT SELLER.CATEGORY_PARENT, SELLER.CATEGORY_NUMBER, SELLER.MAJOR_TEXT, WCS.WISH_CATEGORY_SELLER_ANSWER, WCS.WISH_CATEGORY_SELLER_PRICE
+        SELECT SELLER.WISH_NUMBER, SELLER.CATEGORY_PARENT, SELLER.CATEGORY_NUMBER, SELLER.MAJOR_TEXT, WCS.USER_ID,
+               WCS.WISH_CATEGORY_SELLER_ANSWER, WCS.WISH_CATEGORY_SELLER_PRICE
         FROM WISH_CATEGORY_SELLER WCS
-        RIGHT JOIN (
-            SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
-            FROM MAJOR_CATEGORY_CONTENT MC
-            LEFT JOIN (
-                SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
-                FROM CATEGORY C
-                RIGHT JOIN SUB_CATEGORY S
-                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
-                WHERE C.CATEGORY_PARENT IS NOT NULL) C
-            ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
-            WHERE MC.WISH_NUMBER = #{wish_number}
-            UNION
-            SELECT C.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
-            FROM MAJOR_CATEGORY_CONTENT MC
-            RIGHT JOIN (
-                SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
-                FROM CATEGORY C
-                RIGHT JOIN SUB_CATEGORY S
-                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
-                WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
-            ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER) SELLER
-        ON SELLER.WISH_NUMBER = WCS.WISH_NUMBER AND SELLER.CATEGORY_PARENT = WCS.CATEGORY_NUMBER
+                 RIGHT JOIN
+             (
+                 SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+                 FROM MAJOR_CATEGORY_CONTENT MC
+                          LEFT JOIN (
+                     SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
+                     FROM CATEGORY C
+                              RIGHT JOIN SUB_CATEGORY S
+                                         ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+                     WHERE C.CATEGORY_PARENT IS NOT NULL) C
+                                    ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+                 WHERE MC.WISH_NUMBER = #{wish_number}
+                 UNION
+                 SELECT C.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+                 FROM MAJOR_CATEGORY_CONTENT MC
+                          RIGHT JOIN (
+                     SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
+                     FROM CATEGORY C
+                              RIGHT JOIN SUB_CATEGORY S
+                                         ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+                     WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
+                                     ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER) SELLER
+             ON SELLER.WISH_NUMBER = WCS.WISH_NUMBER AND SELLER.CATEGORY_PARENT = WCS.CATEGORY_NUMBER
+        WHERE SELLER.WISH_NUMBER = #{wish_number} AND WCS.USER_ID = #{user_id}
     </select>
 
     <select id="list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
@@ -75,7 +78,7 @@
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
-        SELECT W.WISH_TITLE
+        SELECT W.WISH_TITLE, W.WISH_NUMBER,S.USER_ID
         FROM WISH W
         JOIN WISH_CATEGORY_SELLER S
         ON W.WISH_NUMBER = S.WISH_NUMBER
@@ -88,6 +91,9 @@
         FROM WISH_CATEGORY_SELLER
         WHERE WISH_NUMBER=#{wish_number}
         GROUP BY WISH_NUMBER
+    </select>
+    <select id="count" resultType="java.lang.Boolean">
+        SELECT COUNT(*) FROM APPLY_STATUS WHERE WISH_NUMBER = #{wish_number} AND USER_ID != #{user_id} AND APPLY_STATUS=1
     </select>
 
 </mapper>

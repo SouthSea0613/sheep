@@ -6,8 +6,14 @@
         FROM SELLER S
         JOIN
             (SELECT W.WISH_NUMBER,W.USER_ID,W.WISH_TITLE,A.APPLY_STATUS FROM WISH W JOIN APPLY_STATUS A ON W.WISH_NUMBER = A.WISH_NUMBER WHERE A.APPLY_STATUS=0) AS WA
+<<<<<<< HEAD
             WHERE WA.WISH_TITLE LIKE CONCAT(S.SELLER_AREA,'%')
         AND S.USER_ID=#{user_id}
         GROUP BY WA.WISH_NUMBER
+=======
+        WHERE WA.WISH_TITLE LIKE CONCAT(S.SELLER_AREA,'%')
+        AND S.USER_ID=#{user_id}
+        GROUP BY WA.WISH_NUMBER;
+>>>>>>> minyoung
     </select>
 </mapper>

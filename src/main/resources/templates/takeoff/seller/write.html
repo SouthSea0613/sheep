@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/takeoff.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <link rel="stylesheet" href="/css/index.css">
+    <script defer src="/javascript/common.js"></script>
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<section>
+<div class="main_content">
     <div class="content">
         <form action="/takeoff/seller/write" id="write_form" method="post">
             <h2>견적서 작성</h2>
@@ -72,7 +74,7 @@
             all_money_input.value = total;
         }
     </script>
-</section>
+</div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

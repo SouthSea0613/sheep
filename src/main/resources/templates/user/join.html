@@ -6,40 +6,43 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script defer src="/javascript/common.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
 	<link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/headerfooter.css">
 </head>
 
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <h2>회원가입.html</h2>
-<form th:action="@{/user/join}" method="post" id="join_form">
+<div class="main_content">
+    <form th:action="@{/user/join}" method="post" id="join_form">
 
-	아이디
-	<input type="text" name="user_id" onblur="id_check()" id="user_id" placeholder="사용할 아이디를 입력하세요.">
-	<span id="id_check"></span><br>
-	<input id="id_check_val" type="hidden" value="0">
+        아이디
+        <input type="text" name="user_id" onblur="id_check()" id="user_id" placeholder="사용할 아이디를 입력하세요.">
+        <span id="id_check"></span><br>
+        <input id="id_check_val" type="hidden" value="0">
 
-	비밀번호
-	<input type="password" name="user_pw" id="user_pw" placeholder="숫자, 영문 대.소문자 포함 8~12자"><br>
+        비밀번호
+        <input type="password" name="user_pw" id="user_pw" placeholder="숫자, 영문 대.소문자 포함 8~12자"><br>
 
-	비밀번호 확인
-	<input type="password" id="user_pw2" onblur="pw_check()">
-	<span id="pw_check"></span><br>
-	<input id="pw_check_val" type="hidden" value="0">
+        비밀번호 확인
+        <input type="password" id="user_pw2" onblur="pw_check()">
+        <span id="pw_check"></span><br>
+        <input id="pw_check_val" type="hidden" value="0">
 
-	이름
-	<input type="text" name="user_name" id="user_name"><br>
+        이름
+        <input type="text" name="user_name" id="user_name"><br>
 
-	전화번호
-	<select name="user_phone_company" id="user_phone_company">
-		<option value="none">통신사</option>
-		<option value="1">SKT</option>
-		<option value="2">KT</option>
-		<option value="3">LGU+</option>
-		<option value="4">알뜰폰</option>
-	</select>
-	<input type="text" name="user_phone" id="user_phone"><br>
+        전화번호
+        <select name="user_phone_company" id="user_phone_company">
+            <option value="none">통신사</option>
+            <option value="1">SKT</option>
+            <option value="2">KT</option>
+            <option value="3">LGU+</option>
+            <option value="4">알뜰폰</option>
+        </select>
+        <input type="text" name="user_phone" id="user_phone"><br>
 
 	주소
 	<input type="hidden" name="user_addr" id="user_addr"><br>
@@ -48,21 +51,22 @@
 	<input type="text" id="sample6_address" readonly placeholder="주소"><br>
 	<input type="text" id="sample6_detailAddress" placeholder="상세주소"><br>
 
-	메일
-	<input type="text" name="user_email" id="user_email"> @
-	<select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
-		<option value="none">메일선택</option>
-		<option value="naver.com">naver.com</option>
-		<option value="gmail.com">gmail.com</option>
-		<option value="daum.net">daum.net</option>
-		<option value="nate.com">nate.com</option>
-		<option value="other">직접입력</option>
-	</select>
-	<span id="email_check"></span><br>
-	<input id="email_check_val" type="hidden" value="0">
-	<input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
-	<input type="button" value="회원가입" id="join_button" onclick="join_check()">
-</form>
+        메일
+        <input type="text" name="user_email" id="user_email"> @
+        <select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
+            <option value="none">메일선택</option>
+            <option value="naver.com">naver.com</option>
+            <option value="gmail.com">gmail.com</option>
+            <option value="daum.net">daum.net</option>
+            <option value="nate.com">nate.com</option>
+            <option value="other">직접입력</option>
+        </select>
+        <span id="email_check"></span><br>
+        <input id="email_check_val" type="hidden" value="0">
+        <input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
+        <input type="button" value="회원가입" id="join_button" onclick="join_check()">
+    </form>
+</div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

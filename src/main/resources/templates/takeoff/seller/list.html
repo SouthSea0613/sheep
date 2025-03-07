@@ -20,7 +20,7 @@
 					const content = document.getElementById('writetakeoff')
 					enterlist.style.display = 'none';
 					res.data.forEach(list=>{
-						content.innerHTML+='<div id="entercontent">'+list.wish_title+'</div>'
+						content.innerHTML+='<div id="entercontent">'+'<a href="/takeoff/seller/detail?wish_number='+list.wish_number+'&user_id='+list.user_id+ '">' + list.wish_title+'</a>'+'</div>'
 					})
 					num=1;
 				}

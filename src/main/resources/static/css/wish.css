@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 90vh;
+}
+
+/* main */
+
+.main_content {
+    height: auto;
+    min-height: 100%;
+    padding: 3vh 0;
+}
+
+/* 머릿글 */
+h2 {
+    margin: 5vh 25vh;
+}
+
+.wish_write_btn {
+    margin: 2vh 3vh;
+    justify-self: end;
+}
+
+.wish-list-area {
+    margin: 0 auto;
+    width: 60%;
+}
+
+.non_wish {
+    text-align: center;
+}
+
+.wish_list_block {
+    width: 100%;
+    margin: 5px auto;
+    padding: 2vh 3vh;
+    border: 1px solid #6e6e6e;
+    border-radius: 3vh;
+}
+.wish_container{
+    display: flex;
+    width: 100%;
+
+}
+
+.wish_apply_status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /*justify-self: end;*/
+    background-color: lightgray;
+    width: 10vh;
+    height: 4vh;
+    border-radius: 15vh;
+}

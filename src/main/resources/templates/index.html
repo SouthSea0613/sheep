@@ -2,43 +2,124 @@
 
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<link rel="stylesheet" href="/css/index.css">
-	<style>
-		.wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
-		.wrap * {padding: 0;margin: 0;}
-		.wrap .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
-		.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
-		.info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
-		.info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
-		.info .close:hover {cursor: pointer;}
-		.info .body {position: relative;overflow: hidden;}
-		.info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
-		.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-		.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
-		.info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
-		.info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-		.info .link {color: #5085BB;}
-	</style>
-	<script defer th:src="@{/javascript/index.js}"></script>
-	<script>
-		userType("[[${session.user_id}]]", "[[${session.user_type}]]");
-	</script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.17/jquery.bxslider.min.js"
+            integrity="sha512-LaBO0tZh1+6Ebk+EnHt/WsGM0UnmkCXfQ1rfhGmpa5MXUdslNuSSELBRcteHKz4k4ny+Op10Ax2fPoTNq+VcUg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.17/jquery.bxslider.css"
+          integrity="sha512-rV4fiystTwIvs71MLqeLbKbzosmgDS7VU5Xqk1IwFitAM+Aa9x/8Xil4CW+9DjOvVle2iqg4Ncagsbgu2MWxKQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <script type="text/javascript"
+            src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
+    <script defer src="/javascript/common.js"></script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <script th:inline="javascript">
+        const user = [[${session?.user_id}]];
+        const type = [[${session?.user_type}]];
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+
+            $(".slider").bxSlider({
+                adaptiveHeight: true,
+                responsive: true,
+                // slideWidth: 1000,
+                auto: true,
+                controls: true,
+                autoHover: true,
+                pager: true,
+                autoControls: false,
+                responsive: true,
+            })
+        })
+    </script>
+    <style>
+        body {
+            background-color: #FAFBFD;
+        }
+    </style>
 </head>
 <body>
 
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<h1>index.html</h1>
-<div id="map" style="width:100%;height:350px;"></div>
-<div id="clickLatlng"></div>
-<input type="text" id="sample6_postcode" readonly placeholder="우편번호">
-<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" id="sample6_address" readonly placeholder="주소"><br>
-<input type="text" id="sample6_detailAddress" placeholder="상세주소">
+<div class="main_content">
+<!--  슬라이드 배너  -->
+    <div class="content-home">
+        <ul class="slider">
+            <li>
+                <div class="slide_text"><h1>우리집을 찾아보세요!</h1></div>
+                <a th:href="@{/}"><img src="/image/malrangcow.jpg"></a>
+            </li>
+            <li>
+                <div class="slide_text"><h1>위시리스트</h1></div>
+                <a th:href="@{/}"><img src="/image/sky.jpg"></a>
+            </li>
+            <li>
+                <div class="slide_text"><h1>구인구직</h1></div>
+                <a th:href="@{/}"><img src=""></a>
+            </li>
+        </ul>
+    </div>
+
+<!--  브랜드 설명  -->
+    <div class="brand_ex">
+        <hr>
+        <div class="brand_content">
+            <div class="brand_title"><h2>우</h2>리들의 <h2>편</h2>리한 <h2>인</h2>테리어</div>
+            <div class="brand_text">
+                <div class="b_text1">우편인</div>
+                <div>은 인테리어 견적을 어디에서나 쉽고 간편하게 여러 업체에서 받아볼 수 있습니다.</div>
+            </div>
+            <div>그리고 이웃집 또는 다른 집들의 인테리어를 지도에서 한눈에 확인 할 수 있습니다.</div>
+        </div>
+        <hr>
+    </div>
+
+<!--  업체 게시판  -->
+    <div class="seller_content">
+        <h3>업체게시판</h3>
+        <br>
+        <hr>
+        <br>
+        <div class="seller_subcontent">
+            <div><img src="" alt="" class="seller_img"></div>
+            <div class="seller_text">
+                <h3><a href="">"30년된 구축아파트, 트렌디한 화이트인테리어로!"</a></h3>
+                <div><a href="">짱돌디자인</a></div>
+            </div>
+        </div>
+        <div class="seller_subcontent">
+            <div><img src="" alt="" class="seller_img"></div>
+            <div class="seller_text">
+                <h3><a href="">"30평대 구식 빌라 레트로 인테리어로"</a></h3>
+                <div><a href="">부싯돌디자인</a></div>
+            </div>
+        </div>
+        <div class="seller_subcontent">
+            <div><img src="" alt="" class="seller_img"></div>
+            <div class="seller_text">
+                <h3><a href="">"작은 원룸 인테리어 하나로 공간 절약"</a></h3>
+                <div><a href="">돌덩이디자인</a></div>
+            </div>
+        </div>
+        <br>
+        <hr>
+    </div>
+</div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
+<script>
+    var container = document.getElementById('map');
+    var options = {
+        center: new kakao.maps.LatLng(37.43887833749142, 126.67511828936453),
+        level: 3
+    };
+
+    var map = new kakao.maps.Map(container, options);
+</script>
 </body>
 </html>
