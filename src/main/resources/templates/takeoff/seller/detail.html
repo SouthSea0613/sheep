@@ -3,15 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
     <script>
-        function complete () {
-
-        }
-
-        function selecttakeoff() {
-            axios.post('')
-        }
+        // function selecttakeoff() {
+        //     axios.post('')
+        // }
     </script>
 </head>
 <style>
@@ -49,14 +44,20 @@
             <br>
         </th:block>
 
-        <div th:if="${takeoffDto?.apply_status == 대기중}">
+        <div th:if="${session?.user_type == 1 && takeoffDto?.apply_status == 상담중}">
+            <form th:action="@{/takeoff/complete}" method="get">
             <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
-            <input type="submit" onclick="complete()" value="계약완료">
+            <input type="hidden" name="user_id" th:value="${session?.user_id}">
+            <input type="submit" value="계약완료">
+            </form>
         </div>
 
-        <div>
+        <div th:if="${session?.user_type == 0 && takeoffDto?.apply_status == 대기중}">
+            <form th:action="@{/takeoff/changestatus}">
             <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
-            <input type="submit" onclick="selecttakeoff()" value="계약선택">
+            <input type="hidden" name="user_id" th:value="${takeoffDto?.user_id}">
+            <input type="submit" value="견적선택">
+            </form>
         </div>
     </div>
 </section>

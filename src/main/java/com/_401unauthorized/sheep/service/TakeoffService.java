@@ -271,7 +271,7 @@ public class TakeoffService {
     }
 
     @Transactional
-    public boolean write(List<TakeoffSellerDto> takeoffsellerdto, String user_id, String wish_number) {
+    public boolean write(List<TakeoffSellerDto> takeoffsellerdto, String user_id, Integer wish_number) {
         boolean result1 = takeoffDao.status(user_id, wish_number);
         if (!result1) {
             return false;

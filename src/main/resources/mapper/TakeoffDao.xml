@@ -30,7 +30,7 @@
     </update>
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT WISH_TITLE, WISH_TYPE, WISH_SIZE, WISH_SIZE_TEXT, WISH_MONEY, WISH_ADDR, A.APPLY_STATUS
+        SELECT WISH_TITLE, WISH_TYPE, WISH_SIZE, WISH_SIZE_TEXT, WISH_MONEY, WISH_ADDR, A.APPLY_STATUS, A.USER_ID
         FROM APPLY_STATUS A
         LEFT JOIN WISH W
         ON W.WISH_NUMBER = A.WISH_NUMBER
