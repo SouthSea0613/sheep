@@ -50,11 +50,11 @@ public class TakeoffController {
     }
 
     @PostMapping("seller/write")
-    public String write(@RequestParam("wish_number") String wish_number, @RequestParam("category_number") List<String> category_number, @RequestParam("takeoff_content") List<String> takeoff_content, @RequestParam("takeoff_money") List<String> takeoff_money, HttpSession httpSession) {
+    public String write(@RequestParam("wish_number") Integer wish_number, @RequestParam("category_number") List<String> category_number, @RequestParam("takeoff_content") List<String> takeoff_content, @RequestParam("takeoff_money") List<String> takeoff_money, HttpSession httpSession) {
         String user_id = (httpSession.getAttribute("user_id").toString());
         TakeoffSellerDto takeoffsellerDto = new TakeoffSellerDto();
         takeoffsellerDto.setUser_id(user_id);
-        takeoffsellerDto.setWish_number(wish_number);
+        takeoffsellerDto.setWish_number(String.valueOf(wish_number));
         List<TakeoffSellerDto> takeoffsellerdto = new ArrayList<>();
 
         for (int i = 0; i < category_number.size(); i++) {
@@ -110,7 +110,7 @@ public class TakeoffController {
                     takeoff_seller_dto.setCategory_number("16");
                     break;
             }
-            takeoff_seller_dto.setWish_number(wish_number);
+            takeoff_seller_dto.setWish_number(String.valueOf(wish_number));
             takeoff_seller_dto.setWish_category_seller_answer(takeoff_content.get(i));
             takeoff_seller_dto.setWish_category_seller_price(takeoff_money.get(i));
 

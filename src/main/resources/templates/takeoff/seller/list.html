@@ -20,7 +20,8 @@
 					const content = document.getElementById('writetakeoff')
 					enterlist.style.display = 'none';
 					res.data.forEach(list=>{
-						content.innerHTML+='<div id="entercontent">'+list.wish_title+'</div>'
+						console.log("number")
+						content.innerHTML+='<div id="entercontent">'+'<a href="/takeoff/seller/detail?wish_number='+list.wish_number+'&user_id='+list.user_id+ '">' + list.wish_title+'</a>'+'</div>'
 					})
 					num=1;
 				}
@@ -51,7 +52,7 @@
 <div id="enterlist">
 	<th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
 		<th:block th:each="takeofflist : ${seller_takeoff_list}">
-			<a th:href="@{/takeoff/seller/detail(wish_number=${takeofflist.wish_number})}" th:text="${takeofflist.wish_title}"></a>
+			<a th:href="@{/wish/detail(wish_number=${takeofflist.wish_number})}" th:text="${takeofflist.wish_title}"></a>
 			<div th:text="${takeofflist.user_id}"></div>
 		</th:block>
 	</th:block>
