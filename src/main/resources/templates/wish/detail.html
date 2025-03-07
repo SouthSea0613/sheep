@@ -45,24 +45,16 @@
             <br>
         </th:block>
         <div th:if="${wish_dto?.apply_status==null}" class="takeoffarea">
-<!--            <input type="hidden" th:value="${wish_dto?.wish_number}" class="wish_number" name="wish_number">-->
             <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
             <input type="submit" value="위시 수정">
             <input type="button" onclick="delete_wish()" th:value="삭제하기">
         </div>
 
-<<<<<<< HEAD
         <div th:if="${session.user_type == '1'}">
             <input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number" id="wish_number">
             <input type="button" onclick="seller_write()" value="작성하기">
         </div>
-=======
-            <div th:if="${session.user_type == '1'}">
-			<input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number" id="wish_number">
-			<input type="button" onclick="seller_write()" value="작성하기">
-            </div>
->>>>>>> jieun
     </form>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>

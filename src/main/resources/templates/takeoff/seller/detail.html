@@ -43,11 +43,8 @@
             <div th:text="${takeoffSeller?.wish_category_seller_price}+만원">견적금액</div>
             <br>
         </th:block>
-<<<<<<< HEAD
+
         <div th:text="|합계: ${all_money}만원|">합계</div>
-=======
-            <div th:text="|합계: ${all_money}만원|">합계</div>
->>>>>>> jieun
 
         <div th:if="${session?.user_type == '1' && takeoffDto?.apply_status == 상담중}">
             <form th:action="@{/takeoff/complete}" method="get">
@@ -66,9 +63,5 @@
         </div>
     </div>
 </section>
-
-<div>
-    <!--   footer   -->
-</div>
 </body>
 </html>
