@@ -8,6 +8,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.17/jquery.bxslider.min.js"
             integrity="sha512-LaBO0tZh1+6Ebk+EnHt/WsGM0UnmkCXfQ1rfhGmpa5MXUdslNuSSELBRcteHKz4k4ny+Op10Ax2fPoTNq+VcUg=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.17/jquery.bxslider.css"
+          integrity="sha512-rV4fiystTwIvs71MLqeLbKbzosmgDS7VU5Xqk1IwFitAM+Aa9x/8Xil4CW+9DjOvVle2iqg4Ncagsbgu2MWxKQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <script type="text/javascript"
             src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
     <script defer src="/javascript/common.js"></script>
@@ -23,8 +26,15 @@
             loginStatus();
 
             $(".slider").bxSlider({
+                adaptiveHeight: true,
+                responsive: true,
+                // slideWidth: 1000,
                 auto: true,
-                slideWidth: 600,
+                controls: true,
+                autoHover: true,
+                pager: true,
+                autoControls: false,
+                responsive: true,
             })
         })
     </script>
@@ -40,17 +50,20 @@
 <div class="main_content">
 <!--  슬라이드 배너  -->
     <div class="content-home">
-        <div class="slider">
-            <div>
-                <img src="/image/malrangcow.jpg">
-            </div>
-            <div>
-                <img src="/image/sky.jpg">
-            </div>
-            <div>
-                <img src="">
-            </div>
-        </div>
+        <ul class="slider">
+            <li>
+                <div class="slide_text"><h1>우리집을 찾아보세요!</h1></div>
+                <a th:href="@{/}"><img src="/image/malrangcow.jpg"></a>
+            </li>
+            <li>
+                <div class="slide_text"><h1>위시리스트</h1></div>
+                <a th:href="@{/}"><img src="/image/sky.jpg"></a>
+            </li>
+            <li>
+                <div class="slide_text"><h1>구인구직</h1></div>
+                <a th:href="@{/}"><img src=""></a>
+            </li>
+        </ul>
     </div>
 
 <!--  브랜드 설명  -->

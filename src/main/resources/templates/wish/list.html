@@ -84,7 +84,7 @@
     <h2>위시리스트</h2>
     <div class="wish-list-area">
         <th:block th:if="${#lists.isEmpty(wish_list)}">
-            <div>
+            <div class="non_wish">
                 <div>위시리스트가 없습니다</div>
             </div>
         <div>
@@ -105,14 +105,17 @@
         </div>
             ---------------------------------
         </th:block>
+        <div class="wishBarea wish_write_btn">
+            <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
+        </div>
         <th:block th:unless="${#lists.isEmpty(wish_list)}">
             <th:block th:each="wish:${wish_list}">
                 <div class="wish_list_block">
-                    <div class="container">
-                    <div>
-                        <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
-                    </div>
-                    <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}">상태값</div>
+                    <div class="wish_container">
+                        <div>
+                            <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}" th:text="${wish?.wish_title}"></a>
+                        </div>
+                        <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}" class="wish_apply_status">상태값</div>
                     </div>
                     <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
                         <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
@@ -121,9 +124,6 @@
                 </div>
             </th:block>
         </th:block>
-        <div class="wishBarea">
-            <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
-        </div>
     </div>
 </div>
     <th:block th:replace="~{common/fragment::footer}"></th:block>
