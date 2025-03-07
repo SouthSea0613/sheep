@@ -136,14 +136,23 @@ public class TakeoffController {
         if (takeoffDto != null) {
             model.addAttribute("takeoffDto", takeoffDto);
             model.addAttribute("takeoffSellerDto", takeoffSellerDto);
+<<<<<<< HEAD
 
+=======
+            log.info("takeoffSellerDto:" + takeoffSellerDto);
+>>>>>>> jieun
             int all = 0;
             for (CategoryListDto price : takeoffSellerDto) {
                 all += price.getWish_category_seller_price();
             }
             model.addAttribute("all_money", all);
+<<<<<<< HEAD
 
+=======
+            log.info("all_money:" + model.getAttribute("all_money"));
+>>>>>>> jieun
             return "takeoff/seller/detail";
+
         } else {
             return "redirect:/takeoff/seller/list";
         }
