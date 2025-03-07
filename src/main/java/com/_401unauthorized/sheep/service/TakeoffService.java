@@ -252,13 +252,17 @@ public class TakeoffService {
 
     public List<TakeoffDto> list(Integer wishNumber) {
       List<TakeoffDto> takeoffdtolist = takeoffDao.list(wishNumber);
+      for(TakeoffDto takeoffdto : takeoffdtolist){
         switch(takeoffdtolist.get(1).getApply_status()){
-            case "1" :
+            case "0" :
+                takeoffdto.setApply_status("대기중");
                 break;
-            case "2" :
+            case "1" :
+                takeoffdto.setApply_status("상담중");
                 break;
 
         }
+      }
         return takeoffDao.list(wishNumber);
     }
 
