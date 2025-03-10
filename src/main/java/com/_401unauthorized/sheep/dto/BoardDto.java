@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-
 import java.time.LocalDateTime;
 
 @Data
@@ -13,10 +12,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @Accessors(chain = true)
-public class EmploymentDto {
+public class BoardDto {
     int job_number;
     String user_id;
     String job_title;
     String job_content;
     LocalDateTime job_reg_date;
+
 }
