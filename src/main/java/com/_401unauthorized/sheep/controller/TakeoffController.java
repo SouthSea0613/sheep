@@ -133,7 +133,9 @@ public class TakeoffController {
         }
         WishDto takeoffDto = takeoffService.essential(wish_number,user_id);
         List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number, user_id);
+        log.info("!!!!지금 위시 넘버는? :" + takeoffDto.getWish_number());
         if (takeoffDto != null) {
+            log.info(takeoffDto.toString());
             model.addAttribute("takeoffDto", takeoffDto);
             model.addAttribute("takeoffSellerDto", takeoffSellerDto);
             int all = 0;
@@ -172,8 +174,9 @@ public class TakeoffController {
 
     // (판매자) 내가준 견적리스트 에서 <계약완료>! ---------------------------------------
     @GetMapping("/complete")
-    public String complete(@RequestParam("wish_number") Integer wish_number) {
-        if (takeoffService.complete(wish_number)) {
+    public String complete(@RequestParam("wish_number") Integer wish_number, @RequestParam("user_id") String user_id) {
+        log.info(wish_number.toString());
+        if (takeoffService.complete(wish_number, user_id)) {
             return "redirect:/takeoff/seller/list";
         } else {
             return "takeoff/seller/detail";

@@ -292,8 +292,8 @@ public class TakeoffService {
         return true;
     }
 
-    public boolean complete(Integer wish_number) {
-        if (takeoffDao.complete(wish_number)) {
+    public boolean complete(Integer wish_number, String user_id) {
+        if (takeoffDao.complete(wish_number, user_id)) {
             return true;
         }
         return false;
