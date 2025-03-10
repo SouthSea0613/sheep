@@ -207,5 +207,13 @@ public class TakeoffController {
         }
         return false;
     }
+    @GetMapping("/changestatus")
+    public String changestatus(@RequestParam Integer wish_number,@RequestParam String user_id){
+        if(takeoffService.changestatus(wish_number,user_id)){
+            return "wish/list";
+        }
+        return "takeoff/seller/detail";
+    }
+
 }
 
