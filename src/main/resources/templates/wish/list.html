@@ -93,6 +93,7 @@
 
         function createbtn() {
             const btndiv = document.querySelectorAll('.status_wish_number')
+            console.log(btndiv)
             const listdiv = document.querySelectorAll('.listbtn')
             console.log("테스트2")
             for (let i = 0; i < btndiv.length; i++) {
@@ -135,37 +136,65 @@
             <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
         </div>
 
-            <th:block th:unless="${#lists.isEmpty(wish_req_list)}">
-                <th:block th:each="wish:${wish_list}">
-                    <div>
-                    <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
-                        <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
-                               name="wish_number">
-                        <div class="listbtn"></div>
-                        <div class="takeoff_list">
-
+        <!--위시리스트 요청 후 -->
+        <th:block th:unless="${#lists.isEmpty(wish_req_list)}">
+            <th:block th:each="wish:${wish_req_list}">
+                <div class="wish_list_block">
+                    <div class="wish_container">
+                        <div>
+                            <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
+                               th:text="${wish?.wish_title}"></a>
                         </div>
-                        <div class="">
-                            <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
+                        <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}"
+                             class="wish_apply_status">상태값
+                        </div>
+                        <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
+                            <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
                                    name="wish_number">
-                            <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
+                            <div class="listbtn"></div>
+                            <div class="takeoff_list">
+
+                            </div>
+                            <div class="">
+                                <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
+                                       name="wish_number">
+                                <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
+                            </div>
                         </div>
                     </div>
-<!--                    <div class="test">-->
+                    <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
+                        <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                        <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+                    </div>
+                </div>
 
-<!--                    </div>-->
-
-        </div>
+            </th:block>
+        </th:block>
+            <!--위시리스트(요청전)-->
+            <th:block th:unless="${#lists.isEmpty(wish_list)}">
+                <th:block th:each="wish:${wish_list}">
         <div class="wish_list_block">
             <div class="wish_container">
                 <div>
                     <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
                        th:text="${wish?.wish_title}"></a>
                 </div>
-                <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}"
-                     class="wish_apply_status">상태값
-                </div>
+<!--                <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}"-->
+<!--                     class="wish_apply_status">상태값-->
+<!--                </div>-->
+                <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
+                    <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
+                           name="wish_number">
+                    <div class="listbtn"></div>
+                    <div class="takeoff_list">
 
+                    </div>
+                    <div class="">
+                        <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
+                               name="wish_number">
+                        <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
+                    </div>
+                </div>
             </div>
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">

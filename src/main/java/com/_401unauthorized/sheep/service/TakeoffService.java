@@ -278,8 +278,8 @@ public class TakeoffService {
 
     @Transactional
     public boolean write(List<TakeoffSellerDto> takeoffsellerdto, String user_id, Integer wish_number) {
-        Integer result3 = takeoffDao.counttakeoff(wish_number);
-        if(result3>6){
+//        Integer result3 = takeoffDao.counttakeoff(wish_number);
+//        if(result3<6 || result3==null){
         boolean result1 = takeoffDao.status(user_id, wish_number);
         if (!result1) {
             return false;
@@ -290,7 +290,7 @@ public class TakeoffService {
                 return false;
             }
         }
-        }
+//        }
         return true;
     }
 
