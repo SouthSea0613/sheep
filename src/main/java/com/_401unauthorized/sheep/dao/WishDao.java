@@ -21,4 +21,6 @@ public interface WishDao {
     List<CategoryDto> get_takeoff_detail(Integer wish_number);
 
     boolean update(WishDto wishdto);
+
+    WishDto get_wish_req_list(String userId);
 }

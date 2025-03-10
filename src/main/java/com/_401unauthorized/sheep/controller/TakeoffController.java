@@ -199,5 +199,13 @@ public class TakeoffController {
         }
         return false;
     }
+    @PostMapping("/contract")
+    @ResponseBody
+    public boolean contract(@RequestBody Integer wish_number,@RequestBody String user_id){
+        if(takeoffService.contract(wish_number,user_id)){
+            return true;
+        }
+        return false;
+    }
 }
 

@@ -35,9 +35,11 @@ public class WishService {
                 wish.setApply_status(null);
             }
         }
+
         log.info(wish_list.toString());
         return wish_list;
     }
+
 
     @Transactional
     public boolean write(WishDto wishDto) {
@@ -317,6 +319,10 @@ public class WishService {
 
     public boolean update(WishDto wishdto) {
         return wishDao.update(wishdto);
+    }
+
+    public Object get_wish_req_list(String userId) {
+        return wishDao.get_wish_req_list(userId);
     }
 }
 

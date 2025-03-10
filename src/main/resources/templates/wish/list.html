@@ -19,6 +19,7 @@
         })
 
         function wish_write() {
+
             location.href = "/wish/write"
         }
 
@@ -39,13 +40,26 @@
             });
 
         }
+        function contract(btn){
+            const wishnumber = document.getElementsByClassName('hidden_wish_number')
+            const userid = document.getElementsByClassName('hidden_user_id')
+            const contractbtn = document.getElementsByClassName()
+            axios.post('/takeoff/contract',{
+                wish_number: wishnumber.value,
+                user_id: userid.value,
+            }).then((res)=>{
+                if(res.data){
 
+                }
+
+            })
+        }
         function takeofflist(btn) {
-            const takeofflist = document.querySelector('.takeoff_list');
-            const openbtn = document.getElementById('openbtn');
-            const closebtn = document.getElementById('closebtn');
-
-            if (btn === openbtn) {
+            const takeofflist = document.querySelectorAll('.takeoff_list');
+            const openbtn = document.querySelectorAll('.openbtn');
+            const closebtn = document.querySelectorAll('.closebtn');
+            for(let i=0; i<openbtn.length; i++){
+            if (btn === openbtn[i]) {
                 const wishnumber = btn.parentElement.previousElementSibling.value
                 console.log(wishnumber);
                 axios.post('/takeoff/list', {
@@ -54,19 +68,26 @@
                     console.log(res);
 
                     console.log("테스트");
-                    closebtn.style.display = 'block';
+                    closebtn[i].style.display = 'block';
                     btn.style.display = 'none';
                     res.data.forEach(resp => {
-                        takeofflist.innerHTML += '<div id="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.user_id + '">' + resp.user_id + '</a>' + '</span>'
-                        takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
-                        takeofflist.innerHTML += '<span>' + resp.apply_status + '</span>';
+                        takeofflist[i].innerHTML += '<div class="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.user_id + '">' + resp.user_id + '</a>' + '</span>'
+                        takeofflist[i].innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
+                        takeofflist[i].innerHTML += '<span>' + resp.apply_status + '</span>';
+                        if(resp.apply_status==="상담중"){
+                            takeofflist[i].innerHTML +='<input class="hidden_wish_number" type="hidden" value='+resp.wish_number+'>'
+                            takeofflist[i].innerHTML +='<input class="hidden_user_id" type="hidden" value='+resp.user_id+'>'
+                            takeofflist[i].innerHTML += '<span>' + '<input type="button" class="contractbtn" value="계약완료" onclick="contract(this)">'
+                        }
                     })
                 })
+
             }
-            if (btn === closebtn) {
+            if (btn === closebtn[i]) {
                 btn.style.display = 'none';
-                openbtn.style.display = 'block';
-                takeofflist.innerHTML = "";
+                openbtn[i].style.display = 'block';
+                takeofflist[i].innerHTML = "";
+            }
             }
         }
 
@@ -83,13 +104,20 @@
                 })
                     .then((res) => {
                         if (res.data) {
-                            listdiv[i].innerHTML += '<input type="button" value="버튼" id="openbtn" onclick="takeofflist(this)">'
-                            listdiv[i].innerHTML += '<input type="button" hidden value="닫기버튼" id="closebtn" onclick="takeofflist(this)">'
+                            listdiv[i].innerHTML += '<input type="button" value="버튼" class="openbtn" onclick="takeofflist(this)">'
+                            listdiv[i].innerHTML += '<input type="button" hidden value="닫기버튼" class="closebtn" onclick="takeofflist(this)">'
                         } else {
                             console.log("실패")
                         }
                     })
             }
+        }
+        function confirm(){
+            const userid = document.querySelectorAll('wish_user_id')
+            userid
+            axios.post('/takeoff/confirm',{
+
+            })
         }
     </script>
 </head>
@@ -107,24 +135,25 @@
             <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
         </div>
 
-            <th:block th:unless="${#lists.isEmpty(wish_list)}">
+            <th:block th:unless="${#lists.isEmpty(wish_req_list)}">
                 <th:block th:each="wish:${wish_list}">
                     <div>
                     <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
                         <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
                                name="wish_number">
                         <div class="listbtn"></div>
-                    </div>
-                    <div class="test">
                         <div class="takeoff_list">
 
                         </div>
                         <div class="">
                             <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
                                    name="wish_number">
-                            <input type="button" value="확정" onclick="confirm()">
+                            <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
                         </div>
                     </div>
+<!--                    <div class="test">-->
+
+<!--                    </div>-->
 
         </div>
         <div class="wish_list_block">
