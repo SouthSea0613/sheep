@@ -143,17 +143,13 @@ public class WishController {
 
     @GetMapping("/delete")
     public String delete(@RequestParam("wish_number") Integer wish_number) {
-        log.info("delete wish number: " + wish_number);
-        if (wish_number == null || wish_number < 1) {
-            return "redirect:/wish/list";
-        }
         if (wishService.delete_wish(wish_number)) {
-            log.info("delete wish number: " + wish_number);
             return "redirect:/wish/list";
         } else {
             return "redirect:/wish/detail";
         }
     }
+
     @PostMapping("/update")
     public String update(WishDto wishdto,HttpSession httpSession){
         wishdto.setUser_id(httpSession.getAttribute("user_id").toString());

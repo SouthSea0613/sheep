@@ -298,7 +298,6 @@ public class WishService {
     public boolean delete_wish(Integer wish_number) {
         if (wishDao.check_sub_category(wish_number)) {
             if (!wishDao.delete_sub_category(wish_number)) {
-                log.info("삭제테스트");
                 return false;
             }
             return false;
