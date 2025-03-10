@@ -6,6 +6,18 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<link rel="stylesheet" href="/css/index.css">
+	<style>
+		.area{
+			position : absolute;
+			border: 1px solid black;
+			width: 30%;
+			height : 50%;
+			background-color : green;
+			left :50%;
+			top : 50%;
+			display: none;
+		}
+	</style>
 	<script>
 		onload=()=>{
 			checkarea()
@@ -50,23 +62,13 @@
 			}).then(res=>{
 					const areadiv = document.getElementById('area')
 				console.log(res.data)
-					if(res.data) {
+					if(!res.data) {
 						areadiv.style.display = "block";
 					}
 			})
 		}
 	</script>
-	<style>
-		.area{
-			position : absolute;
-			border: 1px solid black;
-			width: 30%;
-			height : 50%;
-			background-color : green;
-			left :50%;
-			top : 50%;
-		}
-	</style>
+
 </head>
 <body>
 <div class="area">
