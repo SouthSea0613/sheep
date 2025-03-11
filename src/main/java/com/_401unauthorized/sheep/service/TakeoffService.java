@@ -334,4 +334,11 @@ public class TakeoffService {
         }
         return false;
     }
+
+    public boolean confirm(String user_id, Integer wish_number) {
+        if(takeoffDao.changestatus(wish_number,user_id)){
+            return true;
+        }
+        return false;
+    }
 }

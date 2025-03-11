@@ -232,5 +232,13 @@ public class TakeoffController {
         }
         return "takeoff/seller/detail";
     }
+    @PostMapping("/confirm")
+    @ResponseBody
+    public boolean confirm(@RequestBody String user_id,@RequestBody Integer wish_number){
+        if(takeoffService.confirm(user_id,wish_number)){
+            return true;
+        }
+        return false;
+    }
 }
 
