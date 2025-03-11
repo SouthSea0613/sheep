@@ -26,6 +26,7 @@ public class WishController {
     public String get_wish_list(HttpSession httpSession, Model model) {
         String user_id = httpSession.getAttribute("user_id").toString();
         model.addAttribute("wish_list", wishService.get_wish_list(user_id));
+        model.addAttribute("wish_req_list",wishService.get_wish_req_list(user_id));
         log.info(wishService.get_wish_list(user_id).toString());
         return "wish/list";
     }

@@ -254,18 +254,24 @@ public class TakeoffService {
 
     public List<TakeoffDto> list(Integer wishNumber) {
       List<TakeoffDto> takeoffdtolist = takeoffDao.list(wishNumber);
-      for(TakeoffDto takeoffdto : takeoffdtolist){
-        switch(takeoffdtolist.get(1).getApply_status()){
+      log.info(takeoffdtolist.toString());
+      for(int i=0; i<takeoffdtolist.size();i++){
+        switch(takeoffdtolist.get(i).getApply_status()){
             case "0" :
-                takeoffdto.setApply_status("대기중");
+                takeoffdtolist.get(i).setApply_status("대기중");
                 break;
             case "1" :
-                takeoffdto.setApply_status("상담중");
+                takeoffdtolist.get(i).setApply_status("상담중");
                 break;
-
+            case "2":
+                takeoffdtolist.get(i).setApply_status("계약완료");
+                break;
+            case "3":
+                takeoffdtolist.get(i).setApply_status("취소");
+                break;
         }
       }
-        return takeoffDao.list(wishNumber);
+        return takeoffdtolist;
     }
 
     public List<TakeoffDto> my_list(String userid) {
@@ -274,6 +280,8 @@ public class TakeoffService {
 
     @Transactional
     public boolean write(List<TakeoffSellerDto> takeoffsellerdto, String user_id, Integer wish_number) {
+//        Integer result3 = takeoffDao.counttakeoff(wish_number);
+//        if(result3<6 || result3==null){
         boolean result1 = takeoffDao.status(user_id, wish_number);
         if (!result1) {
             return false;
@@ -284,13 +292,7 @@ public class TakeoffService {
                 return false;
             }
         }
-        Integer result3 = takeoffDao.counttakeoff(wish_number);
-        if(result3>0){
-            boolean result4 = takeoffDao.update_status(wish_number);
-            if(!result4){
-                return false;
-            }
-        }
+//        }
         return true;
     }
 
@@ -315,7 +317,22 @@ public class TakeoffService {
         return false;
     }
 
+<<<<<<< HEAD
     public boolean select_area(String user_id, String seller_area) {
         return userDao.select_area(user_id, seller_area);
+=======
+    public boolean contract(Integer wish_number, String user_id) {
+        if(takeoffDao.contract(wish_number,user_id)){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean changestatus(Integer wish_number, String user_id) {
+        if(takeoffDao.changestatus(wish_number,user_id)){
+            return true;
+        }
+        return false;
+>>>>>>> minyoung
     }
 }

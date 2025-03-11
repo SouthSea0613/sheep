@@ -199,6 +199,7 @@ public class TakeoffController {
         }
         return false;
     }
+<<<<<<< HEAD
 
     @GetMapping("/seller/select_area")
     public String select_area() {
@@ -212,5 +213,23 @@ public class TakeoffController {
         }
         return "takeoff/seller/select_area";
     }
+=======
+    @PostMapping("/contract")
+    @ResponseBody
+    public boolean contract(@RequestBody Integer wish_number,@RequestBody String user_id){
+        if(takeoffService.contract(wish_number,user_id)){
+            return true;
+        }
+        return false;
+    }
+    @GetMapping("/changestatus")
+    public String changestatus(@RequestParam Integer wish_number,@RequestParam String user_id){
+        if(takeoffService.changestatus(wish_number,user_id)){
+            return "wish/list";
+        }
+        return "takeoff/seller/detail";
+    }
+
+>>>>>>> minyoung
 }
 

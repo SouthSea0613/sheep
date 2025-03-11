@@ -16,9 +16,13 @@ public interface TakeoffDao {
     List<TakeoffDto> my_list(String userid);
     boolean complete(Integer wish_number);
     Integer counttakeoff(Integer wish_number);
-    boolean update_status(Integer wish_number);
+    boolean update_status(Integer wish_number, String user_id);
 
     boolean count(Integer wish_number, String user_id);
 
     boolean checkarea(String userId);
+
+    boolean contract(Integer wish_number, String user_id);
+
+    boolean changestatus(Integer wish_number, String user_id);
 }
