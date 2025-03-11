@@ -319,23 +319,8 @@ public class WishService {
 
     public WishDto get_wish_req_list(String userId) {
         WishDto wishdto = wishDao.get_wish_req_list(userId);
-<<<<<<< HEAD
         if(wishdto!=null){
-        switch (wishdto.getApply_status()){
-            case "0", "1":
-                wishdto.setApply_status("진행중");
-                break;
-            case "2":
-                wishdto.setApply_status("계약완료");
-                break;
-            case "3":
-                wishdto.setApply_status("취소");
-                break;
-            case "4":
-                wishdto.setApply_status("기간만료");
-=======
-        if (wishdto.getApply_status() != null) {
-            switch (wishdto.getApply_status()) {
+            switch (wishdto.getApply_status()){
                 case "0", "1":
                     wishdto.setApply_status("진행중");
                     break;
@@ -348,8 +333,6 @@ public class WishService {
                 case "4":
                     wishdto.setApply_status("기간만료");
             }
->>>>>>> origin/jieun
-        }
         }
         return wishdto;
     }

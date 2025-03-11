@@ -46,8 +46,3 @@ public class EmploymentController {
         return "/employment/list";
     }
 }
-
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/jieun
