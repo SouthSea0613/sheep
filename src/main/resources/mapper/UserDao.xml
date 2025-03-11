@@ -94,4 +94,10 @@
         FROM USER
         WHERE USER_ID = #{user_id}
     </select>
+
+    <update id="select_area">
+        UPDATE SELLER
+        SET SELLER_AREA = #{seller_area}
+        WHERE USER_ID = #{user_id}
+    </update>
 </mapper>

@@ -16,9 +16,9 @@
     <script defer src="/javascript/common.js"></script>
     <link rel="stylesheet" href="/css/headerfooter.css">
     <link rel="stylesheet" href="/css/index.css">
-    <script th:inline="javascript">
-        const user = [[${session?.user_id}]];
-        const type = [[${session?.user_type}]];
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
 
         $(() => {
             console.log(type)

@@ -38,14 +38,6 @@
 			num=0;
 		}
 		function checkarea(){
-			// axios.post('/takeoff/checkarea',null,{
-			// 	param:{user_id : "[[${session.user_id}]]"}
-			// }).then(res=>{
-			// 	const areadiv = document.getElementById('area')
-			// 	if(res.data){
-			// 		areadiv.style.display="block";
-			// 	}
-			// })
 			axios.post('/takeoff/checkarea',{
 			}).then(res=>{
 					const areadiv = document.getElementById('area')
@@ -54,6 +46,9 @@
 						areadiv.style.display = "block";
 					}
 			})
+		}
+		function select_seller_area(){
+			location.href = "/takeoff/seller/select_area"
 		}
 	</script>
 	<style>
@@ -83,6 +78,12 @@
 	<input type="button" class="" value="작성한 견적" onclick="writetab()">
 </div>
 <div id="enterlist">
+	<th:block th:if="${#lists.isEmpty(seller_takeoff_list)}">
+		<div class="non_seller_takeoff_list">
+			<div>들어온 견적리스트가 없습니다.</div>
+			<input type="button" id="seller_area" onclick="select_seller_area()" value="지역설정">
+		</div>
+	</th:block>
 	<th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
 		<th:block th:each="takeofflist : ${seller_takeoff_list}">
 			<a th:href="@{/wish/detail(wish_number=${takeofflist.wish_number})}" th:text="${takeofflist.wish_title}"></a>

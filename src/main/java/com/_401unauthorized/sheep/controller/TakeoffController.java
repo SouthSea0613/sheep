@@ -199,5 +199,18 @@ public class TakeoffController {
         }
         return false;
     }
+
+    @GetMapping("/seller/select_area")
+    public String select_area() {
+        return "takeoff/seller/select_area";
+    }
+
+    @PostMapping("/seller/select_area")
+    public String select_area(HttpSession httpSession,@RequestParam("seller_area") String seller_area) {
+        if(takeoffService.select_area(httpSession.getAttribute("user_id").toString(), seller_area)){
+            return "redirect:/takeoff/seller/list";
+        }
+        return "takeoff/seller/select_area";
+    }
 }
 

@@ -1,6 +1,7 @@
 package com._401unauthorized.sheep.service;
 
 import com._401unauthorized.sheep.dao.TakeoffDao;
+import com._401unauthorized.sheep.dao.UserDao;
 import com._401unauthorized.sheep.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 @Service
 public class TakeoffService {
     private final TakeoffDao takeoffDao;
+    private final UserDao userDao;
 
     public boolean call(ApplyDto applyDto) {
         boolean result = takeoffDao.call(applyDto);
@@ -311,5 +313,9 @@ public class TakeoffService {
             return true;
         }
         return false;
+    }
+
+    public boolean select_area(String user_id, String seller_area) {
+        return userDao.select_area(user_id, seller_area);
     }
 }
