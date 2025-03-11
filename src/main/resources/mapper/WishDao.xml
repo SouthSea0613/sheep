@@ -113,6 +113,7 @@
             ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER) SELLER
         ON SELLER.WISH_NUMBER = WCS.WISH_NUMBER AND SELLER.CATEGORY_PARENT = WCS.CATEGORY_NUMBER
     </select>
+
     <select id="get_wish_req_list" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT W.WISH_NUMBER,W.WISH_TITLE,A.APPLY_STATUS
         FROM WISH W

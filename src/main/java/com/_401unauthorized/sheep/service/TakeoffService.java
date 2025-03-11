@@ -317,10 +317,10 @@ public class TakeoffService {
         return false;
     }
 
-<<<<<<< HEAD
     public boolean select_area(String user_id, String seller_area) {
         return userDao.select_area(user_id, seller_area);
-=======
+    }
+
     public boolean contract(Integer wish_number, String user_id) {
         if(takeoffDao.contract(wish_number,user_id)){
             return true;
@@ -333,6 +333,5 @@ public class TakeoffService {
             return true;
         }
         return false;
->>>>>>> minyoung
     }
 }
