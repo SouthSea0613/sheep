@@ -4,6 +4,7 @@ import com._401unauthorized.sheep.dto.BoardDto;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface BoardDao {
+public interface EmploymentDao {
     boolean write(BoardDto employmentDto);
+
 }

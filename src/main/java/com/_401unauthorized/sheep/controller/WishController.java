@@ -33,7 +33,7 @@ public class WishController {
 
     @GetMapping("/write")
     public String write() {
-        return "write";
+        return "wish/write";
     }
 
     @GetMapping("/get_wish_detail")
