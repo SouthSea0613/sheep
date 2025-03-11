@@ -14,7 +14,7 @@ public interface TakeoffDao {
     List<CategoryDto> get_category_detail(Integer wish_number, String user_id);
     List<TakeoffDto> list(Integer wish_number);
     List<TakeoffDto> my_list(String userid);
-    boolean complete(Integer wish_number);
+    boolean complete(Integer wish_number, String user_id);
     Integer counttakeoff(Integer wish_number);
     boolean update_status(Integer wish_number, String user_id);
 
