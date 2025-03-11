@@ -3,6 +3,7 @@ package com._401unauthorized.sheep.controller;
 
 import com._401unauthorized.sheep.dto.UserDto;
 import com._401unauthorized.sheep.service.UserService;
+import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
     private final UserService userService;
+    private final WishService wishService;
 
     @GetMapping("/join")
     public String join() {
@@ -110,8 +112,12 @@ public class UserController {
     }
 
     @PostMapping("/join_additional_seller")
-    public String join_additional_seller(UserDto userDto) {
+    public String join_additional_seller(UserDto userDto, HttpSession httpSession) {
+        if(userDto.getUser_id() == "" || userDto.getUser_id() == null ){
+            userDto.setUser_id(httpSession.getAttribute("user_id").toString());
+        }
         if (userService.join_additional_seller(userDto)) {
+            httpSession.invalidate();
             return "redirect:/user/login";
         } else {
             return "redirect:/user/join_additional";
@@ -138,8 +144,12 @@ public class UserController {
     }
 
     @PostMapping("/join_additional_engineer")
-    public String join_additional_engineer(UserDto userDto){
+    public String join_additional_engineer(UserDto userDto, HttpSession httpSession) {
+        if(userDto.getUser_id() == "" || userDto.getUser_id() == null ){
+            userDto.setUser_id(httpSession.getAttribute("user_id").toString());
+        }
         if(userService.join_additional_engineer(userDto)) {
+            httpSession.invalidate();
             return "redirect:/user/login";
         }
         return "redirect:/user/join_additional";
