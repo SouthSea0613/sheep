@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.WishDao">
-    <update id="update">
-    </update>
+
     <!--리스트 가져오기-->
     <!--  위시리스트에 갔을때 제목이랑 상태 값을 가지고 와야함으로 WISH_TITLE이랑 APPLY_STATUS를 select했다.  -->
     <!--  LEFT JOIN은 왼쪽의테이블을 중심으로 오른쪽테이블을 매치를 함으로 WISH_TITLE오른쪽에 APPLY_STATUS를 매치한다.  -->
@@ -52,12 +51,6 @@
         WHERE WISH_NUMBER = #{wishNumber}
     </select>
 
-    <select id="check_sub_category" resultType="java.lang.Boolean">
-        SELECT COUNT(*)
-        FROM SUB_CATEGORY
-        WHERE WISH_NUMBER = #{wishNumber}
-    </select>
-
     <!--글쓰기!(generateKey) 사용-->
     <!--  wish_number(PK/ 오토인크리먼트) 로 작성하면서 겹치지 않게 지켜줌, 하위 친구들도 동일한 위시넘버로 계속 간다.  -->
     <!--  WISH 테이블의 필수 값을 순서대로 write.html에 있는 틀에 맞춰 작성된 VALUE값을 불러온다. 아래 모두 같다.  -->
@@ -78,6 +71,7 @@
         INSERT INTO SUB_CATEGORY
         VALUES (#{category_number}, #{wish_number})
     </insert>
+
     <!-- 삭제 요청 -->
     <delete id="delete_sub_category">
         DELETE FROM SUB_CATEGORY
@@ -97,27 +91,27 @@
     <select id="get_takeoff_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
         SELECT SELLER.WISH_NUMBER, SELLER.CATEGORY_PARENT, SELLER.CATEGORY_NUMBER, SELLER.MAJOR_TEXT, WCS.WISH_CATEGORY_SELLER_ANSWER, WCS.WISH_CATEGORY_SELLER_PRICE
         FROM WISH_CATEGORY_SELLER WCS
-                 RIGHT JOIN (
+        RIGHT JOIN (
             SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
             FROM MAJOR_CATEGORY_CONTENT MC
-                     LEFT JOIN (
+            LEFT JOIN (
                 SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
                 FROM CATEGORY C
-                         RIGHT JOIN SUB_CATEGORY S
-                                    ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+                RIGHT JOIN SUB_CATEGORY S
+                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
                 WHERE C.CATEGORY_PARENT IS NOT NULL) C
-                               ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+            ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
             WHERE MC.WISH_NUMBER = #{wish_number}
             UNION
             SELECT C.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
             FROM MAJOR_CATEGORY_CONTENT MC
-                     RIGHT JOIN (
+            RIGHT JOIN (
                 SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
                 FROM CATEGORY C
-                         RIGHT JOIN SUB_CATEGORY S
-                                    ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+                RIGHT JOIN SUB_CATEGORY S
+                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
                 WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
-                                ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER) SELLER
-                            ON SELLER.WISH_NUMBER = WCS.WISH_NUMBER AND SELLER.CATEGORY_PARENT = WCS.CATEGORY_NUMBER
+            ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER) SELLER
+        ON SELLER.WISH_NUMBER = WCS.WISH_NUMBER AND SELLER.CATEGORY_PARENT = WCS.CATEGORY_NUMBER
     </select>
 </mapper>

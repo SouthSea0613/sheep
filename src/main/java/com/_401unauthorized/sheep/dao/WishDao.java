@@ -17,7 +17,6 @@ public interface WishDao {
     boolean delete_wish(Integer wish_number);
     boolean delete_major_category(Integer wish_number);
     boolean delete_sub_category(Integer wish_number);
-    boolean check_sub_category(Integer wishNumber);
     List<CategoryDto> get_takeoff_detail(Integer wish_number);
     boolean update(WishDto wishdto);
 }

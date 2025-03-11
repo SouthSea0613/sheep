@@ -7,7 +7,7 @@
 	<script src="/javascript/write.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<link rel="stylesheet" href="/css/headerfooter.css">
 	<link rel="stylesheet" href="/css/wish.css">
 	<style>
@@ -59,7 +59,7 @@
 <div class="main_content">
 	<!--  위 div는 전체 묶음  -->
 	<!--    아래는 컨트롤러 작성해야함    -->
-	<form action="/wish/update" method="post" id="write_form">
+	<form action="/wish/write" method="post" id="write_form">
 		<div><!---------------------------------------------------------------------------------------------->
 
 			<div>
@@ -329,13 +329,13 @@
 			<div class="ready">
 				<div>
 					<input type="checkbox" class="major_category_number" value="16" name="category_number">공사준비/마감
-				<dl>
-					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="42">입주민동의서</dd>
-					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="43">EV보양 및 실내외
-						보양
-					</dd>
-					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="44">입주청소</dd>
-				</dl>
+					<dl>
+						<dd><input type="checkbox" name="category_number" class="sub_category_number" value="42">입주민동의서</dd>
+						<dd><input type="checkbox" name="category_number" class="sub_category_number" value="43">EV보양 및 실내외
+							보양
+						</dd>
+						<dd><input type="checkbox" name="category_number" class="sub_category_number" value="44">입주청소</dd>
+					</dl>
 				</div>
 			</div>
 		</div>
@@ -373,7 +373,6 @@
 	const categorys = "[[${category_list_dto}]]";
 	categorys.forEach(category => {
 		category.sub_category.forEach(sub => {
-			console.log(category)
 			switch (category.major_category) {
 				case "철거":
 					document.querySelectorAll(".major_category_number")[0].setAttribute("checked", true)

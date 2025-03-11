@@ -296,10 +296,7 @@ public class WishService {
 
     @Transactional
     public boolean delete_wish(Integer wish_number) {
-        if (wishDao.check_sub_category(wish_number)) {
-            if (!wishDao.delete_sub_category(wish_number)) {
-                return false;
-            }
+        if (!wishDao.delete_sub_category(wish_number)) {
             return false;
         }
 
