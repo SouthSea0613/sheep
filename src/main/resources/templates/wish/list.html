@@ -58,28 +58,31 @@
             const takeofflist = document.querySelectorAll('.takeoff_list');
             const openbtn = document.querySelectorAll('.openbtn');
             const closebtn = document.querySelectorAll('.closebtn');
+            const confirmbtn = document.getElementById('confirmbtn');
             for(let i=0; i<openbtn.length; i++){
             if (btn === openbtn[i]) {
                 const wishnumber = btn.parentElement.previousElementSibling.value
+                confirmbtn.style.display = "block";
                 console.log(wishnumber);
                 axios.post('/takeoff/list', {
                     wish_number: wishnumber
                 }).then((res) => {
                     console.log(res);
-
                     console.log("테스트");
                     closebtn[i].style.display = 'block';
                     btn.style.display = 'none';
                     res.data.forEach(resp => {
                         takeofflist[i].innerHTML += '<div class="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.user_id + '">' + resp.user_id + '</a>' + '</span>'
                         takeofflist[i].innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
-                        takeofflist[i].innerHTML += '<span>' + resp.apply_status + '</span>';
+                        takeofflist[i].innerHTML += '<span class="status">' + resp.apply_status + '</span>';
                         if(resp.apply_status==="상담중"){
                             takeofflist[i].innerHTML +='<input class="hidden_wish_number" type="hidden" value='+resp.wish_number+'>'
                             takeofflist[i].innerHTML +='<input class="hidden_user_id" type="hidden" value='+resp.user_id+'>'
-                            takeofflist[i].innerHTML += '<span>' + '<input type="button" class="contractbtn" value="계약완료" onclick="contract(this)">'
                         }
+                        confirmbtn.style.display="block";
+
                     })
+
                 })
 
             }
@@ -87,6 +90,7 @@
                 btn.style.display = 'none';
                 openbtn[i].style.display = 'block';
                 takeofflist[i].innerHTML = "";
+                confirmbtn.style.display='none';
             }
             }
         }
@@ -114,10 +118,27 @@
             }
         }
         function confirm(){
-            const userid = document.querySelectorAll('wish_user_id')
-            userid
+            const userid = document.querySelectorAll('.wish_user_id')
+            const wishnumber = document.querySelector('.wish_number_status')
+            const takeofflist = document.querySelectorAll('.takeoff_list');
+            const contractbtn = document.querySelectorAll('contractbtn');
+            const status = document.querySelectorAll('status');
             axios.post('/takeoff/confirm',{
+                user_id : userid,
+                wish_number : wishnumber,
+            }).then((res)=>{
+                if(res.data){
+                    alert("견적이 확정되었습니다.")
+                    takeofflist.style.display = "block";
+                    status.forEach(status=>{
+                        if(status.innerText ==="상담중"){
 
+                        }
+                    })
+
+                }else{
+                    alert("견적확정이 실패했습니다.")
+                }
             })
         }
     </script>
@@ -151,12 +172,17 @@
                         <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
                             <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
                                    name="wish_number">
-
                             <div class="listbtn"></div>
                             <div class="takeoff_list">
-
                             </div>
-
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
+                            <div class="confirmbtn">
+                                <input type="button" id="confirmbtn" hidden value="확정" onclick="confirm()">
+                            </div>
                             <div class="">
                                 <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
                                        name="wish_number">
@@ -189,8 +215,8 @@
                            name="wish_number">
                     <div class="listbtn"></div>
                     <div class="takeoff_list">
-
                     </div>
+
                     <div class="">
                         <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
                                name="wish_number">
