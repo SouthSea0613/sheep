@@ -240,5 +240,10 @@ public class TakeoffController {
         }
         return false;
     }
+    @PostMapping("/getstatus")
+    @ResponseBody
+    public WishDto getstatus(@RequestBody WishDto wishdto){
+        return takeoffService.getstatus(wishdto.getUser_id(),wishdto.getWish_number());
+    }
 }
 

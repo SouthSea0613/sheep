@@ -363,4 +363,8 @@ public class TakeoffService {
         }
         return false;
     }
+
+    public WishDto getstatus(String user_id, int wish_number) {
+        return takeoffDao.getstatus(user_id,wish_number);
+    }
 }

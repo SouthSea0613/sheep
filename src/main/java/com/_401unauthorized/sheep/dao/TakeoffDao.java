@@ -25,4 +25,6 @@ public interface TakeoffDao {
     boolean contract(Integer wish_number, String user_id);
 
     boolean changestatus(Integer wish_number, String user_id);
+
+    WishDto getstatus(String user_id, int wish_number);
 }
