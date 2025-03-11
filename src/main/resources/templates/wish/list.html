@@ -43,14 +43,19 @@
         function contract(btn){
             const wishnumber = document.getElementsByClassName('hidden_wish_number')
             const userid = document.getElementsByClassName('hidden_user_id')
-            const contractbtn = document.getElementsByClassName()
+            const contractbtn = document.querySelectorAll('.contractbtn')
+
             axios.post('/takeoff/contract',{
                 wish_number: wishnumber.value,
                 user_id: userid.value,
             }).then((res)=>{
-                if(res.data){
+                if(res.data) {
+                    alert("계약이 완료되었습니다");
 
+                }else{
+                    alert("계약이 실패했습니다");
                 }
+
 
             })
         }
@@ -84,7 +89,6 @@
                     })
 
                 })
-
             }
             if (btn === closebtn[i]) {
                 btn.style.display = 'none';
@@ -117,30 +121,35 @@
                     })
             }
         }
+
         function confirm(){
-            const userid = document.querySelectorAll('.wish_user_id')
-            const wishnumber = document.querySelector('.wish_number_status')
-            const takeofflist = document.querySelectorAll('.takeoff_list');
-            const contractbtn = document.querySelectorAll('contractbtn');
-            const status = document.querySelectorAll('status');
+            // const userid = document.querySelector('.hidden_user_id')
+            const wishnumber = document.querySelector('.hidden_wish_number')
+            const takeofflist = document.querySelector('.takeoff_list');
+            const contractbtn = document.querySelectorAll('.contractbtn');
+            const status = document.querySelectorAll('.status');
+            const confirmbtn = document.getElementById('confirmbtn')
+            // console.log(userid)
+            console.log(wishnumber)
+            for(let i=0; i<5;i++){
+                if(status[i].innerText==="상담중"){
             axios.post('/takeoff/confirm',{
-                user_id : userid,
-                wish_number : wishnumber,
+                user_id : "[[${session.user_id}]]",
+                wish_number : wishnumber.value,
             }).then((res)=>{
                 if(res.data){
                     alert("견적이 확정되었습니다.")
                     takeofflist.style.display = "block";
-                    status.forEach(status=>{
-                        if(status.innerText ==="상담중"){
-
-                        }
-                    })
+                    contractbtn[i].style.display = 'block';
 
                 }else{
                     alert("견적확정이 실패했습니다.")
                 }
             })
+            }
+            }
         }
+
     </script>
 </head>
 <body>
@@ -180,7 +189,7 @@
                             <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
                             <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
                             <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
-                            <div class="confirmbtn">
+                            <div th:if="${wish?.apply_status==1}" class="confirmbtn_class">
                                 <input type="button" id="confirmbtn" hidden value="확정" onclick="confirm()">
                             </div>
                             <div class="">

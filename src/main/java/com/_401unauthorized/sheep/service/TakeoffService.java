@@ -275,7 +275,29 @@ public class TakeoffService {
     }
 
     public List<TakeoffDto> my_list(String userid) {
-        return takeoffDao.my_list(userid);
+        List<TakeoffDto> takeoffdtolist =takeoffDao.my_list(userid);
+        for(TakeoffDto takeoffdto : takeoffdtolist){
+            switch (takeoffdto.getApply_status()){
+                case "0" :
+                    takeoffdto.setApply_status("대기중");
+                    break;
+                case "1":
+                    takeoffdto.setApply_status("상담중");
+                    break;
+                case "2":
+                    takeoffdto.setApply_status("계약완료");
+                    break;
+                case "3":
+                    takeoffdto.setApply_status("취소");
+                    break;
+                case "4":
+                    takeoffdto.setApply_status("기간만료");
+                    break;
+                    
+            }
+        }
+
+        return takeoffdtolist;
     }
 
     @Transactional

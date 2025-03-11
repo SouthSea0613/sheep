@@ -74,7 +74,7 @@
     </select>
 
     <select id="list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
-        SELECT W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
+        SELECT W.WISH_NUMBER,W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
         FROM WISH_CATEGORY_SELLER W
         JOIN APPLY_STATUS A
         ON W.USER_ID=A.USER_ID
@@ -84,12 +84,13 @@
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
+        SELECT WS.WISH_TITLE,WS.USER_ID,A.APPLY_STATUS,WS.WISH_NUMBER FROM APPLY_STATUS A JOIN(
         SELECT W.WISH_TITLE, W.WISH_NUMBER,S.USER_ID
         FROM WISH W
         JOIN WISH_CATEGORY_SELLER S
         ON W.WISH_NUMBER = S.WISH_NUMBER
-        WHERE S.USER_ID=#{userid}
-        GROUP BY W.WISH_NUMBER
+        WHERE S.USER_ID=#{user_id}
+        GROUP BY W.WISH_NUMBER) AS WS ON A.WISH_NUMBER = WS.WISH_NUMBER AND A.USER_ID = WS.USER_ID
     </select>
 
     <select id="counttakeoff" resultType="java.lang.Integer">

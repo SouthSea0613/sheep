@@ -50,7 +50,7 @@
         </div>
 
         <div th:if="${session?.user_type == '0' && takeoffDto?.apply_status == '대기중'}">
-            <form th:action="@{/takeoff/changestatus}">
+            <form th:action="@{/takeoff/changestatus}" method="get">
             <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
             <input type="hidden" name="user_id" th:value="${takeoffDto?.user_id}">
             <input type="submit" value="견적선택">

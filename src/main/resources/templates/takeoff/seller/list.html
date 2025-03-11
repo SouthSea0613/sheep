@@ -24,7 +24,6 @@
 		}
 		let num = 0;
 		function writetab(){
-
 			if(num===0){
 			axios.post('/takeoff/seller/my_list',{
 				user_id : "[[${session.user_id}]]"
@@ -35,7 +34,7 @@
 					const content = document.getElementById('writetakeoff')
 					enterlist.style.display = 'none';
 					res.data.forEach(list=>{
-						content.innerHTML+='<div id="entercontent">'+'<a href="/takeoff/seller/detail?wish_number='+list.wish_number+'&user_id='+list.user_id+ '">' + list.wish_title+'</a>'+'</div>'
+						content.innerHTML+='<div class="entercontent">'+'<a href="/takeoff/seller/detail?wish_number='+list.wish_number+'&user_id='+list.user_id+ '">' + list.wish_title+'</a>'+'<span>'+list.apply_status+'</span>'+'</div>'
 					})
 					num=1;
 				}

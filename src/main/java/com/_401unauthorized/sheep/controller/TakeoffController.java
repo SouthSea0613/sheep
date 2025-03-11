@@ -224,18 +224,18 @@ public class TakeoffController {
         }
         return false;
     }
-
     @GetMapping("/changestatus")
     public String changestatus(@RequestParam Integer wish_number,@RequestParam String user_id){
         if(takeoffService.changestatus(wish_number,user_id)){
-            return "wish/list";
+            return "redirect:/wish/list";
         }
         return "takeoff/seller/detail";
     }
     @PostMapping("/confirm")
     @ResponseBody
-    public boolean confirm(@RequestBody String user_id,@RequestBody Integer wish_number){
-        if(takeoffService.confirm(user_id,wish_number)){
+    public boolean confirm(@RequestBody WishDto wishdto){
+        log.info("테스트");
+        if(takeoffService.confirm(wishdto.getUser_id(),wishdto.getWish_number())){
             return true;
         }
         return false;
