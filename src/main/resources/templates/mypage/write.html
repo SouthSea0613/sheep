@@ -10,12 +10,11 @@
 	<script defer src="/javascript/common.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
 	<script th:src="@{/javascript/mypage.js}"></script>
-	<script th:inline="javascript">
-		const user = [[${session?.user_id}]];
-		const type = [[${session?.user_type}]];
+	<script>
+		const user = "[[${session?.user_id}]]";
+		const type = "[[${session?.user_type}]]";
 
 		$(() => {
-			console.log(type)
 			userType();
 			loginStatus();
 		})
@@ -77,15 +76,15 @@
 		</div>
 
 	</form>
-	<script th:inline="javascript">
-		const email = [[${userdto?.user_email}]];
+	<script>
+		const email = "[[${userdto?.user_email}]]";
 		const emailsplit = email.split("@");
 		const user_email = document.getElementById('user_email');
 		const email_detail = document.getElementById('user_email_detail');
 		user_email.value = emailsplit[0];
 		email_detail.value = emailsplit[1];
 
-		const phone_company = [[${userdto?.user_phone_company}]];
+		const phone_company = "[[${userdto?.user_phone_company}]]";
 		;
 		switch (phone_company) {
 			case "1":
@@ -107,8 +106,8 @@
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
-<script th:inline="javascript">
-	const email = [[${userdto?.user_email}]];
+<script>
+	const email = "[[${userdto?.user_email}]]";
 	const emailsplit = email.split("@");
 	const user_email = document.getElementById('user_email');
 	const email_detail = document.getElementById('user_email_detail');

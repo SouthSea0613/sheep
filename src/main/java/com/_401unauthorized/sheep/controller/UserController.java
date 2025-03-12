@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class UserController {
     private final UserService userService;
-    private final WishService wishService;
 
     @GetMapping("/join")
     public String join() {
@@ -42,6 +41,7 @@ public class UserController {
         }
         return true;
     }
+
     @PostMapping("/id_find_email_id")
     @ResponseBody
     public String id_find_email_id(@RequestBody UserDto userDto) {
@@ -81,6 +81,7 @@ public class UserController {
         }
         return true;
     }
+
     @PostMapping("/engineer_regnum_check")
     @ResponseBody
     public boolean engineer_regnum_check(@RequestBody UserDto userDto){
