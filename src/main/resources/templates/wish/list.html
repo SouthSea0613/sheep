@@ -6,6 +6,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="/javascript/common.js"></script>
+    <script src="https://kit.fontawesome.com/3e18228bfa.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/css/headerfooter.css">
     <link rel="stylesheet" href="/css/wish.css">
     <script>
@@ -23,7 +24,7 @@
         }
 
         function takeoff(btn) {
-            const wishnumber = "[[${wish_dto?.wish_number}]]";
+            const wishnumber = btn.previousElementSibling.value;
             axios.post('/takeoff/call', {
                 user_id: "[[${session.user_id}]]",
                 wish_number: wishnumber,
@@ -56,38 +57,38 @@
             }
         }
         function takeofflist(btn) {
-            const takeofflist = document.querySelectorAll('.takeoff_list');
-            const openbtn = document.querySelectorAll('.openbtn');
-            const closebtn = document.querySelectorAll('.closebtn');
+            const takeofflist = document.querySelector('.takeoff_list');
+            const openbtn = document.querySelector('.openbtn');
+            const closebtn = document.querySelector('.closebtn');
             const confirmbtn = document.querySelector('#confirmbtn');
             const contractbtn = document.querySelectorAll('.contractbtn');
-            console.log(confirmbtn);
-            for(let i=0; i<openbtn.length; i++){
-                if (btn === openbtn[i]) {
-                    const wishnumber = btn.parentElement.previousElementSibling.value
+                if (btn === openbtn) {
+                    const wishnumber = btn.previousElementSibling.value
                     confirmbtn.style.display = "block";
                     console.log(wishnumber);
                     axios.post('/takeoff/list', {
                         wish_number: wishnumber
                     }).then((res) => {
-                        closebtn[i].style.display = 'block';
+                        closebtn.style.display = 'block';
                         btn.style.display = 'none';
+                        console.log(res.data)
+                        console.log(takeofflist)
+
                         res.data.forEach(resp => {
-                            takeofflist[i].innerHTML += '<div class="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.user_id + '">' + resp.user_id + '</a>' + '</span>'
-                            takeofflist[i].innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
-                            takeofflist[i].innerHTML += '<span class="status">' + resp.apply_status + '</span>';
+                            takeofflist.innerHTML += '<div class="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_name + '">' + resp.seller_name + '</a>' + '</span>'
+                            takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
+                            takeofflist.innerHTML += '<span class="status">' + resp.apply_status + '</span>';
                             if(resp.apply_status==="상담중"){
-                                takeofflist[i].innerHTML +='<input class="hidden_wish_number" type="hidden" value='+resp.wish_number+'>'
-                                takeofflist[i].innerHTML +='<input class="hidden_user_id" type="hidden" value='+resp.user_id+'>'
+                                takeofflist.innerHTML +='<input class="hidden_wish_number" type="hidden" value='+resp.wish_number+'>'
+                                takeofflist.innerHTML +='<input class="hidden_user_id" type="hidden" value='+resp.user_id+'>'
                             }
                         })
                         buttonstatus();
                     })
-                }
-                if (btn === closebtn[i]) {
+                if (btn === closebtn) {
                     btn.style.display = 'none';
-                    openbtn[i].style.display = 'block';
-                    takeofflist[i].innerHTML = "";
+                    openbtn.style.display = 'block';
+                    takeofflist.innerHTML = "";
                     console.log(contractbtn)
                     contractbtn.forEach(cbtn=>{
                         console.log(cbtn)
@@ -99,9 +100,8 @@
 
         function createbtn() {
             const btndiv = document.querySelectorAll('.status_wish_number')
-            console.log(btndiv)
-            const listdiv = document.querySelectorAll('.listbtn')
-            console.log("테스트2")
+            const openbtn = document.querySelector('.openbtn')
+            const closebtn = document.querySelector('.closebtn')
             for (let i = 0; i < btndiv.length; i++) {
                 axios.post('/takeoff/count', null, {
                     params: {
@@ -111,23 +111,19 @@
                 })
                     .then((res) => {
                         if (res.data) {
-                            listdiv[i].innerHTML += '<input type="button" value="버튼" class="openbtn" onclick="takeofflist(this)">'
-                            listdiv[i].innerHTML += '<input type="button" hidden value="닫기버튼" class="closebtn" onclick="takeofflist(this)">'
+
                         } else {
-                            console.log("실패")
                         }
                     })
             }
         }
 
         function confirm(){
-            // const userid = document.querySelector('.hidden_user_id')
             const wishnumber = document.querySelector('.hidden_wish_number')
             const takeofflist = document.querySelector('.takeoff_list');
             const contractbtn = document.querySelectorAll('.contractbtn');
             const status = document.querySelectorAll('.status');
             const confirmbtn = document.getElementById('confirmbtn')
-            // console.log(userid)
             console.log(wishnumber)
             for(let i=0; i<5;i++){
                 if(status[i].innerText==="상담중"){
@@ -185,12 +181,20 @@
                 }
             })
         }
+        function endwish(){
+            const endwish = document.querySelector('.endwish')
+            axios.post('/takeoff/endwish')
+                .then(res=>{
+
+                })
+        }
     </script>
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
     <h2>위시리스트</h2>
+
     <div class="wish-list-area">
         <th:block th:if="${#lists.isEmpty(wish_list) and #lists.isEmpty(wish_req_list)}">
             <div class="non_wish">
@@ -198,6 +202,10 @@
             </div>
         </th:block>
         <div class="wishBarea wish_write_btn">
+            <div class="tab">
+                <input type="button" class="wish_ing" value="진행중 위시">
+                <input type="button" class="wish_end" value="종료된 위시" onclick="endwish()">
+            </div>
             <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
         </div>
 
@@ -206,13 +214,19 @@
             <th:block th:each="wish:${wish_req_list}">
                 <div class="wish_list_block">
                     <div class="wish_container">
-                        <div>
+                        <div class="button">
+                            <input type="hidden" class="hidden-regwish" th:value="${wish.wish_number}">
+                            <i class="fa-solid fa-caret-down fa-2xl openbtn" onclick="takeofflist(this)"></i>
+                            <i style="display: none" class="fa-solid fa-caret-up fa-2xl closebtn" onclick="takeofflist(this)"></i>
+                        </div>
+                        <div class="wish_box">
                             <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
                                th:text="${wish?.wish_title}"></a>
                         </div>
                         <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}"
                              class="wish_apply_status">상태값
                         </div>
+                    </div>
                         <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
                             <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
                                    name="wish_number">
@@ -236,10 +250,8 @@
                     </div>
                     <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
                         <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
-                        <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+                        <input type="button" class="wish_takeoff" onclick="takeoff()" value="견적요청">
                     </div>
-                </div>
-
             </th:block>
         </th:block>
             <!--위시리스트(요청전)-->
@@ -268,7 +280,11 @@
         </div>
         </th:block>
         </th:block>
+        <div class="endwish_container">
+            <div class="endwish">
 
+            </div>
+        </div>
     </div>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>

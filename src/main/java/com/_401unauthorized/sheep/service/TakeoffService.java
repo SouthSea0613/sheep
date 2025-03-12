@@ -375,4 +375,8 @@ public class TakeoffService {
     public WishDto getstatus(String user_id, int wish_number) {
         return takeoffDao.getstatus(user_id,wish_number);
     }
+
+    public WishDto endwish(String user_id) {
+        return  takeoffDao.endwish(user_id);
+    }
 }

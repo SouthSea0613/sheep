@@ -11,6 +11,7 @@ import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -245,5 +246,11 @@ public class TakeoffController {
     public WishDto getstatus(@RequestBody WishDto wishdto){
         return takeoffService.getstatus(wishdto.getUser_id(),wishdto.getWish_number());
     }
+    @PostMapping("/endwish")
+    @ResponseBody
+    public WishDto endwish(HttpSession httpSession){
+        return takeoffService.endwish(httpSession.getAttribute("user_id").toString());
+    }
+
 }
 
