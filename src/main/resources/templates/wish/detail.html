@@ -51,7 +51,7 @@
             <input type="button" onclick="delete_wish()" th:value="삭제하기">
         </div>
 
-        <div th:if="${session?.user_type == '1'}">
+        <div th:if="${session?.user_type == '1' and wish_dto?.apply_status == '대기중'}">
             <input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number" id="wish_number">
             <input type="button" onclick="seller_write()" value="작성하기">
         </div>
@@ -70,7 +70,7 @@
     }
 
 	function takeoff(btn) {
-		const wishnumber = btn.previousElementSibling.value;
+		const wishnumber = "[[${wish_dto?.wish_number}]]"
 		axios.post('/takeoff/call', {
 			user_id: "[[${session.user_id}]]",
 			wish_number: wishnumber,
