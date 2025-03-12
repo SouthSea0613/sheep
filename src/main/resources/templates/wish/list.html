@@ -16,11 +16,9 @@
             userType();
             loginStatus();
             createbtn();
-
         })
 
         function wish_write() {
-
             location.href = "/wish/write"
         }
 
@@ -39,12 +37,10 @@
                     location.href = "/wish/list";
                 }
             });
-
         }
-        function contract(btn){
+        function contract(){
             const wishnumber = document.querySelectorAll('.hidden_wish_number')
             const userid = document.querySelectorAll('.hidden_user_id')
-            const contractbtn = document.querySelectorAll('.contractbtn')
             for(let i=0; i<wishnumber.length; i++){
                 axios.post('/takeoff/contract',{
                     wish_number: wishnumber[i].value,
@@ -56,11 +52,8 @@
                     }else{
                         alert("계약이 실패했습니다");
                     }
-
-
                 })
             }
-
         }
         function takeofflist(btn) {
             const takeofflist = document.querySelectorAll('.takeoff_list');
@@ -226,11 +219,11 @@
                             <div class="listbtn"></div>
                             <div class="takeoff_list">
                             </div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract(this)"></div>
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
+                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
                             <div class="confirmbtn_class">
                                 <input type="button" id="confirmbtn" hidden value="확정" onclick="confirm()">
                             </div>
@@ -258,9 +251,6 @@
                     <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
                        th:text="${wish?.wish_title}"></a>
                 </div>
-<!--                <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}"-->
-<!--                     class="wish_apply_status">상태값-->
-<!--                </div>-->
                 <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
                     <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
                            name="wish_number">
@@ -276,14 +266,11 @@
                 <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             </div>
         </div>
-
         </th:block>
         </th:block>
 
     </div>
 </div>
-
-
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
