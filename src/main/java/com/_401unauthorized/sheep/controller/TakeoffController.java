@@ -177,7 +177,7 @@ public class TakeoffController {
     public String complete(@RequestParam("wish_number") Integer wish_number, @RequestParam("user_id") String user_id) {
         log.info(wish_number.toString());
         if (takeoffService.complete(wish_number, user_id)) {
-            return "redirect:/takeoff/seller/list";
+            return "redirect:/wish/list";
         } else {
             return "takeoff/seller/detail";
         }

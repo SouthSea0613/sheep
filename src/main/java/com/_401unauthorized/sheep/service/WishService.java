@@ -336,6 +336,5 @@ public class WishService {
         }
         return wishdto;
     }
-
 }
 
