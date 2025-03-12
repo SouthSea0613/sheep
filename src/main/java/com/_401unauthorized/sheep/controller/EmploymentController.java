@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,22 @@ public class EmploymentController {
         boolean employment_list = employmentService.write(employmentDto);
         model.addAttribute("employment_list", employment_list);
         return "redirect:/employment/list";
+    }
+
+    @GetMapping("/select_area")
+    public String select_area(Model model) {
+        model.addAttribute("action", "/employment/select_area");
+        log.info("action: {}", model.getAttribute("action"));
+        return "takeoff/seller/select_area";
+    }
+
+    @PostMapping("/select_area")
+    public String select_area(BoardDto boardDto, @RequestParam("job_area") String job_area) {
+        Integer board_number = boardDto.getBoard_number();
+        if (employmentService.select_area(board_number, job_area)) {
+            return "redirect:/employment/write";
+        }
+        return "redirect:/takeoff/seller/select_area";
     }
 
 //    @GetMapping("/list")

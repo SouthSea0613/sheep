@@ -11,4 +11,6 @@
         INSERT INTO JOB_BOARD (BOARD_NUMBER ,JOB_COUNT) VALUES (#{board_number}, #{job_count});
     </insert>
 
+    <select id="select_area" resultType="java.lang.Boolean"></select>
+
 </mapper>

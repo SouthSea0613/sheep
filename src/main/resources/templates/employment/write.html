@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script>
+        function select_seller_area(){
+            location.href = "/employment/select_area"
+        }
+    </script>
 </head>
 <body>
 <!--<th:block th:replace="~{fragments::header}"></th:block>-->
@@ -17,7 +22,7 @@
         <input type="hidden" name="user_id" th:value="${session?.user_id}">
 
         <div>모집지역</div>
-        <input type="button" name="job_area" value="지역설정" required>
+        <input type="button" name="job_area" value="지역설정" required onclick="select_seller_area()">
         <div>글제목</div>
         <input type="text" class="" name="board_title" autofocus placeholder="현장지역/모집분야/모집인원 순으로 적어주세요!" required><br>
         <div>모집인원</div>

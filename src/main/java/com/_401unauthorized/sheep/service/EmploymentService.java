@@ -7,9 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -35,6 +33,10 @@ public class EmploymentService {
        Integer page_number = boardDto.getPage_number();
        boardDto.setStart_index((page_number - 1) * boardDto.getList_count());
        return employmentDao.list(boardDto);
+    }
+
+    public boolean select_area(Integer board_nubmer, String job_area) {
+        return employmentDao.select_area(board_nubmer, job_area);
     }
 //
 //    public String paging(BoardDto boardDto) {

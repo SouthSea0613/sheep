@@ -10,4 +10,6 @@ public interface EmploymentDao {
     boolean write(BoardDto employmentDto);
     void insert_count(Integer board_number,Integer job_count);
     List<BoardDto> list(BoardDto boardDto);
+
+    boolean select_area(Integer board_number, String job_area);
 }
