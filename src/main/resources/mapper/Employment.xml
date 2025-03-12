@@ -3,6 +3,12 @@
 <mapper namespace="com._401unauthorized.sheep.dao.EmploymentDao">
 
     <!--글을 쓰자!-->
-    <insert id="write"></insert>
+    <insert id="write" useGeneratedKeys="true" keyProperty="board_number">
+        INSERT INTO BOARD VALUES (null, #{user_id}, #{board_title}, #{board_content}, 0, default, 2)
+    </insert>
+
+    <insert id="insert_count">
+        INSERT INTO JOB_BOARD (BOARD_NUMBER ,JOB_COUNT) VALUES (#{board_number}, #{job_count});
+    </insert>
 
 </mapper>

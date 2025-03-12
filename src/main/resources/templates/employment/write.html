@@ -5,17 +5,26 @@
     <title>Title</title>
 </head>
 <body>
-<th:block th:replace="~{fragments::header}"></th:block>
+<!--<th:block th:replace="~{fragments::header}"></th:block>-->
 이곳은 구익구직 작성하는 곳!
 
 <section>
 <div class="content">
 
     <form action="/employment/write" method="post">
+
+        <div class="">
         <input type="hidden" name="user_id" th:value="${session?.user_id}">
-        <input type="text" class="" name="board_title" autofocus placeholder="현장지역/모집분야/모집인원 순으로 적어주세요!" required>
-        <input type="text" class="" name="job_count" required>
+
+        <div>모집지역</div>
+        <input type="button" name="job_area" value="지역설정" required>
+        <div>글제목</div>
+        <input type="text" class="" name="board_title" autofocus placeholder="현장지역/모집분야/모집인원 순으로 적어주세요!" required><br>
+        <div>모집인원</div>
+        <input type="text" class="" name="job_count" placeholder="모집인원 수를 적어주세요" required><div>명</div>
+        <div>내용</div>
         <textarea class="" id="board_content" name="board_content" placeholder="모집 내용을 적어주세요"></textarea>
+        </div>
 
         <div class="">
         <input type="submit" value="작성완료">
@@ -25,6 +34,6 @@
 </div>
 </section>
 
-<th:block th:replace="~{fragments::footer}"></th:block>
+<!--<th:block th:replace="~{fragments::footer}"></th:block>-->
 </body>
 </html>
