@@ -269,6 +269,9 @@ public class TakeoffService {
             case "3":
                 takeoffdtolist.get(i).setApply_status("취소");
                 break;
+            case "4":
+                takeoffdtolist.get(i).setApply_status("기간만료");
+                break;
         }
       }
         return takeoffdtolist;
@@ -343,11 +346,16 @@ public class TakeoffService {
         return userDao.select_area(user_id, seller_area);
     }
 
-    public boolean contract(Integer wish_number, String user_id) {
-        if(takeoffDao.contract(wish_number,user_id)){
-            return true;
+    @Transactional
+    public boolean contract(Integer wish_number, String user_id, String session_user_id) {
+        if(!takeoffDao.contract(wish_number,user_id,session_user_id)){
+            return false;
         }
-        return false;
+        if(!takeoffDao.update_contract_status(wish_number,user_id,session_user_id)){
+            return false;
+        }
+
+        return true;
     }
 
     public boolean changestatus(Integer wish_number, String user_id) {

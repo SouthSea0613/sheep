@@ -218,8 +218,8 @@ public class TakeoffController {
 
     @PostMapping("/contract")
     @ResponseBody
-    public boolean contract(@RequestBody Integer wish_number,@RequestBody String user_id){
-        if(takeoffService.contract(wish_number,user_id)){
+    public boolean contract(@RequestBody WishDto wishdto,HttpSession httpSession){
+        if(takeoffService.contract(wishdto.getWish_number(),wishdto.getUser_id(),httpSession.getAttribute("user_id").toString())){
             return true;
         }
         return false;

@@ -22,9 +22,13 @@ public interface TakeoffDao {
 
     boolean checkarea(String userId);
 
-    boolean contract(Integer wish_number, String user_id);
+    boolean contract(Integer wish_number, String user_id, String session_user_id);
 
     boolean changestatus(Integer wish_number, String user_id);
 
     WishDto getstatus(String user_id, int wish_number);
+
+    boolean update_contract_status(Integer wish_number, String user_id, String session_user_id);
+
+    boolean update_wish_status(Integer wish_number, String user_id);
 }

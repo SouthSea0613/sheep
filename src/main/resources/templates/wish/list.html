@@ -16,41 +16,6 @@
             userType();
             loginStatus();
             createbtn();
-            function buttonstatus(){
-                const wishnumber = document.querySelector('.wish_number_status').value
-                const contractbtn = document.querySelectorAll('.contractbtn');
-                const status = document.querySelectorAll('.status');
-                const confirmbtn = document.getElementById('confirmbtn')
-                console.log(status[1])
-                axios.post('/takeoff/getstatus',{
-                    wish_number: wishnumber,
-                    user_id :"[[${session.user_id}]]",
-                }).then(res=>{
-                    switch (res.data.apply_status){
-                        case "0":
-                            break;
-                        case "1":
-                            confirmbtn.style.display="none";
-                            for(let i=0; i<5;i++) {
-                                if (status[i].innerText === "상담중") {
-                                    contractbtn[i].style.display = "block";
-                                }
-                            }
-                            break;
-                        case "2":
-                            confirmbtn.style.display="none";
-                            for(let i=0; i<5;i++) {
-                                contractbtn[i].style.display = "none";
-                            }
-                            break;
-                        case "3":
-                            break;
-                        case "4":
-                            break;
-                    }
-                })
-            }
-            buttonstatus();
 
         })
 
@@ -77,29 +42,32 @@
 
         }
         function contract(btn){
-            const wishnumber = document.getElementsByClassName('hidden_wish_number')
-            const userid = document.getElementsByClassName('hidden_user_id')
+            const wishnumber = document.querySelectorAll('.hidden_wish_number')
+            const userid = document.querySelectorAll('.hidden_user_id')
             const contractbtn = document.querySelectorAll('.contractbtn')
+            for(let i=0; i<wishnumber.length; i++){
+                axios.post('/takeoff/contract',{
+                    wish_number: wishnumber[i].value,
+                    user_id: userid[i].value,
+                }).then((res)=>{
+                    if(res.data) {
+                        alert("계약이 완료되었습니다");
+                        history.go(0);
+                    }else{
+                        alert("계약이 실패했습니다");
+                    }
 
-            axios.post('/takeoff/contract',{
-                wish_number: wishnumber.value,
-                user_id: userid.value,
-            }).then((res)=>{
-                if(res.data) {
-                    alert("계약이 완료되었습니다");
 
-                }else{
-                    alert("계약이 실패했습니다");
-                }
+                })
+            }
 
-
-            })
         }
         function takeofflist(btn) {
             const takeofflist = document.querySelectorAll('.takeoff_list');
             const openbtn = document.querySelectorAll('.openbtn');
             const closebtn = document.querySelectorAll('.closebtn');
             const confirmbtn = document.querySelector('#confirmbtn');
+            const contractbtn = document.querySelectorAll('.contractbtn');
             console.log(confirmbtn);
             for(let i=0; i<openbtn.length; i++){
                 if (btn === openbtn[i]) {
@@ -120,16 +88,20 @@
                                 takeofflist[i].innerHTML +='<input class="hidden_user_id" type="hidden" value='+resp.user_id+'>'
                             }
                         })
-
+                        buttonstatus();
                     })
                 }
                 if (btn === closebtn[i]) {
                     btn.style.display = 'none';
                     openbtn[i].style.display = 'block';
                     takeofflist[i].innerHTML = "";
-                    // confirmbtn.style.display='none';
+                    console.log(contractbtn)
+                    contractbtn.forEach(cbtn=>{
+                        console.log(cbtn)
+                        cbtn.style.display="none";
+                    })
                 }
-            }           Q
+            }
         }
 
         function createbtn() {
@@ -183,6 +155,42 @@
                 }
             }
 
+        }
+        function buttonstatus(){
+            const wishnumber = document.querySelector('.wish_number_status').value
+            const contractbtn = document.querySelectorAll('.contractbtn');
+            const status = document.querySelectorAll('.status');
+            const confirmbtn = document.getElementById('confirmbtn')
+            console.log(status[1])
+            axios.post('/takeoff/getstatus',{
+                wish_number: wishnumber,
+                user_id :"[[${session.user_id}]]",
+            }).then(res=>{
+                switch (res.data.apply_status){
+                    case "0":
+                        break;
+                    case "1":
+                        confirmbtn.style.display="none";
+                        for(let i=0; i<5;i++) {
+                            if (status[i].innerText === "상담중") {
+                                contractbtn[i].style.display = "block";
+                            }
+                        }
+                        break;
+                    case "2":
+                        confirmbtn.style.display="none";
+                        for(let i=0; i<5;i++) {
+                            contractbtn[i].style.display = "none";
+                        }
+                        break;
+                    case "3":
+                        confirmbtn.style.display="none";
+                        break;
+                    case "4":
+                        confirmbtn.style.display="none";
+                        break;
+                }
+            })
         }
     </script>
 </head>

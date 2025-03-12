@@ -30,11 +30,17 @@
     </update>
 
     <update id="contract">
-        UPDATE APPLY_STATUS SET APPLY_STATUS = 1 WHERE USER_ID = #{user_id}
+        UPDATE APPLY_STATUS SET APPLY_STATUS = 2 WHERE (USER_ID = #{user_id} OR USER_ID = #{session_user_id}) AND WISH_NUMBER = #{wish_number}
     </update>
 
     <update id="changestatus">
         UPDATE APPLY_STATUS SET APPLY_STATUS = 1 WHERE USER_ID = #{user_id}
+    </update>
+    <update id="update_contract_status">
+        UPDATE APPLY_STATUS SET APPLY_STATUS = 4 WHERE APPLY_STATUS !=2 AND WISH_NUMBER = #{wish_number}
+    </update>
+    <update id="update_wish_status">
+        UPDATE APPLY_STATUS SET APPLY_STATUS = 2 WHERE WISH_NUMBER = #{wish_number} AND USER_ID = #{user_id}
     </update>
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
