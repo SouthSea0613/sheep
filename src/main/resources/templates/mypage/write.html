@@ -68,9 +68,14 @@
 			</div>
 		</th:block>
 
+		<div class="button_area">
+			<input type="button" value="추가인증" onclick="location.href = '/user/join_additional'">
+		</div>
+
 		<div class="button-area">
 			<input type="button" id="write_button" value="수정완료" onclick="writebtn()">
 		</div>
+
 	</form>
 	<script th:inline="javascript">
 		const email = [[${userdto?.user_email}]];
