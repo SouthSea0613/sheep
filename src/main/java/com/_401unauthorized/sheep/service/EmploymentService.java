@@ -22,8 +22,14 @@ public class EmploymentService {
             log.info("boardDto = {}", boardDto.getBoard_number());
             int board_number = boardDto.getBoard_number();
             int job_count = boardDto.getJob_count();
+            String job_area = boardDto.getJob_area();
             log.info("job count: {}", job_count);
-            employmentDao.insert_count(board_number,job_count);
+            log.info("job area: {}", job_area);
+            BoardDto jobDto = new BoardDto();
+            jobDto.setBoard_number(board_number);
+            jobDto.setJob_count(job_count);
+            jobDto.setJob_area(job_area);
+            employmentDao.insert_job(jobDto);
             return true;
         }
         return false;
@@ -35,9 +41,11 @@ public class EmploymentService {
        return employmentDao.list(boardDto);
     }
 
-    public boolean select_area(Integer board_nubmer, String job_area) {
-        return employmentDao.select_area(board_nubmer, job_area);
-    }
+
+//    public boolean select_area(Integer board_nubmer, String job_area) {
+//        return employmentDao.select_area(board_nubmer, job_area);
+//    }
+
 //
 //    public String paging(BoardDto boardDto) {
 //        int total_number = employmentDao.count(boardDto);
