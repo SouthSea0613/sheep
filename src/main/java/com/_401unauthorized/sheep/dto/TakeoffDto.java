@@ -24,4 +24,5 @@ public class TakeoffDto {
     String wish_category_seller_answer;
     int wish_category_seller_price;
     String apply_status;
+    String seller_company;
 }
