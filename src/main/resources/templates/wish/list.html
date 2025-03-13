@@ -163,7 +163,7 @@
                         break;
                     case "1":
                         confirmbtn.style.display="none";
-                        for(let i=0; i<5;i++) {
+                        for(let i=0; i<res.data.apply;i++) {
                             if (status[i].innerText === "상담중") {
                                 contractbtn[i].style.display = "block";
                             }
@@ -190,14 +190,17 @@
             const endwish_container = document.querySelector('.endwish_container')
             const wish_ing_container = document.querySelector('.all_wish')
             const buttondiv = document.querySelectorAll('.button_endlist')
+            const wish_takeoff = document.querySelector('.takeoff_end')
             console.log(buttondiv)
             if(num===0){
             axios.post('/takeoff/endwish',{
             })
                 .then((res)=>{
+
                     wish_ing_container.style.display='none';
                     endwish_container.style.display="block";
                     endwish.innerHTML+= '<input type="hidden" class="end_wish_number" value="'+res.data.wish_number+'"' +'>';
+                    if(res.data.wish_number!=null){
                     endwish.innerHTML+= '<span>'+res.data.wish_title+'</span>'
                     endwish.innerHTML+= '<span>'+res.data.apply_status+'</span>'
                     endwish.innerHTML+= '<div class="endlist"></div>'
@@ -207,6 +210,9 @@
                             div.innerHTML += '<i style="display: none" class="fa-solid fa-caret-up fa-2xl closebtn2" onClick="takeoffendlist(this)"></i>'
                         })
                     num=1;
+                    }else{
+                        endwish.innerHTML+='<p>종료된 위시가 존재하지 않습니다.</p>'
+                    }
                 })
             }
         }
@@ -242,6 +248,7 @@
                         wish_number:number.value,
                         user_id : "[[${session.user_id}]]"
                     }).then(res=>{
+                        if(res!=null){
                         console.log(res.data);
                         list.forEach(div=>{
                             res.data.forEach(data=>{
@@ -255,6 +262,7 @@
                             linkcss()
                             })
                         })
+                        }
                         closebtn[i].style.display="block";
                         openbtn[i].style.display="none";
                     })
@@ -266,6 +274,7 @@
                         div.style.display="none";
                     })
                 }
+
              }
             function linkcss(){
                 const seller_class = document.querySelector('.seller_class');
