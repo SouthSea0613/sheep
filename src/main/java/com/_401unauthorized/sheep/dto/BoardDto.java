@@ -26,12 +26,4 @@ public class BoardDto {
     LocalDate job_expiredate;
     int job_count;
     String job_status;
-
-    Integer list_count;
-    Integer start_index;
-    Integer page_number;
-
-    String colname;
-    String keyword;
-
 }

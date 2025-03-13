@@ -5,6 +5,7 @@
 	<title>Title</title>
 	<link rel="stylesheet" href="/css/headerfooter.css">
 	<link rel="stylesheet" href="/css/mypage.css">
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script defer src="/javascript/common.js"></script>
@@ -42,7 +43,11 @@
 		<input type="text" name="user_phone" id="user_phone" th:value="${userdto.user_phone}"><br>
 
 		주소
-		<input type="text" name="user_addr" id="user_addr" th:value="${userdto.user_addr}"><br>
+		<input type="hidden" name="user_addr" id="user_addr"><br>
+
+		<input type="button" onclick="find_addr()" value="주소 찾기"><br>
+		<input type="text" id="sample6_address" readonly placeholder="주소"><br>
+		<input type="text" id="sample6_detailAddress" placeholder="상세주소"><br>
 
 		이메일
 		<input type="text" name="user_email" id="user_email"> @
@@ -67,9 +72,11 @@
 			</div>
 		</th:block>
 
+		<th:block th:if="${session.user_type} == 0">
 		<div class="button_area">
 			<input type="button" value="추가인증" onclick="location.href = '/user/join_additional'">
 		</div>
+		</th:block>
 
 		<div class="button-area">
 			<input type="button" id="write_button" value="수정완료" onclick="writebtn()">

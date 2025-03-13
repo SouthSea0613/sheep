@@ -13,4 +13,8 @@
 
     <select id="select_area" resultType="java.lang.Boolean"></select>
 
+    <select id="get_board_list" resultType="com._401unauthorized.sheep.dto.BoardDto">
+
+    </select>
+
 </mapper>

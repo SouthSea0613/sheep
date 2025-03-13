@@ -12,4 +12,6 @@ public interface EmploymentDao {
     List<BoardDto> list(BoardDto boardDto);
 
     boolean select_area(Integer board_number, String job_area);
+
+    List<BoardDto> get_board_list(int start_index);
 }
