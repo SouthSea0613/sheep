@@ -74,6 +74,10 @@ nav li {
     margin-right: 5px;
 }
 
+nav li a {
+    width: 10vh;
+}
+
 li.user_pf {
     text-align: center;
     margin-left: 5px;

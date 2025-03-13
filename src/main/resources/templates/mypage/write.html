@@ -3,13 +3,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-	<link rel="stylesheet" href="/css/headerfooter.css">
-	<link rel="stylesheet" href="/css/mypage.css">
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script defer src="/javascript/common.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
 	<script th:src="@{/javascript/mypage.js}"></script>
+	<link rel="stylesheet" href="/css/headerfooter.css">
+	<link rel="stylesheet" href="/css/mypage.css">
 	<script>
 		const user = "[[${session?.user_id}]]";
 		const type = "[[${session?.user_type}]]";
@@ -22,59 +22,60 @@
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<h2>회원정보수정</h2><br>
 <div class="main_content">
+	<h2>회원정보수정</h2><br>
 	<form th:action="@{/mypage/write}" method="post" id="insert_info">
-		아이디
-		<input type="text" id="user_id" th:value="${session?.user_id}" readonly><br>
+		<div class="mypage_content">
+			<div>아이디</div>
+			<input type="text" id="user_id" th:value="${session?.user_id}" readonly class="mypage_text"><br>
+			<hr>
+			<div>이름</div>
+			<input type="text" name="user_name" id="user_name" th:value="${userdto.user_name}" class="mypage_text"><br>
+			<hr>
+			<div>전화번호</div>
+			<select name="user_phone_company" id="user_phone_company">
+				<option id="optionid" value="none">통신사</option>
+				<option value="1">SKT</option>
+				<option value="2">KT</option>
+				<option value="3">LGU</option>
+				<option value="4">알뜰폰</option>
+			</select>
+			<input type="text" name="user_phone" id="user_phone" th:value="${userdto.user_phone}" class="mypage_text"><br>
+			<hr>
+			<div>주소</div>
+			<input type="text" name="user_addr" id="user_addr" th:value="${userdto.user_addr}" class="mypage_text"><br>
+			<hr>
+			<div>이메일</div>
+			<input type="text" name="user_email" id="user_email"> @
+			<select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
+				<option value="none">메일 선택</option>
+				<option value="naver.com">naver.com</option>
+				<option value="gmail.com">gmail.com</option>
+				<option value="daum.net">daum.net</option>
+				<option value="nate.com">nate.com</option>
+				<option value="other">직접입력</option>
+			</select>
+			<span id="email_check"></span><br>
+			<input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
+			<th:block th:unless="${#lists.isEmpty(userdto.engineer_regnum)}">
+				<div class="engineer_info">
+					<hr>
+					<div>자격증번호</div>
+					<input type="text" id="engineer_regnum" th:value="${userdto.engineer_regnum}" readonly><br>
+					<hr>
+					<div>자격증 발급일자</div>
+					<input type="text" name="engineer_regdate" th:value="${userdto.engineer_regdate}" id="engineer_regdate" class="mypage_text">
+				</div>
+			</th:block>
 
-		이름
-		<input type="text" name="user_name" id="user_name" th:value="${userdto.user_name}"><br>
-
-		전화번호
-		<select name="user_phone_company" id="user_phone_company">
-			<option id="optionid" value="none">통신사</option>
-			<option value="1">SKT</option>
-			<option value="2">KT</option>
-			<option value="3">LGU</option>
-			<option value="4">알뜰폰</option>
-		</select>
-		<input type="text" name="user_phone" id="user_phone" th:value="${userdto.user_phone}"><br>
-
-		주소
-		<input type="text" name="user_addr" id="user_addr" th:value="${userdto.user_addr}"><br>
-
-		이메일
-		<input type="text" name="user_email" id="user_email"> @
-		<select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
-			<option value="none">메일 선택</option>
-			<option value="naver.com">naver.com</option>
-			<option value="gmail.com">gmail.com</option>
-			<option value="daum.net">daum.net</option>
-			<option value="nate.com">nate.com</option>
-			<option value="other">직접입력</option>
-		</select>
-		<span id="email_check"></span><br>
-		<input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
-
-		<th:block th:unless="${#lists.isEmpty(userdto.engineer_regnum)}">
-			<div class="engineer_info">
-				자격증번호
-				<input type="text" id="engineer_regnum" th:value="${userdto.engineer_regnum}" readonly><br>
-
-				자격증 발급일자
-				<input type="text" name="engineer_regdate" th:value="${userdto.engineer_regdate}" id="engineer_regdate">
+			<div class="button_area">
+				<input type="button" value="추가인증" onclick="location.href = '/user/join_additional'" class="mypage_write_button">
 			</div>
-		</th:block>
 
-		<div class="button_area">
-			<input type="button" value="추가인증" onclick="location.href = '/user/join_additional'">
+			<div class="button-area">
+				<input type="button" id="write_button" value="수정완료" onclick="writebtn()" class="mypage_write_button">
+			</div>
 		</div>
-
-		<div class="button-area">
-			<input type="button" id="write_button" value="수정완료" onclick="writebtn()">
-		</div>
-
 	</form>
 	<script>
 		const email = "[[${userdto?.user_email}]]";

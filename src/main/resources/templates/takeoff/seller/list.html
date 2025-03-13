@@ -5,19 +5,19 @@
 	<title>Title</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	<link rel="stylesheet" href="/css/index.css">
-	<style>
-		.area{
-			position : absolute;
-			border: 1px solid black;
-			width: 30%;
-			height : 50%;
-			background-color : green;
-			left :50%;
-			top : 50%;
-			display: none;
-		}
-	</style>
+	<script defer src="/javascript/common.js"></script>
+	<link rel="stylesheet" href="/css/headerfooter.css">
+	<link rel="stylesheet" href="/css/takeoff.css">
+	<script>
+		const user = "[[${session?.user_id}]]";
+		const type = "[[${session?.user_type}]]";
+
+		$(() => {
+			console.log(type)
+			userType();
+			loginStatus();
+		})
+	</script>
 	<script>
 		onload=()=>{
 			checkarea()

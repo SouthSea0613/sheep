@@ -27,8 +27,9 @@
 
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<h2>위시 디테일</h2>
 <div class="main_content">
+<h2>위시 디테일</h2>
+    <div class="eun_wish_detail_box">
     <div th:text="${wish_dto?.wish_addr}">주소</div><br>
     <div th:text="${wish_dto?.wish_type}">주거형태</div><br>
     <div th:text="${wish_dto?.wish_size}">평수</div><br>
@@ -44,13 +45,14 @@
         <br>
     </th:block>
     <div th:if="${session?.user_type == '0' && wish_dto?.apply_status==null}" class="takeoffarea">
-        <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
-        <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">            <input type="button" onclick="delete_wish()" th:value="삭제하기">
+        <input type="button" class="wish_takeoff wish_btn_list" onclick="takeoff(this)" value="견적요청">
+        <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">            <input type="button" class="wish_btn_list" onclick="delete_wish()" th:value="삭제하기">
     </div>
 
     <div th:if="${session?.user_type == '1' and wish_dto?.apply_status == '대기중'}">
         <input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number" id="wish_number">
-        <input type="button" onclick="seller_write()" value="작성하기">
+        <input type="button" class="wish_btn_list" onclick="seller_write()" value="작성하기">
+    </div>
     </div>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
