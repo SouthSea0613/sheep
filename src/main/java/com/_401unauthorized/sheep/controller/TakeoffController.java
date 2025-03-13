@@ -205,7 +205,8 @@ public class TakeoffController {
     }
 
     @GetMapping("/seller/select_area")
-    public String select_area() {
+    public String select_area(Model model) {
+        model.addAttribute("action", "/takeoff/seller/select_area");
         return "takeoff/seller/select_area";
     }
 

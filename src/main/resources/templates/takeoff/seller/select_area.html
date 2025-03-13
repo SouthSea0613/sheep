@@ -25,7 +25,7 @@
 
 <h2>견적 지역 설정</h2>
 
-<form action="/takeoff/seller/select_area" method="post">
+<form th:action="${action}" method="post">
 <!-- 도 선택 -->
 <select id="province" onchange="updateCities()">
     <option value="">도 선택</option>

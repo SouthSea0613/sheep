@@ -31,5 +31,7 @@ public class BoardDto {
     Integer start_index;
     Integer page_number;
 
+    String colname;
+    String keyword;
 
 }

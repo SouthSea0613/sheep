@@ -26,17 +26,32 @@ function id_check() {
 
 function pw_check() {
 	const user_pw = $('#user_pw');
+	const user_pw2 = $('#user_pw2');
+	const pw_check_msg = $('#pw_check');
+	const pw_check_val = $('#pw_check_val');
+	let pw_regex = /^(?=.*[a-zA-Z])(?=.*\d)[A-Za-z\d]{8,12}$/;
+
 	if (user_pw.val() != '') {
-		if (user_pw.val() == $('#user_pw2').val()) {
-			$('#pw_check').text('비밀번호가 일치 합니다.');
-			$('#pw_check_val').val(1);
+		if (!pw_regex.test(user_pw.val())) {
+			// 비밀번호가 유효성 검사에 실패한 경우
+			pw_check_msg.text('비밀번호는 숫자, 영문 대소문자를 포함하여 8~12자로 설정해야 합니다.')
+				.css("color", "red");
+			pw_check_val.val(0);
+		} else if (user_pw.val() === user_pw2.val()) {
+			// 비밀번호가 유효하고, 두 개가 일치하는 경우
+			pw_check_msg.text('비밀번호가 일치합니다.')
+				.css("color", "green");
+			pw_check_val.val(1);
 		} else {
-			$('#pw_check').text('비밀번호가 일치하지 않습니다.');
-			$('#pw_check_val').val(0);
+			// 비밀번호가 유효하지만, 비밀번호 확인 값과 일치하지 않는 경우
+			pw_check_msg.text('비밀번호가 일치하지 않습니다.')
+				.css("color", "red");
+			pw_check_val.val(0);
 		}
 	} else {
-		$('#pw_check').text('');
-		$('#pw_check_val').val(0);
+		// 비밀번호 입력이 비어 있는 경우
+		pw_check_msg.text('');
+		pw_check_val.val(0);
 	}
 }
 
