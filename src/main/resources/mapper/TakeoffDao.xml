@@ -80,13 +80,17 @@
     </select>
 
     <select id="list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
-        SELECT W.WISH_NUMBER,W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
-        FROM WISH_CATEGORY_SELLER W
-        JOIN APPLY_STATUS A
-        ON W.USER_ID=A.USER_ID
-        AND W.WISH_NUMBER = A.WISH_NUMBER
-        WHERE W.WISH_NUMBER=#{wish_number}
-        GROUP BY W.USER_ID,A.APPLY_STATUS
+        SELECT S.SELLER_NAME,WA.WISH_NUMBER,WA.USER_ID,WA.WISH_CATEGORY_SELLER_PRICE,WA.APPLY_STATUS
+        FROM SELLER S
+        JOIN
+            (SELECT W.WISH_NUMBER,W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
+            FROM WISH_CATEGORY_SELLER W
+            JOIN APPLY_STATUS A
+            ON W.USER_ID=A.USER_ID
+            AND W.WISH_NUMBER = A.WISH_NUMBER
+            GROUP BY W.WISH_NUMBER,W.USER_ID,A.APPLY_STATUS) AS WA
+        ON WA.USER_ID = S.USER_ID
+        WHERE WA.WISH_NUMBER=#{wish_number}
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
@@ -119,6 +123,26 @@
     </select>
     <select id="getstatus" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT APPLY_STATUS FROM APPLY_STATUS WHERE USER_ID = #{user_id} AND WISH_NUMBER = #{wish_number}
+    </select>
+    <select id="endwish" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT A.USER_ID,W.WISH_NUMBER,W.WISH_TITLE,A.APPLY_STATUS
+        FROM WISH W
+        JOIN APPLY_STATUS A
+        ON W.WISH_NUMBER = A.WISH_NUMBER
+        WHERE A.USER_ID = #{user_id} AND A.APPLY_STATUS=2
+    </select>
+    <select id="endtakeoff" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
+        SELECT S.SELLER_NAME,WA.WISH_NUMBER,WA.USER_ID,WA.WISH_CATEGORY_SELLER_PRICE,WA.WISH_NUMBER,WA.APPLY_STATUS
+        FROM SELLER S
+                 JOIN
+             (SELECT W.WISH_NUMBER,W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
+              FROM WISH_CATEGORY_SELLER W
+                       JOIN APPLY_STATUS A
+                            ON W.USER_ID=A.USER_ID
+                                AND W.WISH_NUMBER = A.WISH_NUMBER
+              GROUP BY W.WISH_NUMBER,W.USER_ID,A.APPLY_STATUS) AS WA
+             ON WA.USER_ID = S.USER_ID
+        WHERE WA.WISH_NUMBER=#{wish_number}
     </select>
 
 </mapper>
