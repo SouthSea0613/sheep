@@ -144,5 +144,8 @@
              ON WA.USER_ID = S.USER_ID
         WHERE WA.WISH_NUMBER=#{wish_number}
     </select>
+    <select id="get_takeoff" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM APPLY_STATUS WHERE USER_ID != #{user_id} AND WISH_NUMBER = #{wish_number}
+    </select>
 
 </mapper>

@@ -66,6 +66,8 @@
                     const wishnumber = btn.previousElementSibling.value
                     confirmbtn.style.display = "block";
                     console.log(wishnumber);
+                    openbtn.style.display = "none";
+                    closebtn.style.display = "block";
                     axios.post('/takeoff/list', {
                         wish_number: wishnumber
                     }).then((res) => {
@@ -78,16 +80,18 @@
                             takeofflist.innerHTML += '<div class="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_name + '">' + resp.seller_name + '</a>' + '</span>'
                             takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
                             takeofflist.innerHTML += '<span class="status">' + resp.apply_status + '</span>';
-                            if(resp.apply_status==="상담중"){
-                                takeofflist.innerHTML +='<input class="hidden_wish_number" type="hidden" value='+resp.wish_number+'>'
-                                takeofflist.innerHTML +='<input class="hidden_user_id" type="hidden" value='+resp.user_id+'>'
+                            if (resp.apply_status === "상담중") {
+                                takeofflist.innerHTML += '<input class="hidden_wish_number" type="hidden" value=' + resp.wish_number + '>'
+                                takeofflist.innerHTML += '<input class="hidden_user_id" type="hidden" value=' + resp.user_id + '>'
                             }
                         })
                         buttonstatus();
                     })
-                if (btn === closebtn) {
+                }
+                else if (btn === closebtn) {
                     btn.style.display = 'none';
                     openbtn.style.display = 'block';
+                    closebtn.style.display="none";
                     takeofflist.innerHTML = "";
                     console.log(contractbtn)
                     contractbtn.forEach(cbtn=>{
@@ -95,13 +99,11 @@
                         cbtn.style.display="none";
                     })
                 }
-            }
+
         }
 
         function createbtn() {
             const btndiv = document.querySelectorAll('.status_wish_number')
-            const openbtn = document.querySelector('.openbtn')
-            const closebtn = document.querySelector('.closebtn')
             for (let i = 0; i < btndiv.length; i++) {
                 axios.post('/takeoff/count', null, {
                     params: {
@@ -230,6 +232,9 @@
             console.log("엥")
              for(let i =0; i<openbtn.length; i++){
                 if(btn===openbtn[i]){
+                    endwish_div.forEach(div=>{
+                        div.style.display="block";
+                    })
                     wishnumber.forEach(number=>{
                         console.log(number)
                     axios.post('/takeoff/endtakeoff', {
@@ -294,9 +299,11 @@
                 <div class="wish_list_block">
                     <div class="wish_container">
                         <div class="button">
+                            <div th:if="${takeoff>0}">
                             <input type="hidden" class="hidden-regwish" th:value="${wish.wish_number}">
                             <i class="fa-solid fa-caret-down fa-2xl openbtn" onclick="takeofflist(this)"></i>
                             <i style="display: none" class="fa-solid fa-caret-up fa-2xl closebtn" onclick="takeofflist(this)"></i>
+                            </div>
                         </div>
                         <div class="wish_box">
                             <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"

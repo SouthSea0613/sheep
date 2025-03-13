@@ -4,6 +4,7 @@ import com._401unauthorized.sheep.dto.CategoryListDto;
 import com._401unauthorized.sheep.dto.MajorDto;
 import com._401unauthorized.sheep.dto.SubDto;
 import com._401unauthorized.sheep.dto.WishDto;
+import com._401unauthorized.sheep.service.TakeoffService;
 import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -21,12 +22,15 @@ import java.util.List;
 @Controller
 public class WishController {
     private final WishService wishService;
+    private final TakeoffService takeoffService;
 
     @GetMapping("/list")
     public String get_wish_list(HttpSession httpSession, Model model) {
         String user_id = httpSession.getAttribute("user_id").toString();
         model.addAttribute("wish_list", wishService.get_wish_list(user_id));
         model.addAttribute("wish_req_list",wishService.get_wish_req_list(user_id));
+        Integer wish_number = wishService.get_wish_req_list(user_id).getWish_number();
+        model.addAttribute("takeoff",takeoffService.get_takeoff(user_id,wish_number));
         log.info(wishService.get_wish_list(user_id).toString());
         return "wish/list";
     }
