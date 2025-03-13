@@ -93,6 +93,7 @@
                     openbtn.style.display = 'block';
                     closebtn.style.display="none";
                     takeofflist.innerHTML = "";
+                    confirmbtn.style.display="none";
                     console.log(contractbtn)
                     contractbtn.forEach(cbtn=>{
                         console.log(cbtn)
@@ -360,8 +361,10 @@
                             </div>
                         </div>
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
+                <div th:if="${wish_req_list==null}">
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
                 <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+                </div>
             </div>
             </div>
             </th:block>
