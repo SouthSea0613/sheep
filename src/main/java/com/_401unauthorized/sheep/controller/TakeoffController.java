@@ -233,6 +233,7 @@ public class TakeoffController {
         }
         return "takeoff/seller/detail";
     }
+
     @PostMapping("/confirm")
     @ResponseBody
     public boolean confirm(@RequestBody WishDto wishdto){
@@ -242,16 +243,19 @@ public class TakeoffController {
         }
         return false;
     }
+
     @PostMapping("/getstatus")
     @ResponseBody
     public WishDto getstatus(@RequestBody WishDto wishdto){
         return takeoffService.getstatus(wishdto.getUser_id(),wishdto.getWish_number());
     }
+
     @PostMapping("/endwish")
     @ResponseBody
     public WishDto endwish(HttpSession httpSession){
         return takeoffService.endwish(httpSession.getAttribute("user_id").toString());
     }
+
     @PostMapping("/endtakeoff")
     @ResponseBody
     public List<TakeoffDto> endtakeoff(@RequestBody TakeoffDto takeoffdto){
