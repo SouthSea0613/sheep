@@ -9,19 +9,28 @@
 
 <section>
     <div class="list">
+        <div class="">지역</div>
         <div class="">글제목</div>
         <div class="">글쓴이</div>
         <div class="">등록일</div>
         <div class="">모집상황</div>
     </div>
 
+    <div>
+        <th:block th:if="${#lists.isEmpty(employment_board_list)}">
+            <div class="">현재 구인글이 존재하지 않습니다.</div>
+        </th:block>
+
+    </div>
+
     <div class="">
-        <th:block th:unless="${#lists.isEmpty()}">
-            <th:block th:each="board:${board_list}">
-                <div class="" th:text="${board_title}"></div>
-                <div class="" th:text="${user_id}"></div>
-                <div class="" th:text="${board_regdate}"></div>
-                <div class="" th:text="${job_count}"></div>
+        <th:block th:unless="${#lists.isEmpty(employment_board_list)}">
+            <th:block th:each="employment:${employment_board_list}">
+                <div class="" th:text="${employment.job_area}"></div>
+                <div class="" th:text="${employment.board_title}"></div>
+                <div class="" th:text="${employment.user_id}"></div>
+                <div class="" th:text="${employment.board_regdate}"></div>
+                <div class="" th:text="${employment.job_count}"></div>
             </th:block>
         </th:block>
     </div>

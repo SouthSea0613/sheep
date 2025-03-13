@@ -50,34 +50,11 @@ public class EmploymentController {
 //        return "redirect:/takeoff/seller/select_area";
 //    }
 
-//    @GetMapping("/list")
-//    public String list(BoardDto boardDto, Model model, HttpSession httpSession) {
-//        if (boardDto.getPage_number() == null || boardDto.getPage_number() < 1) {
-//            boardDto.setPage_number(1);
-//        }
-//
-//        if (boardDto.getList_count() == null) {
-//            boardDto.setList_count(employmentService.list_count);
-//        }
-//
-//        if (boardDto.getStart_index() == null) {
-//            boardDto.setStart_index(0);
-//        }
-//
-//        List<BoardDto> employment_list = null;
-//        employment_list = employmentService.list(boardDto);
-//        if (boardDto != null) {
-//            String pageHtml = employmentService.paging(boardDto);
-//            if (boardDto.getColname() != null) {
-//                httpSession.setAttribute("boardDto", boardDto);
-//            } else {
-//                httpSession.removeAttribute("boardDto");
-//                httpSession.setAttribute("boardDto", boardDto.getPage_number());
-//            }
-//            model.addAttribute("paging", pageHtml);
-//            model.addAttribute("employment_list", employment_list);
-//            return "employment/list";
-//        }
-//        return "employment/list";
-//    }
+    @GetMapping("/list")
+    public String list(Model model) {
+        List<BoardDto> employment_board_list = employmentService.list();
+        model.addAttribute("employment_board_list", employment_board_list);
+        return "employment/list";
+    }
 }
+

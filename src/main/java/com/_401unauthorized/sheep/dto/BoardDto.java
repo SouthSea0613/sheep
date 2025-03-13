@@ -20,10 +20,10 @@ public class BoardDto {
     String board_title;
     String board_content;
     String board_status;
-    LocalDateTime board_regdate;
+    String board_regdate;
     String board_kind;
 
-    LocalDate job_expiredate;
+    String job_expiredate;
     int job_count;
     String job_status;
     String job_area;

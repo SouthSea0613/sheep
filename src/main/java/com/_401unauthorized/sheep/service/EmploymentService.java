@@ -35,10 +35,10 @@ public class EmploymentService {
         return false;
     }
 
-    public List<BoardDto> list(BoardDto boardDto) {
-       Integer page_number = boardDto.getPage_number();
-       boardDto.setStart_index((page_number - 1) * boardDto.getList_count());
-       return employmentDao.list(boardDto);
+    public List<BoardDto> list() {
+       List<BoardDto> employment_board_list = employmentDao.list();
+       log.info("employment_board_list = {}", employment_board_list);
+       return employment_board_list;
     }
 
 

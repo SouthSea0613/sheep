@@ -9,6 +9,5 @@ import java.util.List;
 public interface EmploymentDao {
     boolean write(BoardDto employmentDto);
     void insert_job(BoardDto jobDto);
-    List<BoardDto> list(BoardDto boardDto);
-//    boolean select_area(Integer board_number, String job_area);
+    List<BoardDto> list();
 }
