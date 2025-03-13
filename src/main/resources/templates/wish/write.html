@@ -372,8 +372,10 @@
 
 	const categorys = "[[${category_list_dto}]]";
 	categorys.forEach(category => {
-		category.sub_category.forEach(sub => {
-			switch (category.major_category) {
+		console.log(category)
+		category.forEach(sub => {
+
+			switch (sub.major_category) {
 				case "철거":
 					document.querySelectorAll(".major_category_number")[0].setAttribute("checked", true)
 					document.querySelectorAll(".major_category_number")[0].nextElementSibling.style.display = "block";

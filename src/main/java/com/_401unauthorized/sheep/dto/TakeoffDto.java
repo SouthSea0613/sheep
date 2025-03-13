@@ -20,6 +20,7 @@ public class TakeoffDto {
     String major_category;
     String major_text;
     List<String> sub_category;
+    String seller_name;
     String wish_category_seller_answer;
     int wish_category_seller_price;
     String apply_status;
