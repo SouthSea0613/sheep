@@ -29,7 +29,11 @@ public class WishController {
         String user_id = httpSession.getAttribute("user_id").toString();
         model.addAttribute("wish_list", wishService.get_wish_list(user_id));
         model.addAttribute("wish_req_list",wishService.get_wish_req_list(user_id));
-        Integer wish_number = wishService.get_wish_req_list(user_id).getWish_number();
+        WishDto wishDto = wishService.get_wish_req_list(user_id);
+        Integer wish_number = null;
+        if (wishDto != null) {
+            wish_number = wishService.get_wish_req_list(user_id).getWish_number();
+        }
         model.addAttribute("takeoff",takeoffService.get_takeoff(user_id,wish_number));
         log.info(wishService.get_wish_list(user_id).toString());
         return "wish/list";
