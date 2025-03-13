@@ -75,7 +75,7 @@
                         console.log(takeofflist)
 
                         res.data.forEach(resp => {
-                            takeofflist.innerHTML += '<div class="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_name + '">' + resp.seller_name + '</a>' + '</span>'
+                            takeofflist.innerHTML += '<div class="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_company + '">' + resp.seller_company + '</a>' + '</span>'
                             takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
                             takeofflist.innerHTML += '<span class="status">' + resp.apply_status + '</span>';
                             if(resp.apply_status==="상담중"){
@@ -89,9 +89,7 @@
                     btn.style.display = 'none';
                     openbtn.style.display = 'block';
                     takeofflist.innerHTML = "";
-                    console.log(contractbtn)
                     contractbtn.forEach(cbtn=>{
-                        console.log(cbtn)
                         cbtn.style.display="none";
                     })
                 }
