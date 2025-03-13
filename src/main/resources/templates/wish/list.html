@@ -242,18 +242,21 @@
                             if(data.apply_status==="기간만료"){
                                 div.innerHTML += '<div class="seller_class"><span>'+ data.seller_name + '</span>';
                             }else{
-                                div.innerHTML += '<div class="seller_class"><span>' + '<a href="/takeoff/detail?wish_number='+data.wish_number+'">'+ data.seller_name + '<a/></span>';
+                                div.innerHTML += '<div class="seller_class"><span>' + '<a href="/takeoff/seller/detail?wish_number=' + data.wish_number + '&user_id=' + data.user_id + '">'+ data.seller_name + '<a/></span>';
                             }
                             div.innerHTML += '<span>' + data.wish_category_seller_price+ "만원" + '</span>';
                             div.innerHTML += '<span class="status_span">' + data.apply_status + '</span></div>'
                             linkcss()
                             })
                         })
+                        closebtn[i].style.display="block";
+                        openbtn[i].style.display="none";
                     })
                     })
-
                 }else if(btn===closebtn[i]){
                     endwish_div.forEach(div=>{
+                        openbtn[i].style.display="block";
+                        closebtn[i].style.display="none";
                         div.style.display="none";
                     })
                 }
