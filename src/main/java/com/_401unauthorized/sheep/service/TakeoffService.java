@@ -377,6 +377,41 @@ public class TakeoffService {
     }
 
     public WishDto endwish(String user_id) {
-        return  takeoffDao.endwish(user_id);
+        WishDto wishdto = takeoffDao.endwish(user_id);
+        if(wishdto!=null){
+            switch (wishdto.getApply_status()){
+                case "0", "1":
+                    wishdto.setApply_status("진행중");
+                    break;
+                case "2":
+                    wishdto.setApply_status("계약완료");
+                    break;
+                case "3":
+                    wishdto.setApply_status("취소");
+                    break;
+                case "4":
+                    wishdto.setApply_status("기간만료");
+            }
+        }
+        return wishdto;
+    }
+
+    public List<TakeoffDto> endtakeoff(String user_id, Integer wish_number) {
+        List<TakeoffDto> takeoffdtoList = takeoffDao.endtakeoff(user_id,wish_number);
+        for(TakeoffDto takeoffdto : takeoffdtoList){
+            if(takeoffdto.getApply_status()!=null){
+                switch (takeoffdto.getApply_status()){
+                    case "2":
+                        takeoffdto.setApply_status("계약완료");
+                        break;
+                    case "3":
+                        takeoffdto.setApply_status("취소");
+                    case "4":
+                        takeoffdto.setApply_status("기간만료");
+                        break;
+                }
+            }
+        }
+        return takeoffdtoList;
     }
 }

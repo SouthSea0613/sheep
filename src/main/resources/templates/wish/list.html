@@ -181,12 +181,88 @@
                 }
             })
         }
+        let num = 0;
         function endwish(){
             const endwish = document.querySelector('.endwish')
-            axios.post('/takeoff/endwish')
-                .then(res=>{
-
+            const endwish_container = document.querySelector('.endwish_container')
+            const wish_ing_container = document.querySelector('.all_wish')
+            const buttondiv = document.querySelectorAll('.button_endlist')
+            console.log(buttondiv)
+            if(num===0){
+            axios.post('/takeoff/endwish',{
+            })
+                .then((res)=>{
+                    wish_ing_container.style.display='none';
+                    endwish_container.style.display="block";
+                    endwish.innerHTML+= '<input type="hidden" class="end_wish_number" value="'+res.data.wish_number+'"' +'>';
+                    endwish.innerHTML+= '<span>'+res.data.wish_title+'</span>'
+                    endwish.innerHTML+= '<span>'+res.data.apply_status+'</span>'
+                    endwish.innerHTML+= '<div class="endlist"></div>'
+                        buttondiv.forEach(div=>{
+                            console.log(div)
+                            div.innerHTML += '<i class="fa-solid fa-caret-down fa-2xl openbtn2" onClick="takeoffendlist(this)"></i>'
+                            div.innerHTML += '<i style="display: none" class="fa-solid fa-caret-up fa-2xl closebtn2" onClick="takeoffendlist(this)"></i>'
+                        })
+                    num=1;
                 })
+            }
+        }
+        function ingtab(){
+            const buttondiv = document.querySelectorAll('.button_endlist')
+            const wish_ing_container = document.querySelector('.all_wish')
+            const endwish_container = document.querySelector('.endwish_container')
+            const endwish_div = document.querySelector('.endwish')
+            buttondiv.forEach(div=>{
+                div.innerHTML="";
+            })
+            endwish_div.innerHTML ="";
+            wish_ing_container.style.display="block";
+            endwish_container.style.display="none";
+            num=0;
+        }
+
+        function takeoffendlist(btn) {
+            const wishnumber = document.querySelectorAll('.end_wish_number')
+            const openbtn = document.querySelectorAll('.openbtn2')
+            const closebtn = document.querySelectorAll('.closebtn2')
+            const list = document.querySelectorAll('.endlist')
+            const endwish_div = document.querySelectorAll('.endwish')
+            console.log("엥")
+             for(let i =0; i<openbtn.length; i++){
+                if(btn===openbtn[i]){
+                    wishnumber.forEach(number=>{
+                        console.log(number)
+                    axios.post('/takeoff/endtakeoff', {
+                        wish_number:number.value,
+                        user_id : "[[${session.user_id}]]"
+                    }).then(res=>{
+                        console.log(res.data);
+                        list.forEach(div=>{
+                            res.data.forEach(data=>{
+                            if(data.apply_status==="기간만료"){
+                                div.innerHTML += '<div class="seller_class"><span>'+ data.seller_name + '</span>';
+                            }else{
+                                div.innerHTML += '<div class="seller_class"><span>' + '<a href="/takeoff/detail?wish_number='+data.wish_number+'">'+ data.seller_name + '<a/></span>';
+                            }
+                            div.innerHTML += '<span>' + data.wish_category_seller_price+ "만원" + '</span>';
+                            div.innerHTML += '<span class="status_span">' + data.apply_status + '</span></div>'
+                            linkcss()
+                            })
+                        })
+                    })
+                    })
+
+                }else if(btn===closebtn[i]){
+                    endwish_div.forEach(div=>{
+                        div.style.display="none";
+                    })
+                }
+             }
+            function linkcss(){
+                const seller_class = document.querySelector('.seller_class');
+                seller_class.style.backgroundcolor= "gray";
+            }
+
         }
     </script>
 </head>
@@ -203,12 +279,12 @@
         </th:block>
         <div class="wishBarea wish_write_btn">
             <div class="tab">
-                <input type="button" class="wish_ing" value="진행중 위시">
+                <input type="button" class="wish_ing" value="진행중 위시" onclick="ingtab()">
                 <input type="button" class="wish_end" value="종료된 위시" onclick="endwish()">
             </div>
             <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
         </div>
-
+        <div class="all_wish">
         <!--위시리스트 요청 후 -->
         <th:block th:unless="${#lists.isEmpty(wish_req_list)}">
             <th:block th:each="wish:${wish_req_list}">
@@ -247,7 +323,7 @@
                                 <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
                             </div>
                         </div>
-                    </div>
+                </div>
                     <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
                         <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
                         <input type="button" class="wish_takeoff" onclick="takeoff()" value="견적요청">
@@ -257,32 +333,40 @@
             <!--위시리스트(요청전)-->
             <th:block th:unless="${#lists.isEmpty(wish_list)}">
                 <th:block th:each="wish:${wish_list}">
-        <div class="wish_list_block">
-            <div class="wish_container">
-                <div>
-                    <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
-                       th:text="${wish?.wish_title}"></a>
-                </div>
-                <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
-                    <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
-                           name="wish_number">
-                    <div class="">
-                        <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
-                               name="wish_number">
-                        <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
-                    </div>
-                </div>
-            </div>
+                    <div class="wish_list_block">
+                        <div class="wish_container">
+                            <div>
+                                <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
+                                   th:text="${wish?.wish_title}"></a>
+                            </div>
+                            <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
+                                <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
+                                       name="wish_number">
+                                <div class="">
+                                    <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
+                                           name="wish_number">
+                                    <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
+                                </div>
+                            </div>
+                        </div>
             <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
                 <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
                 <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
             </div>
+            </div>
+            </th:block>
+        </th:block>
         </div>
-        </th:block>
-        </th:block>
-        <div class="endwish_container">
-            <div class="endwish">
+        <div class="endwish_container" hidden>
+            <div class="wish_list_block">
+                <div class="takeoff_end">
+                    <span class="button_endlist">
+                    </span>
+                    <!--종료된 위시-->
+                    <div class="endwish">
 
+                    </div>
+                </div>
             </div>
         </div>
     </div>

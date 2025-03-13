@@ -251,6 +251,12 @@ public class TakeoffController {
     public WishDto endwish(HttpSession httpSession){
         return takeoffService.endwish(httpSession.getAttribute("user_id").toString());
     }
+    @PostMapping("/endtakeoff")
+    @ResponseBody
+    public List<TakeoffDto> endtakeoff(@RequestBody TakeoffDto takeoffdto){
+        List<TakeoffDto> takeoffdtoList = takeoffService.endtakeoff(takeoffdto.getUser_id(),takeoffdto.getWish_number());
+        return takeoffdtoList;
+    }
 
 }
 

@@ -33,4 +33,6 @@ public interface TakeoffDao {
     boolean update_wish_status(Integer wish_number, String user_id);
 
     WishDto endwish(String user_id);
+
+    List<TakeoffDto> endtakeoff(String user_id, Integer wish_number);
 }
