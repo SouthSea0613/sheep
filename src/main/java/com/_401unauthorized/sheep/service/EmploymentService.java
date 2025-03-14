@@ -60,12 +60,17 @@ public class EmploymentService {
         return employmentDto;
     }
 
-
 //    public boolean select_area(Integer board_nubmer, String job_area) {
 //        return employmentDao.select_area(board_nubmer, job_area);
 //    }
 
-//
+    public List<BoardDto> get_board_list(Integer page_number) {
+
+        // 0번째: 0~9 / 1번째: 10~19 .... 1페이지가 0번째 여야하니까
+        int start_index = (page_number - 1) * 10;
+        return employmentDao.get_board_list(start_index);
+    }
+
 //    public String paging(BoardDto boardDto) {
 //        int total_number = employmentDao.count(boardDto);
 //        String url = null;

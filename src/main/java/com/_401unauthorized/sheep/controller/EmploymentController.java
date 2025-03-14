@@ -50,13 +50,6 @@ public class EmploymentController {
 //        return "redirect:/takeoff/seller/select_area";
 //    }
 
-    @GetMapping("/list")
-    public String list(Model model) {
-        List<BoardDto> employment_board_list = employmentService.list();
-        model.addAttribute("employment_board_list", employment_board_list);
-        return "employment/list";
-    }
-
     @GetMapping("/detail")
     public String detail(@RequestParam("board_number") Integer board_number, Model model) {
         if (board_number == null || board_number < 1) {
@@ -69,6 +62,13 @@ public class EmploymentController {
         } else {
             return "redirect:/employment/list";
         }
+    }
+
+    @GetMapping("/list")
+    public String list(@RequestParam("page_number") Integer page_number, Model model) {
+        List<BoardDto> boarddto = employmentService.get_board_list(page_number);
+        model.addAttribute("boarddto", boarddto);
+        return "employment/list";
     }
 }
 

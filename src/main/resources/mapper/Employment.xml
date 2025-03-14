@@ -34,4 +34,8 @@
 <!--INSERT INTO JOB_BOARD (BOARD_NUMBER, JOB_AREA) VALUES (#{board_number}, #{job_area});-->
 <!--</insert>-->
 
+    <select id="get_board_list" resultType="com._401unauthorized.sheep.dto.BoardDto">
+
+    </select>
+
 </mapper>

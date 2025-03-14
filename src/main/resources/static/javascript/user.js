@@ -106,11 +106,11 @@ function join_check() {
 	user_addr.val(address.val() +'@'+ detail_address.val());
 
 	if (address.val() == '') {
-		alert('사업자 주소를 입력하세요.');
+		alert('주소를 입력하세요.');
 		return false;
 	}
 	if (detail_address.val() == '') {
-		alert('사업자 상세주소를 입력하세요.');
+		alert('상세주소를 입력하세요.');
 		detail_address.focus();
 		return false;
 	}

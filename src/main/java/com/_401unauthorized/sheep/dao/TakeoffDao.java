@@ -35,4 +35,6 @@ public interface TakeoffDao {
     WishDto endwish(String user_id);
 
     List<TakeoffDto> endtakeoff(String user_id, Integer wish_number);
+
+    Integer get_takeoff(String user_id, Integer wish_number);
 }

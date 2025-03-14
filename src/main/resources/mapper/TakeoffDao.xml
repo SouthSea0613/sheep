@@ -80,7 +80,7 @@
     </select>
 
     <select id="list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
-        SELECT S.SELLER_NAME,WA.WISH_NUMBER,WA.USER_ID,WA.WISH_CATEGORY_SELLER_PRICE,WA.APPLY_STATUS
+        SELECT S.SELLER_COMPANY,WA.WISH_NUMBER,WA.USER_ID,WA.WISH_CATEGORY_SELLER_PRICE,WA.APPLY_STATUS
         FROM SELLER S
         JOIN
             (SELECT W.WISH_NUMBER,W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
@@ -143,6 +143,9 @@
               GROUP BY W.WISH_NUMBER,W.USER_ID,A.APPLY_STATUS) AS WA
              ON WA.USER_ID = S.USER_ID
         WHERE WA.WISH_NUMBER=#{wish_number}
+    </select>
+    <select id="get_takeoff" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM APPLY_STATUS WHERE USER_ID != #{user_id} AND WISH_NUMBER = #{wish_number}
     </select>
 
 </mapper>

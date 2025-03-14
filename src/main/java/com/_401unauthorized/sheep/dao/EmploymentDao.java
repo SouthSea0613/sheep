@@ -11,4 +11,6 @@ public interface EmploymentDao {
     void insert_job(BoardDto jobDto);
     List<BoardDto> list();
     BoardDto detail(Integer board_number);
+    List<BoardDto> list(BoardDto boardDto);
+    List<BoardDto> get_board_list(int start_index);
 }

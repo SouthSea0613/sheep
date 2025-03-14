@@ -414,4 +414,8 @@ public class TakeoffService {
         }
         return takeoffdtoList;
     }
+
+    public Integer get_takeoff(String user_id, Integer wish_number) {
+        return takeoffDao.get_takeoff(user_id,wish_number);
+    }
 }
