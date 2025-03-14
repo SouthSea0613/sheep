@@ -3,6 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>견적 지역 설정</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="/javascript/common.js"></script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/takeoff.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,6 +25,16 @@
             font-weight: bold;
         }
     </style>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+        })
+    </script>
 </head>
 <body>
 

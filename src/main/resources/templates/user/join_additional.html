@@ -32,20 +32,20 @@
 			if (seller_regnum.val() !== '') {
 				data.seller_regnum = seller_regnum.val();
 				axios.post('/user/seller_regnum_check', data)
-					.then(res => {
-						console.log(res);
-						if (res.data) {
-							$('#seller_regnum_check').text('사용 가능한 사업자등록번호 입니다.');
-							$('#seller_regnum_val').val(1);
-						} else {
-							$('#seller_regnum_check').text('이미 사용중인 사업자등록번호 입니다.')
+						.then(res => {
+							console.log(res);
+							if (res.data) {
+								$('#seller_regnum_check').text('사용 가능한 사업자등록번호 입니다.');
+								$('#seller_regnum_val').val(1);
+							} else {
+								$('#seller_regnum_check').text('이미 사용중인 사업자등록번호 입니다.')
+								$('#seller_regnum_val').val(0);
+							}
+						})
+						.catch(() => {
+							$('#seller_regnum_check').text('');
 							$('#seller_regnum_val').val(0);
-						}
-					})
-					.catch(() => {
-						$('#seller_regnum_check').text('');
-						$('#seller_regnum_val').val(0);
-					})
+						})
 			} else {
 				$('#seller_regnum_check').text('');
 				$('#seller_regnum_val').val(0);
@@ -100,20 +100,20 @@
 			const engineer_regnum = $('#engineer_regnum');
 			data.engineer_regnum = engineer_regnum.val();
 			axios.post('/user/engineer_regnum_check', data)
-				.then(res => {
-					console.log(res);
-					if (res.data) {
-						$('#engineer_regnum_check').text('사용 가능한 자격증번호입니다.');
-						$('#engineer_regnum_val').val(1);
-					} else {
-						$('#engineer_regnum_check').text('이미 사용중인 자격증번호입니다.');
+					.then(res => {
+						console.log(res);
+						if (res.data) {
+							$('#engineer_regnum_check').text('사용 가능한 자격증번호입니다.');
+							$('#engineer_regnum_val').val(1);
+						} else {
+							$('#engineer_regnum_check').text('이미 사용중인 자격증번호입니다.');
+							$('#engineer_regnum_val').val(0);
+						}
+					})
+					.catch(() => {
+						$('#engineer_regnum_check').text('');
 						$('#engineer_regnum_val').val(0);
-					}
-				})
-				.catch(() => {
-					$('#engineer_regnum_check').text('');
-					$('#engineer_regnum_val').val(0);
-				})
+					})
 		}
 
 		function join_addCheck_engineer() {
@@ -135,53 +135,63 @@
 
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<h2>추가인증.html</h2>
 <div class="main_content">
-	<input type="radio" name="join_additional" id="join_additional1" value="seller" checked onchange="check()">시공업체
-	<input type="radio" name="join_additional" id="join_additional2" value="engineer" onchange="check()">기술자<br>
+	<div class="join_additional_content">
+		<input type="radio" name="join_additional" id="join_additional1" value="seller" checked onchange="check()">시공업체
+		<input type="radio" name="join_additional" id="join_additional2" value="engineer" onchange="check()">기술자
+		<hr>
 
-	<form th:action="@{/user/join_additional_seller}" method="post" id="join_addForm_seller">
-		<div>
-			<input type="hidden" name="user_id" th:value="${param.user_id}"><br>
-			사업자등록번호 <input type="text" name="seller_regnum" id="seller_regnum" onblur="seller_regnum_check()"><br>
-			<span id="seller_regnum_check"></span><br>
-			<input id="seller_regnum_val" type="hidden" value="0">
-			업체명 <input type="text" id="seller_company" name="seller_company"><br>
-			대표자 <input type="text" id="seller_name" name="seller_name"><br>
-
-			업체주소 <input type="hidden" id="seller_addr" name="seller_addr"><br>
-			<input type="button" onclick="find_addr()" value="주소 찾기"><br>
-			<input type="text" id="sample6_address" readonly placeholder="주소"><br>
-			<input type="text" id="sample6_detailAddress" placeholder="상세주소"><br>
-			<script>
-				function find_addr() {
-					new daum.Postcode({
-						oncomplete: data => {
-							if (data.userSelectedType === 'R') {
-								$("#sample6_address").val(data.roadAddress);
-							} else {
-								$("#sample6_address").val(data.jibunAddress);
+		<form th:action="@{/user/join_additional_seller}" method="post" id="join_addForm_seller">
+			<div>
+				<input type="hidden" name="user_id" th:value="${param.user_id}">
+				<div>사업자등록번호</div>
+				<input type="text" name="seller_regnum" id="seller_regnum" onblur="seller_regnum_check()" placeholder="사업자등록번호">
+				<input id="seller_regnum_val" type="hidden" value="0">
+				<hr>
+				<div>업체명</div>
+				<input type="text" id="seller_company" name="seller_company" placeholder="업체명"><br>
+				<hr>
+				<div>대표자</div>
+				<input type="text" id="seller_name" name="seller_name" placeholder="대표자"><br>
+				<hr>
+				<div>주소</div>
+				<input type="hidden" id="seller_addr" name="seller_addr"><br>
+				<input type="button" onclick="find_addr()" value="주소 찾기" class="join_addr_btn"><br>
+				<input type="text" id="sample6_address" readonly placeholder="주소"><br>
+				<input type="text" id="sample6_detailAddress" placeholder="상세주소"><br>
+				<script>
+					function find_addr() {
+						new daum.Postcode({
+							oncomplete: data => {
+								if (data.userSelectedType === 'R') {
+									$("#sample6_address").val(data.roadAddress);
+								} else {
+									$("#sample6_address").val(data.jibunAddress);
+								}
+								$("#sample6_detailAddress").focus();
 							}
-							$("#sample6_detailAddress").focus();
-						}
-					}).open();
-				}
-			</script>
+						}).open();
+					}
+				</script>
 
-			<input type="button" value="인증요청" id="join_addBtn" onclick="join_addCheck_seller()">
-		</div>
-	</form>
+				<input type="button" value="인증요청" id="join_addBtn" onclick="join_addCheck_seller()">
+			</div>
+		</form>
 
-	<form th:action="@{/user/join_additional_engineer}" method="post" id="join_addForm_engineer" style="display: none">
-		<div>
-			<input type="hidden" name="user_id" th:value="${param.user_id}">
-			자격증번호 <input type="text" name="engineer_regnum" id="engineer_regnum" onblur="engineer_regnum_check()">
-			<span id="engineer_regnum_check"></span><br>
-			<input type="hidden" id="engineer_regnum_val" value="0">
-			취득일 <input type="text" name="engineer_regdate" id="engineer_regdate"><br>
-			<input type="button" value="인증요청" id="join_addBtn2" onclick="join_addCheck_engineer()">
-		</div>
-	</form>
+		<form th:action="@{/user/join_additional_engineer}" method="post" id="join_addForm_engineer" style="display: none">
+			<div>
+				<input type="hidden" name="user_id" th:value="${param.user_id}">
+				<div>자격증번호</div>
+				<input type="text" name="engineer_regnum" id="engineer_regnum" onblur="engineer_regnum_check()" placeholder="자격증번호">
+				<input type="hidden" id="engineer_regnum_val" value="0">
+				<hr>
+				<div>취득일</div>
+				<input type="text" name="engineer_regdate" id="engineer_regdate" placeholder="취득일"><br>
+				<span id="engineer_regnum_check"></span><br>
+				<input type="button" value="인증요청" id="join_addBtn2" onclick="join_addCheck_engineer()">
+			</div>
+		</form>
+	</div>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>

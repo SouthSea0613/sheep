@@ -20,6 +20,11 @@ body {
 h2 {
     margin: 5vh 25vh;
 }
+hr {
+    margin: 2vh 0;
+}
+
+/* list */
 
 .wish_write_btn {
     margin: 2vh 3vh;
@@ -80,4 +85,84 @@ h2 {
 }
 .wishBarea{
     width: 100%;
+}
+
+/* * wish detail */
+
+.eun_wish_detail_box {
+    margin: 0 auto;
+    padding: 3vh 3vh;
+    width: 65vh;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 3vh;
+}
+
+.eun_wish_detail_box hr {
+    margin: 2vh 0;
+}
+
+.eun_wish_category_box {
+    text-align: center;
+}
+
+/* wish write */
+
+.eun_wish_write_container {
+    margin: 0 auto;
+    padding: 3vh 3vh;
+    width: 65vh;
+    justify-content: center;
+    border: 1px solid black;
+    border-radius: 3vh;
+}
+
+.wish_addr_content {
+    display: inline;
+}
+
+/* button list */
+
+.wish_write_btn {
+    margin: 2vh 3vh;
+    justify-self: end;
+}
+
+.wish_btn_list {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 15vh;
+    height: 5vh;
+    text-align: center;
+    background-color: #449fff;
+    border-radius: 15vh;
+    transition: all 0.3s ease;
+}
+
+.wish_btn_list:hover {
+    background-color: #2f7edb;
+    cursor: pointer;
+}
+
+.write_addr_btn {
+    all: unset;
+    display: inline-block;
+    margin: 0 1vh;
+    width: 8vh;
+    height: 3vh;
+    padding: 0 10px;
+    font-size: 14px;
+    text-align: center;
+    background-color: #72bfff;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid #5faee7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.write_addr_btn:hover {
+    background-color: #3f94c9;
+    cursor: pointer;
 }

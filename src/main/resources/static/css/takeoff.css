@@ -15,3 +15,31 @@ body {
     min-height: 100%;
     padding: 30px 0;
 }
+
+/* takeoff */
+
+h2 {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 3%;
+}
+
+.content {
+    margin: 5vh auto;
+    padding: 3vh 3vh;
+    width: 75vh;
+    border: 1px solid black;
+    border-radius: 3vh;
+}
+
+/* takeoff list */
+
+.area{
+    position : absolute;
+    border: 1px solid black;
+    width: 30%;
+    background-color : green;
+    left :50%;
+    top : 50%;
+    display: none;
+}

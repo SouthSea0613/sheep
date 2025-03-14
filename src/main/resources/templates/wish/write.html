@@ -59,7 +59,7 @@
 <div class="main_content">
 	<!--  위 div는 전체 묶음  -->
 	<!--    아래는 컨트롤러 작성해야함    -->
-	<form action="/wish/write" method="post" id="write_form">
+	<form action="/wish/write" method="post" id="write_form" class="eun_wish_write_container">
 		<div><!---------------------------------------------------------------------------------------------->
 
 			<div>
@@ -77,9 +77,9 @@
 						}).open();
 					}
 				</script>
-				<div id="title">시공주소</div>
-				<div>
-					<input type="button" onclick="find_addr()" value="주소 찾기"><br>
+				<div id="title" class="wish_addr_content">시공주소</div>
+				<div class="wish_addr_content">
+					<input type="button" onclick="find_addr()" value="주소 찾기" class="write_addr_btn"><br>
 					<input type="hidden" id="wish_list_addr" name="wish_addr" th:value="${wish_dto?.wish_addr}">
 					<input type="text" id="sample6_address" name="wish_title" class="title_class"
 						   th:value="${wish_dto?.wish_title}" readonly placeholder="주소"><br>
@@ -87,7 +87,7 @@
 				</div>
 			</div>
 
-			<br><!---------------------------------------------------------------------------------------------->
+			<hr><!---------------------------------------------------------------------------------------------->
 
 			<div>
 
@@ -113,7 +113,7 @@
 						break;
 				}
 			</script>
-			<br><!---------------------------------------------------------------------------------------------->
+			<hr><!---------------------------------------------------------------------------------------------->
 
 			<div>
 				<div>평수</div>
@@ -153,7 +153,7 @@
 						break;
 				}
 			</script>
-			<br><!---------------------------------------------------------------------------------------------->
+			<hr><!---------------------------------------------------------------------------------------------->
 
 			<div>
 				<div>예산</div>
@@ -169,10 +169,7 @@
 			<div>견적요청시 작성하신 내용으로 신청되오니, 최대한 정확히 작성해주세요.</div>
 			<div>참고란에는 최대한 구체적으로 작성해주세요.</div>
 		</div><!---------------------------------------------------------------------------------------------->
-
-		<br>
 		<hr>
-		<br>
 		<!-- 아래부터 시공 선택 사항 -->
 		<!---------------------------------------------------------------------------------------------->
 		<div class="remove">
@@ -341,7 +338,7 @@
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<!--  여기서 버튼 누르면 DB로 넘어감  -->
-		<div><input type="button" value="위시 저장" onclick="clickbtn()"></div>
+		<div><input type="button" value="위시 저장" onclick="clickbtn()" class="wish_btn_list"></div>
 	</form>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
