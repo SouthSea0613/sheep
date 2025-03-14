@@ -6,6 +6,7 @@ import com._401unauthorized.sheep.dto.BoardDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -60,10 +61,6 @@ public class EmploymentService {
         return employmentDto;
     }
 
-//    public boolean select_area(Integer board_nubmer, String job_area) {
-//        return employmentDao.select_area(board_nubmer, job_area);
-//    }
-
     public List<BoardDto> get_board_list(Integer page_number) {
 
         // 0번째: 0~9 / 1번째: 10~19 .... 1페이지가 0번째 여야하니까
@@ -71,15 +68,14 @@ public class EmploymentService {
         return employmentDao.get_board_list(start_index);
     }
 
-//    public String paging(BoardDto boardDto) {
-//        int total_number = employmentDao.count(boardDto);
-//        String url = null;
-//        if(boardDto.getColname() != null) {
-//            url = "/employment?colname=" + boardDto.getColname() + "&keyword=" + boardDto.getKeyword() + "&";
-//        } else {
-//            url = "/employment?";
-//        }
-//
-//        Paging paging = new Paging(total_number, boardDto.getPage_number(), list_count, page_count, url);
-//    }
+    @Transactional
+    public boolean resume_write(BoardDto boarddto, Integer parent_board_number) {
+        if(!employmentDao.resume_write(boarddto)){
+            return false;
+        }
+        if(!employmentDao.resume_write2(boarddto.getBoard_number(), boarddto.getUser_id(), parent_board_number)){
+            return false;
+        }
+        return true;
+    }
 }

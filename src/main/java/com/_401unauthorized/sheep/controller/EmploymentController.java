@@ -41,15 +41,6 @@ public class EmploymentController {
         return "takeoff/seller/select_area";
     }
 
-//    @PostMapping("/select_area")
-//    public String select_area(BoardDto boardDto, @RequestParam("job_area") String job_area) {
-//        Integer board_number = boardDto.getBoard_number();
-//        if (employmentService.select_area(board_number, job_area)) {
-//            return "redirect:/employment/write";
-//        }
-//        return "redirect:/takeoff/seller/select_area";
-//    }
-
     @GetMapping("/detail")
     public String detail(@RequestParam("board_number") Integer board_number, Model model) {
         if (board_number == null || board_number < 1) {
@@ -69,6 +60,15 @@ public class EmploymentController {
         List<BoardDto> boarddto = employmentService.get_board_list(page_number);
         model.addAttribute("boarddto", boarddto);
         return "employment/list";
+    }
+
+    @PostMapping("/resume_write")
+    public String resume_write(BoardDto boarddto, @RequestParam("parent_board_number") Integer parent_board_number,HttpSession session) {
+        boarddto.setUser_id(session.getAttribute("user_id").toString());
+        if(employmentService.resume_write(boarddto, parent_board_number)){
+            return "redirect:/employment/detail";
+        }
+        return "redirect:/employment/resume/write";
     }
 }
 

@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
-<section>
+<form action="/employment/resume_write" method="post" id="resume_write">
     <h2>이력서 작성</h2>
-</section>
+    제목
+    <input type="hidden" name="parent_board_number" th:value="${param.parent_board_number}">
+    <input type="hidden" name="user_id" th:value="${session?.user_id}">
+    <input type="text" id="resume_title" name="board_title" autofocus placeholder="제목" required><br>
+    <textarea id="resume_content" name="board_content" rows="15" placeholder="경력을 적어주요." >
+나이:
+경력:
+    </textarea>
 
+    <div><input type="button" value="작성완료" onclick="resume_write()"></div>
+    </div>
+</form>
+<script>
+    function resume_write(){
+        const resume_title = $('#resume_title');
+        const resume_contents = $('#resume_contents');
+        if(resume_title.val() === ''){
+            alert("제목을 입력하세요.")
+            resume_title.focus();
+            return false;
+        }
+        if(resume_contents.val() === ''){
+            alert("내용을 입력하세요.")
+            resume_contents.focus();
+            return false;
+        }
+        $('#resume_write').submit();
+    }
+</script>
 </body>
 </html>
