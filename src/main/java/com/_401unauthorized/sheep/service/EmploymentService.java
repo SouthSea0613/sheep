@@ -36,9 +36,28 @@ public class EmploymentService {
     }
 
     public List<BoardDto> list() {
-       List<BoardDto> employment_board_list = employmentDao.list();
-       log.info("employment_board_list = {}", employment_board_list);
-       return employment_board_list;
+        List<BoardDto> employment_board_list = employmentDao.list();
+        log.info("employment_board_list = {}", employment_board_list);
+        for (BoardDto employment : employment_board_list) {
+            if (employment.getBoard_status() != null){
+                switch (employment.getBoard_status()) {
+                    case "0":
+                        employment.setBoard_status("모집중");
+                        break;
+
+                    case "1":
+                        employment.setBoard_status("마감");
+                        break;
+                }
+            }
+        }
+        return employment_board_list;
+    }
+
+    public BoardDto detail(Integer board_number) {
+        BoardDto employmentDto = employmentDao.detail(board_number);
+        log.info("employmentDto = {}", employmentDto);
+        return employmentDto;
     }
 
 

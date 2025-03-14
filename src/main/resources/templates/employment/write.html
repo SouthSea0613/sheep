@@ -16,7 +16,7 @@
 <section>
 <div class="content">
 
-    <form action="/employment/inset_write" method="post">
+    <form th:action="@{/employment/insert_write}" method="post">
 
         <div class="">
         <input type="hidden" name="user_id" th:value="${session?.user_id}">

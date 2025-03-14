@@ -27,6 +27,7 @@ public class BoardDto {
     int job_count;
     String job_status;
     String job_area;
+    String seller_company;
 
     Integer list_count;
     Integer start_index;
@@ -34,5 +35,6 @@ public class BoardDto {
 
     String colname;
     String keyword;
+
 
 }

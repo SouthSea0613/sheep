@@ -56,5 +56,19 @@ public class EmploymentController {
         model.addAttribute("employment_board_list", employment_board_list);
         return "employment/list";
     }
+
+    @GetMapping("/detail")
+    public String detail(@RequestParam("board_number") Integer board_number, Model model) {
+        if (board_number == null || board_number < 1) {
+            return "redirect:/employment/list";
+        }
+        BoardDto employmentDto = employmentService.detail(board_number);
+        if (employmentDto != null) {
+            model.addAttribute("employmentDto", employmentDto);
+            return "employment/detail";
+        } else {
+            return "redirect:/employment/list";
+        }
+    }
 }
 

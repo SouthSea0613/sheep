@@ -10,4 +10,5 @@ public interface EmploymentDao {
     boolean write(BoardDto employmentDto);
     void insert_job(BoardDto jobDto);
     List<BoardDto> list();
+    BoardDto detail(Integer board_number);
 }

@@ -5,15 +5,14 @@
     <title>Title</title>
 </head>
 <body>
-<th:block th:replace="~{fragments::header}"></th:block>
 
 <section>
     <div class="list">
-        <div class="">지역</div>
-        <div class="">글제목</div>
-        <div class="">글쓴이</div>
-        <div class="">등록일</div>
-        <div class="">모집상황</div>
+        <div>지역</div>
+        <div>글제목</div>
+        <div>글쓴이</div>
+        <div>등록일</div>
+        <div>모집상황</div>
     </div>
 
     <div>
@@ -27,19 +26,27 @@
         <th:block th:unless="${#lists.isEmpty(employment_board_list)}">
             <th:block th:each="employment:${employment_board_list}">
                 <div class="" th:text="${employment.job_area}"></div>
-                <div class="" th:text="${employment.board_title}"></div>
+                <input type="hidden" name="board_number" th:value="${employment.board_number}">
+                <div class="">
+                    <a th:href="@{/employment/detail(board_number=${employment.board_number})}" th:text="${employment.board_title}"></a>
+                </div>
                 <div class="" th:text="${employment.user_id}"></div>
                 <div class="" th:text="${employment.board_regdate}"></div>
+                <div class="" th:text="${employment.board_status}"></div>
                 <div class="" th:text="${employment.job_count}"></div>
             </th:block>
         </th:block>
     </div>
 
     <div class="">
-        <input type="button" value="작성하기" onclick="location.href='/employment/write'">
+        <th:block th:if="${session?.user_type eq '1'}">
+        <form th:action="@{/employment/write}" method="post">
+        <input type="submit" value="작성하기">
+        </th:block>
+        </form>
     </div>
 </section>
 
-<th:block th:replace="~{fragments::footer}"></th:block>
+
 </body>
 </html>

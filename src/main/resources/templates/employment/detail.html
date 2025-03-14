@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        function employment_complete() {
+            location.href="/employment/complete"
+        }
+
+        function find_job() {
+            location.href="/employment/resume/write"
+        }
+    </script>
+</head>
+<body>
+
+<section>
+    <h2>employment.detail!</h2>
+    <div class="job-content">
+        <div th:text="${employmentDto?.board_title}"></div>
+        <div th:text="${employmentDto?.seller_company}"></div>
+        <div th:text="${employmentDto?.user_id}"></div>
+        <div th:text="${employmentDto?.job_area}"></div>
+        <div th:text="${employmentDto?.board_status}"></div>
+        <div th:text="${employmentDto?.board_content}"></div>
+    </div>
+
+    <th:block>
+        <div th:if="${session.user_type eq '1'}">
+            <input type="button" value="마감" onclick="employment_complete()">
+        </div>
+        <div th:if="${session.user_type eq '2'}">
+            <input type="button" value="지원하기" onclick="find_job()">
+        </div>
+    </th:block>
+
+<!--    <div class="find-job-area">-->
+<!--        <a th:href="@{/employment/resume/detail}" th:text="${profile.profile_text}"></a>-->
+<!--    </div>-->
+
+
+</section>
+
+</body>
+</html>
