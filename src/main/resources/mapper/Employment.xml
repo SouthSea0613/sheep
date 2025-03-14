@@ -12,12 +12,12 @@
         INSERT INTO JOB_BOARD (BOARD_NUMBER, JOB_COUNT, JOB_AREA, JOB_STATUS) VALUES (#{board_number}, #{job_count}, #{job_area}, 0)
     </insert>
 
-    <insert id="resume_write" useGeneratedKeys="true">
+    <insert id="resume_write" useGeneratedKeys="true" keyProperty="board_number">
         INSERT INTO BOARD VALUES (NULL, #{user_id}, #{board_title}, #{board_content}, 0, DEFAULT, 3)
     </insert>
 
     <insert id="resume_write2">
-        INSERT INTO EMPLOYEE VALUES (#{board_number}, #{user_id}, #{parent_board_number}, 0)
+        INSERT INTO EMPLOYEE VALUES (#{board_number}, #{parent_board_number}, #{user_id}, 0)
     </insert>
 
     <select id="list" resultType="com._401unauthorized.sheep.dto.BoardDto">

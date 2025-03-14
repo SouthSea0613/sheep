@@ -63,10 +63,10 @@ public class EmploymentController {
     }
 
     @PostMapping("/resume_write")
-    public String resume_write(BoardDto boarddto, @RequestParam("parent_board_number") Integer parent_board_number,HttpSession session) {
+    public String resume_write(BoardDto boarddto, HttpSession session) {
         boarddto.setUser_id(session.getAttribute("user_id").toString());
-        if (employmentService.resume_write(boarddto, parent_board_number)) {
-            return "redirect:/employment/detail";
+        if (employmentService.resume_write(boarddto)) {
+            return "redirect:/employment/detail?board_number=" + boarddto.getParent_board_number();
         }
         return "redirect:/employment/resume/write";
     }
@@ -80,8 +80,8 @@ public class EmploymentController {
     }
 
     @GetMapping("/resume/write")
-    public String resume_write(@RequestParam("board_number") Integer board_number) {
-        return "employment/resume/write?board_number=" + board_number;
+    public String resume_write() {
+        return "employment/resume/write";
     }
 
     @GetMapping("/resume/detail")

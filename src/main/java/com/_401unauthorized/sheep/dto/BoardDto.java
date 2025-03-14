@@ -22,8 +22,7 @@ public class BoardDto {
     String board_status;
     String board_regdate;
     String board_kind;
-
-//    구인구직 관련 Dto
+    
     String job_expiredate;
     int job_count;
     String job_status;

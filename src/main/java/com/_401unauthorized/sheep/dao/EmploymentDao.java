@@ -12,7 +12,7 @@ public interface EmploymentDao {
     BoardDto detail(Integer board_number);
     List<BoardDto> get_board_list(int start_index);
     boolean resume_write(BoardDto boarddto);
-    boolean resume_write2(int board_number, String user_id, Integer parent_board_number);
+    boolean resume_write2(BoardDto boarddto);
     boolean complete(Integer board_number);
     BoardDto resume_detail(Integer board_number);
 }

@@ -5,11 +5,11 @@
     <title>Title</title>
     <script>
         function employment_complete() {
-            location.href="/employment/complete?board_number="+"[[${param.board_number}]]"
+            location.href = "/employment/complete?board_number="+"[[${param.board_number}]]"
         }
 
-        function write() {
-            location.href="/employment/resume/write"
+        function resume_write() {
+            location.href = "/employment/resume/write?board_number=" + "[[${param.board_number}]]";
         }
     </script>
 </head>
@@ -31,7 +31,7 @@
             <input type="button" value="마감" onclick="employment_complete()">
         </div>
         <div th:if="${session.user_type eq '2' and employmentDto?.job_status eq 모집중}">
-            <input type="button" value="지원하기" onclick="write()">
+            <input type="button" value="지원하기" onclick="resume_write()">
         </div>
     </th:block>
     </div>

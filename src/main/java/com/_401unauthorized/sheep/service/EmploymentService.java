@@ -65,11 +65,11 @@ public class EmploymentService {
     }
 
     @Transactional
-    public boolean resume_write(BoardDto boarddto, Integer parent_board_number) {
+    public boolean resume_write(BoardDto boarddto) {
         if (!employmentDao.resume_write(boarddto)) {
             return false;
         }
-        if (!employmentDao.resume_write2(boarddto.getBoard_number(), boarddto.getUser_id(), parent_board_number)) {
+        if (!employmentDao.resume_write2(boarddto)) {
             return false;
         }
         return true;

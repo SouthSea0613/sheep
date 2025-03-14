@@ -46,7 +46,8 @@
     </th:block>
     <div th:if="${session?.user_type == '0' && wish_dto?.apply_status==null}" class="takeoffarea">
         <input type="button" class="wish_takeoff wish_btn_list" onclick="takeoff(this)" value="견적요청">
-        <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">            <input type="button" class="wish_btn_list" onclick="delete_wish()" th:value="삭제하기">
+        <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
+        <input type="button" class="wish_btn_list" onclick="delete_wish()" th:value="삭제하기">
     </div>
 
     <div th:if="${session?.user_type == '1' and wish_dto?.apply_status == '대기중'}">
