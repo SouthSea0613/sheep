@@ -41,15 +41,6 @@ public class EmploymentController {
         return "takeoff/seller/select_area";
     }
 
-//    @PostMapping("/select_area")
-//    public String select_area(BoardDto boardDto, @RequestParam("job_area") String job_area) {
-//        Integer board_number = boardDto.getBoard_number();
-//        if (employmentService.select_area(board_number, job_area)) {
-//            return "redirect:/employment/write";
-//        }
-//        return "redirect:/takeoff/seller/select_area";
-//    }
-
     @GetMapping("/detail")
     public String detail(@RequestParam("board_number") Integer board_number, Model model) {
         if (board_number == null || board_number < 1) {
@@ -69,6 +60,32 @@ public class EmploymentController {
         List<BoardDto> boarddto = employmentService.get_board_list(page_number);
         model.addAttribute("boarddto", boarddto);
         return "employment/list";
+    }
+
+    @GetMapping("/complete")
+    public String complete(@RequestParam("board_number") Integer board_number) {
+        if (employmentService.complete(board_number)) {
+            return "redirect:/employment/list?page_number=1";
+        }
+        return "redirect:/employment/detail?board_number=" + board_number;
+    }
+
+    @GetMapping("/resume/write")
+    public String resume_write(@RequestParam("board_number") Integer board_number) {
+        return "employment/resume/write?board_number=" + board_number;
+    }
+
+    @GetMapping("/resume/detail")
+    public String resume_detail(@RequestParam("board_number") Integer board_number, Model model) {
+        if (board_number == null || board_number < 1) {
+            return "redirect:/employment/list?page_number=1";
+        }
+        BoardDto profileDto = employmentService.resume_detail(board_number);
+        if (profileDto != null) {
+            model.addAttribute("employmentDto", profileDto);
+            return "redirect:/employment/detail?board_number=" + board_number;
+        }
+        return "redirect:/employment/list?page_number=1";
     }
 }
 

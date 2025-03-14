@@ -9,8 +9,8 @@ import java.util.List;
 public interface EmploymentDao {
     boolean write(BoardDto employmentDto);
     void insert_job(BoardDto jobDto);
-    List<BoardDto> list();
     BoardDto detail(Integer board_number);
-    List<BoardDto> list(BoardDto boardDto);
     List<BoardDto> get_board_list(int start_index);
+    boolean complete(Integer board_number);
+    BoardDto resume_detail(Integer board_number);
 }
