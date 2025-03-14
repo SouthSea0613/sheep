@@ -8,8 +8,9 @@ import java.util.List;
 @Mapper
 public interface EmploymentDao {
     boolean write(BoardDto employmentDto);
-    void insert_count(Integer board_number,Integer job_count);
+    void insert_job(BoardDto jobDto);
+    List<BoardDto> list();
+    BoardDto detail(Integer board_number);
     List<BoardDto> list(BoardDto boardDto);
-
-    boolean select_area(Integer board_number, String job_area);
+    List<BoardDto> get_board_list(int start_index);
 }

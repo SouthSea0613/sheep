@@ -22,23 +22,55 @@ public class EmploymentService {
             log.info("boardDto = {}", boardDto.getBoard_number());
             int board_number = boardDto.getBoard_number();
             int job_count = boardDto.getJob_count();
+            String job_area = boardDto.getJob_area();
             log.info("job count: {}", job_count);
-            employmentDao.insert_count(board_number,job_count);
+            log.info("job area: {}", job_area);
+            BoardDto jobDto = new BoardDto();
+            jobDto.setBoard_number(board_number);
+            jobDto.setJob_count(job_count);
+            jobDto.setJob_area(job_area);
+            employmentDao.insert_job(jobDto);
             return true;
         }
         return false;
     }
 
-    public List<BoardDto> list(BoardDto boardDto) {
-       Integer page_number = boardDto.getPage_number();
-       boardDto.setStart_index((page_number - 1) * boardDto.getList_count());
-       return employmentDao.list(boardDto);
+    public List<BoardDto> list() {
+        List<BoardDto> employment_board_list = employmentDao.list();
+        log.info("employment_board_list = {}", employment_board_list);
+        for (BoardDto employment : employment_board_list) {
+            if (employment.getBoard_status() != null){
+                switch (employment.getBoard_status()) {
+                    case "0":
+                        employment.setBoard_status("모집중");
+                        break;
+
+                    case "1":
+                        employment.setBoard_status("마감");
+                        break;
+                }
+            }
+        }
+        return employment_board_list;
     }
 
-    public boolean select_area(Integer board_nubmer, String job_area) {
-        return employmentDao.select_area(board_nubmer, job_area);
+    public BoardDto detail(Integer board_number) {
+        BoardDto employmentDto = employmentDao.detail(board_number);
+        log.info("employmentDto = {}", employmentDto);
+        return employmentDto;
     }
-//
+
+//    public boolean select_area(Integer board_nubmer, String job_area) {
+//        return employmentDao.select_area(board_nubmer, job_area);
+//    }
+
+    public List<BoardDto> get_board_list(Integer page_number) {
+
+        // 0번째: 0~9 / 1번째: 10~19 .... 1페이지가 0번째 여야하니까
+        int start_index = (page_number - 1) * 10;
+        return employmentDao.get_board_list(start_index);
+    }
+
 //    public String paging(BoardDto boardDto) {
 //        int total_number = employmentDao.count(boardDto);
 //        String url = null;

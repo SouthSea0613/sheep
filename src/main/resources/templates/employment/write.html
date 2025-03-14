@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -16,13 +16,14 @@
 <section>
 <div class="content">
 
-    <form action="/employment/write" method="post">
+    <form th:action="@{/employment/insert_write}" method="post">
 
         <div class="">
         <input type="hidden" name="user_id" th:value="${session?.user_id}">
 
         <div>모집지역</div>
-        <input type="button" name="job_area" value="지역설정" required onclick="select_seller_area()">
+        <input type="button" id="job_area" value="지역설정" required onclick="select_seller_area()">
+        <input type="hidden" name="job_area" th:value="${#job_area}">
         <div>글제목</div>
         <input type="text" class="" name="board_title" autofocus placeholder="현장지역/모집분야/모집인원 순으로 적어주세요!" required><br>
         <div>모집인원</div>

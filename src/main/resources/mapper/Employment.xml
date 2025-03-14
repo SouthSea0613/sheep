@@ -7,10 +7,35 @@
         INSERT INTO BOARD VALUES (null, #{user_id}, #{board_title}, #{board_content}, 0, default, 2)
     </insert>
 
-    <insert id="insert_count">
-        INSERT INTO JOB_BOARD (BOARD_NUMBER ,JOB_COUNT) VALUES (#{board_number}, #{job_count});
+    <insert id="insert_job">
+        INSERT INTO JOB_BOARD (BOARD_NUMBER, JOB_COUNT, JOB_AREA) VALUES (#{board_number}, #{job_count}, #{job_area})
     </insert>
 
-    <select id="select_area" resultType="java.lang.Boolean"></select>
+    <select id="list" resultType="com._401unauthorized.sheep.dto.BoardDto">
+        SELECT
+            JB.JOB_AREA, B.BOARD_NUMBER, B.BOARD_TITLE, B.USER_ID, B.BOARD_REGDATE, B.BOARD_STATUS, JB.JOB_COUNT
+        FROM BOARD B
+                 JOIN JOB_BOARD JB
+                      ON B.BOARD_NUMBER = JB.BOARD_NUMBER
+        WHERE BOARD_KIND = 2
+    </select>
+
+    <select id="detail" resultType="com._401unauthorized.sheep.dto.BoardDto">
+        SELECT
+            B.BOARD_NUMBER, B.BOARD_TITLE, B.USER_ID, B.BOARD_CONTENT, B.BOARD_REGDATE, JB.JOB_COUNT, JB.JOB_AREA, S.SELLER_COMPANY
+        FROM
+            BOARD B
+                JOIN JOB_BOARD JB ON B.BOARD_NUMBER = JB.BOARD_NUMBER
+                JOIN SELLER S ON B.USER_ID = S.USER_ID
+        WHERE B.BOARD_NUMBER = 1;
+    </select>
+
+    <!--<insert id="select_area">-->
+<!--INSERT INTO JOB_BOARD (BOARD_NUMBER, JOB_AREA) VALUES (#{board_number}, #{job_area});-->
+<!--</insert>-->
+
+    <select id="get_board_list" resultType="com._401unauthorized.sheep.dto.BoardDto">
+
+    </select>
 
 </mapper>

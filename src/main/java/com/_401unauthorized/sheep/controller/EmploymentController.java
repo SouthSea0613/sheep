@@ -22,12 +22,12 @@ import java.util.List;
 public class EmploymentController {
     private final EmploymentService employmentService;
 
-    @GetMapping("/write")
+    @PostMapping("/write")
     public String write() {
         return "employment/write";
     }
 
-    @PostMapping("/write")
+    @PostMapping("/insert_write")
     public String write(BoardDto employmentDto, Model model) {
         boolean employment_list = employmentService.write(employmentDto);
         model.addAttribute("employment_list", employment_list);
@@ -36,48 +36,39 @@ public class EmploymentController {
 
     @GetMapping("/select_area")
     public String select_area(Model model) {
-        model.addAttribute("action", "/employment/select_area");
+        model.addAttribute("action", "/employment/write");
         log.info("action: {}", model.getAttribute("action"));
         return "takeoff/seller/select_area";
     }
 
-    @PostMapping("/select_area")
-    public String select_area(BoardDto boardDto, @RequestParam("job_area") String job_area) {
-        Integer board_number = boardDto.getBoard_number();
-        if (employmentService.select_area(board_number, job_area)) {
-            return "redirect:/employment/write";
+//    @PostMapping("/select_area")
+//    public String select_area(BoardDto boardDto, @RequestParam("job_area") String job_area) {
+//        Integer board_number = boardDto.getBoard_number();
+//        if (employmentService.select_area(board_number, job_area)) {
+//            return "redirect:/employment/write";
+//        }
+//        return "redirect:/takeoff/seller/select_area";
+//    }
+
+    @GetMapping("/detail")
+    public String detail(@RequestParam("board_number") Integer board_number, Model model) {
+        if (board_number == null || board_number < 1) {
+            return "redirect:/employment/list";
         }
-        return "redirect:/takeoff/seller/select_area";
+        BoardDto employmentDto = employmentService.detail(board_number);
+        if (employmentDto != null) {
+            model.addAttribute("employmentDto", employmentDto);
+            return "employment/detail";
+        } else {
+            return "redirect:/employment/list";
+        }
     }
 
-//    @GetMapping("/list")
-//    public String list(BoardDto boardDto, Model model, HttpSession httpSession) {
-//        if (boardDto.getPage_number() == null || boardDto.getPage_number() < 1) {
-//            boardDto.setPage_number(1);
-//        }
-//
-//        if (boardDto.getList_count() == null) {
-//            boardDto.setList_count(employmentService.list_count);
-//        }
-//
-//        if (boardDto.getStart_index() == null) {
-//            boardDto.setStart_index(0);
-//        }
-//
-//        List<BoardDto> employment_list = null;
-//        employment_list = employmentService.list(boardDto);
-//        if (boardDto != null) {
-//            String pageHtml = employmentService.paging(boardDto);
-//            if (boardDto.getColname() != null) {
-//                httpSession.setAttribute("boardDto", boardDto);
-//            } else {
-//                httpSession.removeAttribute("boardDto");
-//                httpSession.setAttribute("boardDto", boardDto.getPage_number());
-//            }
-//            model.addAttribute("paging", pageHtml);
-//            model.addAttribute("employment_list", employment_list);
-//            return "employment/list";
-//        }
-//        return "employment/list";
-//    }
+    @GetMapping("/list")
+    public String list(@RequestParam("page_number") Integer page_number, Model model) {
+        List<BoardDto> boarddto = employmentService.get_board_list(page_number);
+        model.addAttribute("boarddto", boarddto);
+        return "employment/list";
+    }
 }
+

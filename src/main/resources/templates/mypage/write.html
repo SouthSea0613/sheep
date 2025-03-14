@@ -67,14 +67,18 @@
 					<input type="text" name="engineer_regdate" th:value="${userdto.engineer_regdate}" id="engineer_regdate" class="mypage_text">
 				</div>
 			</th:block>
-
 			<div class="button_area">
 				<input type="button" value="추가인증" onclick="location.href = '/user/join_additional'" class="mypage_write_button">
 			</div>
+		<th:block th:if="${session.user_type} == 0">
+		<div class="button_area">
+			<input type="button" value="추가인증" onclick="location.href = '/user/join_additional'">
+		</div>
+		</th:block>
 
-			<div class="button-area">
-				<input type="button" id="write_button" value="수정완료" onclick="writebtn()" class="mypage_write_button">
-			</div>
+		<div class="button-area">
+			<input type="button" id="write_button" value="수정완료" onclick="writebtn()">
+		</div>
 		</div>
 	</form>
 	<script>
