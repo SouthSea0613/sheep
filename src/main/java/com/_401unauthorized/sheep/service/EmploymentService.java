@@ -36,28 +36,9 @@ public class EmploymentService {
         return false;
     }
 
-    public List<BoardDto> list() {
-        List<BoardDto> employment_board_list = employmentDao.list();
-        log.info("employment_board_list = {}", employment_board_list);
-        for (BoardDto employment : employment_board_list) {
-            if (employment.getBoard_status() != null){
-                switch (employment.getBoard_status()) {
-                    case "0":
-                        employment.setBoard_status("모집중");
-                        break;
-
-                    case "1":
-                        employment.setBoard_status("마감");
-                        break;
-                }
-            }
-        }
-        return employment_board_list;
-    }
-
     public BoardDto detail(Integer board_number) {
         BoardDto employmentDto = employmentDao.detail(board_number);
-        log.info("employmentDto = {}", employmentDto);
+        log.info("employmentDto.user_id = {}", employmentDto.getUser_id());
         return employmentDto;
     }
 
@@ -65,17 +46,44 @@ public class EmploymentService {
 
         // 0번째: 0~9 / 1번째: 10~19 .... 1페이지가 0번째 여야하니까
         int start_index = (page_number - 1) * 10;
-        return employmentDao.get_board_list(start_index);
+        List<BoardDto> boarddto = employmentDao.get_board_list(start_index);
+        log.info("boarddto = {}", boarddto);
+        for (BoardDto employment : boarddto) {
+            if (employment.getJob_status() != null){
+                switch (employment.getJob_status()) {
+                    case "0":
+                        employment.setJob_status("모집중");
+                        break;
+
+                    case "1":
+                        employment.setJob_status("마감");
+                        break;
+                }
+            }
+        }
+        return boarddto;
     }
 
     @Transactional
     public boolean resume_write(BoardDto boarddto, Integer parent_board_number) {
-        if(!employmentDao.resume_write(boarddto)){
+        if (!employmentDao.resume_write(boarddto)) {
             return false;
         }
-        if(!employmentDao.resume_write2(boarddto.getBoard_number(), boarddto.getUser_id(), parent_board_number)){
+        if (!employmentDao.resume_write2(boarddto.getBoard_number(), boarddto.getUser_id(), parent_board_number)) {
             return false;
         }
         return true;
+    }
+
+    public boolean complete(Integer board_number) {
+        if (employmentDao.complete(board_number)) {
+            return true;
+        }
+        return false;
+    }
+
+    public BoardDto resume_detail(Integer board_number) {
+        BoardDto profileDto = employmentDao.resume_detail(board_number);
+        return profileDto;
     }
 }

@@ -5,16 +5,16 @@
     <title>Title</title>
     <script>
         function employment_complete() {
-            location.href="/employment/complete"
+            location.href="/employment/complete?board_number="+"[[${param.board_number}]]"
         }
 
-        function find_job() {
-            location.href="/employment/resume/write?parent_board_number="+"[[${employmentDto.board_number}]]"
+        function write() {
+            location.href="/employment/resume/write"
         }
     </script>
 </head>
-<body>
 
+<body>
 <section>
     <h2>employment.detail!</h2>
     <div class="job-content">
@@ -22,25 +22,19 @@
         <div th:text="${employmentDto?.seller_company}"></div>
         <div th:text="${employmentDto?.user_id}"></div>
         <div th:text="${employmentDto?.job_area}"></div>
-        <div th:text="${employmentDto?.board_status}"></div>
+        <div th:text="${employmentDto?.job_status}"></div>
         <div th:text="${employmentDto?.board_content}"></div>
     </div>
-
+    <div class="employment-button">
     <th:block>
-        <div th:if="${session.user_type eq '1'}">
+        <div th:if="${session.user_id eq employmentDto?.user_id and employmentDto?.job_status eq 모집중}">
             <input type="button" value="마감" onclick="employment_complete()">
         </div>
-        <div th:if="${session.user_type eq '2'}">
-            <input type="button" value="지원하기" onclick="find_job()">
+        <div th:if="${session.user_type eq '2' and employmentDto?.job_status eq 모집중}">
+            <input type="button" value="지원하기" onclick="write()">
         </div>
     </th:block>
-
-<!--    <div class="find-job-area">-->
-<!--        <a th:href="@{/employment/resume/detail}" th:text="${profile.profile_text}"></a>-->
-<!--    </div>-->
-
-
+    </div>
 </section>
-
 </body>
 </html>

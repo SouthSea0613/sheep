@@ -65,10 +65,36 @@ public class EmploymentController {
     @PostMapping("/resume_write")
     public String resume_write(BoardDto boarddto, @RequestParam("parent_board_number") Integer parent_board_number,HttpSession session) {
         boarddto.setUser_id(session.getAttribute("user_id").toString());
-        if(employmentService.resume_write(boarddto, parent_board_number)){
+        if (employmentService.resume_write(boarddto, parent_board_number)) {
             return "redirect:/employment/detail";
         }
         return "redirect:/employment/resume/write";
+    }
+
+    @GetMapping("/complete")
+    public String complete(@RequestParam("board_number") Integer board_number) {
+        if (employmentService.complete(board_number)) {
+            return "redirect:/employment/list?page_number=1";
+        }
+        return "redirect:/employment/detail?board_number=" + board_number;
+    }
+
+    @GetMapping("/resume/write")
+    public String resume_write(@RequestParam("board_number") Integer board_number) {
+        return "employment/resume/write?board_number=" + board_number;
+    }
+
+    @GetMapping("/resume/detail")
+    public String resume_detail(@RequestParam("board_number") Integer board_number, Model model) {
+        if (board_number == null || board_number < 1) {
+            return "redirect:/employment/list?page_number=1";
+        }
+        BoardDto profileDto = employmentService.resume_detail(board_number);
+        if (profileDto != null) {
+            model.addAttribute("employmentDto", profileDto);
+            return "redirect:/employment/detail?board_number=" + board_number;
+        }
+        return "redirect:/employment/list?page_number=1";
     }
 }
 

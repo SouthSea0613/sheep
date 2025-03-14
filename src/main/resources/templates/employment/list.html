@@ -16,15 +16,15 @@
     </div>
 
     <div>
-        <th:block th:if="${#lists.isEmpty(employment_board_list)}">
+        <th:block th:if="${#lists.isEmpty(boarddto)}">
             <div class="">현재 구인글이 존재하지 않습니다.</div>
         </th:block>
 
     </div>
 
     <div class="">
-        <th:block th:unless="${#lists.isEmpty(employment_board_list)}">
-            <th:block th:each="employment:${employment_board_list}">
+        <th:block th:unless="${#lists.isEmpty(boarddto)}">
+            <th:block th:each="employment:${boarddto}">
                 <div class="" th:text="${employment.job_area}"></div>
                 <input type="hidden" name="board_number" th:value="${employment.board_number}">
                 <div class="">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="" th:text="${employment.user_id}"></div>
                 <div class="" th:text="${employment.board_regdate}"></div>
-                <div class="" th:text="${employment.board_status}"></div>
+                <div class="" th:text="${employment.job_status}"></div>
                 <div class="" th:text="${employment.job_count}"></div>
             </th:block>
         </th:block>
@@ -42,8 +42,8 @@
         <th:block th:if="${session?.user_type eq '1'}">
         <form th:action="@{/employment/write}" method="post">
         <input type="submit" value="작성하기">
-        </th:block>
         </form>
+        </th:block>
     </div>
 </section>
 
