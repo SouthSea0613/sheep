@@ -14,5 +14,7 @@ public interface EmploymentDao {
     boolean resume_write(BoardDto boarddto);
     boolean resume_write2(BoardDto boarddto);
     boolean complete(Integer board_number);
-    List<BoardDto> resume_detail(Integer board_number);
+    List<BoardDto> resume_list(Integer board_number);
+    BoardDto profile_detail(Integer board_number);
+    boolean lets_do_it(Integer board_number);
 }

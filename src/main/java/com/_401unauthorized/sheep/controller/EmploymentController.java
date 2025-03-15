@@ -31,7 +31,7 @@ public class EmploymentController {
     public String write(BoardDto employmentDto, Model model) {
         boolean employment_list = employmentService.write(employmentDto);
         model.addAttribute("employment_list", employment_list);
-        return "redirect:/employment/list";
+        return "redirect:/employment/list?page_number=1";
     }
 
     @GetMapping("/select_area")
@@ -44,16 +44,16 @@ public class EmploymentController {
     @GetMapping("/detail")
     public String detail(@RequestParam("board_number") Integer board_number, Model model) {
         if (board_number == null || board_number < 1) {
-            return "redirect:/employment/list";
+            return "redirect:/employment/list?page_number=1";
         }
         BoardDto employmentDto = employmentService.detail(board_number);
         if (employmentDto != null) {
-            List<BoardDto> profileDto = employmentService.resume_detail(board_number);
+            List<BoardDto> profileDto = employmentService.resume_list(board_number);
             model.addAttribute("employmentDto", employmentDto);
             model.addAttribute("profileDto", profileDto);
             return "employment/detail";
         } else {
-            return "redirect:/employment/list";
+            return "redirect:/employment/list?page_number=1";
         }
     }
 
@@ -86,17 +86,27 @@ public class EmploymentController {
         return "employment/resume/write";
     }
 
-//    @GetMapping("/resume/detail")
-//    public String resume_detail(@RequestParam("board_number") Integer board_number, Model model) {
-//        if (board_number == null || board_number < 1) {
-//            return "redirect:/employment/list?page_number=1";
-//        }
-//        BoardDto profileDto = employmentService.profile_detail(board_number);
-//        if (profileDto != null) {
-//            model.addAttribute("employmentDto", profileDto);
-//            return "redirect:/employment/detail";
-//        }
-//        return "redirect:/employment/list?page_number=1";
-//    }
+    @GetMapping("/resume/detail")
+    public String resume_detail(@RequestParam("board_number") Integer board_number, Model model) {
+        log.info("board_number: {}", board_number);
+        if (board_number == null || board_number < 1) {
+            return "redirect:/employment/detail";
+        }
+        BoardDto profileDto = employmentService.profile_detail(board_number);
+        if (profileDto != null) {
+            model.addAttribute("profileDto", profileDto);
+            return "employment/resume/detail";
+        }
+        return "redirect:/employment/detail?board_number=" + board_number;
+    }
+
+    @PostMapping("/lets_do_it")
+    public String lets_do_it(@RequestParam("board_number") Integer board_number) {
+        boolean result = employmentService.lets_do_it(board_number);
+        if (result) {
+            return "redirect:/employment/list?page_number=1";
+        }
+        return "redirect:/employment/resume/detail?board_number=" + board_number;
+    }
 }
 
