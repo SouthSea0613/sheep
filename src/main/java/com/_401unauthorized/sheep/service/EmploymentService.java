@@ -82,8 +82,14 @@ public class EmploymentService {
         return false;
     }
 
-    public BoardDto resume_detail(Integer board_number) {
-        BoardDto profileDto = employmentDao.resume_detail(board_number);
+    public List<BoardDto> resume_detail(Integer board_number) {
+        log.info("board_number = {}", board_number);
+        List<BoardDto> profileDto = employmentDao.resume_detail(board_number);
+        log.info("profileDto = {}", profileDto);
         return profileDto;
     }
+
+//    public BoardDto profile_detail(Integer board_number) {
+//        return
+//    }
 }

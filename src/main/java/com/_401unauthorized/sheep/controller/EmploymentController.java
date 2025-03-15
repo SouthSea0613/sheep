@@ -48,7 +48,9 @@ public class EmploymentController {
         }
         BoardDto employmentDto = employmentService.detail(board_number);
         if (employmentDto != null) {
+            List<BoardDto> profileDto = employmentService.resume_detail(board_number);
             model.addAttribute("employmentDto", employmentDto);
+            model.addAttribute("profileDto", profileDto);
             return "employment/detail";
         } else {
             return "redirect:/employment/list";
@@ -76,7 +78,7 @@ public class EmploymentController {
         if (employmentService.complete(board_number)) {
             return "redirect:/employment/list?page_number=1";
         }
-        return "redirect:/employment/detail?board_number=" + board_number;
+        return "redirect:/employment/detail";
     }
 
     @GetMapping("/resume/write")
@@ -84,17 +86,17 @@ public class EmploymentController {
         return "employment/resume/write";
     }
 
-    @GetMapping("/resume/detail")
-    public String resume_detail(@RequestParam("board_number") Integer board_number, Model model) {
-        if (board_number == null || board_number < 1) {
-            return "redirect:/employment/list?page_number=1";
-        }
-        BoardDto profileDto = employmentService.resume_detail(board_number);
-        if (profileDto != null) {
-            model.addAttribute("employmentDto", profileDto);
-            return "redirect:/employment/detail?board_number=" + board_number;
-        }
-        return "redirect:/employment/list?page_number=1";
-    }
+//    @GetMapping("/resume/detail")
+//    public String resume_detail(@RequestParam("board_number") Integer board_number, Model model) {
+//        if (board_number == null || board_number < 1) {
+//            return "redirect:/employment/list?page_number=1";
+//        }
+//        BoardDto profileDto = employmentService.profile_detail(board_number);
+//        if (profileDto != null) {
+//            model.addAttribute("employmentDto", profileDto);
+//            return "redirect:/employment/detail";
+//        }
+//        return "redirect:/employment/list?page_number=1";
+//    }
 }
 
