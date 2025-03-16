@@ -270,7 +270,12 @@
                         openbtn[i].style.display="block";
                         closebtn[i].style.display="none";
                         div.style.display="none";
+
                     })
+                    list.forEach(div => {
+                        div.innerHTML = null;
+                    })
+                    endwish();
                 }
 
              }

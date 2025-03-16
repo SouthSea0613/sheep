@@ -10,7 +10,7 @@
             JOIN APPLY_STATUS A
             ON W.WISH_NUMBER = A.WISH_NUMBER
             WHERE A.APPLY_STATUS=0) AS WA
-        WHERE WA.WISH_TITLE LIKE CONCAT(S.SELLER_AREA,'%') AND S.USER_ID=#{user_id}
+        WHERE WA.WISH_TITLE LIKE CONCAT('%', S.SELLER_AREA,'%') AND S.USER_ID=#{user_id}
         GROUP BY WA.WISH_NUMBER
     </select>
 </mapper>
