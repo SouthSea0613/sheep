@@ -8,23 +8,19 @@ body {
     height: 90vh;
 }
 
-/* main */
-
 .main_content {
     height: auto;
     min-height: 100%;
     padding: 3vh 0;
 }
 
-/* 머릿글 */
 h2 {
     margin: 5vh 25vh;
 }
+
 hr {
     margin: 2vh 0;
 }
-
-/* list */
 
 .wish_write_btn {
     margin: 2vh 3vh;
@@ -37,6 +33,7 @@ hr {
     justify-content: center;
 
 }
+
 .container{
 
 }
@@ -52,6 +49,7 @@ hr {
     border: 1px solid #6e6e6e;
     border-radius: 3vh;
 }
+
 .wish_container{
     display: flex;
     width: 100%;
@@ -70,24 +68,27 @@ hr {
     height: 4vh;
     border-radius: 15vh;
 }
+
 .detaillink{
     color : black;
     text-decoration: none;
 }
+
 .detaillink:hover{
     color : gray;
 }
+
 .openbtn{
     cursor: pointer;
 }
+
 .closebtn{
     cursor: pointer;
 }
+
 .wishBarea{
     width: 100%;
 }
-
-/* * wish detail */
 
 .eun_wish_detail_box {
     margin: 0 auto;
@@ -106,8 +107,6 @@ hr {
     text-align: center;
 }
 
-/* wish write */
-
 .eun_wish_write_container {
     margin: 0 auto;
     padding: 3vh 3vh;
@@ -120,8 +119,6 @@ hr {
 .wish_addr_content {
     display: inline;
 }
-
-/* button list */
 
 .wish_write_btn {
     margin: 2vh 3vh;

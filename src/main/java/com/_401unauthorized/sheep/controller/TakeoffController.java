@@ -1,10 +1,6 @@
 package com._401unauthorized.sheep.controller;
 
-import com._401unauthorized.sheep.dto.ApplyDto;
-import com._401unauthorized.sheep.dto.CategoryListDto;
-import com._401unauthorized.sheep.dto.TakeoffDto;
-import com._401unauthorized.sheep.dto.TakeoffSellerDto;
-import com._401unauthorized.sheep.dto.WishDto;
+import com._401unauthorized.sheep.dto.*;
 import com._401unauthorized.sheep.service.SellerService;
 import com._401unauthorized.sheep.service.TakeoffService;
 import com._401unauthorized.sheep.service.WishService;
@@ -262,6 +258,11 @@ public class TakeoffController {
         List<TakeoffDto> takeoffdtoList = takeoffService.endtakeoff(takeoffdto.getUser_id(),takeoffdto.getWish_number());
         return takeoffdtoList;
     }
-
+    @PostMapping("/seller/endtakeoff")
+    @ResponseBody
+    public List<TakeoffDto> endtakeoff(@RequestBody UserDto userdto){
+        List<TakeoffDto> takeoffdtoList = takeoffService.endseller_takeoff(userdto.getUser_id());
+        return takeoffdtoList;
+    }
 }
 
