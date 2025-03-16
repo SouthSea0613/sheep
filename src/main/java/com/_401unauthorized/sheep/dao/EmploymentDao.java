@@ -13,8 +13,8 @@ public interface EmploymentDao {
     List<BoardDto> get_board_list(int start_index);
     boolean resume_write(BoardDto boarddto);
     boolean resume_write2(BoardDto boarddto);
-    boolean complete(Integer board_number);
+    boolean resume_complete(Integer board_number);
     List<BoardDto> resume_list(Integer board_number);
     BoardDto profile_detail(Integer board_number);
-    boolean lets_do_it(Integer board_number);
+    boolean lets_do_it(BoardDto doDto);
 }

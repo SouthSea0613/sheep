@@ -70,8 +70,8 @@ public class EmploymentService {
         return true;
     }
 
-    public boolean complete(Integer board_number) {
-        return employmentDao.complete(board_number);
+    public boolean resume_complete(Integer board_number) {
+        return employmentDao.resume_complete(board_number);
     }
 
     public List<BoardDto> resume_list(Integer board_number) {
@@ -85,7 +85,7 @@ public class EmploymentService {
         return employmentDao.profile_detail(board_number);
     }
 
-    public boolean lets_do_it(Integer board_number) {
-        return employmentDao.lets_do_it(board_number);
+    public boolean lets_do_it(BoardDto doDto) {
+        return employmentDao.lets_do_it(doDto);
     }
 }

@@ -9,9 +9,6 @@
 <section>
     <h2>resume detail!!</h2>
     <div class="profile_detail">
-        <input type="hidden" name="parent_board_number" th:value="${profileDto?.parent_board_number}">
-        <input type="hidden" name="board_number" th:value="${profileDto?.board_number}">
-        <input type="hidden" name="user_id" th:value="${profileDto.user_id}" th:text="${profileDto?.user_id}">
         <div class="">제목</div>
         <div th:text="${profileDto?.board_title}"></div>
         <div class="">지원일자</div>
@@ -24,7 +21,11 @@
         <div th:text="${profileDto?.board_content}"></div>
 
         <div th:if="${session.user_type eq '1' and profileDto.employee_status != 1}">
-            <input type="button" value="채용하기" th:onclick="@{/employment/lets_do_it}">
+            <form th:action="@{/employment/lets_do_it}" method="post">
+            <input type="hidden" name="board_number" th:value="${profileDto?.board_number}">
+            <input type="hidden" name="user_id" th:value="${profileDto?.user_id}">
+            <input type="submit" value="채용하기">
+            </form>
         </div>
     </div>
 </section>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -22,8 +23,14 @@ import java.util.List;
 public class EmploymentController {
     private final EmploymentService employmentService;
 
+    @GetMapping("/write")
+    public String job_write() {
+        return "employment/write";
+    }
+
     @PostMapping("/write")
-    public String write() {
+    public String write(@RequestParam("seller_area") String seller_area, Model model) {
+        model.addAttribute("seller_area", seller_area);
         return "employment/write";
     }
 
@@ -73,9 +80,9 @@ public class EmploymentController {
         return "redirect:/employment/resume/write";
     }
 
-    @GetMapping("/complete")
+    @GetMapping("/resume/complete")
     public String complete(@RequestParam("board_number") Integer board_number) {
-        if (employmentService.complete(board_number)) {
+        if (employmentService.resume_complete(board_number)) {
             return "redirect:/employment/list?page_number=1";
         }
         return "redirect:/employment/detail";
@@ -101,12 +108,14 @@ public class EmploymentController {
     }
 
     @PostMapping("/lets_do_it")
-    public String lets_do_it(@RequestParam("board_number") Integer board_number) {
-        boolean result = employmentService.lets_do_it(board_number);
+    public String lets_do_it(BoardDto doDto) {
+        log.info("doDto: {}", doDto);
+        boolean result = employmentService.lets_do_it(doDto);
+        log.info("result: {}", result);
         if (result) {
             return "redirect:/employment/list?page_number=1";
         }
-        return "redirect:/employment/resume/detail?board_number=" + board_number;
+        return "redirect:/employment/resume/detail?board_number=" + doDto.getParent_board_number();
     }
 }
 
