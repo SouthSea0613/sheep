@@ -8,15 +8,11 @@ body {
     height: 90vh;
 }
 
-/* main */
-
 .main_content {
     height: auto;
     min-height: 100%;
     padding: 30px 0;
 }
-
-/* takeoff */
 
 h2 {
     margin-left: 10%;
@@ -32,14 +28,30 @@ h2 {
     border-radius: 3vh;
 }
 
-/* takeoff list */
-
-.area{
-    position : absolute;
+.area {
+    position: absolute;
     border: 1px solid black;
     width: 30%;
-    background-color : green;
-    left :50%;
-    top : 50%;
+    background-color: green;
+    left: 50%;
+    top: 50%;
     display: none;
+}
+
+.button_div input{
+    border : none;
+    width : 130px;
+    height : 40px;
+    background-color: white;
+    box-shadow: 0 0 3px 0;
+    border-radius: 10px 10px 0 0;
+}
+
+#enterlist {
+    border: 1px solid gray;
+
+}
+
+a{
+    text-decoration: none;
 }
