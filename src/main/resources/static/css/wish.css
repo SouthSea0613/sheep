@@ -6,6 +6,7 @@
 
 body {
     height: 90vh;
+    min-width : 400px;
 }
 
 .main_content {
@@ -14,17 +15,8 @@ body {
     padding: 3vh 0;
 }
 
-h2 {
-    margin: 5vh 25vh;
-}
-
 hr {
     margin: 2vh 0;
-}
-
-.wish_write_btn {
-    margin: 2vh 3vh;
-    justify-self: end;
 }
 
 .wish-list-area {
@@ -64,18 +56,22 @@ hr {
     text-align: center;
     /*justify-self: end;*/
     background-color: lightgray;
-    width: 10vh;
-    height: 4vh;
+    width : 130px;
+    height : 30px;
     border-radius: 15vh;
+    padding: 5px 0;
+    font-weight : bold;
 }
 
 .detaillink{
     color : black;
     text-decoration: none;
+    font-size : 18px;
 }
 
 .detaillink:hover{
     color : gray;
+    text-decoration: underline;
 }
 
 .openbtn{
@@ -121,7 +117,7 @@ hr {
 }
 
 .wish_write_btn {
-    margin: 2vh 3vh;
+    /*margin: 2vh 3vh;*/
     justify-self: end;
 }
 
@@ -151,7 +147,7 @@ hr {
     padding: 0 10px;
     font-size: 14px;
     text-align: center;
-    background-color: #72bfff;
+    background-color: #FFC5B2;
     color: white;
     border-radius: 10px;
     border: 1px solid #5faee7;
@@ -160,6 +156,52 @@ hr {
 }
 
 .write_addr_btn:hover {
-    background-color: #3f94c9;
+    background-color: #fc9c7c;
     cursor: pointer;
+}
+.wish-list-area{
+    width: 60%;
+    margin : 50px auto;
+}
+.tab_button input{
+    border : none;
+    width : 130px;
+    height : 40px;
+    background-color: #FFC5B2;
+    box-shadow: 0 0 2px 0;
+    font-weight : bold;
+    font-size : 15px;
+}
+.tab input:hover{
+    border : none;
+    width : 130px;
+    height : 40px;
+    background-color: #fc9c7c;
+    box-shadow: 0 0 2px 0;
+    cursor: pointer;
+}
+#wish_write{
+    border: 1px solid lightgray;
+    box-shadow: 0 0 1px 0;
+    width : 100px;
+    border-radius: 10px;
+    height : 40px;
+
+}
+.tab{
+    display: flex;
+    width : 100%;
+    justify-content: space-between;
+    margin-top: 2%;
+}
+.takeoffdiv a{
+    color : black;
+    text-decoration: none;
+}
+.takeoffdiv a:hover{
+    text-decoration: underline;
+}
+.seller_company{
+    font-weight : bold;
+    font-size : 18px;
 }

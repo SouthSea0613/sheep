@@ -80,17 +80,21 @@
     </select>
 
     <select id="list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
-        SELECT S.SELLER_COMPANY,WA.WISH_NUMBER,WA.USER_ID,WA.WISH_CATEGORY_SELLER_PRICE,WA.APPLY_STATUS
-        FROM SELLER S
-        JOIN
-            (SELECT W.WISH_NUMBER,W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
-            FROM WISH_CATEGORY_SELLER W
-            JOIN APPLY_STATUS A
-            ON W.USER_ID=A.USER_ID
-            AND W.WISH_NUMBER = A.WISH_NUMBER
-            GROUP BY W.WISH_NUMBER,W.USER_ID,A.APPLY_STATUS) AS WA
-        ON WA.USER_ID = S.USER_ID
-        WHERE WA.WISH_NUMBER=#{wish_number}
+        SELECT INFO.SELLER_COMPANY,INFO.WISH_NUMBER,INFO.USER_ID,INFO.WISH_CATEGORY_SELLER_PRICE,INFO.APPLY_STATUS,U.USER_PHONE
+        FROM USER U
+            JOIN (
+                SELECT S.SELLER_COMPANY,WA.WISH_NUMBER,WA.USER_ID,WA.WISH_CATEGORY_SELLER_PRICE,WA.APPLY_STATUS
+                FROM SELLER S
+                JOIN (
+                    SELECT W.WISH_NUMBER,W.USER_ID,SUM(W.WISH_CATEGORY_SELLER_PRICE) AS WISH_CATEGORY_SELLER_PRICE,A.APPLY_STATUS
+                    FROM WISH_CATEGORY_SELLER W
+                    JOIN APPLY_STATUS A
+                    ON W.USER_ID=A.USER_ID
+                    AND W.WISH_NUMBER = A.WISH_NUMBER
+                    GROUP BY W.WISH_NUMBER,W.USER_ID,A.APPLY_STATUS) AS WA
+                    ON WA.USER_ID = S.USER_ID
+                    WHERE WA.WISH_NUMBER=#{wish_number}) AS INFO
+                ON INFO.USER_ID = U.USER_ID;
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">

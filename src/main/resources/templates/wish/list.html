@@ -77,10 +77,11 @@
                         console.log(takeofflist)
 
                         res.data.forEach(resp => {
-                            takeofflist.innerHTML += '<div class="takeoffdiv">' + '<span>' + '<a href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_company + '">' + resp.seller_company + '</a>' + '</span>'
-                            takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>' + '</div>';
+                            takeofflist.innerHTML += '<div class="takeoffdiv"><span><a class="seller_company" href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_company + '">' + resp.seller_company + '</a>' + '</span>'
+                            takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span></div>';
                             takeofflist.innerHTML += '<span class="status">' + resp.apply_status + '</span>';
                             if (resp.apply_status === "상담중") {
+                                takeofflist.innerHTML += '<div class=""><i class="fa-light fa-circle-info fa-lg" style="color: #999999;"></i><p>'+resp.user_phone+'</p></div>'
                                 takeofflist.innerHTML += '<input class="hidden_wish_number" type="hidden" value=' + resp.wish_number + '>'
                                 takeofflist.innerHTML += '<input class="hidden_user_id" type="hidden" value=' + resp.user_id + '>'
                             }
@@ -285,9 +286,8 @@
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
-    <h2>위시리스트</h2>
-
     <div class="wish-list-area">
+        <h2>위시리스트</h2>
         <th:block th:if="${#lists.isEmpty(wish_list) and #lists.isEmpty(wish_req_list)}">
             <div class="non_wish">
                 <div>위시리스트가 없습니다</div>
@@ -295,10 +295,14 @@
         </th:block>
         <div class="wishBarea wish_write_btn">
             <div class="tab">
-                <input type="button" class="wish_ing" value="진행중 위시" onclick="ingtab()">
-                <input type="button" class="wish_end" value="종료된 위시" onclick="endwish()">
+                <div class="tab_button">
+                    <input type="button" class="wish_ing" value="진행중 위시" onclick="ingtab()">
+                    <input type="button" class="wish_end" value="종료된 위시" onclick="endwish()">
+                </div>
+                <div class="write_btn">
+                    <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
+                </div>
             </div>
-            <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
         </div>
         <div class="all_wish">
         <!--위시리스트 요청 후 -->

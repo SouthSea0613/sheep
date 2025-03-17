@@ -15,6 +15,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class TakeoffDto {
     String user_id;
+    String user_phone;
     Integer wish_number;
     String wish_title;
     String major_category;

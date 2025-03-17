@@ -14,14 +14,13 @@
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
-    <h2 class="login_h2">로그인.html</h2>
+    <h2 class="login_h2">로그인</h2>
     <div class="login_main_content">
         아이디
         <input type="text" name="user_id" id="user_id" placeholder="아이디"><br>
         <hr>
         비밀번호
         <input type="password" name="user_pw" id="user_pw" placeholder="비밀번호">
-        <br>
     </div>
     <span id="error_user"></span><br>
     <button onclick="login()" class="login_btn">로그인</button><br>
