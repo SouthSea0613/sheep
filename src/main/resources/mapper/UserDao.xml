@@ -95,6 +95,12 @@
         WHERE USER_ID = #{user_id}
     </select>
 
+    <select id="getSeller_area" resultType="java.lang.String">
+        SELECT SELLER_ADDR
+        FROM SELLER
+        WHERE USER_ID = #{user_id}
+    </select>
+
     <update id="select_area">
         UPDATE SELLER
         SET SELLER_AREA = #{seller_area}

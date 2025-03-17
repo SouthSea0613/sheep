@@ -3,6 +3,7 @@ package com._401unauthorized.sheep.controller;
 import com._401unauthorized.sheep.dto.*;
 import com._401unauthorized.sheep.service.SellerService;
 import com._401unauthorized.sheep.service.TakeoffService;
+import com._401unauthorized.sheep.service.UserService;
 import com._401unauthorized.sheep.service.WishService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ public class TakeoffController {
     private final TakeoffService takeoffService;
     private final WishService wishService;
     private final SellerService sellerService;
+    private final UserService userService;
 
     // (소비자) 위시리스트 에서 <견적요청>! -----------------------------
     @PostMapping("/call")
@@ -128,11 +130,10 @@ public class TakeoffController {
         if (wish_number == null || wish_number < 1) {
             return "takeoff/seller/list";
         }
+
         WishDto takeoffDto = takeoffService.essential(wish_number,user_id);
         List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number, user_id);
-        log.info("!!!!지금 위시 넘버는? :" + takeoffDto.getWish_number());
         if (takeoffDto != null) {
-            log.info(takeoffDto.toString());
             model.addAttribute("takeoffDto", takeoffDto);
             model.addAttribute("takeoffSellerDto", takeoffSellerDto);
             int all = 0;
@@ -150,6 +151,7 @@ public class TakeoffController {
     // 들어온 위시리스트 & 내가준 견적리스트 (화면)----------------------------------------------------------------------------------------------
     @GetMapping("/seller/list")
     public String seller(HttpSession httpsession, Model model) {
+        model.addAttribute("area", userService.getSeller_area(httpsession.getAttribute("user_id").toString()));
         model.addAttribute("seller_takeoff_list",sellerService.seller_list(httpsession.getAttribute("user_id").toString()));
         return "takeoff/seller/list";
     }
@@ -208,6 +210,7 @@ public class TakeoffController {
 
     @PostMapping("/seller/select_area")
     public String select_area(HttpSession httpSession,@RequestParam("seller_area") String seller_area) {
+        log.info("seller_area: {}", seller_area);
         if(takeoffService.select_area(httpSession.getAttribute("user_id").toString(), seller_area)){
             return "redirect:/takeoff/seller/list";
         }

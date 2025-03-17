@@ -125,4 +125,16 @@ public class WishController {
     public String update(@RequestParam("wish_number") Integer wish_number, HttpSession httpSession){
         return "redirect:/wish/detail";
     }
+
+    @GetMapping("/get_req_wish")
+    @ResponseBody
+    public Boolean get_req_wish(HttpSession httpSession) {
+        WishDto wishDto = wishService.get_wish_req_list(httpSession.getAttribute("user_id").toString());
+        if (wishDto == null) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

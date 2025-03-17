@@ -3,16 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .list_info1 {
+            font-family: 'MangoBoard', 'Pretendard', sans-serif;
+        }
+        .list_info2 {
+            font-family: 'Pretendard', sans-serif;
+        }
+        .list_info3 {
+            font-family: 'Do Hyeon', sans-serif;
+        }
+        .title {
+            
+        }
+        .
+
+
+
+    </style>
 </head>
 <body>
 
 <section>
     <div class="list">
-        <div>지역</div>
-        <div>글제목</div>
-        <div>글쓴이</div>
-        <div>등록일</div>
-        <div>모집상황</div>
+        <div class="list_info1" style="font-family: 'MangoDdobak-B', sans-serif">지역</div>
+        <div class="list_info2" style="font-family: 'Do Hyeon', sans-serif">글제목</div>
+        <div class="list_info3" style="font-family: 'SUIT', sans-serif">글쓴이</div>
+        <div class="list_info">등록일</div>
+        <div class="list_info">모집상황</div>
     </div>
 
     <div>
@@ -26,14 +44,17 @@
         <th:block th:unless="${#lists.isEmpty(boarddto)}">
             <th:block th:each="employment:${boarddto}">
                 <div th:if="${employment?.employee_status < employment?.job_count}">
-                <div class="" th:text="${employment?.job_area}"></div>
-                <input type="hidden" name="board_number" th:value="${employment?.board_number}">
-                <div class="">
-                    <a th:href="@{/employment/detail(board_number=${employment.board_number})}"
-                       th:text="${employment.board_title}"></a>
-                </div>
-                <div class="" th:text="${employment?.user_id}"></div>
-                <div class="" th:text="${employment?.board_regdate}"></div>
+                    <div class="area" style="font-family: 'Do Hyeon', sans-serif"
+                         th:text="${employment?.job_area}"></div>
+                    <input type="hidden" name="board_number" th:value="${employment?.board_number}">
+                    <div class="">
+                        <a class="title" style="font-family: 'Pretendard', sans-serif"
+                           th:href="@{/employment/detail(board_number=${employment.board_number})}"
+
+                           th:text="${employment.board_title}"></a>
+                    </div>
+                    <div class="" th:text="${employment?.user_id}"></div>
+                    <div class="" th:text="${employment?.board_regdate}"></div>
                     <div class="" th:text="${employment?.employee_status}"></div>
                     <div class="" th:text="${employment?.job_count}"></div>
                 </div>
@@ -41,10 +62,10 @@
         </th:block>
     </div>
 
-    <div class="">
+    <div class="button_area">
         <th:block th:if="${session?.user_type eq '1'}">
             <form th:action="@{/employment/write}" method="get">
-                <input type="submit" value="작성하기">
+                <input type="submit" class="button" value="작성하기">
             </form>
         </th:block>
     </div>

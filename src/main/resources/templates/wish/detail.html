@@ -44,8 +44,7 @@
         <div th:text="${category.major_text}">대분류 텍스트</div>
         <br>
     </th:block>
-    <div th:if="${session?.user_type == '0' && wish_dto?.apply_status==null}" class="takeoffarea">
-        <input type="button" class="wish_takeoff wish_btn_list" onclick="takeoff(this)" value="견적요청">
+    <div id="takeoffarea" th:if="${session?.user_type == '0' && wish_dto?.apply_status==null}" class="takeoffarea">
         <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
         <input type="button" class="wish_btn_list" onclick="delete_wish()" th:value="삭제하기">
     </div>
@@ -84,6 +83,14 @@
 			}
 		});
 	}
+
+    axios.get("/wish/get_req_wish")
+        .then(res => {
+            if(res.data) {
+                const takeoffarea = $("#takeoffarea");
+                takeoffarea.append('<input type="button" class="wish_takeoff wish_btn_list" onclick="takeoff(this)" value="견적요청"/>');
+            }
+        });
 </script>
 </body>
 </html>

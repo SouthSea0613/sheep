@@ -83,5 +83,9 @@ public class UserService {
     public boolean join_additional_engineer(UserDto userDto) {
         return userDao.change_user_type(userDto.getUser_id(),2) && userDao.join_additional_engineer(userDto);
     }
+
+    public String getSeller_area(String user_id) {
+        return userDao.getSeller_area(user_id);
+    }
 }
 
