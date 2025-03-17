@@ -23,7 +23,7 @@
 
         <div>모집지역</div>
         <input type="button" id="job_area" value="지역설정" required onclick="select_seller_area()">
-        <input type="hidden" name="job_area" th:value="${#job_area}">
+        <input type="hidden" name="job_area" th:value="${seller_area}">
         <div>글제목</div>
         <input type="text" class="" name="board_title" autofocus placeholder="현장지역/모집분야/모집인원 순으로 적어주세요!" required><br>
         <div>모집인원</div>

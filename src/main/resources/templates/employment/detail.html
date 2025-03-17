@@ -5,7 +5,7 @@
     <title>Title</title>
     <script>
         function employment_complete() {
-            location.href = "/employment/complete?board_number="+"[[${param.board_number}]]"
+            location.href = "/employment/resume/complete?board_number=" + "[[${param.board_number}]]";
         }
 
         function resume_write() {
@@ -26,14 +26,28 @@
         <div th:text="${employmentDto?.board_content}"></div>
     </div>
     <div class="employment-button">
-    <th:block>
-        <div th:if="${session.user_id eq employmentDto?.user_id and employmentDto?.job_status eq 모집중}">
-            <input type="button" value="마감" onclick="employment_complete()">
+        <th:block>
+            <div th:if="${session.user_id eq employmentDto?.user_id and employmentDto?.job_status eq 모집중}">
+                <input type="button" value="마감" onclick="employment_complete()">
+            </div>
+            <div th:if="${session.user_type eq '2' and employmentDto?.job_status eq 모집중}">
+                <input type="button" value="지원하기" onclick="resume_write()">
+            </div>
+        </th:block>
+    </div>
+    <div class="find-job">
+        <div th:if="${#lists.isEmpty(profileDto)}">
+            지원자가 없습니다.
         </div>
-        <div th:if="${session.user_type eq '2' and employmentDto?.job_status eq 모집중}">
-            <input type="button" value="지원하기" onclick="resume_write()">
+        <div th:unless="${#lists.isEmpty(profileDto)}">
+            <div th:each="profile: ${profileDto}">
+                <div th:if="${(profile?.parent_board_number eq employmentDto?.board_number
+                and session.user_id eq profile?.user_id) or (profile?.parent_board_number eq employmentDto?.board_number
+                and session.user_type eq '1') and profile?.employee_status != 1}">
+                    <a th:href="@{/employment/resume/detail(board_number=${profile.board_number})}" th:text="${profile.board_title}">견적서 제목</a>
+                </div>
+            </div>
         </div>
-    </th:block>
     </div>
 </section>
 </body>

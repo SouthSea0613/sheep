@@ -25,24 +25,27 @@
     <div class="">
         <th:block th:unless="${#lists.isEmpty(boarddto)}">
             <th:block th:each="employment:${boarddto}">
-                <div class="" th:text="${employment.job_area}"></div>
-                <input type="hidden" name="board_number" th:value="${employment.board_number}">
+                <div th:if="${employment?.employee_status < employment?.job_count}">
+                <div class="" th:text="${employment?.job_area}"></div>
+                <input type="hidden" name="board_number" th:value="${employment?.board_number}">
                 <div class="">
-                    <a th:href="@{/employment/detail(board_number=${employment.board_number})}" th:text="${employment.board_title}"></a>
+                    <a th:href="@{/employment/detail(board_number=${employment.board_number})}"
+                       th:text="${employment.board_title}"></a>
                 </div>
-                <div class="" th:text="${employment.user_id}"></div>
-                <div class="" th:text="${employment.board_regdate}"></div>
-                <div class="" th:text="${employment.job_status}"></div>
-                <div class="" th:text="${employment.job_count}"></div>
+                <div class="" th:text="${employment?.user_id}"></div>
+                <div class="" th:text="${employment?.board_regdate}"></div>
+                    <div class="" th:text="${employment?.employee_status}"></div>
+                    <div class="" th:text="${employment?.job_count}"></div>
+                </div>
             </th:block>
         </th:block>
     </div>
 
     <div class="">
         <th:block th:if="${session?.user_type eq '1'}">
-        <form th:action="@{/employment/write}" method="post">
-        <input type="submit" value="작성하기">
-        </form>
+            <form th:action="@{/employment/write}" method="get">
+                <input type="submit" value="작성하기">
+            </form>
         </th:block>
     </div>
 </section>
