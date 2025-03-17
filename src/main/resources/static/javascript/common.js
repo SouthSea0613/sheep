@@ -28,8 +28,9 @@ function userType() {
 }
 
 function List() {
-    const div = document.getElementsByName('list_box');
+    const div = document.querySelector('.list_box');
     const btn = document.getElementById('common_user_name');
+    if(window.getComputedStyle(div).display==="none"){
         $('.list_box').css('display', 'block');
         if (type == 0 || type == null) {
             $('.all2').css('display', 'block');
@@ -47,4 +48,7 @@ function List() {
             $('.seller2').css('display', 'none');
             $('.engineer2').css('display', 'block');
         }
+    }else{
+        $('.list_box').css('display', 'none');
+    }
 }
