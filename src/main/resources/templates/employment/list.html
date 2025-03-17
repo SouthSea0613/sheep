@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="/css/employment.css">
-    <link href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/static/woff2/SUIT.css" rel="stylesheet">
 </head>
 <body>
 
 <section>
     <div class="list">
-        <div class="list_info">지역</div>
-        <div class="list_info">글제목</div>
-        <div class="list_info">글쓴이</div>
+        <div class="list_info1" style="font-family: 'MangoDdobak-B', sans-serif">지역</div>
+        <div class="list_info2" style="font-family: 'Do Hyeon', sans-serif">글제목</div>
+        <div class="list_info3" style="font-family: 'SUIT', sans-serif">글쓴이</div>
         <div class="list_info">등록일</div>
         <div class="list_info">모집상황</div>
     </div>
@@ -28,10 +27,11 @@
         <th:block th:unless="${#lists.isEmpty(boarddto)}">
             <th:block th:each="employment:${boarddto}">
                 <div th:if="${employment?.employee_status < employment?.job_count}">
-                <div class="" th:text="${employment?.job_area}"></div>
+                <div class="area" style="font-family: 'Do Hyeon', sans-serif" th:text="${employment?.job_area}"></div>
                 <input type="hidden" name="board_number" th:value="${employment?.board_number}">
                 <div class="">
-                    <a th:href="@{/employment/detail(board_number=${employment.board_number})}"
+                    <a class="title" style="font-family: 'Pretendard', sans-serif" th:href="@{/employment/detail(board_number=${employment.board_number})}"
+
                        th:text="${employment.board_title}"></a>
                 </div>
                 <div class="" th:text="${employment?.user_id}"></div>
