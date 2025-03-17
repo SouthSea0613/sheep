@@ -15,6 +15,7 @@ import java.util.List;
 @Accessors(chain = true)
 public class WishDto {
     int wish_number;
+    String user_name;
     String user_id;
     String wish_title;
     String wish_type;

@@ -6,53 +6,106 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="/javascript/common.js"></script>
-<link rel="stylesheet" href="/css/headerfooter.css">
-<link rel="stylesheet" href="/css/wish.css">
-    <script>
-        const user = "[[${session?.user_id}]]";
-        const type = "[[${session?.user_type}]]";
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-        $(() => {
-            console.log(type)
-            userType();
-            loginStatus();
-        })
-    </script>
-<style>
-    ul {
-        list-style-type: none;
-    }
-</style>
+        body {
+            height: 90vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 25px;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .info-box {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .info-box div {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .major-category {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .button-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-section input {
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-section input:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
-
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<div class="main_content">
-<h2>위시 디테일</h2>
-    <div class="eun_wish_detail_box">
-    <div th:text="${wish_dto?.wish_addr}">주소</div><br>
-    <div th:text="${wish_dto?.wish_type}">주거형태</div><br>
-    <div th:text="${wish_dto?.wish_size}">평수</div><br>
-    <div th:text="${wish_dto?.wish_size_text}">평수상세</div><br>
-    <div th:text="${wish_dto?.wish_money}+만원">예산</div><br>
+<div class="container">
+    <div class="section-title">위시 디테일</div>
+    <div class="info-box">
+        <div><strong>주소:</strong> <span th:text="${wish_dto?.wish_addr}">주소</span></div>
+        <div><strong>주거 형태:</strong> <span th:text="${wish_dto?.wish_type}">주거형태</span></div>
+        <div><strong>평수:</strong> <span th:text="${wish_dto?.wish_size}">평수</span></div>
+        <div><strong>평수 상세:</strong> <span th:text="${wish_dto?.wish_size_text}">평수상세</span></div>
+        <div><strong>예산:</strong> <span th:text="${wish_dto?.wish_money} + '만원'">예산</span></div>
+    </div>
 
     <th:block th:each="category:${category_list_dto}">
-        <div th:text="'<'+${category.major_category}+'>'">대분류 넘버</div>
-        <th:block th:each="subcategory:${category.sub_category}">
-            <div th:text="${subcategory}">중분류 넘버</div>
-        </th:block>
-        <div th:text="${category.major_text}">대분류 텍스트</div>
-        <br>
+        <div class="info-box">
+            <div class="major-category" th:text="${category.major_category}">대분류</div>
+            <div>
+                <strong>선택항목:</strong>
+                <span th:text="${#strings.listJoin(category.sub_category, ', ')}">중분류 목록</span>
+            </div>
+            <div><strong>참고:</strong> <span th:text="${category.major_text}">대분류 텍스트</span></div>
+        </div>
     </th:block>
-    <div id="takeoffarea" th:if="${session?.user_type == '0' && wish_dto?.apply_status==null}" class="takeoffarea">
-        <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
-        <input type="button" class="wish_btn_list" onclick="delete_wish()" th:value="삭제하기">
+
+    <div class="button-section" th:if="${session?.user_type == '0' && wish_dto?.apply_status == null}">
+        <input type="button" onclick="delete_wish()" value="삭제하기">
     </div>
 
-    <div th:if="${session?.user_type == '1' and wish_dto?.apply_status == '대기중'}">
-        <input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number" id="wish_number">
-        <input type="button" class="wish_btn_list" onclick="seller_write()" value="작성하기">
-    </div>
+    <div class="button-section" th:if="${session?.user_type == '1' and wish_dto?.apply_status == '대기중'}">
+        <input type="button" onclick="seller_write()" value="작성하기">
     </div>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
@@ -66,31 +119,6 @@
         let wish_number = "[[${wish_dto?.wish_number}]]";
         location.href = "/wish/delete?wish_number=" + wish_number;
     }
-
-	function takeoff(btn) {
-		const wishnumber = "[[${wish_dto?.wish_number}]]"
-		axios.post('/takeoff/call', {
-			user_id: "[[${session.user_id}]]",
-			wish_number: wishnumber,
-			apply_status: "0",
-		}).then((res) => {
-			if (res) {
-				alert("견적 요청이 완료되었습니다")
-				location.href = "/wish/list";
-			} else {
-				alert("견적 요청이 실패되었습니다");
-				location.href = "/wish/list";
-			}
-		});
-	}
-
-    axios.get("/wish/get_req_wish")
-        .then(res => {
-            if(res.data) {
-                const takeoffarea = $("#takeoffarea");
-                takeoffarea.append('<input type="button" class="wish_takeoff wish_btn_list" onclick="takeoff(this)" value="견적요청"/>');
-            }
-        });
 </script>
 </body>
 </html>

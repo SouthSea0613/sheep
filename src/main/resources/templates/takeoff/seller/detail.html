@@ -6,21 +6,79 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="/javascript/common.js"></script>
-    <link rel="stylesheet" href="/css/headerfooter.css">
-    <link rel="stylesheet" href="/css/takeoff.css">
-    <script>
-        const user = "[[${session?.user_id}]]";
-        const type = "[[${session?.user_type}]]";
-
-        $(() => {
-            console.log(type)
-            userType();
-            loginStatus();
-        })
-    </script>
     <style>
-        ul {
-            list-style-type: none;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 90vh;
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            width: 60%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 25px;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .info-box {
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .info-box div {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .button-section {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .button-section input[type="submit"] {
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button-section input[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        .total-price {
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            padding: 15px;
+            background-color: #ffc107;
+            color: black;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         }
     </style>
 </head>
@@ -29,50 +87,46 @@
     <!--header-->
 </div>
 
-<section>
-    <div>
-        <!--  위 div는 전체 묶음  -->
-        <div th:text="${takeoffDto?.wish_addr}">주소</div>
-        <br>
-        <div th:text="${takeoffDto?.wish_type}">주거형태</div>
-        <br>
-        <div th:text="${takeoffDto?.wish_size}">평수</div>
-        <br>
-        <div th:text="${takeoffDto?.wish_size_text}">평수상세</div>
-        <br>
-        <div th:text="${takeoffDto?.wish_money}+만원">예산</div>
-        <br>
-        <th:block th:each="takeoffSeller:${takeoffSellerDto}">
-            <div th:text="${takeoffSeller?.major_category}">대분류 넘버</div>
+<section class="container">
+    <div class="section-title">견적 상세 정보</div>
+    <div class="info-box">
+        <div><strong>주소:</strong> <span th:text="${takeoffDto?.wish_addr}">주소</span></div>
+        <div><strong>주거 형태:</strong> <span th:text="${takeoffDto?.wish_type}">주거형태</span></div>
+        <div><strong>평수:</strong> <span th:text="${takeoffDto?.wish_size}">평수</span></div>
+        <div><strong>평수 상세:</strong> <span th:text="${takeoffDto?.wish_size_text}">평수상세</span></div>
+        <div><strong>예산:</strong> <span th:text="${takeoffDto?.wish_money} + '만원'">예산</span></div>
+    </div>
+
+    <th:block th:each="takeoffSeller:${takeoffSellerDto}">
+        <div class="info-box">
+            <div><strong>대분류:</strong> <span th:text="${takeoffSeller?.major_category}">대분류 넘버</span></div>
             <th:block th:each="subcategory:${takeoffSeller.sub_category}">
-                <div th:text="${subcategory}">중분류 넘버</div>
+                <div><strong>중분류:</strong> <span th:text="${subcategory}">중분류 넘버</span></div>
             </th:block>
-            <div th:text="${takeoffSeller?.major_text}">대분류 텍스트</div>
-            <br>
-            <div th:text="${takeoffSeller?.wish_category_seller_answer}">판매자답변</div>
-            <div th:text="${takeoffSeller?.wish_category_seller_price}+만원">견적금액</div>
-            <br>
-        </th:block>
-
-        <div th:text="|합계: ${all_money}만원|">합계</div>
-
-        <div th:if="${session?.user_type == '0' && takeoffDto?.apply_status == '상담중'}">
-            <th:block th:unless="${takeoffDto?.apply_status} == '계약완료'">
-                <form th:action="@{/takeoff/complete}" method="get">
-                    <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
-                    <input type="hidden" name="user_id" th:value="${session?.user_id}">
-                    <input type="submit" value="계약완료">
-                </form>
-            </th:block>
+            <div><strong>대분류 텍스트:</strong> <span th:text="${takeoffSeller?.major_text}">대분류 텍스트</span></div>
+            <div><strong>판매자 답변:</strong> <span th:text="${takeoffSeller?.wish_category_seller_answer}">판매자답변</span></div>
+            <div><strong>견적 금액:</strong> <span th:text="${takeoffSeller?.wish_category_seller_price} + '만원'">견적금액</span></div>
         </div>
+    </th:block>
 
-        <div th:if="${session?.user_type == '0' && takeoffDto?.apply_status == '대기중'}">
-            <form th:action="@{/takeoff/changestatus}" method="get">
+    <div class="total-price">합계: <span th:text="${all_money} + '만원'">합계</span></div>
+
+    <div class="button-section" th:if="${session?.user_type == '0' && takeoffDto?.apply_status == '상담중'}">
+        <th:block th:unless="${takeoffDto?.apply_status} == '계약완료'">
+            <form th:action="@{/takeoff/complete}" method="get">
+                <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
+                <input type="hidden" name="user_id" th:value="${session?.user_id}">
+                <input type="submit" value="계약완료">
+            </form>
+        </th:block>
+    </div>
+
+    <div class="button-section" th:if="${session?.user_type == '0' && takeoffDto?.apply_status == '대기중'}">
+        <form th:action="@{/takeoff/changestatus}" method="get">
             <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
             <input type="hidden" name="user_id" th:value="${takeoffDto?.user_id}">
-            <input type="submit" value="견적선택">
-            </form>
-        </div>
+            <input type="submit" value="견적 선택">
+        </form>
     </div>
 </section>
 </body>
