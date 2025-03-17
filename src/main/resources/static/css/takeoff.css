@@ -1,3 +1,5 @@
+/* ========== 기존 CSS 파일 (건드리지 마세요) ========== */
+
 /* ==================== 기본 설정 ==================== */
 * {
     box-sizing: border-box;
@@ -222,4 +224,176 @@ a {
 
 .contract_section input[type="submit"]:hover {
     background-color: #218838;
+}
+
+/* ========== 여기서부터 추가할 CSS 코드 ========== */
+
+/* 견적서 작성 페이지 스타일 (기존 테마와 유사하게) */
+.main_content {
+    /* container 클래스로 이미 컨테이너 스타일이 적용되어 있으므로 중앙 정렬만 추가 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.content {
+    width: 100%; /* container 내에 있으므로 100% 사용 */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 페이지 제목 보완 (container의 .page_logo와 중복되지 않게) */
+.content h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 견적서 작성 입력 필드 스타일 */
+.takeoff {
+    margin-top: 15px;
+}
+
+.takeoff input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.takeoff input:focus {
+    border-color: #fc9c7c;
+    outline: none;
+}
+
+/* 견적 금액 입력 필드 스타일 */
+.takeoff_money {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.takeoff_money input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: right;
+}
+
+.takeoff_money input:focus {
+    border-color: #fc9c7c;
+    outline: none;
+}
+
+.takeoff_money::after {
+    content: "만원";
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 견적 저장 버튼 보완 */
+.content div input[type="button"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFC5B2;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.content div input[type="button"]:hover {
+    background-color: #fc9c7c;
+    transform: scale(1.05);
+}
+
+/* 합계 금액 영역 보완 */
+.takeoff_all_money {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px;
+    background-color: #ffc107;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.takeoff_all_money input {
+    width: 100px;
+    padding: 8px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+}
+
+/* 정보 표시 영역 (주소, 주거형태, 평수 등) */
+.content div:not(.takeoff, .takeoff_money, .takeoff_all_money) {
+    font-size: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 카테고리 정보 영역 (필요시 사용) */
+.category_section {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.category_section div {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 5px 0;
+}
+/* ========== 추가할 CSS 코드 ========== */
+
+/* 상단 기본 정보 영역 */
+.basic_info {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #fefefe;
+}
+
+.basic_info h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #fc9c7c;
+    padding-bottom: 5px;
+}
+
+/* 대분류 스타일: 굵고 큰 글씨 */
+.major_category {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #003366;
+}
+
+/* 중분류 스타일: 들여쓰기 및 작은 글씨 */
+.sub_category {
+    font-size: 16px;
+    margin-left: 15px;
+    margin-bottom: 5px;
 }
