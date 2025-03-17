@@ -1,131 +1,124 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script defer src="/javascript/common.js"></script>
-    <link rel="stylesheet" href="/css/headerfooter.css">
-    <link rel="stylesheet" href="/css/takeoff.css">
-    <link rel="stylesheet" href="/css/index.css">
-    <script>
-        const user = "[[${session?.user_id}]]";
-        const type = "[[${session?.user_type}]]";
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<script defer src="/javascript/common.js"></script>
+	<link rel="stylesheet" href="/css/headerfooter.css">
+	<link rel="stylesheet" href="/css/takeoff.css">
+	<link rel="stylesheet" href="/css/index.css">
+	<script>
+		const user = "[[${session?.user_id}]]";
+		const type = "[[${session?.user_type}]]";
 
-        $(() => {
-            console.log(type)
-            userType();
-            loginStatus();
-        })
+		$(() => {
+			console.log(type)
+			userType();
+			loginStatus();
+		})
 
-        onload = () => {
-            checkarea()
-        }
+		onload=()=>{
+			axios.post('/takeoff/checkarea',{
+			}).then(res=>{
+				const areadiv = document.getElementById('area')
+				console.log(res.data)
+				if(!res.data) {
+					areadiv.style.display = "block";
+				}
+			})
+		}
 
-        function checkarea() {
-            axios.post('/takeoff/checkarea', {}).then(res => {
-                const areadiv = document.getElementById('area')
-                console.log(res.data)
-                if (!res.data) {
-                    areadiv.style.display = "block";
-                }
-            })
-        }
+		function select_seller_area(){
+			location.href = "/takeoff/seller/select_area"
+		}
 
-        function select_seller_area() {
-            location.href = "/takeoff/seller/select_area"
-        }
-
-        function tab(num) {
-            console.log(num.className)
-            switch (num.className) {
-                case "0":
-                    const enterlist = document.getElementById('enterlist')
-                    const content = document.getElementById('writetakeoff')
-                    const endlist = document.querySelector('.endtakeoff')
-                    endlist.textContent = "";
-                    enterlist.style.display = 'block';
-                    content.textContent = "";
-                    break;
-                case "1":
-                    console.log(document.getElementById('writetakeoff').children)
-                    axios.post('/takeoff/seller/my_list', {
-                        user_id: "[[${session.user_id}]]"
-                    }).then((res) => {
-                        console.log(res);
-                        if (res.data != null) {
-                            const enterlist = document.getElementById('enterlist')
-                            const content = document.getElementById('writetakeoff')
-                            const endlist = document.querySelector('.endtakeoff')
-                            if (content.children.length === 0) {
-                                enterlist.style.display = "none";
-                                endlist.textContent = "";
-                                res.data.forEach(list => {
-                                    content.innerHTML += '<div class="entercontent">' + '<a href="/takeoff/seller/detail?wish_number=' + list.wish_number + '&user_id=' + list.user_id + '">' + list.wish_title + '</a>' + '<span>' + list.apply_status + '</span>' + '</div>'
-                                })
-                            }
-                        }
-                    })
-                    break;
-                case "2":
-                    axios.post('/takeoff/seller/endtakeoff', {
-                        user_id: "[[${session.user_id}]]",
-                    }).then(res => {
-                        const writelist = document.querySelector('#writetakeoff')
-                        const enterlist = document.getElementById('enterlist')
-                        const endlist = document.querySelector('.endtakeoff')
-                        writelist.textContent = "";
-                        enterlist.style.display = "none";
-                        console.log(res.data)
-                        if (endlist.children.length === 0) {
-                            res.data.forEach(data => {
-                                endlist.innerHTML += '<span>' + data.wish_title + '</span>';
-                                endlist.innerHTML += '<span>' + data.apply_status + '</span>';
-                            })
-                        }
-                    })
-                    break;
-            }
-        }
-    </script>
-
+		function tab(num){
+			switch (num.className){
+				case "0":
+					const enterlist = document.getElementById('enterlist')
+					const content = document.getElementById('writetakeoff')
+					const endlist = document.querySelector('.endtakeoff')
+					endlist.textContent ="";
+					enterlist.style.display ='block';
+					content.textContent="";
+					break;
+				case "1":
+					console.log(document.getElementById('writetakeoff').children)
+					axios.post('/takeoff/seller/my_list',{
+						user_id : "[[${session.user_id}]]"
+					}).then((res)=>{
+						if(res.data!=null){
+							const enterlist = document.getElementById('enterlist')
+							const content = document.getElementById('writetakeoff')
+							const endlist = document.querySelector('.endtakeoff')
+							if(content.children.length===0){
+							enterlist.style.display="none";
+							endlist.textContent="";
+							res.data.forEach(list=>{
+								content.innerHTML+='<div class="entercontent">'+'<a class="write_a" href="/takeoff/seller/detail?wish_number='+list.wish_number+'&user_id='+list.user_id+ '">' + list.wish_title+'</a>'+'<p class="status_class">'+list.apply_status+'</p>'+'</div>'
+							})
+							}
+						}
+					})
+					break;
+				case "2":
+					axios.post('/takeoff/seller/endtakeoff',{
+						user_id: "[[${session.user_id}]]",
+					}).then(res=>{
+						const writelist = document.querySelector('#writetakeoff')
+						const enterlist = document.getElementById('enterlist')
+						const endlist = document.querySelector('.endtakeoff')
+						writelist.textContent="";
+						enterlist.style.display="none";
+						if(endlist.children.length===0){
+						res.data.forEach(data=>{
+							endlist.innerHTML += '<div class="end_div"><span>' + data.wish_title +  '</span>';
+							endlist.innerHTML += '<p class="status_class">' + data.apply_status +  '</p></div>';
+							})
+						}
+					})
+					break;
+			}
+		}
+	</script>
 </head>
+
 <body>
 <div class="area">
 </div>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<h2>seller.list.html</h2>
-<div>
-    <th:block th:if="${#lists.isEmpty(seller_takeoff_list)}">
-        <a th:href="@{takeoff/seller/location_insert}"></a>
-    </th:block>
-</div>
-<div class="button_div">
-    <input type="button" class="0" value="들어온 견적" onclick="tab(this)">
-    <input type="button" class="1" value="작성한 견적" onclick="tab(this)">
-    <input type="button" class="2" value="종료된 견적" onclick="tab(this)">
-</div>
-<div id="enterlist">
-    <th:block th:if="${#lists.isEmpty(seller_takeoff_list)}">
-        <div>들어온 견적리스트가 없습니다.</div>
-        <th:block th:if="${#lists.isEmpty(area)}">
-            <div class="non_seller_takeoff_list">
-                <input type="button" id="seller_area" onclick="select_seller_area()" value="지역설정">
-            </div>
-        </th:block>
-    </th:block>
 
-    <th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
-        <th:block th:each="takeofflist : ${seller_takeoff_list}">
-            <a th:href="@{/wish/detail(wish_number=${takeofflist.wish_number})}"
-               th:text="${takeofflist.wish_title}"></a>
-            <div th:text="${takeofflist.user_id}"></div>
-        </th:block>
-    </th:block>
+<div class="container">
+	<div class="page_logo">
+		견적리스트
+	</div>
+<div>
+	<th:block th:if="${#lists.isEmpty(seller_takeoff_list)}">
+		<a th:href="@{takeoff/seller/location_insert}"></a>
+	</th:block>
+</div>
+<div class="button_div"><input type="button" class="0" value="들어온 견적" onclick="tab(this)"><input type="button" class="1" value="작성한 견적" onclick="tab(this)"><input type="button" class="2" value="종료된 견적" onclick="tab(this)"></div>
+<div id="enterlist">
+	<th:block th:if="${#lists.isEmpty(seller_takeoff_list)}">
+		<div class="non_seller_takeoff_list">
+			<div>들어온 견적리스트가 없습니다.</div>
+			<input type="button" id="seller_area" onclick="select_seller_area()" value="지역설정">
+		</div>
+	</th:block>
+	<th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
+		<th:block th:each="takeofflist : ${seller_takeoff_list}">
+			<div class="enter_takeoff_div">
+			<a class="title_a" th:href="@{/wish/detail(wish_number=${takeofflist.wish_number})}" th:text="${takeofflist.wish_title}"></a>
+			<p class="user_id_p" th:text="${takeofflist.user_id}"></p>
+			</div>
+		</th:block>
+	</th:block>
 </div>
 <div id="writetakeoff"></div>
 <div class="endtakeoff"></div>
+</div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

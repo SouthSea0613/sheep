@@ -1,0 +1,32 @@
+.address_span{
+    color : gray;
+}
+.title_span{
+    font-size : 18px;
+}
+.title{
+    font-size : 18px;
+    font-weight: bold;
+}
+dl{
+    margin: 0 20px;
+}
+p{
+    color : #848181;
+}
+.info{
+    color : #848181;
+}
+label{
+    font-weight: bold;
+    font-size : 18px;
+
+}
+h2{
+    width : 30%;
+    margin : 20px auto;
+}
+input[type=text]{
+    width : 50%;
+    height : 30px;
+}

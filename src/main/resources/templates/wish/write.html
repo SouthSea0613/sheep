@@ -5,11 +5,13 @@
 	<title>Wish Write</title>
 	<script defer src="/javascript/common.js"></script>
 	<script src="/javascript/write.js"></script>
+	<script src="https://kit.fontawesome.com/3e18228bfa.js" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<link rel="stylesheet" href="/css/headerfooter.css">
 	<link rel="stylesheet" href="/css/wish.css">
+	<link rel="stylesheet" href="/css/wishwrite.css">
 	<style>
         dl {
             display: none;
@@ -55,13 +57,12 @@
 
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<h2>위시작성</h2>
 <div class="main_content">
+	<h2>나만의 인테리어 위시 만들기</h2>
 	<!--  위 div는 전체 묶음  -->
 	<!--    아래는 컨트롤러 작성해야함    -->
 	<form action="/wish/write" method="post" id="write_form" class="eun_wish_write_container">
 		<div><!---------------------------------------------------------------------------------------------->
-
 			<div>
 				<script>
 					function find_addr() {
@@ -77,12 +78,16 @@
 						}).open();
 					}
 				</script>
-				<div id="title" class="wish_addr_content">시공주소</div>
+
 				<div class="wish_addr_content">
-					<input type="button" onclick="find_addr()" value="주소 찾기" class="write_addr_btn"><br>
+					<span class="title">시공주소</span>
+					<span class="address_span">시공이 필요한 주소를 입력하세요.</span>
+				</div>
+				<div class="wish_addr_content">
+					<input type="button" onclick="find_addr()" value="주소 찾기" class="write_addr_btn">
 					<input type="hidden" id="wish_list_addr" name="wish_addr" th:value="${wish_dto?.wish_addr}">
 					<input type="text" id="sample6_address" name="wish_title" class="title_class"
-						   th:value="${wish_dto?.wish_title}" readonly placeholder="주소"><br>
+						   th:value="${wish_dto?.wish_title}" readonly placeholder="주소">
 					<input type="text" th:value="${wish_dto?.wish_addr}" id="sample6_detailAddress" class="addr_class" placeholder="상세주소"><br>
 				</div>
 			</div>
@@ -91,7 +96,7 @@
 
 			<div>
 
-				<div id="type">주거형태</div>
+				<div id="type" class="title">주거형태</div>
 				<div>
 					<input type="radio" class="wish_type" name="wish_type" value="1">아파트
 					<input type="radio" class="wish_type" name="wish_type" value="2">단독주택
@@ -116,7 +121,7 @@
 			<hr><!---------------------------------------------------------------------------------------------->
 
 			<div>
-				<div>평수</div>
+				<div class="title">평수</div>
 				<div>
 					<input type="radio" class="wish_size" name="wish_size" value="10">10평 대
 					<input type="radio" class="wish_size" name="wish_size" value="20">20평 대
@@ -156,182 +161,223 @@
 			<hr><!---------------------------------------------------------------------------------------------->
 
 			<div>
-				<div>예산</div>
+				<div class="title">예산</div>
 				<div>
 					<input type="text"
 						   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-						   name="wish_money" id="money" th:value="${wish_dto?.wish_money}" placeholder="예산을 적어주세요.">만원
+						   name="wish_money" id="money" th:value="${wish_dto?.wish_money}" placeholder="예산을 적어주세요.">
+					<span>만원</span>
 				</div>
 			</div>
 
 			<br><!---------------------------------------------------------------------------------------------->
 
-			<div>견적요청시 작성하신 내용으로 신청되오니, 최대한 정확히 작성해주세요.</div>
-			<div>참고란에는 최대한 구체적으로 작성해주세요.</div>
+			<div class="info">견적요청시 작성하신 내용으로 신청되오니, 최대한 정확히 작성해주세요.</div>
+			<div class="info">참고란에는 최대한 구체적으로 작성해주세요.</div>
 		</div><!---------------------------------------------------------------------------------------------->
 		<hr>
 		<!-- 아래부터 시공 선택 사항 -->
 		<!---------------------------------------------------------------------------------------------->
 		<div class="remove">
 			<div>
-				<input type="checkbox" name="category_number" class="major_category_number" value="1">철거
+				<input type="checkbox" name="category_number" class="major_category_number" value="1">
+				<label>철거</label>
 				<dl>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 전체철거, 발코니 타일 재사용, 마루철거 방 제외 등</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="wood">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="2">목공
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="2">
+				<label>목공</label>
 				<dl>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="17"
-							   id="wood_hot">단열
+							   id="wood_hot">
+						<label>단열</label>
 					</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="18"
-							   id="wood_ceiling">천장
+							   id="wood_ceiling">
+						<label>천장</label>
 					</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="19"
-							   id="wood_walls">벽
+							   id="wood_walls">
+						<label>벽</label>
 					</dd>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 아이방 단열, 우물천장 제거, 가벽 제거 등</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="paper">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="3">도배
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="3">
+				<label>도배</label>
 				<dl>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 회벽 도배 희망, 거실만 도배 교체 등</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="elec">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="4">전기
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="4">
+				<label>전기</label>
 				<dl>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 전체 콘센트 교체, 안방 2구 콘센트 증설, 주방 콘센트 증설, 이동 , 욕실 간접등 전기작업 등
+					</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="light">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="5">조명
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="5">
+				<label>조명</label>
 				<dl>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 거실 우물천장 간접등 설치, 거실or주방 라인조명 희망, 집 전체 매립등으로 교체 희망 등
+					</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="tile">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="6">타일
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="6">
+				<label>타일</label>
 				<dl>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 욕실 타일 교체, 현관 타일 교체, 발코니 타일교체 등
+					</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="film">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="7">필름
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="7">
+				<label>필름</label>
 				<dl>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="20">현관방화문</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="21">중문필름</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="22">천장몰딩</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="23">걸레받이몰딩</dd>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 주방 도어 필름교체, 기존 붙박이장 필름교체 등
+					</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="coating">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="8">도장
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="8">
+				<label>도장</label>
 				<dl>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 발코니 2개 등</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="kitchen">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="9">부엌
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="9">
+				<label>부엌</label>
 				<dl>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="24">'ㅡ'자</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="25">'ㄱ'자</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="26">대면형</dd>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 무광 화이트, 상부장 없앰, 빌트인 가구필요(밥솥, 식세기등)</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="bath">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="10">욕실
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="10">
+				<label>욕실</label>
 				<dl>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="27">욕조</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="28">샤워부스</dd>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 휴젠트 환풍기, 간접등, 원피스변기 등</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="storage">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="11">수납
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="11">
+				<label>수납</label>
 				<dl>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="29">드레스룸</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="30">붙박이장</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="31">현관장</dd>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 벽박이장, 안방 서랍장, 전체 우드톤 등</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="floor">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="12">바닥
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="12">
+				<label>바닥</label>
 				<dl>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="32">장판</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="33">강화마루</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="34">강마루</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="35">타일</dd>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 구정마루, 원목마루oo, 주방만 타일 희망 등</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="window">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="13">창호
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="13">
+				<label>창호</label>
 				<dl>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="36">일반창</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="37">터닝도어</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="38">폴딩도어</dd>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 거실 발코니에 곰팡이가 심해요, LXoo, 주방 발코니 터닝도어 희망 등</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="door">
-			<div><input type="checkbox" name="category_number" class="major_category_number" value="14">도어
+			<div><input type="checkbox" name="category_number" class="major_category_number" value="14">
+				<label>도어</label>
 				<dl>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 방문 전체 기본도어 교체, 라인문틀 도어 교체, 히든도어 희망 등</dd>
 				</dl>
 			</div>
 		</div>
 		<br><!---------------------------------------------------------------------------------------------->
 		<div class="mdoor">
-			<div><input type="checkbox" class="major_category_number" value="15" name="category_number">중문
+			<div><input type="checkbox" class="major_category_number" value="15" name="category_number">
+				<label>중문</label>
 				<dl>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="39">3연동</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="40">여닫이</dd>
 					<dd><input type="checkbox" name="category_number" class="sub_category_number" value="41">슬라이딩</dd>
 					<dd><input type="text" name="major_text" class="major_text" placeholder="상세설명을 작성해주세요."></dd>
+					<dd class="info">ex) 강화유리 중문, 블랙컬러 희망 등
+					</dd>
 				</dl>
 			</div>
 			<br><!---------------------------------------------------------------------------------------------->
 			<div class="ready">
 				<div>
-					<input type="checkbox" class="major_category_number" value="16" name="category_number">공사준비/마감
+					<input type="checkbox" class="major_category_number" value="16" name="category_number">
+					<label>공사준비/마감</label>
 					<dl>
 						<dd><input type="checkbox" name="category_number" class="sub_category_number" value="42">입주민동의서</dd>
 						<dd><input type="checkbox" name="category_number" class="sub_category_number" value="43">EV보양 및 실내외
 							보양
 						</dd>
 						<dd><input type="checkbox" name="category_number" class="sub_category_number" value="44">입주청소</dd>
+						<dd class="info">공사준비/마감 은 아파트 기준 관리사무소에 문의를 주셔야 합니다. 아시는 업체가 있거나 셀프로 하실 예정이라면 체크를 풀어주세요. </dd>
 					</dl>
 				</div>
 			</div>
