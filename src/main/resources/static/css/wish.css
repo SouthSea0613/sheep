@@ -54,13 +54,12 @@ hr {
     align-items: center;
     justify-content: center;
     text-align: center;
-    /*justify-self: end;*/
-    background-color: lightgray;
     width : 130px;
     height : 30px;
     border-radius: 15vh;
     padding: 5px 0;
     font-weight : bold;
+    background-color: #FFC5B2;
 }
 
 .detaillink{
@@ -186,6 +185,7 @@ hr {
     width : 100px;
     border-radius: 10px;
     height : 40px;
+    background-color: #FFC5B2;
 
 }
 .tab{
@@ -194,7 +194,8 @@ hr {
     justify-content: space-between;
     margin-top: 2%;
 }
-.takeoffdiv a{
+
+a{
     color : black;
     text-decoration: none;
 }
@@ -204,4 +205,30 @@ hr {
 .seller_company{
     font-weight : bold;
     font-size : 18px;
+}
+.fa-phone{
+    width : 50px;
+    height: 50px;
+    /*border : 2px solid black;*/
+    /*border-radius: 50%;*/
+}
+.phonenumber{
+    display: none;
+    position: absolute;
+}
+.phone_img{
+    width : 20px;
+    height : 20px;
+}
+.downimg{
+    width : 20px;
+    height : 20px;
+}
+.upimg{
+    width : 20px;
+    height : 20px;
+}
+.button{
+    display: flex;
+    align-items: center;
 }

@@ -58,8 +58,8 @@
         }
         function takeofflist(btn) {
             const takeofflist = document.querySelector('.takeoff_list');
-            const openbtn = document.querySelector('.openbtn');
-            const closebtn = document.querySelector('.closebtn');
+            const openbtn = document.querySelector('.downimg');
+            const closebtn = document.querySelector('.upimg');
             const confirmbtn = document.querySelector('#confirmbtn');
             const contractbtn = document.querySelectorAll('.contractbtn');
                 if (btn === openbtn) {
@@ -77,17 +77,24 @@
                         console.log(takeofflist)
 
                         res.data.forEach(resp => {
-                            takeofflist.innerHTML += '<div class="takeoffdiv"><span><a class="seller_company" href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_company + '">' + resp.seller_company + '</a>' + '</span>'
-                            takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span></div>';
+                            takeofflist.innerHTML += '<span><a class="seller_company" href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_company + '">' + resp.seller_company + '</a>' + '</span>'
+                            takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>';
                             takeofflist.innerHTML += '<span class="status">' + resp.apply_status + '</span>';
                             if (resp.apply_status === "상담중") {
-                                takeofflist.innerHTML += '<div class=""><i class="fa-light fa-circle-info fa-lg" style="color: #999999;"></i><p>'+resp.user_phone+'</p></div>'
+                                takeofflist.innerHTML += '<div class=""><img class="phone_img" src="/image/phone.png" alt="전화번호"><p class="phonenumber">'+resp.user_phone+'</p></div>'
                                 takeofflist.innerHTML += '<input class="hidden_wish_number" type="hidden" value=' + resp.wish_number + '>'
                                 takeofflist.innerHTML += '<input class="hidden_user_id" type="hidden" value=' + resp.user_id + '>'
                             }
+                            document.querySelector('.phone_img').addEventListener('mouseover',function(){
+                                document.querySelector('.phonenumber').style.display="block";
+                            })
+                            document.querySelector('.phone_img').addEventListener('mouseout',function(){
+                                document.querySelector('.phonenumber').style.display="none";
+                            })
                         })
                         buttonstatus();
                     })
+
                 }
                 else if (btn === closebtn) {
                     btn.style.display = 'none';
@@ -101,6 +108,7 @@
                 }
 
         }
+
 
         function createbtn() {
             const btndiv = document.querySelectorAll('.status_wish_number')
@@ -279,7 +287,6 @@
                 const seller_class = document.querySelector('.seller_class');
                 seller_class.style.backgroundcolor= "gray";
             }
-
         }
     </script>
 </head>
@@ -313,8 +320,10 @@
                         <div class="button">
                             <div th:if="${takeoff>0}">
                             <input type="hidden" class="hidden-regwish" th:value="${wish.wish_number}">
-                            <i class="fa-solid fa-caret-down fa-2xl openbtn" onclick="takeofflist(this)"></i>
-                            <i style="display: none" class="fa-solid fa-caret-up fa-2xl closebtn" onclick="takeofflist(this)"></i>
+                                <img class="downimg" src="/image/down.png" alt="다운" onclick="takeofflist(this)">
+                                <img hidden class="upimg" src="/image/up.png" alt="업" onclick="takeofflist(this)">
+<!--                            <i class="fa-solid fa-caret-down fa-2xl openbtn" onclick="takeofflist(this)"></i>-->
+<!--                            <i style="display: none" class="fa-solid fa-caret-up fa-2xl closebtn" onclick="takeofflist(this)"></i>-->
                             </div>
                         </div>
                         <div class="wish_box">
