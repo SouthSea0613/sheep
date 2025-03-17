@@ -3,7 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/css/employment.css">
+    <style>
+        .list_info1 {
+            font-family: 'MangoBoard', 'Pretendard', sans-serif;
+        }
+        .list_info2 {
+            font-family: 'Pretendard', sans-serif;
+        }
+        .list_info3 {
+            font-family: 'Do Hyeon', sans-serif;
+        }
+        .title {
+            
+        }
+        .
+
+
+
+    </style>
 </head>
 <body>
 
@@ -27,15 +44,17 @@
         <th:block th:unless="${#lists.isEmpty(boarddto)}">
             <th:block th:each="employment:${boarddto}">
                 <div th:if="${employment?.employee_status < employment?.job_count}">
-                <div class="area" style="font-family: 'Do Hyeon', sans-serif" th:text="${employment?.job_area}"></div>
-                <input type="hidden" name="board_number" th:value="${employment?.board_number}">
-                <div class="">
-                    <a class="title" style="font-family: 'Pretendard', sans-serif" th:href="@{/employment/detail(board_number=${employment.board_number})}"
+                    <div class="area" style="font-family: 'Do Hyeon', sans-serif"
+                         th:text="${employment?.job_area}"></div>
+                    <input type="hidden" name="board_number" th:value="${employment?.board_number}">
+                    <div class="">
+                        <a class="title" style="font-family: 'Pretendard', sans-serif"
+                           th:href="@{/employment/detail(board_number=${employment.board_number})}"
 
-                       th:text="${employment.board_title}"></a>
-                </div>
-                <div class="" th:text="${employment?.user_id}"></div>
-                <div class="" th:text="${employment?.board_regdate}"></div>
+                           th:text="${employment.board_title}"></a>
+                    </div>
+                    <div class="" th:text="${employment?.user_id}"></div>
+                    <div class="" th:text="${employment?.board_regdate}"></div>
                     <div class="" th:text="${employment?.employee_status}"></div>
                     <div class="" th:text="${employment?.job_count}"></div>
                 </div>
