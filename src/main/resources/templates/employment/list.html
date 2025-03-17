@@ -1,73 +1,60 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <style>
-        .list_info1 {
-            font-family: 'MangoBoard', 'Pretendard', sans-serif;
-        }
-        .list_info2 {
-            font-family: 'Pretendard', sans-serif;
-        }
-        .list_info3 {
-            font-family: 'Do Hyeon', sans-serif;
-        }
-        .title {
-            
-        }
-        .
-
-
-
-    </style>
+    <title>기술자모집</title>
+    <link rel="stylesheet" href="/css/employment.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+          crossorigin/>
 </head>
 <body>
 
 <section>
-    <div class="list">
-        <div class="list_info1" style="font-family: 'MangoDdobak-B', sans-serif">지역</div>
-        <div class="list_info2" style="font-family: 'Do Hyeon', sans-serif">글제목</div>
-        <div class="list_info3" style="font-family: 'SUIT', sans-serif">글쓴이</div>
-        <div class="list_info">등록일</div>
-        <div class="list_info">모집상황</div>
+    <div class="table-header">
+        <div class="title-container">
+        <div class="title">기술자모집</div>
+        </div>
+            <div class="btn_area">
+            <th:block th:if="${session?.user_type eq '1'}">
+                <form th:action="@{/employment/write}" method="get">
+                    <input type="submit" class="btn" value="작성하기">
+                </form>
+            </th:block>
+        </div>
     </div>
-
     <div>
         <th:block th:if="${#lists.isEmpty(boarddto)}">
             <div class="">현재 구인글이 존재하지 않습니다.</div>
         </th:block>
-
     </div>
 
-    <div class="">
-        <th:block th:unless="${#lists.isEmpty(boarddto)}">
-            <th:block th:each="employment:${boarddto}">
-                <div th:if="${employment?.employee_status < employment?.job_count}">
-                    <div class="area" style="font-family: 'Do Hyeon', sans-serif"
-                         th:text="${employment?.job_area}"></div>
-                    <input type="hidden" name="board_number" th:value="${employment?.board_number}">
-                    <div class="">
-                        <a class="title" style="font-family: 'Pretendard', sans-serif"
+    <div class="container">
+        <div class="table">
+            <div class="label">지역</div>
+            <div class="label">글제목</div>
+            <div class="label">글쓴이</div>
+            <div class="label">모집상황</div>
+        </div>
+        <div class="timeleaf">
+            <th:block th:unless="${#lists.isEmpty(boarddto)}">
+                <th:block th:each="employment:${boarddto}">
+                    <div th:if="${employment?.employee_status < employment?.job_count}">
+                        <div class="value" style="font-family: 'Do Hyeon', sans-serif"
+                             th:text="${employment?.job_area}"></div>
+                        <input type="hidden" name="board_number" th:value="${employment?.board_number}">
+                        <a class="value" style="font-family: 'Pretendard', sans-serif"
                            th:href="@{/employment/detail(board_number=${employment.board_number})}"
-
                            th:text="${employment.board_title}"></a>
+                        <div class="value" th:text="${employment?.user_id}"></div>
+                        <div class="status">
+                            <div class="value1" th:text="${employment?.employee_status}"></div>/
+                            <div class="value1" th:text="${employment?.job_count}"></div>
+                        </div>
                     </div>
-                    <div class="" th:text="${employment?.user_id}"></div>
-                    <div class="" th:text="${employment?.board_regdate}"></div>
-                    <div class="" th:text="${employment?.employee_status}"></div>
-                    <div class="" th:text="${employment?.job_count}"></div>
-                </div>
+                </th:block>
             </th:block>
-        </th:block>
-    </div>
-
-    <div class="button_area">
-        <th:block th:if="${session?.user_type eq '1'}">
-            <form th:action="@{/employment/write}" method="get">
-                <input type="submit" class="button" value="작성하기">
-            </form>
-        </th:block>
+        </div>
     </div>
 </section>
 

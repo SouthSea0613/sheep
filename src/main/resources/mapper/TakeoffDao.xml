@@ -26,7 +26,7 @@
     <update id="complete">
         UPDATE APPLY_STATUS
         SET APPLY_STATUS = 2
-        WHERE WISH_NUMBER = #{wish_number} AND USER_ID = #{user_id}
+        WHERE WISH_NUMBER = #{wish_number} AND (USER_ID = #{user_id} or USER_ID = #{seller_user_id})
     </update>
 
     <update id="contract">
