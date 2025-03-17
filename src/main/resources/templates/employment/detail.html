@@ -12,43 +12,111 @@
             location.href = "/employment/resume/write?board_number=" + "[[${param.board_number}]]";
         }
     </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    <style>
+        * {
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        .container {
+            background-color: #ffffff;
+            letter-spacing: 1.5px;
+        }
+
+        .title {
+            display: flex;
+            justify-content: left;
+        }
+
+        .content {
+            display: flex;
+            justify-content: center;
+            color: #3F322E;
+        }
+
+        .table {
+            background-color: #fff8f1;
+            width: 500px;
+        }
+
+        .b_title {
+            display: flex;
+            justify-content: left;
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+
+        }
+
+        .b_company b_user {
+            float: left;
+        }
+
+        .b_content {
+            margin-top: 50px;
+        }
+
+
+        .eb_btn_area {
+            display: block;
+        }
+
+        .eb_btn {
+            display: flex;
+            justify-content: center;
+            background-color: #FFB8A1;
+            width: 100px;
+            height: 25px;
+            border: none;
+            border-radius: 40px;
+            color: #4A4A4A;
+        }
+    </style>
 </head>
 
 <body>
-<section>
-    <h2>employment.detail!</h2>
-    <div class="job-content">
-        <div th:text="${employmentDto?.board_title}"></div>
-        <div th:text="${employmentDto?.seller_company}"></div>
-        <div th:text="${employmentDto?.user_id}"></div>
-        <div th:text="${employmentDto?.job_area}"></div>
-        <div th:text="${employmentDto?.job_status}"></div>
-        <div th:text="${employmentDto?.board_content}"></div>
-    </div>
-    <div class="employment-button">
-        <th:block>
-            <div th:if="${session.user_id eq employmentDto?.user_id and employmentDto?.job_status eq 모집중}">
-                <input type="button" value="마감" onclick="employment_complete()">
-            </div>
-            <div th:if="${session.user_type eq '2' and employmentDto?.job_status eq 모집중}">
-                <input type="button" value="지원하기" onclick="resume_write()">
-            </div>
-        </th:block>
-    </div>
-    <div class="find-job">
-        <div th:if="${#lists.isEmpty(profileDto)}">
-            지원자가 없습니다.
+<div class="container">
+    <section>
+        <div class="title">
+            <h2>employment.detail!</h2>
         </div>
-        <div th:unless="${#lists.isEmpty(profileDto)}">
-            <div th:each="profile: ${profileDto}">
-                <div th:if="${(profile?.parent_board_number eq employmentDto?.board_number
+        <div class="content">
+            <div class="table">
+                <div class="b_title" th:text="${employmentDto?.board_title}"></div>
+                <div class="b_company" th:text="${employmentDto?.seller_company}"></div>
+                <div class="b_user" th:text="${employmentDto?.user_id}"></div>
+                <div class="b_area" th:text="${employmentDto?.job_area}"></div>
+                <div class="b_status" th:text="${employmentDto?.job_status}"></div>
+                <div class="b_content" th:text="${employmentDto?.board_content}"></div>
+            </div>
+            <div class="employment-button">
+                <th:block>
+                    <div class="eb_btn_area"
+                         th:if="${session.user_id eq employmentDto?.user_id and employmentDto?.job_status eq 모집중}">
+                        <input type="button" class="eb_btn" value="마감" onclick="employment_complete()">
+                    </div>
+                    <div class="eb_btn_area" th:if="${session.user_type eq '2' and employmentDto?.job_status eq 모집중}">
+                        <input type="button" class="eb_btn" value="지원하기" onclick="resume_write()">
+                    </div>
+                </th:block>
+            </div>
+            <div class="find-job">
+                <div th:if="${#lists.isEmpty(profileDto)}">
+                    지원자가 없습니다.
+                </div>
+                <div th:unless="${#lists.isEmpty(profileDto)}">
+                    <div th:each="profile: ${profileDto}">
+                        <div th:if="${(profile?.parent_board_number eq employmentDto?.board_number
                 and session.user_id eq profile?.user_id) or (profile?.parent_board_number eq employmentDto?.board_number
                 and session.user_type eq '1') and profile?.employee_status != 1}">
-                    <a th:href="@{/employment/resume/detail(board_number=${profile.board_number})}" th:text="${profile.board_title}">견적서 제목</a>
+                            <a th:href="@{/employment/resume/detail(board_number=${profile.board_number})}"
+                               th:text="${profile.board_title}">견적서 제목</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>
 </body>
 </html>
