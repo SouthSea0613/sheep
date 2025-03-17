@@ -171,11 +171,12 @@ public class TakeoffController {
         return takeoffdtolist;
     }
 
-    // (판매자) 내가준 견적리스트 에서 <계약완료>! ---------------------------------------
+    // (소비자) 위시리스트 에서 <계약완료>! ---------------------------------------
     @GetMapping("/complete")
-    public String complete(@RequestParam("wish_number") Integer wish_number, @RequestParam("user_id") String user_id) {
+    public String complete(@RequestParam("wish_number") Integer wish_number, @RequestParam("user_id") String user_id, HttpSession httpSession) {
         log.info(wish_number.toString());
-        if (takeoffService.complete(wish_number, user_id)) {
+        String seller_user_id = httpSession.getAttribute("user_id").toString();
+        if (takeoffService.complete(wish_number, user_id, seller_user_id)) {
             return "redirect:/wish/list";
         } else {
             return "takeoff/seller/detail";

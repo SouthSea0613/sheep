@@ -44,6 +44,7 @@ public class EmploymentController {
     @GetMapping("/select_area")
     public String select_area(Model model) {
         model.addAttribute("action", "/employment/write");
+        model.addAttribute("seller_area", "/employment/write");
         log.info("action: {}", model.getAttribute("action"));
         return "takeoff/seller/select_area";
     }
