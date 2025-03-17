@@ -105,6 +105,7 @@
     </div>
 
     <div class="button-section" th:if="${session?.user_type == '1' and wish_dto?.apply_status == '대기중'}">
+        <input type="hidden" id="wish_number" th:value="${param?.wish_number}">
         <input type="button" onclick="seller_write()" value="작성하기">
     </div>
 </div>
