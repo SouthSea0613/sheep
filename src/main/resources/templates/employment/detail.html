@@ -300,7 +300,7 @@
                 <th:block th:each="profile: ${profileDto}">
                     <th:block th:if="${(profile?.parent_board_number eq employmentDto?.board_number
                 and session.user_id eq profile?.user_id) or (profile?.parent_board_number eq employmentDto?.board_number
-                and session.user_type eq '1') and profile?.employee_status != 1}">
+                and session.user_type eq '1' and employmentDto?.user_id eq session.user_id) and profile?.employee_status != 1}">
                         <div class="applicant_item">
                             <a th:href="@{/employment/resume/detail(board_number=${profile.board_number})}"
                                class="view-resume"
