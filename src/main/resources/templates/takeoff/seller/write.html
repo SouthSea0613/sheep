@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>견적서 작성</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script defer src="/javascript/common.js"></script>
     <link rel="stylesheet" href="/css/headerfooter.css">
@@ -19,81 +19,89 @@
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<!-- container 클래스를 그대로 유지 -->
+
+<!-- 중앙 정렬된 메인 콘텐츠 -->
 <div class="main_content container">
     <div class="content">
         <form action="/takeoff/seller/write" id="write_form" method="post">
             <!-- 페이지 제목 -->
             <h2 class="page_logo">견적서 작성</h2>
-            <!-- 상단 기본 정보 (주소/주거형태/평수/평수참고/예산) -->
+
+            <!-- 기본 정보 -->
             <div class="basic_info">
                 <h3>기본 정보</h3>
                 <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
-                <div class="u_addr" th:text="${wish_dto?.wish_addr}">주소</div>
-                <div th:text="${wish_dto?.wish_type}">주거형태</div>
-                <div th:text="${wish_dto?.wish_size}">평수</div>
-                <div th:text="${wish_dto?.wish_size_text}">평수참고</div>
-                <div class="u_money" th:text="${wish_dto?.wish_money}+만원">예산</div>
+                <div><strong>주소</strong> <span class="u_addr" th:text="${wish_dto?.wish_addr}">주소</span></div>
+                <div><strong>주거형태</strong> <span th:text="${wish_dto?.wish_type}">주거형태</span></div>
+                <div><strong>평수</strong> <span th:text="${wish_dto?.wish_size}">평수</span></div>
+                <div><strong>평수 참고</strong> <span th:text="${wish_dto?.wish_size_text}">평수참고</span></div>
+                <div><strong>예산</strong> <span class="u_money" th:text="${wish_dto?.wish_money}+만원">예산</span></div>
             </div>
 
             <!-- 카테고리별 정보 -->
             <th:block th:each="category : ${category_list_dto}">
-                <!-- category_section 클래스도 추가하여 기존 테마와 일치 -->
                 <div class="wish_info category_section">
-                    <!-- 대분류: 굵고 큰 글씨 -->
-                    <div class="major_category" th:text="${category.major_text}">대분류 텍스트</div>
+                    <!-- 대분류 (주요 카테고리) -->
+                    <div class="major_category" th:text="${category.major_category}">대분류</div>
                     <input type="hidden" name="category_number" th:value="${category?.major_category}">
-                    <!-- 중분류: 구분되어 보이도록 -->
+
+                    <!-- 중분류 목록 -->
                     <th:block th:each="subcategory : ${category.sub_category}">
-                        <div class="sub_category" th:text="${subcategory}">중분류 넘버</div>
+                        <div class="sub_category" th:text="${subcategory}">중분류</div>
                     </th:block>
 
-                    <!-- 견적 입력 부분 -->
+                    <!-- 대분류 텍스트 (사용자가 입력한 내용) -->
+                    <div class="major_text" th:if="${category.major_text}!=null" th:text="${category.major_text}">대분류 설명</div>
+
+                    <!-- 견적 입력 -->
                     <div class="takeoff">
                         <input type="text" name="takeoff_content" class="takeoff_content" placeholder="상세하게 적어주세요.">
                     </div>
                     <div class="takeoff_money">
                         <input type="text"
                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                               name="takeoff_money" class="takeoff_money" placeholder="견적을 적어주세요." onblur="all_money()">만원
+                               name="takeoff_money" class="takeoff_money" placeholder="견적을 입력해주세요." onblur="all_money()">
                     </div>
                 </div>
             </th:block>
+
             <!-- 버튼 영역 -->
             <div class="button_div">
                 <input type="button" value="견적 저장" onclick="takeoffbtn()">
             </div>
         </form>
-        <br>
+
         <!-- 합계 영역 -->
         <div class="takeoff_all_money total_price">
             합계: <input type="text" id="takeoff_all_money" readonly name="takeoff_all_money">만원
         </div>
     </div>
-    <script>
-        function takeoffbtn() {
-            let takeoff_content_number = document.getElementsByClassName("takeoff_content");
-            for (let i = 0; i < takeoff_content_number.length; i++) {
-                if (takeoff_content_number[i].value == '') {
-                    alert("상세 견적을 작성 해주세요.");
-                    takeoff_content_number[i].focus();
-                    return false;
-                }
-            }
-            $('#write_form').submit();
-        }
-
-        function all_money() {
-            let total = 0;
-            const money_input = document.querySelectorAll(".takeoff_money");
-            money_input.forEach(money => {
-                total += parseInt(money.value) || 0;
-            });
-            const all_money_input = document.getElementById("takeoff_all_money");
-            all_money_input.value = total;
-        }
-    </script>
 </div>
+
+<!-- JavaScript -->
+<script>
+    function takeoffbtn() {
+        let takeoff_content_number = document.getElementsByClassName("takeoff_content");
+        for (let i = 0; i < takeoff_content_number.length; i++) {
+            if (takeoff_content_number[i].value == '') {
+                alert("상세 견적을 작성 해주세요.");
+                takeoff_content_number[i].focus();
+                return false;
+            }
+        }
+        $('#write_form').submit();
+    }
+
+    function all_money() {
+        let total = 0;
+        const money_input = document.querySelectorAll(".takeoff_money");
+        money_input.forEach(money => {
+            total += parseInt(money.value) || 0;
+        });
+        document.getElementById("takeoff_all_money").value = total;
+    }
+</script>
+
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
