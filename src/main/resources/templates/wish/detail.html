@@ -6,8 +6,10 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="/javascript/common.js"></script>
-<link rel="stylesheet" href="/css/headerfooter.css">
-<link rel="stylesheet" href="/css/wish.css">
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/wish.css">
+    <link rel="stylesheet" href="/css/wishdetail.css">
+
     <script>
         const user = "[[${session?.user_id}]]";
         const type = "[[${session?.user_type}]]";
@@ -23,6 +25,14 @@
         list-style-type: none;
     }
 </style>
+    <script>
+        onload=()=> {
+            const addr = "[[${wish_dto?.wish_addr}]]";
+            const address = addr.split('@')
+            console.log(address[0] + address[1])
+            document.querySelector('.wish_addr').innerHTML = address[0] + " " + address[1]
+        }
+    </script>
 </head>
 
 <body>
@@ -30,19 +40,33 @@
 <div class="main_content">
 <h2>위시 디테일</h2>
     <div class="eun_wish_detail_box">
-    <div th:text="${wish_dto?.wish_addr}">주소</div><br>
-    <div th:text="${wish_dto?.wish_type}">주거형태</div><br>
-    <div th:text="${wish_dto?.wish_size}">평수</div><br>
-    <div th:text="${wish_dto?.wish_size_text}">평수상세</div><br>
-    <div th:text="${wish_dto?.wish_money}+만원">예산</div><br>
+<!--    <div class="frame">-->
+<!--    <p>주소</p><div class="wish_addr"></div>-->
+<!--    </div>-->
+<!--    <div class="frame">-->
+<!--    <p>주거형태</p><div th:text="${wish_dto?.wish_type}">주거형태</div>-->
+<!--    </div>-->
+<!--    <div class="frame">-->
+<!--    <p>평수</p><div th:text="${wish_dto?.wish_size}">평수</div>-->
+<!--    </div>-->
+<!--    <div class="frame">-->
+<!--    <p>평수상세</p><div th:text="${wish_dto?.wish_size_text}">평수상세</div>-->
+<!--    </div>-->
+<!--    <div class="frame">-->
+<!--    <p>예산</p><div th:text="${wish_dto?.wish_money}+만원">예산</div>-->
+<!--    </div>-->
+        <div th:text="${wish_dto?.wish_addr}">주소</div>
+        <div th:text="${wish_dto?.wish_type}">주거형태</div>
+        <div th:text="${wish_dto?.wish_size}">평수</div>
+        <div th:text="${wish_dto?.wish_size_text}">평수상세</div>
+        <div th:text="${wish_dto?.wish_money}+만원">예산</div>
 
     <th:block th:each="category:${category_list_dto}">
-        <div th:text="'<'+${category.major_category}+'>'">대분류 넘버</div>
+        <div class="majorcategory" th:if="${category.major_category}!=null" th:text="${category.major_category}">대분류 넘버</div>
         <th:block th:each="subcategory:${category.sub_category}">
-            <div th:text="${subcategory}">중분류 넘버</div>
+            <div th:if="${subcategory}!=null" th:text="${subcategory}">중분류 넘버</div>
         </th:block>
-        <div th:text="${category.major_text}">대분류 텍스트</div>
-        <br>
+        <div th:if="${category.major_text}!=null" th:text="${category.major_text}">대분류 텍스트</div>
     </th:block>
     <div id="takeoffarea" th:if="${session?.user_type == '0' && wish_dto?.apply_status==null}" class="takeoffarea">
         <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">

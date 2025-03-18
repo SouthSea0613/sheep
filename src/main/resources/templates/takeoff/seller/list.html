@@ -86,8 +86,6 @@
 </head>
 
 <body>
-<div class="area">
-</div>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 
 <div class="container">
@@ -100,22 +98,46 @@
 	</th:block>
 </div>
 <div class="button_div"><input type="button" class="0" value="들어온 견적" onclick="tab(this)"><input type="button" class="1" value="작성한 견적" onclick="tab(this)"><input type="button" class="2" value="종료된 견적" onclick="tab(this)"></div>
-<div id="enterlist">
+
+	<div id="enterlist">
 	<th:block th:if="${#lists.isEmpty(seller_takeoff_list)}">
 		<div class="non_seller_takeoff_list">
 			<div>들어온 견적리스트가 없습니다.</div>
 			<input type="button" id="seller_area" onclick="select_seller_area()" value="지역설정">
 		</div>
 	</th:block>
+
 	<th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
 		<th:block th:each="takeofflist : ${seller_takeoff_list}">
-			<div class="enter_takeoff_div">
-			<a class="title_a" th:href="@{/wish/detail(wish_number=${takeofflist.wish_number})}" th:text="${takeofflist.wish_title}"></a>
-			<p class="user_id_p" th:text="${takeofflist.user_id}"></p>
+			<div class="main_box" th:onclick="|location.href='/wish/detail?wish_number=' + ${takeofflist.wish_number}|">
+
+					<div class="u_name_money">
+					<div class="u_name">
+						<span class="title_a" th:text="'고객명: '"></span>
+						<span th:text="${takeofflist.user_name}"></span>
+					</div>
+
+					<div class="u_money">
+						<span class="title_a" th:text="'예산: '"></span>
+						<span th:text="${takeofflist.wish_money} + '만원'"></span>
+					</div>
+					</div>
+
+				<div class="u_addr">
+					<span class="title_a" th:text="'주소: '"></span>
+					<span th:text="${takeofflist.wish_title}"></span>
+				</div>
+
+				<div>
+					<p class="title_a">시공분야</p>
+					<span th:text="${#strings.listJoin(takeofflist.major_category.![category_number], ', ')}"></span>
+				</div>
+
 			</div>
 		</th:block>
 	</th:block>
-</div>
+
+	</div>
 <div id="writetakeoff"></div>
 <div class="endtakeoff"></div>
 </div>

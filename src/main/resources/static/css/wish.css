@@ -1,184 +1,5 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    height: 90vh;
-    min-width : 400px;
-}
-
-.main_content {
-    height: auto;
-    min-height: 100%;
-    padding: 3vh 0;
-}
-
-hr {
-    margin: 2vh 0;
-}
-
-.wish-list-area {
-   display: flex;
-    flex-flow: column;
-    justify-content: center;
-
-}
-
-.container{
-
-}
-
-.non_wish {
-    text-align: center;
-}
-
-.wish_list_block {
-    width: 100%;
-    margin: 5px auto;
-    padding: 2vh 3vh;
-    border: 1px solid #6e6e6e;
-    border-radius: 3vh;
-    background-color: #003366;
-    color : white;
-
-}
-.wish_box{
-    background-color: #003366;
-}
-.wish_box a{
-    background-color: #003366;
-    color : white;
-}
-.wish_container{
-    display: flex;
-    width: 100%;
-    color : white;
-    justify-content: space-between;
-    background-color: #003366;
-
-}
-.wish_container a{
-
-    color : white;
-    background-color: #003366;
-
-}
-
-.wish_apply_status {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width : 130px;
-    height : 30px;
-    border-radius: 15vh;
-    padding: 5px 0;
-    font-weight : bold;
-    background-color: white;
-    color :  #003366;
-}
-
-.detaillink{
-    color : black;
-    text-decoration: none;
-    font-size : 18px;
-}
-
-.detaillink:hover{
-    color : gray;
-    text-decoration: underline;
-}
-
-.openbtn{
-    cursor: pointer;
-}
-
-.closebtn{
-    cursor: pointer;
-}
-
-.wishBarea{
-    width: 100%;
-}
-
-.eun_wish_detail_box {
-    margin: 0 auto;
-    padding: 3vh 3vh;
-    width: 65vh;
-    justify-content: center;
-    border: 1px solid black;
-    border-radius: 3vh;
-}
-
-.eun_wish_detail_box hr {
-    margin: 2vh 0;
-}
-
-.eun_wish_category_box {
-    text-align: center;
-}
-
-.eun_wish_write_container {
-    margin: 0 auto;
-    padding: 3vh 3vh;
-    width: 65vh;
-    justify-content: center;
-    border: 1px solid black;
-    border-radius: 3vh;
-}
-
-.wish_addr_content {
-    display: inline;
-}
-
-.wish_write_btn {
-    /*margin: 2vh 3vh;*/
-    justify-self: end;
-}
-
-.wish_btn_list {
-    all: unset;
-    display: block;
-    margin: 1vh auto;
-    width: 15vh;
-    height: 5vh;
-    text-align: center;
-    background-color: #449fff;
-    border-radius: 15vh;
-    transition: all 0.3s ease;
-}
-
-.wish_btn_list:hover {
-    background-color: #2f7edb;
-    cursor: pointer;
-}
-
-.write_addr_btn {
-    all: unset;
-    display: inline-block;
-    margin: 0 1vh;
-    width: 8vh;
-    height: 3vh;
-    padding: 0 10px;
-    font-size: 14px;
-    text-align: center;
-    background-color: #FFC5B2;
-    color: white;
-    border-radius: 10px;
-    border: 1px solid #5faee7;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.write_addr_btn:hover {
-    background-color: #fc9c7c;
-    cursor: pointer;
-}
-.wish-list-area{
-    width: 60%;
-    margin : 50px auto;
+body{
+    background-color: #f8f9fa;
 }
 .tab_button input{
     border : none;
@@ -189,6 +10,7 @@ hr {
     font-weight : bold;
     font-size : 15px;
     color : white;
+    border-radius: 10px 10px 0 0;
 }
 .tab input:hover{
     border : none;
@@ -198,18 +20,18 @@ hr {
     box-shadow: 0 0 2px 0;
     cursor: pointer;
 }
-#wish_write{
+#wish_write {
     border: 1px solid lightgray;
     box-shadow: 0 0 1px 0;
-    width : 100px;
+    width: 100px;
     border-radius: 10px;
-    height : 40px;
+    height: 40px;
     background-color: #C8102E;
-    color : white;
+    color: white;
     font-weight: bold;
-    font-size : 15px;
-
+    font-size: 15px;
 }
+/*}*/
 .tab{
     display: flex;
     width : 100%;
@@ -217,27 +39,27 @@ hr {
     margin-top: 2%;
 }
 
-a{
-    color : black;
-    text-decoration: none;
-}
-.takeoffdiv a:hover{
-    text-decoration: underline;
-}
-.seller_company{
-    font-weight : bold;
-    font-size : 18px;
-}
-.fa-phone{
-    width : 50px;
-    height: 50px;
-    /*border : 2px solid black;*/
-    /*border-radius: 50%;*/
-}
-.phonenumber{
-    display: none;
-    position: absolute;
-}
+/*a{*/
+/*    color : black;*/
+/*    text-decoration: none;*/
+/*}*/
+/*.takeoffdiv a:hover{*/
+/*    text-decoration: underline;*/
+/*}*/
+/*.seller_company{*/
+/*    font-weight : bold;*/
+/*    font-size : 18px;*/
+/*}*/
+/*.fa-phone{*/
+/*    width : 50px;*/
+/*    height: 50px;*/
+/*    !*border : 2px solid black;*!*/
+/*    !*border-radius: 50%;*!*/
+/*}*/
+/*.phonenumber{*/
+/*    display: none;*/
+/*    position: absolute;*/
+/*}*/
 .phone_img{
     width : 20px;
     height : 20px;
@@ -245,12 +67,73 @@ a{
 .downimg{
     width : 20px;
     height : 20px;
+    background-color: #003366;
 }
 .upimg{
     width : 20px;
     height : 20px;
+    background-color: #003366;
 }
-.button{
+.downimg2{
+    width : 20px;
+    height : 20px;
+    background-color: #003366;
+}
+.upimg2{
+    width : 20px;
+    height : 20px;
+    background-color: #003366;
+}
+/*.button{*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    background-color: #003366;*/
+/*}*/
+/*.button div{*/
+/*    background-color: #003366;*/
+/*}*/
+
+body{
+    width : 100%;
+    height : 100%;
+}
+.main_content{
+    width: 60%;
+    margin : 10% auto;
+}
+.all_wish  *{
+    background-color:#003366;
+    color : white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.wish_container{
+    background-color:#003366;
+}
+.wish_takeoff{
+    border : none;
+    background-color: #C8102E;
+}
+.wish_list_block{
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    padding: 3% 5%;
+}
+.wish_takeoff{
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.endwish *{
+    background-color:#003366;
+}
+.wish_list_block *{
+    background-color:#003366;
+    color : white;
+    text-decoration: none;
+}
+.wish_list_block{
+    background-color:#003366;
+}
+.button_endlist{
+
 }

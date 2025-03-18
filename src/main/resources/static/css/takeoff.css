@@ -1,3 +1,6 @@
+/* ========== 기존 CSS 파일 (건드리지 마세요) ========== */
+
+/* ==================== 기본 설정 ==================== */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -6,123 +9,396 @@
 
 body {
     height: 90vh;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
 }
 
-.main_content {
-    height: auto;
-    min-height: 100%;
-    padding: 30px 0;
+/* ==================== 컨테이너 ==================== */
+.container {
+    width: 60%;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 140px auto 30px auto;
 }
 
-h2 {
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 3%;
+/* ==================== 페이지 제목 ==================== */
+.page_logo {
+    font-weight: bold;
+    font-size: 25px;
+    padding: 20px 0;
+    text-align: center;
 }
 
-.content {
-    margin: 5vh auto;
-    padding: 3vh 3vh;
-    width: 75vh;
-    border: 1px solid black;
-    border-radius: 3vh;
+/* ==================== 버튼 스타일 ==================== */
+.button_div {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-.area {
-    position: absolute;
-    border: 1px solid black;
-    width: 30%;
-    background-color: green;
-    left: 50%;
-    top: 50%;
-    display: none;
-}
-
-.button_div input{
-    border : none;
-    width : 130px;
-    height : 40px;
+.button_div input {
+    border: none;
+    width: 130px;
+    height: 40px;
     background-color: #FFC5B2;
     box-shadow: 0 0 2px 0;
     border-radius: 10px 10px 0 0;
-    font-weight : bold;
-    font-size : 15px;
+    font-weight: bold;
+    font-size: 15px;
+    transition: background-color 0.3s, transform 0.2s;
 }
-.button_div input:hover{
-    border : none;
-    width : 130px;
-    height : 40px;
+
+.button_div input:hover {
     background-color: #fc9c7c;
-    box-shadow: 0 0 2px 0;
-    border-radius: 10px 10px 0 0;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+/* ==================== 리스트 스타일 ==================== */
+#enterlist, .endtakeoff, #writetakeoff {
+    padding: 15px;
+}
+
+/* 항목별 리스트 스타일 */
+.entercontent, .end_div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.entercontent:hover, .end_div:hover {
+    background-color: #e9ecef;
     cursor: pointer;
 }
-.enter_takeoff_div{
-    padding: 1% 3%;
-}
-.user_id_p{
-    background-color: #fc9c7c;
+
+/* ==================== 상태 표시 박스 ==================== */
+.status_class {
     border-radius: 10px;
-    font-weight: bold;
-    width : 100px;
+    background-color: #fc9c7c;
+    width: 130px;
+    height: 30px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    font-weight: bold;
     padding: 5px 0;
 }
 
-#enterlist {
-    /*border: 1px solid gray;*/
-    box-shadow: 0 0 2px 0;
-}
-
-a{
+/* ==================== 링크 스타일 ==================== */
+a {
     text-decoration: none;
-    color : black;
+    color: black;
     font-weight: bold;
+}
 
+.title_a {
+    font-size: 18px;
+    font-weight: bold;
 }
-.title_a{
-    font-size : 20px;
+
+.write_a {
+    font-size: 20px;
 }
-.write_a{
-    font-size : 20px;
-}
-.container{
-    width: 60%;
-    margin : 30px auto;
-}
-.enter_takeoff_div{
-    display: flex;
-    justify-content: space-between;
-}
-.enter_takeoff_div:hover{
-    background-color: lightgray;
-    cursor: pointer;
-    text-decoration: underline;
-}
-.page_logo{
-    font-weight : bold;
-    font-size: 25px;
-    padding: 20px 0;
-}
-.entercontent{
-    box-shadow: 0 0 2px 0;
-    padding: 1% 3%;
-    display: flex;
-    justify-content: space-between;
-}
-.end_div{
-    box-shadow: 0 0 2px 0;
-    padding: 1% 3%;
-    display: flex;
-}
-.status_class{
+
+/* ==================== 메인 박스 디자인 ==================== */
+.main_box {
+    background-color: #003366;
+    color: white;
+    margin-top: 20px;
+    padding: 15px;
     border-radius: 10px;
-    background-color: #fc9c7c;
-    width : 130px;
-    height : 30px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.main_box:hover {
+    transform: translateY(-3px);
+}
+
+/* ==================== 사용자 정보 섹션 ==================== */
+.u_name_money {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* 기존 10px에서 15px로 간격 조정 */
+    margin-top: 10px;
+}
+
+.u_name, .u_money {
+    font-size: 16px;
+}
+
+.u_money {
+    margin-bottom: 15px; /* 예산과 주소 사이 간격 추가 */
+}
+
+.u_addr {
+    margin-bottom: 15px;
+}
+
+/* ==================== 지역 설정 팝업 ==================== */
+.area {
+    position: absolute;
+    width: 30%;
+    background-color: green;
+    color: white;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+/* ==================== 견적 정보 섹션 ==================== */
+.wish_info {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.wish_info div {
+    font-size: 16px;
+    margin-bottom: 15px; /* 각 항목 간 간격을 조금 늘림 */
+}
+
+/* ==================== 판매자 답변 섹션 ==================== */
+.seller_response {
+    background-color: #f1f3f5;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+}
+
+.seller_response div {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+/* ==================== 합계 금액 스타일 ==================== */
+.total_price {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    background-color: #ffc107;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== 계약 버튼 스타일 ==================== */
+.contract_section {
     display: flex;
     justify-content: center;
+    margin-top: 20px;
+}
+
+.contract_section form {
+    display: inline-block;
+}
+
+.contract_section input[type="submit"] {
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contract_section input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* ========== 여기서부터 추가할 CSS 코드 ========== */
+
+/* 견적서 작성 페이지 스타일 (기존 테마와 유사하게) */
+.main_content {
+    /* container 클래스로 이미 컨테이너 스타일이 적용되어 있으므로 중앙 정렬만 추가 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.content {
+    width: 100%; /* container 내에 있으므로 100% 사용 */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 페이지 제목 보완 (container의 .page_logo와 중복되지 않게) */
+.content h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* 견적서 작성 입력 필드 스타일 */
+.takeoff {
+    margin-top: 15px;
+}
+
+.takeoff input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.takeoff input:focus {
+    border-color: #fc9c7c;
+    outline: none;
+}
+
+/* 견적 금액 입력 필드 스타일 */
+.takeoff_money {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.takeoff_money input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: right;
+}
+
+.takeoff_money input:focus {
+    border-color: #fc9c7c;
+    outline: none;
+}
+
+.takeoff_money::after {
+    content: "만원";
+    margin-left: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* 견적 저장 버튼 보완 */
+.content div input[type="button"] {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFC5B2;
+    color: black;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.content div input[type="button"]:hover {
+    background-color: #fc9c7c;
+    transform: scale(1.05);
+}
+
+/* 합계 금액 영역 보완 */
+.takeoff_all_money {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px;
+    background-color: #ffc107;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.takeoff_all_money input {
+    width: 100px;
+    padding: 8px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+}
+
+/* 정보 표시 영역 (주소, 주거형태, 평수 등) */
+.content div:not(.takeoff, .takeoff_money, .takeoff_all_money) {
+    font-size: 16px;
+    padding: 8px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+/* 카테고리 정보 영역 (필요시 사용) */
+.category_section {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.category_section div {
+    font-size: 16px;
     font-weight: bold;
     padding: 5px 0;
+}
+/* ========== 추가할 CSS 코드 ========== */
+
+/* 상단 기본 정보 영역 */
+.basic_info {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #fefefe;
+}
+
+.basic_info h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #fc9c7c;
+    padding-bottom: 5px;
+}
+
+/* 대분류 스타일: 굵고 큰 글씨 */
+.major_category {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #003366;
+}
+
+/* 중분류 스타일: 들여쓰기 및 작은 글씨 */
+.sub_category {
+    font-size: 16px;
+    margin-left: 15px;
+    margin-bottom: 5px;
+}
+.button_div input{
+    background-color: #C8102E;
+    color : white;
+    font-weight: bold;
 }

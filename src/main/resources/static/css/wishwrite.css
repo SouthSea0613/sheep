@@ -1,32 +1,138 @@
-.address_span{
-    color : gray;
+/* 전체 페이지 기본 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* 크림 화이트 */
+    color: #333;
+    margin: 0;
+    padding: 0;
 }
-.title_span{
-    font-size : 18px;
-}
-.title{
-    font-size : 18px;
-    font-weight: bold;
-}
-dl{
-    margin: 0 20px;
-}
-p{
-    color : #848181;
-}
-.info{
-    color : #848181;
-}
-label{
-    font-weight: bold;
-    font-size : 18px;
 
+/* 메인 콘텐츠 */
+.main_content {
+    width: 80%;
+    max-width: 800px;
+    margin: 140px auto 30px auto; /* 헤더 높이만큼 여백 추가 */
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-h2{
-    width : 30%;
-    margin : 20px auto;
+
+/* 제목 */
+h2 {
+    text-align: center;
+    color: #003366; /* 딥 블루 */
+    font-size: 24px;
+    margin-bottom: 20px;
 }
-input[type=text]{
-    width : 50%;
-    height : 30px;
+
+/* 폼 스타일 */
+.eun_wish_write_container {
+    padding: 20px;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 입력 필드 스타일 */
+input[type="text"],
+input[type="number"],
+textarea {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    border-color: #003366; /* 포커스 시 딥 블루 */
+    outline: none;
+}
+
+/* 버튼 스타일 */
+.wish_btn_list {
+    display: block;
+    width: 100%;
+    background-color: #C8102E; /* 딥 레드 */
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.wish_btn_list:hover {
+    background-color: #9B0C23;
+}
+
+/* 카테고리 스타일 */
+.title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366; /* 딥 블루 */
+    margin-top: 15px;
+}
+
+/* 체크박스 & 라디오 버튼 */
+input[type="checkbox"],
+input[type="radio"] {
+    margin-right: 5px;
+    accent-color: #C8102E; /* 딥 레드 */
+}
+
+/* 참고 안내 */
+.info {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* 섹션 구분 라인 */
+hr {
+    border: none;
+    height: 1px;
+    background: #ccc;
+    margin: 20px 0;
+}
+
+/* 주소 입력 컨테이너 */
+.wish_addr_content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+/* 주소 찾기 버튼 */
+.write_addr_btn {
+    background-color: #003366; /* 딥 블루 */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.write_addr_btn:hover {
+    background-color: #002244;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .main_content {
+        width: 95%;
+    }
+
+    .wish_addr_content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

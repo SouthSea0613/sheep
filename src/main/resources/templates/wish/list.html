@@ -77,20 +77,22 @@
                         console.log(takeofflist)
 
                         res.data.forEach(resp => {
+                            console.log(resp)
+                            takeofflist.innerHTML += '<div>'
                             takeofflist.innerHTML += '<span><a class="seller_company" href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_company + '">' + resp.seller_company + '</a>' + '</span>'
                             takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>';
                             takeofflist.innerHTML += '<span class="status">' + resp.apply_status + '</span>';
                             if (resp.apply_status === "상담중") {
-                                takeofflist.innerHTML += '<div class=""><img class="phone_img" src="/image/phone.png" alt="전화번호"><p class="phonenumber">'+resp.user_phone+'</p></div>'
                                 takeofflist.innerHTML += '<input class="hidden_wish_number" type="hidden" value=' + resp.wish_number + '>'
                                 takeofflist.innerHTML += '<input class="hidden_user_id" type="hidden" value=' + resp.user_id + '>'
                             }
-                            document.querySelector('.phone_img').addEventListener('mouseover',function(){
-                                document.querySelector('.phonenumber').style.display="block";
-                            })
-                            document.querySelector('.phone_img').addEventListener('mouseout',function(){
-                                document.querySelector('.phonenumber').style.display="none";
-                            })
+                            takeofflist.innerHTML += '</div>'
+                        })
+                        document.querySelector('.phone_img').addEventListener('mouseover',function(){
+                            document.querySelector('.phonenumber').style.display="block";
+                        })
+                        document.querySelector('.phone_img').addEventListener('mouseout',function(){
+                            document.querySelector('.phonenumber').style.display="none";
                         })
                         buttonstatus();
                     })
@@ -146,6 +148,7 @@
                             takeofflist.style.display = "block";
                             contractbtn[i].style.display = 'block';
                             confirmbtn.style.display="none";
+
 
                         }else{
                             alert("견적확정이 실패했습니다.")
@@ -210,14 +213,15 @@
                     if(res.data.wish_number!=null){
                     endwish.innerHTML+= '<span>'+res.data.wish_title+'</span>'
                     endwish.innerHTML+= '<span>'+res.data.apply_status+'</span>'
-                    endwish.innerHTML+= '<div class="endlist"></div>'
+                    endwish.innerHTML+= '<span class="endlist"></span>'
                         buttondiv.forEach(div=>{
                             console.log(div)
-                            div.innerHTML += '<i class="fa-solid fa-caret-down fa-2xl openbtn2" onClick="takeoffendlist(this)"></i>'
-                            div.innerHTML += '<i style="display: none" class="fa-solid fa-caret-up fa-2xl closebtn2" onClick="takeoffendlist(this)"></i>'
+                            div.innerHTML += '<img class="downimg2" src="/image/down.png" alt="다운" onclick="takeoffendlist(this)">'
+                            div.innerHTML += '<img hidden class="upimg2" src="/image/up.png" alt="다운" onclick="takeoffendlist(this)">'
                         })
                     num=1;
                     }else{
+
                         endwish.innerHTML+='<p>종료된 위시가 존재하지 않습니다.</p>'
                     }
                 })
@@ -239,8 +243,8 @@
 
         function takeoffendlist(btn) {
             const wishnumber = document.querySelectorAll('.end_wish_number')
-            const openbtn = document.querySelectorAll('.openbtn2')
-            const closebtn = document.querySelectorAll('.closebtn2')
+            const openbtn = document.querySelectorAll('.downimg2')
+            const closebtn = document.querySelectorAll('.upimg2')
             const list = document.querySelectorAll('.endlist')
             const endwish_div = document.querySelectorAll('.endwish')
             console.log("엥")
@@ -275,13 +279,14 @@
                     })
                     })
                 }else if(btn===closebtn[i]){
-                    endwish_div.forEach(div=>{
+                    // endwish_div.forEach(div=>{
+                    //
+                    //     div.style.display="none";
+                    //
+                    // })
+                    list.forEach(div => {
                         openbtn[i].style.display="block";
                         closebtn[i].style.display="none";
-                        div.style.display="none";
-
-                    })
-                    list.forEach(div => {
                         div.innerHTML = null;
                     })
                     endwish();
@@ -299,7 +304,7 @@
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
     <div class="wish-list-area">
-        <h2>위시리스트</h2>
+        <h2>인테리어 위시</h2>
         <th:block th:if="${#lists.isEmpty(wish_list) and #lists.isEmpty(wish_req_list)}">
             <div class="non_wish">
                 <div>위시리스트가 없습니다</div>
@@ -308,8 +313,7 @@
         <div class="wishBarea wish_write_btn">
             <div class="tab">
                 <div class="tab_button">
-                    <input type="button" class="wish_ing" value="진행중 위시" onclick="ingtab()">
-                    <input type="button" class="wish_end" value="종료된 위시" onclick="endwish()">
+                    <input type="button" class="wish_ing" value="진행중 위시" onclick="ingtab()"><input type="button" class="wish_end" value="종료된 위시" onclick="endwish()">
                 </div>
                 <div class="write_btn">
                     <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
@@ -327,8 +331,6 @@
                             <input type="hidden" class="hidden-regwish" th:value="${wish.wish_number}">
                                 <img class="downimg" src="/image/down.png" alt="다운" onclick="takeofflist(this)">
                                 <img hidden class="upimg" src="/image/up.png" alt="업" onclick="takeofflist(this)">
-<!--                            <i class="fa-solid fa-caret-down fa-2xl openbtn" onclick="takeofflist(this)"></i>-->
-<!--                            <i style="display: none" class="fa-solid fa-caret-up fa-2xl closebtn" onclick="takeofflist(this)"></i>-->
                             </div>
                         </div>
                         <div class="wish_box">
@@ -401,9 +403,9 @@
                     <span class="button_endlist">
                     </span>
                     <!--종료된 위시-->
-                    <div class="endwish">
+                    <span class="endwish">
 
-                    </div>
+                    </span>
                 </div>
             </div>
         </div>

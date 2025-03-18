@@ -26,7 +26,7 @@
     <update id="complete">
         UPDATE APPLY_STATUS
         SET APPLY_STATUS = 2
-        WHERE WISH_NUMBER = #{wish_number} AND USER_ID = #{user_id}
+        WHERE WISH_NUMBER = #{wish_number} AND (USER_ID = #{user_id} or USER_ID = #{seller_user_id})
     </update>
 
     <update id="contract">
@@ -44,7 +44,7 @@
     <update id="update_contract_status">
         UPDATE APPLY_STATUS
         SET APPLY_STATUS = 4
-        WHERE WISH_NUMBER = #{wish_number}
+        WHERE WISH_NUMBER = #{wish_number} AND APPLY_STATUS !=2
     </update>
 
     <update id="update_wish_status">
@@ -104,7 +104,7 @@
                     GROUP BY W.WISH_NUMBER,W.USER_ID,A.APPLY_STATUS) AS WA
                     ON WA.USER_ID = S.USER_ID
                     WHERE WA.WISH_NUMBER=#{wish_number}) AS INFO
-                ON INFO.USER_ID = U.USER_ID;
+                ON INFO.USER_ID = U.USER_ID
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
@@ -178,7 +178,7 @@
         FROM APPLY_STATUS A
         JOIN WISH W
         ON A.WISH_NUMBER = W.WISH_NUMBER
-        WHERE A.USER_ID = #{user_id} AND A.APPLY_STATUS = 2
+        WHERE A.USER_ID = #{user_id} AND (A.APPLY_STATUS = 2 OR A.APPLY_STATUS = 4)
     </select>
 
 </mapper>
