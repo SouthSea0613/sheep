@@ -1,7 +1,7 @@
 /* 기본 스타일 */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #F5F5DC; /* 크림 화이트 */
+    background-color: #f8f9fa; /* 크림 화이트 */
     color: #333;
     margin: 0;
     padding: 0;
@@ -72,7 +72,8 @@ h2 {
     width: 100%;
     background-color: #C8102E; /* 딥 레드 */
     color: white;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: bold;
     border: none;
     padding: 10px;
     margin-top: 15px;

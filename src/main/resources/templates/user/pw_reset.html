@@ -74,6 +74,15 @@
 			$('#pw_reset_form').submit();
 		}
 	</script>
+	<script>
+		const user = "[[${session?.user_id}]]";
+		const type = "[[${session?.user_type}]]";
+
+		$(() => {
+			userType();
+			loginStatus();
+		})
+	</script>
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
