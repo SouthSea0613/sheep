@@ -15,6 +15,15 @@
             userType();
             loginStatus();
         })
+
+    </script>
+    <script>
+        onload=()=> {
+            const addr = "[[${wish_dto?.wish_addr}]]";
+            const address = addr.split('@')
+            console.log(address[0] + address[1])
+            document.querySelector('.u_addr').innerHTML = address[0] + " " + address[1]
+        }
     </script>
 </head>
 <body>
@@ -29,7 +38,7 @@
             <div class="basic_info">
                 <h3>기본 정보</h3>
                 <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
-                <div class="u_addr" th:text="${wish_dto?.wish_addr}">주소</div>
+                <div class="u_addr">주소</div>
                 <div th:text="${wish_dto?.wish_type}">주거형태</div>
                 <div th:text="${wish_dto?.wish_size}">평수</div>
                 <div th:text="${wish_dto?.wish_size_text}">평수참고</div>
@@ -55,7 +64,7 @@
                     <div class="takeoff_money">
                         <input type="text"
                                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
-                               name="takeoff_money" class="takeoff_money" placeholder="견적을 적어주세요." onblur="all_money()">만원
+                               name="takeoff_money" class="takeoff_money" placeholder="견적을 적어주세요." onblur="all_money()">
                     </div>
                 </div>
             </th:block>
