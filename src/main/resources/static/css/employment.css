@@ -10,6 +10,10 @@ body {
     margin: 0 auto;
 }
 
+.main_content {
+    margin: 140px
+}
+
 .title-container {
     display: flex;
     align-items: center;
