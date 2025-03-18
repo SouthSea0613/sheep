@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* 헤더 스타일 */
 .header_top {
     background-color: #FFFFFF; /* 화이트 */
@@ -13,6 +20,7 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'BMDOHYEON';
 }
 
 .header_content {
@@ -143,6 +151,15 @@ nav {
     .right input {
         font-size: 14px;
     }
+}
+
+.logout_class {
+    background-color: white;
+    border: none;
+    font-size: 14px;
+    color: #003366;
+    font-weight: bold;
+    Cursor:pointer;
 }
 
 /* footer */
