@@ -282,10 +282,10 @@ input[type="text"].join_Email {
     width: 20vh;
     height: 5vh;
     text-align: center;
-    color: #003366;
+    background-color: #003366;
+    color: white;
     font-weight: bold;
     font-size: 14px;
-    color: white;
     border-radius: 8px;
     transition: all 0.3s ease;
 }

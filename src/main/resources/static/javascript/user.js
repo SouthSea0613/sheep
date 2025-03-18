@@ -6,10 +6,10 @@ function id_check() {
 		axios.post('/user/id_check', data)
 			.then(res => {
 				if (res.data) {
-					$('#id_check').text('사용 가능한 아이디 입니다.');
+					$('#alert_msg').text('사용 가능한 아이디 입니다.').css('color','green');
 					$('#id_check_val').val(1);
 				} else {
-					$('#id_check').text('이미 사용중인 아이디 입니다.')
+					$('#alert_msg').text('이미 사용중인 아이디 입니다.').css('color','red');
 					$('#id_check_val').val(0);
 				}
 			})
@@ -139,10 +139,10 @@ function test(user_email) {
 		.then(res => {
 			console.log(res);
 			if (res.data) {
-				$('#email_check').text('사용 가능한 이메일입니다.');
+				$('#email_check').text('사용 가능한 이메일입니다.').css('color','green');
 				$('#email_check_val').val(1);
 			} else {
-				$('#email_check').text('이미 사용중인 이메일입니다.')
+				$('#email_check').text('이미 사용중인 이메일입니다.').css('color','red');
 				$('#email_check_val').val(0);
 			}
 		})
