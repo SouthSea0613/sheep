@@ -16,6 +16,7 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
           crossorigin/>
+    <link rel="stylesheet" href="/css/headerfooter.css">
     <style>
         /* 전체적인 스타일 */
         body {
@@ -36,26 +37,20 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            margin-bottom: 20px;
-        }
-
         /* 제목 */
         .title {
-            font-size: 28px;
+            text-align: left;
+            margin: 140px auto 30px auto;
+            font-size: 24px;
             font-weight: bold;
-            margin-bottom: 40px;
+            color: #003366;
         }
 
         /* 버튼 스타일 */
         .btn {
             padding: 10px 16px;
             font-size: 16px;
-            background: #FF7F7F;
+            background: #C8102E;
             color: white;
             border: none;
             border-radius: 8px;
@@ -64,7 +59,7 @@
         }
 
         .btn:hover {
-            background: #FF4F4F;
+            background-color: #9B0C23;
         }
 
         /* 제목과 버튼을 같은 줄에 배치 */
@@ -110,8 +105,15 @@
         .b_label {
             font-weight: bold;
             color: #555;
+            margin-bottom: 10px; /* 라벨과 값 사이 여백 추가 */
+        }
+
+        .b_area_label {
+            font-weight: bold;
+            color: #555;
             margin-right: 10px; /* 라벨과 값 사이 여백 추가 */
         }
+
 
         /* 모집내용은 가독성을 위해 padding 추가 */
         .b_content {
@@ -141,6 +143,18 @@
         .find-job {
             margin-top: 40px;
             text-align: center;
+            position: relative;
+            padding-top: 20px; /* 위쪽 여백 추가 */
+        }
+
+        .find-job::before {
+            content: "";
+            display: block;
+            width: 100%;
+            max-width: 800px; /* 선의 최대 너비 설정 */
+            height: 1px;
+            background-color: #ddd; /* 연한 회색 선 */
+            margin: 0 auto 15px auto; /* 중앙 정렬 & 아래 여백 추가 */
         }
 
         .no-applicant {
@@ -181,17 +195,17 @@
         .view-resume {
             display: inline-block;
             margin-top: 5px;
+            margin-left: auto;
             font-size: 14px;
-            color: #ff5f5f;
+            background: white;
+            color: #003366;
             text-decoration: none;
             font-weight: bold;
             transition: 0.2s;
-            background-color: #ffffff;
-
         }
 
         .view-resume:hover {
-            color: #ff2e2e;
+            color: black;
         }
 
         /* 반응형 (모바일 최적화) */
@@ -202,7 +216,10 @@
             }
 
             .title {
-                font-size: 22px;
+                font-size: 24px;
+                font-weight: bold;
+                color: #003366;
+                white-space: nowrap; /* 줄바꿈 방지 */
             }
 
             .btn {
@@ -222,7 +239,7 @@
                 font-size: 16px;
             }
 
-            .applicant-item {
+            .applicant_item {
                 font-size: 16px;
                 padding: 14px;
             }
@@ -231,10 +248,9 @@
 </head>
 
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<div class="title">기술자모집</div>
 <section class="container">
-    <div class="header">
-        <div class="title">기술자모집</div>
-    </div>
     <div class="title-btn-container">
         <div class="b_title" th:text="${employmentDto?.board_title}"></div>
         <th:block>
@@ -258,12 +274,12 @@
             </div>
 
             <div class="b_area-container">
-                <span class="b_label">모집지역</span>
-                <sapn class="b_area" th:text="${employmentDto?.job_area}"></sapn>
+                <div class="b_area_label">모집지역</div>
+                <span class="b_area" th:text="${employmentDto?.job_area}"></span>
             </div>
             <input type="hidden" class="b_status" th:text="${employmentDto?.job_status}">
             <div class="b_content-container">
-                <span class="b_label">모집내용</span>
+                <div class="b_label">모집내용</div>
                 <div class="b_content" th:text="${employmentDto?.board_content}"></div>
             </div>
         </div>
@@ -290,5 +306,6 @@
         </th:block>
     </div>
 </section>
+<th:block th:replace="~{common/fragment/footer}"></th:block>
 </body>
 </html>

@@ -1,6 +1,6 @@
-
 body {
     background-color: #f8f9fa;
+    font-family: 'Pretendard', sans-serif;
     padding: 20px;
 }
 
@@ -103,7 +103,7 @@ body {
         text-align: center;
     }
 
-    .label {
+    .label .b_area_label {
         font-size: 14px;
     }
 
