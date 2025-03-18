@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script defer src="/javascript/common.js"></script>
+	<script>
+		const user = "[[${session?.user_id}]]";
+		const type = "[[${session?.user_type}]]";
+
+		$(() => {
+			userType();
+			loginStatus();
+
+			$(".slider").bxSlider({
+				adaptiveHeight: true,
+				responsive: true,
+				// slideWidth: 1000,
+				auto: true,
+				controls: true,
+				autoHover: true,
+				pager: true,
+				autoControls: false,
+			})
+		})
+	</script>
+	<link rel="stylesheet" href="/css/headerfooter.css">
+	<style>
+		.main_content_container {
+            margin: 140px auto 30px auto;
+		}
+	</style>
+</head>
+
+<body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<div class="main_content_container">
+	<div>이미지 들어갈 자리</div>
+	<div>업체명</div>
+	<div>소개</div>
+	<div>
+		게시글 목록
+	</div>
+	<input type="button" onclick="location.href='/seller/write'" value="업체페이지 수정">
+	<input type="button" onclick="location.href='/seller/review/write'" value="글쓰기">
+</div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
+</body>
+</html>

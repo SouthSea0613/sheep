@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>지도 오버레이</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
+	<script defer src="/javascript/common.js"></script>
+	<script>
+		const user = "[[${session?.user_id}]]";
+		const type = "[[${session?.user_type}]]";
+
+		$(() => {
+			console.log(type)
+			userType();
+			loginStatus();
+
+			$(".slider").bxSlider({
+				adaptiveHeight: true,
+				responsive: true,
+				// slideWidth: 1000,
+				auto: true,
+				controls: true,
+				autoHover: true,
+				pager: true,
+				autoControls: false,
+			})
+		})
+	</script>
+	<link rel="stylesheet" href="/css/headerfooter.css">
+	<style>
+        .overlaybox {
+            position: relative;
+            width: 360px;
+            height: 350px;
+            background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/box_movie.png') no-repeat;
+            padding: 15px 10px;
+        }
+        .overlaybox .boxtitle {
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .overlaybox .first {
+            position: relative;
+            width: 247px;
+            height: 247px;
+            margin-bottom: 8px;
+        }
+        .first img {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+        .overlaybox ul {
+            width: 320px;
+            padding: 0;
+            list-style: none;
+        }
+        .overlaybox li {
+            position: relative;
+            margin-bottom: 2px;
+            background: #2b2d36;
+            padding: 10px 15px;
+            color: #aaabaf;
+            border-radius: 4px;
+        }
+        .overlaybox li .number {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .overlaybox li .title {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .main_content_container {
+            margin: 80px auto 30px auto;
+        }
+	</style>
+</head>
+<body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<div class="main_content_container" id="map" style="width:100%;height:600px;"></div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
+</body>
+<script>
+	var mapContainer = document.getElementById('map'),
+		mapOption = {
+			center: new kakao.maps.LatLng(33.450701, 126.570667), // 기본 중심 좌표
+			level: 3 // 확대 레벨
+		};
+
+	var map = new kakao.maps.Map(mapContainer, mapOption);
+
+	// 주소-좌표 변환 객체 생성
+	var geocoder = new kakao.maps.services.Geocoder();
+
+	// 주소 검색
+	geocoder.addressSearch('인천 미추홀구 매소홀로488번길 6-32', function (result, status) {
+		if (status === kakao.maps.services.Status.OK) {
+			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+			// 마커 생성
+			var marker = new kakao.maps.Marker({
+				map: map,
+				position: coords
+			});
+
+			// 커스텀 오버레이 HTML
+			var content =
+				'<div class="overlaybox">' +
+				'    <div class="boxtitle">인테리어 회사명</div>' +
+				'    <div class="first">' +
+				'        <a href="https://www.kakaocorp.com/main" target="_blank">' +
+				'            <img src="https://interiorteacher.com/_next/image?url=https%3A%2F%2Fstatic.interiorteacher.com%2Fportfolio%2F864%2FCOVER%2Fmainjpg20240701110623_4.jpg&w=1920&q=75" alt="">' +
+				'        </a>' +
+				'    </div>' +
+				'</div>';
+
+			// 커스텀 오버레이 생성
+			var overlay = new kakao.maps.CustomOverlay({
+				content: content,
+				position: coords,
+				xAnchor: 0.3,
+				yAnchor: 1.0
+			});
+
+			// 마커 클릭 시 오버레이 표시
+			kakao.maps.event.addListener(marker, 'click', function () {
+				overlay.setMap(map);
+			});
+
+			// 지도 중심 이동
+			map.setCenter(coords);
+		}
+	});
+</script>
+</html>

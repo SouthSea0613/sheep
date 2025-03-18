@@ -2,7 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>기술자모집</title>
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script defer src="/javascript/common.js"></script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+
+            $(".slider").bxSlider({
+                adaptiveHeight: true,
+                responsive: true,
+                // slideWidth: 1000,
+                auto: true,
+                controls: true,
+                autoHover: true,
+                pager: true,
+                autoControls: false,
+            })
+        })
+    </script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <style>
+        .main_content_container {
+            margin: 140px auto 30px auto;
+        }
+    </style>
     <script>
         function employment_complete() {
             location.href = "/employment/resume/complete?board_number=" + "[[${param.board_number}]]";
@@ -72,7 +101,6 @@
             margin-bottom: 15px;
         }
 
-        /* 제목 스타일 */
         .title {
             font-size: 26px;
             font-weight: bold;
@@ -120,6 +148,9 @@
             font-size: 15px;
         }
 
+        .b_company b_user {
+            float: left;
+        }
 
         /* 모집내용은 가독성을 위해 padding 추가 */
         .b_content {

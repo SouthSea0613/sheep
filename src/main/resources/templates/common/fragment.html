@@ -6,15 +6,7 @@
     <script defer src="/javascript/common.js"></script>
 	<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
 </head>
-<script>
-    const user = "[[${session?.user_id}]]";
-    const type = "[[${session?.user_type}]]";
 
-    $(() => {
-        userType();
-        loginStatus();
-    })
-</script>
 <body>
 <header th:fragment="header">
 	<div class="header_top">
@@ -24,7 +16,7 @@
 					<li><a th:href="@{/}"><img src="/image/woopeonin_logo.png" alt="header_logo"></a></li>
 				</ul>
 				<ul class="left">
-					<li class="all"><a th:href="@{/}">우리동네 인테리어</a></li>
+					<li class="all"><a th:href="@{/seller/review/list}">우리동네 인테리어</a></li>
 					<li class="null"><a th:href="@{/wish/list}">인테리어 위시</a></li>
 					<li class="seller"><a th:href="@{/takeoff/seller/list}">견적서확인</a></li>
 					<li class="seller"><a th:href="@{/employment/list(page_number=1)}">구인구직</a></li>
@@ -34,9 +26,9 @@
 					<li>
 						<input type="button" id="common_user_name" class="success" onclick="List()" value="테스트님">
 						<div class="list_box">
-							<div class="seller2"><a th:href="@{/seller/main}">업체페이지</a></div>
-							<div class="all2"><a th:href="@{/mypage/write}">회원정보수정</a></div>
-							<div class="user2"><a th:href="@{/wish/list}">인테리어 위시</a></div>
+							<div class="seller2"><a th:href="|@{/seller/main(user_id=${session.user_id})}|" th:text="업체페이지"></a></div>
+							<div class="all2"><a th:href="@{/mypage/write}">회원정보수정 전체</a></div>
+							<div class="user2"><a th:href="@{/wish/list}">위시리스트 소비자</a></div>
 							<div class="seller2"><a th:href="@{/takeoff/seller/list}">견적리스트</a></div>
 							<div class="seller2"><a th:href="@{/}">내가 쓴 글 리스트 시공사</a></div>
 							<div class="engineer2"><a th:href="@{/}">내가 쓴 글 리스트 기술사</a></div>
