@@ -28,7 +28,7 @@ public interface TakeoffDao {
 
     WishDto getstatus(String user_id, int wish_number);
 
-    boolean update_contract_status(Integer wish_number, String user_id, String session_user_id);
+    boolean update_contract_status(Integer wish_number);
 
     boolean update_wish_status(Integer wish_number, String user_id);
 

@@ -137,21 +137,22 @@
             const status = document.querySelectorAll('.status');
             const confirmbtn = document.getElementById('confirmbtn')
             console.log(wishnumber)
-            status.forEach(s=>{
-                if(s.innerText==="상담중"){
+
                     axios.post('/takeoff/confirm',{
                         user_id : "[[${session.user_id}]]",
                         wish_number : wishnumber.value,
                     }).then((res)=>{
                         if(res.data){
                             alert("견적이 확정되었습니다.")
+                            // status.forEach(s=>{
+                            //     if(s.innerText==="상담중"){
                             takeofflist.style.display = "block";
                             confirmbtn.style.display="none";
                         }else{
                             alert("견적확정이 실패했습니다.")
                         }
-                    })
-                }
+                    // })
+                // }
             })
 
         }

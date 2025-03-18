@@ -177,10 +177,12 @@ public class TakeoffController {
     @GetMapping("/complete")
     public String complete(@RequestParam("wish_number") Integer wish_number, @RequestParam("user_id") String user_id, HttpSession httpSession) {
         log.info(wish_number.toString());
-        String seller_user_id = httpSession.getAttribute("user_id").toString();
-        if (takeoffService.complete(wish_number, user_id, seller_user_id)) {
+        String session_user_id = httpSession.getAttribute("user_id").toString();
+        if (takeoffService.complete(wish_number, user_id, session_user_id)) {
+            log.info("리스트");
             return "redirect:/wish/list";
         } else {
+            log.info("디테일");
             return "takeoff/seller/detail";
         }
     }
@@ -220,14 +222,15 @@ public class TakeoffController {
         return "takeoff/seller/select_area";
     }
 
-    @PostMapping("/contract")
-    @ResponseBody
-    public boolean contract(@RequestBody WishDto wishdto,HttpSession httpSession){
-        if(takeoffService.contract(wishdto.getWish_number(),wishdto.getUser_id(),httpSession.getAttribute("user_id").toString())){
-            return true;
-        }
-        return false;
-    }
+//    @PostMapping("/contract")
+//    @ResponseBody
+//    public boolean contract(@RequestBody WishDto wishdto,HttpSession httpSession){
+//        if(takeoffService.contract(wishdto.getWish_number(),wishdto.getUser_id(),httpSession.getAttribute("user_id").toString())){
+//            return true;
+//        }
+//        return false;
+//    }
+
     @GetMapping("/changestatus")
     public String changestatus(@RequestParam Integer wish_number,@RequestParam String user_id){
         if(takeoffService.changestatus(wish_number,user_id)){

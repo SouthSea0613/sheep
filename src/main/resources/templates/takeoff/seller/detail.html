@@ -115,7 +115,7 @@
         <th:block th:unless="${takeoffDto?.apply_status} == '계약완료'">
             <form th:action="@{/takeoff/complete}" method="get">
                 <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
-                <input type="hidden" name="user_id" th:value="${session?.user_id}">
+                <input type="hidden" name="user_id" th:value="${takeoffDto?.user_id}">
                 <input type="submit" value="계약완료">
             </form>
         </th:block>

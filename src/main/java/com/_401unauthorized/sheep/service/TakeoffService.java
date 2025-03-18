@@ -321,12 +321,13 @@ public class TakeoffService {
         return true;
     }
 
-    public boolean complete(Integer wish_number, String user_id, String seller_user_id) {
-        if (takeoffDao.complete(wish_number, user_id, seller_user_id)) {
-            return true;
-        }
-        return false;
-    }
+//    @Transactional
+//    public boolean complete(Integer wish_number, String user_id, String seller_user_id) {
+//        if (takeoffDao.complete(wish_number, user_id, seller_user_id)) {
+//            return true;
+//        }
+//        return false;
+//    }
 
     public boolean count(Integer wish_number,String user_id) {
         if(takeoffDao.count(wish_number,user_id)){
@@ -347,11 +348,11 @@ public class TakeoffService {
     }
 
     @Transactional
-    public boolean contract(Integer wish_number, String user_id, String session_user_id) {
+    public boolean complete(Integer wish_number, String user_id, String session_user_id) {
         if(!takeoffDao.contract(wish_number,user_id,session_user_id)){
             return false;
         }
-        if(!takeoffDao.update_contract_status(wish_number,user_id,session_user_id)){
+        if(!takeoffDao.update_contract_status(wish_number)){
             return false;
         }
 
