@@ -134,12 +134,11 @@
         function confirm(){
             const wishnumber = document.querySelector('.hidden_wish_number')
             const takeofflist = document.querySelector('.takeoff_list');
-            const contractbtn = document.querySelectorAll('.contractbtn');
             const status = document.querySelectorAll('.status');
             const confirmbtn = document.getElementById('confirmbtn')
             console.log(wishnumber)
-            for(let i=0; i<5;i++){
-                if(status[i].innerText==="상담중"){
+            status.forEach(s=>{
+                if(s.innerText==="상담중"){
                     axios.post('/takeoff/confirm',{
                         user_id : "[[${session.user_id}]]",
                         wish_number : wishnumber.value,
@@ -147,16 +146,13 @@
                         if(res.data){
                             alert("견적이 확정되었습니다.")
                             takeofflist.style.display = "block";
-                            contractbtn[i].style.display = 'block';
                             confirmbtn.style.display="none";
-
-
                         }else{
                             alert("견적확정이 실패했습니다.")
                         }
                     })
                 }
-            }
+            })
 
         }
         function buttonstatus(){
@@ -360,19 +356,32 @@
                 <div class="wish_list_block">
                     <div class="wish_container">
                         <div class="button">
-                            <div th:if="${takeoff>0}">
-                            <input type="hidden" class="hidden-regwish" th:value="${wish.wish_number}">
-                                <img class="downimg" src="/image/down.png" alt="다운" onclick="takeofflist(this)">
-                                <img hidden class="upimg" src="/image/up.png" alt="업" onclick="takeofflist(this)">
+                            <th:block th:if="${takeoff>0}">
+                                <div>
+                                    <input type="hidden" class="hidden-regwish" th:value="${wish.wish_number}">
+                                    <img class="downimg" src="/image/down.png" alt="다운" onclick="takeofflist(this)">
+                                    <img hidden class="upimg" src="/image/up.png" alt="업" onclick="takeofflist(this)">
+                                </div>
+                            </th:block>
+                            <div class="wish_box">
+                                <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
+                                   th:text="${wish?.wish_title}"></a>
+                                <th:block th:unless="${wish?.apply_status!=null}">
+                                    <th:block th:unless="${wish?.apply_status!=null}">
+                                        <div class="takeoffarea">
+                                            <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                                            <input type="button" class="wish_takeoff" onclick="takeoff()" value="견적요청">
+                                        </div>
+                                    </th:block>
+                                </th:block>
                             </div>
                         </div>
-                        <div class="wish_box">
-                            <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
-                               th:text="${wish?.wish_title}"></a>
-                        </div>
-                        <div th:if="${wish?.apply_status}" id="applystatus" th:text="${wish?.apply_status}"
-                             class="wish_apply_status">상태값
-                        </div>
+
+                        <th:block th:if="${wish?.apply_status}">
+                            <div id="applystatus" th:text="${wish?.apply_status}"
+                                 class="wish_apply_status">상태값
+                            </div>
+                        </th:block>
                     </div>
                         <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
                             <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
@@ -380,11 +389,11 @@
                             <div class="listbtn"></div>
                             <div class="takeoff_list">
                             </div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
-                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
                             <div class="confirmbtn_class">
                                 <input type="button" id="confirmbtn" hidden value="확 정" onclick="confirm()">
                             </div>
@@ -395,10 +404,7 @@
                             </div>
                         </div>
                 </div>
-                    <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-                        <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
-                        <input type="button" class="wish_takeoff" onclick="takeoff()" value="견적요청">
-                    </div>
+
             </th:block>
         </th:block>
             <!--위시리스트(요청전)-->
@@ -419,13 +425,13 @@
                                     <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
                                 </div>
                             </div>
+                            <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
+                                <div th:if="${wish_req_list==null}">
+                                    <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                                    <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+                                </div>
+                            </div>
                         </div>
-            <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
-                <div th:if="${wish_req_list==null}">
-                <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
-                <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
-                </div>
-            </div>
             </div>
             </th:block>
         </th:block>

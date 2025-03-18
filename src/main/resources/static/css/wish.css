@@ -88,7 +88,6 @@ body{
     font-weight: bold;
 }
 .wish_list_block{
-    /*display: flex;*/
     background-color: white; !important;
     justify-content: space-between;
     margin-left:  5%;
@@ -101,6 +100,11 @@ body{
 .wish_takeoff{
     padding: 5px 10px;
     border-radius: 10px;
+}
+
+.wish_box{
+    display: flex;
+    justify-content: center;
 }
 .endwish *{
     /*background-color:#003366;*/
@@ -245,6 +249,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 16px !important;
 }
 .end_title{
     width : 100%;
