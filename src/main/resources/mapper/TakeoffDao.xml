@@ -102,7 +102,7 @@
                     GROUP BY W.WISH_NUMBER,W.USER_ID,A.APPLY_STATUS) AS WA
                     ON WA.USER_ID = S.USER_ID
                     WHERE WA.WISH_NUMBER=#{wish_number}) AS INFO
-                ON INFO.USER_ID = U.USER_ID;
+                ON INFO.USER_ID = U.USER_ID
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
@@ -115,7 +115,7 @@
             ON W.WISH_NUMBER = S.WISH_NUMBER
             WHERE S.USER_ID=#{user_id}
             GROUP BY W.WISH_NUMBER) AS WS
-        ON A.WISH_NUMBER = WS.WISH_NUMBER AND A.USER_ID = WS.USER_ID AND A.APPLY_STATUS != 2
+        ON A.WISH_NUMBER = WS.WISH_NUMBER AND A.USER_ID = WS.USER_ID AND (A.APPLY_STATUS != 2 AND A.APPLY_STATUS !=4)
     </select>
 
     <select id="counttakeoff" resultType="java.lang.Integer">
@@ -168,6 +168,9 @@
     </select>
     <select id="endseller_takeoff" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
         SELECT W.WISH_TITLE, A.APPLY_STATUS FROM APPLY_STATUS A JOIN WISH W ON A.WISH_NUMBER = W.WISH_NUMBER WHERE A.USER_ID = #{user_id} AND (A.APPLY_STATUS = 2 OR A.APPLY_STATUS = 4)
+    </select>
+    <select id="get_seller_status" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
+        SELECT APPLY_STATUS FROM APPLY_STATUS WHERE WISH_NUMBER = #{wish_number} AND USER_ID !=#{user_id}
     </select>
 
 </mapper>

@@ -123,4 +123,7 @@
         AND APPLY_STATUS IS NOT NULL AND (APPLY_STATUS = 0 OR APPLY_STATUS = 1)
         GROUP BY W.WISH_NUMBER,W.WISH_TITLE,A.APPLY_STATUS
     </select>
+    <select id="get_status" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT APPLY_STATUS FROM APPLY_STATUS WHERE USER_ID=#{user_id} AND WISH_NUMBER = #{wish_number}
+    </select>
 </mapper>

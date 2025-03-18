@@ -1,17 +1,7 @@
 body{
     background-color: #f8f9fa;
 }
-.tab_button input{
-    border : none;
-    width : 130px;
-    height : 40px;
-    background-color: #C8102E;
-    box-shadow: 0 0 2px 0;
-    font-weight : bold;
-    font-size : 15px;
-    color : white;
-    border-radius: 10px 10px 0 0;
-}
+
 .tab input:hover{
     border : none;
     width : 130px;
@@ -39,27 +29,6 @@ body{
     margin-top: 2%;
 }
 
-/*a{*/
-/*    color : black;*/
-/*    text-decoration: none;*/
-/*}*/
-/*.takeoffdiv a:hover{*/
-/*    text-decoration: underline;*/
-/*}*/
-/*.seller_company{*/
-/*    font-weight : bold;*/
-/*    font-size : 18px;*/
-/*}*/
-/*.fa-phone{*/
-/*    width : 50px;*/
-/*    height: 50px;*/
-/*    !*border : 2px solid black;*!*/
-/*    !*border-radius: 50%;*!*/
-/*}*/
-/*.phonenumber{*/
-/*    display: none;*/
-/*    position: absolute;*/
-/*}*/
 .phone_img{
     width : 20px;
     height : 20px;
@@ -67,22 +36,18 @@ body{
 .downimg{
     width : 20px;
     height : 20px;
-    background-color: #003366;
 }
 .upimg{
     width : 20px;
     height : 20px;
-    background-color: #003366;
 }
 .downimg2{
     width : 20px;
     height : 20px;
-    background-color: #003366;
 }
 .upimg2{
     width : 20px;
     height : 20px;
-    background-color: #003366;
 }
 /*.button{*/
 /*    display: flex;*/
@@ -102,38 +67,190 @@ body{
     margin : 10% auto;
 }
 .all_wish  *{
-    background-color:#003366;
-    color : white;
+    /*background-color:#003366;*/
+    color : #003366;
     font-weight: bold;
     text-decoration: none;
 }
+.all_wish{
+    background-color: #003366;
+    padding : 5%;
+    border-radius: 0 15px 15px 15px;
+}
 .wish_container{
-    background-color:#003366;
+    /*background-color:#003366;*/
+    color : #003366;
 }
 .wish_takeoff{
     border : none;
     background-color: #C8102E;
+    color : white;
+    font-weight: bold;
 }
 .wish_list_block{
-    display: flex;
+    background-color: white; !important;
     justify-content: space-between;
-    padding: 3% 5%;
+    margin-left:  5%;
+    margin-right:  5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding : 15px 30px;
+    border-radius: 10px;
 }
 .wish_takeoff{
     padding: 5px 10px;
     border-radius: 10px;
 }
+
+.wish_box{
+    display: flex;
+    justify-content: center;
+}
 .endwish *{
-    background-color:#003366;
+    /*background-color:#003366;*/
 }
-.wish_list_block *{
-    background-color:#003366;
-    color : white;
-    text-decoration: none;
-}
-.wish_list_block{
-    background-color:#003366;
-}
+
 .button_endlist{
 
+}
+.wish_container{
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+.tab_button input{
+    border : none;
+    width : 130px;
+    height : 40px;
+    background-color: #003366;
+    font-weight : bold;
+    font-size : 15px;
+    color : white;
+    border-radius: 15px 15px 0 0;
+}
+.detaillink{
+    font-size : 20px;
+}
+#applystatus{
+    background-color: #C8102E;
+    color : white;
+    width : 10%;
+    height : 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.status{
+    background-color: #589bef;
+    color : white;
+    width : 8%;
+    height : 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.takeoff_list_div{
+    display: flex;
+}
+.takeoff_list_div div{
+    margin-right: 10%;
+    margin-bottom: 1%;
+    margin-top: 3.5%;
+    width : 10%;
+}
+#confirmbtn{
+    background-color: #C8102E;
+    color : white;
+    width : 15%;
+    height : 30px;
+    border-radius: 10px;
+    border : none;
+    font-size:15px;
+}
+.confirmbtn_class{
+    width : 49%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    display: flex;
+    justify-content: end;
+}
+.wish_container div{
+    display: flex;
+    justify-content: center;
+}
+.seller_company{
+    font-size : 20px;
+}
+.money_div{
+    font-size : 18px;
+}
+.end_wish_container{
+    background-color:#003366;
+}
+
+.endwish > p{
+    color : black;
+    font-weight: bold;
+    margin : 0;
+    background-color: white;
+    padding: 10px 0;
+    border-radius: 15px;
+    font-size : 20px;
+}
+.endwish a {
+    text-decoration: none;
+}
+.seller_class{
+    display: flex;
+    background-color: white;
+    color :  #003366;
+}
+.end_wish_div{
+    display: flex;
+    background-color: white;
+
+}
+.takeoff_end{
+
+}
+.wish_list_block2{
+    background-color: white;
+    justify-content: space-between;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    padding: 15px 30px;
+    border-radius: 15px 15px 15px 15px;
+}
+.endwish{
+    background-color: white;
+
+}
+.endwish_container{
+    background-color: #003366;
+    padding: 5%;
+    border-radius: 0 15px 15px 15px;
+}
+.end_wish_div{
+    color: #003366;
+    font-weight: bold;
+    text-decoration: none;
+    font-size : 20px;
+}
+.end_status{
+    background-color: #C8102E;
+    color : white;
+    width : 10%;
+    height : 30px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px !important;
+}
+.end_title{
+    width : 100%;
 }

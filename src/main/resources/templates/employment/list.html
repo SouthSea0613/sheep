@@ -5,15 +5,30 @@
     <title>기술자모집</title>
     <link rel="stylesheet" href="/css/employment.css">
     <link rel="stylesheet" href="/css/headerfooter.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
           crossorigin/>
+
+    <script src="/javascript/common.js"></script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+        $(() => {
+            userType();
+            loginStatus();
+        })
+    </script>
+
+
+
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <section>
     <div class="table-header">
         <div class="title-container">
-            <div class="title">기술자모집</div>
+        <div class="title">기술자모집</div>
         </div>
         <div class="btn_area">
             <th:block th:if="${session?.user_type eq '1'}">

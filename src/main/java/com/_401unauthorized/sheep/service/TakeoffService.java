@@ -437,4 +437,8 @@ public class TakeoffService {
         }
         return takeoffdtoList;
     }
+
+    public List<TakeoffDto> get_seller_status(Integer wish_number, String user_id) {
+        return takeoffDao.get_seller_status(wish_number,user_id);
+    }
 }

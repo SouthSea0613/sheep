@@ -52,6 +52,8 @@ public class WishController {
         WishDto wishDto = wishService.essential(wish_number);
         List<CategoryListDto> categoryListDto = wishService.category(wish_number);
         if (wishDto != null) {
+            log.info(wishDto.toString());
+            log.info(categoryListDto.toString());
             model.addAttribute("wish", wishDto);
             model.addAttribute("categoryListDto", categoryListDto);
             return "wish/detail";

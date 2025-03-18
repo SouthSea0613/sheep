@@ -39,4 +39,6 @@ public interface TakeoffDao {
     Integer get_takeoff(String user_id, Integer wish_number);
 
     List<TakeoffDto> endseller_takeoff(String user_id);
+
+    List<TakeoffDto> get_seller_status(Integer wish_number, String user_id);
 }

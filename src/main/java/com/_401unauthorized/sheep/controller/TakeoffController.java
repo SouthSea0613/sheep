@@ -126,16 +126,18 @@ public class TakeoffController {
 
     // (판매자 & 소비자) 판: 내가준 견적리스트 / 소: 들어온 견적리스트---------------------------------
     @GetMapping("/seller/detail")
-    public String detail(@RequestParam("wish_number") Integer wish_number, @RequestParam("user_id") String user_id, Model model) {
+    public String detail(@RequestParam("wish_number") Integer wish_number, @RequestParam("user_id") String user_id, Model model,HttpSession httpSession) {
         if (wish_number == null || wish_number < 1) {
             return "takeoff/seller/list";
         }
 
         WishDto takeoffDto = takeoffService.essential(wish_number,user_id);
         List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number, user_id);
+        WishDto wishDto  = wishService.get_status(httpSession.getAttribute("user_id").toString(),wish_number);
         if (takeoffDto != null) {
             model.addAttribute("takeoffDto", takeoffDto);
             model.addAttribute("takeoffSellerDto", takeoffSellerDto);
+            model.addAttribute("applystatus", wishDto);
             int all = 0;
             for (CategoryListDto price : takeoffSellerDto) {
                 all += price.getWish_category_seller_price();
@@ -267,6 +269,12 @@ public class TakeoffController {
     public List<TakeoffDto> endtakeoff(@RequestBody UserDto userdto){
         List<TakeoffDto> takeoffdtoList = takeoffService.endseller_takeoff(userdto.getUser_id());
         return takeoffdtoList;
+    }
+    @PostMapping("/seller/status")
+    @ResponseBody
+    public List<TakeoffDto> endtakeoff(@RequestBody TakeoffDto takeoffdto,HttpSession httpSession){
+        List<TakeoffDto> statusList = takeoffService.get_seller_status(takeoffdto.getWish_number(),httpSession.getAttribute("user_id").toString());
+        return statusList;
     }
 }
 

@@ -13,13 +13,15 @@ body {
 .main_content {
     height: auto;
     min-height: 100%;
+    margin: 140px auto 30px auto;
+    background-color: #f8f9fa;;
 }
 
 /* 배너 */
 .content-home {
-    margin: auto 10px;
     display: flex;
     justify-content: center;
+
 }
 
 .slider {

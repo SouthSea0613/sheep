@@ -21,4 +21,6 @@ public interface WishDao {
     boolean update(WishDto wishdto);
 
     WishDto get_wish_req_list(String userId);
+
+    WishDto get_status(String user_id, Integer wish_number);
 }
