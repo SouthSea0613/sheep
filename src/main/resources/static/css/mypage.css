@@ -5,6 +5,7 @@
 }
 
 body {
+    padding-top: 80px;
     height: 90vh;
 }
 
@@ -16,6 +17,7 @@ body {
     height: auto;
     min-height: 100%;
     padding: 3vh 0;
+    font-family: 'Pretendard', sans-serif;
 }
 
 hr {
@@ -44,15 +46,38 @@ h2 {
     all: unset;
     display: block;
     margin: 1vh auto;
-    width: 20vh;
-    height: 5vh;
+    width: 80%;
+    height: 4vh;
+    color: white;
     text-align: center;
-    background-color: #449fff;
-    border-radius: 15vh;
+    background-color: #C8102E;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 1vh;
     transition: all 0.3s ease;
 }
 
 .mypage_write_button:hover {
-    background-color: #2f7edb;
+    background-color: #9B0C23;
+    cursor: pointer;
+}
+
+.mypage_additional_button {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 80%;
+    height: 4vh;
+    color: white;
+    text-align: center;
+    background-color: #003366;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 1vh;
+    transition: all 0.3s ease;
+}
+
+.mypage_additional_button:hover {
+    background-color: #002244;
     cursor: pointer;
 }
