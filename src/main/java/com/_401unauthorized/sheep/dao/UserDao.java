@@ -23,4 +23,5 @@ public interface UserDao {
     boolean update_engineer_info(UserDto userDto);
     boolean select_area(String user_id, String seller_area);
     String getSeller_area(String user_id);
+    String get_seller_company(String userId);
 }

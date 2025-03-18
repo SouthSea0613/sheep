@@ -3,6 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script defer src="/javascript/common.js"></script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+
+            $(".slider").bxSlider({
+                adaptiveHeight: true,
+                responsive: true,
+                // slideWidth: 1000,
+                auto: true,
+                controls: true,
+                autoHover: true,
+                pager: true,
+                autoControls: false,
+            })
+        })
+    </script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <style>
+        .main_content_container {
+            margin: 140px auto 30px auto;
+        }
+    </style>
     <script>
         function employment_complete() {
             location.href = "/employment/resume/complete?board_number=" + "[[${param.board_number}]]";
@@ -73,6 +102,7 @@
 </head>
 
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="container">
     <section>
         <div class="title">
@@ -117,5 +147,6 @@
         </div>
     </section>
 </div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

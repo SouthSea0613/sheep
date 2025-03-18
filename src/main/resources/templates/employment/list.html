@@ -3,6 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>기술자모집</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script defer src="/javascript/common.js"></script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+
+            $(".slider").bxSlider({
+                adaptiveHeight: true,
+                responsive: true,
+                // slideWidth: 1000,
+                auto: true,
+                controls: true,
+                autoHover: true,
+                pager: true,
+                autoControls: false,
+            })
+        })
+    </script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <style>
+        .main_content_container {
+            margin: 140px auto 30px auto;
+        }
+    </style>
     <link rel="stylesheet" href="/css/employment.css">
     <link rel="stylesheet" href="/css/headerfooter.css">
     <link rel="stylesheet"

@@ -3,17 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>common</title>
-    <script defer src="/javascript/common.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
-<script>
-    const user = "[[${session?.user_id}]]";
-    const type = "[[${session?.user_type}]]";
-
-    $(() => {
-        userType();
-        loginStatus();
-    })
-</script>
 <body>
 <header th:fragment="header">
 	<div class="header_top">
@@ -23,7 +14,7 @@
 					<li>우편인</li>
 				</ul>
 				<ul class="left">
-					<li class="all"><a th:href="@{/}">지도 공통</a></li>
+					<li class="all"><a th:href="@{/seller/review/list}">지도 공통</a></li>
 					<li class="null"><a th:href="@{/wish/list}">인테리어 위시</a></li>
 					<li class="seller"><a th:href="@{/takeoff/seller/list}">견적서확인 시공사</a></li>
 					<li class="seller"><a th:href="@{/employment/list(page_number=1)}">구인구직 시공사</a></li>
@@ -34,7 +25,7 @@
 					<li>
 						<input type="button" id="common_user_name" onclick="List()" value="테스트님">
 						<div class="list_box">
-							<div class="seller2"><a th:href="@{/seller/main}">업체페이지</a></div>
+							<div class="seller2"><a th:href="|@{/seller/main(user_id=${session.user_id})}|" th:text="업체페이지"></a></div>
 							<div class="all2"><a th:href="@{/mypage/write}">회원정보수정 전체</a></div>
 							<div class="user2"><a th:href="@{/wish/list}">위시리스트 소비자</a></div>
 							<div class="seller2"><a th:href="@{/takeoff/seller/list}">견적리스트</a></div>
