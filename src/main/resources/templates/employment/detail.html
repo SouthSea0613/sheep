@@ -37,13 +37,19 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
+        .main_content {
+            margin: 140px
+        }
+
         /* 제목 */
         .title {
-            text-align: left;
-            margin: 140px auto 30px auto;
             font-size: 24px;
             font-weight: bold;
             color: #003366;
+            text-align: left;
+            margin: 140px 0 20px 10%; /* 좌우 margin을 auto 대신 10%로 설정 */
+            max-width: 1000px;
+            display: block;
         }
 
         /* 버튼 스타일 */
@@ -70,12 +76,6 @@
             justify-content: space-between; /* 제목 왼쪽, 버튼 오른쪽 */
             width: 100%;
             margin-bottom: 15px;
-        }
-
-        /* 제목 스타일 */
-        .title {
-            font-size: 26px;
-            font-weight: bold;
         }
 
         .company_user {
@@ -255,63 +255,65 @@
 
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<div class="title">기술자모집</div>
-<section class="container">
-    <div class="title-btn-container">
-        <div class="b_title" th:text="${employmentDto?.board_title}"></div>
-        <th:block>
-            <div class="btn_area">
-                <div th:if="${session.user_id eq employmentDto?.user_id and employmentDto?.job_status eq 모집중}">
-                    <input type="button" class="btn" value="마감" onclick="employment_complete()">
+<div class="main_content">
+    <div class="title">기술자모집</div>
+    <section class="container">
+        <div class="title-btn-container">
+            <div class="b_title" th:text="${employmentDto?.board_title}"></div>
+            <th:block>
+                <div class="btn_area">
+                    <div th:if="${session.user_id eq employmentDto?.user_id and employmentDto?.job_status eq 모집중}">
+                        <input type="button" class="btn" value="마감" onclick="employment_complete()">
+                    </div>
+                    <div class="btn_area" th:if="${session.user_type eq '2' and employmentDto?.job_status eq 모집중}">
+                        <input type="button" class="btn" value="지원하기" onclick="resume_write()">
+                    </div>
                 </div>
-                <div class="btn_area" th:if="${session.user_type eq '2' and employmentDto?.job_status eq 모집중}">
-                    <input type="button" class="btn" value="지원하기" onclick="resume_write()">
+            </th:block>
+        </div>
+
+
+        <div class="details">
+            <div class="detail-box">
+                <div class="company_user">
+                    <span class="b_company" th:text="${employmentDto?.seller_company}"></span>
+                    <span class="b_user" th:text="${employmentDto?.user_id}"></span>
                 </div>
-            </div>
-        </th:block>
-    </div>
 
-
-    <div class="details">
-        <div class="detail-box">
-            <div class="company_user">
-                <span class="b_company" th:text="${employmentDto?.seller_company}"></span>
-                <span class="b_user" th:text="${employmentDto?.user_id}"></span>
-            </div>
-
-            <div class="b_area-container">
-                <div class="b_area_label">모집지역</div>
-                <span class="b_area" th:text="${employmentDto?.job_area}"></span>
-            </div>
-            <input type="hidden" class="b_status" th:text="${employmentDto?.job_status}">
-            <div class="b_content-container">
-                <div class="b_label">모집내용</div>
-                <div class="b_content" th:text="${employmentDto?.board_content}"></div>
+                <div class="b_area-container">
+                    <div class="b_area_label">모집지역</div>
+                    <span class="b_area" th:text="${employmentDto?.job_area}"></span>
+                </div>
+                <input type="hidden" class="b_status" th:text="${employmentDto?.job_status}">
+                <div class="b_content-container">
+                    <div class="b_label">모집내용</div>
+                    <div class="b_content" th:text="${employmentDto?.board_content}"></div>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="find-job">
-        <th:block th:if="${#lists.isEmpty(profileDto)}">
-            <p class="no-applicant">지원자가 없습니다.</p>
-        </th:block>
-        <th:block th:unless="${#lists.isEmpty(profileDto)}">
-            <div class="applicant-list">
-                <th:block th:each="profile: ${profileDto}">
-                    <th:block th:if="${(profile?.parent_board_number eq employmentDto?.board_number
+        <div class="find-job">
+            <th:block th:if="${#lists.isEmpty(profileDto)}">
+                <p class="no-applicant">지원자가 없습니다.</p>
+            </th:block>
+            <th:block th:unless="${#lists.isEmpty(profileDto)}">
+                <div class="applicant-list">
+                    <th:block th:each="profile: ${profileDto}">
+                        <th:block th:if="${(profile?.parent_board_number eq employmentDto?.board_number
                 and session.user_id eq profile?.user_id) or (profile?.parent_board_number eq employmentDto?.board_number
                 and session.user_type eq '1' and employmentDto?.user_id eq session.user_id) and profile?.employee_status != 1}">
-                        <div class="applicant_item">
-                            <a th:href="@{/employment/resume/detail(board_number=${profile.board_number})}"
-                               class="view-resume"
-                               th:text="${profile.board_title}"></a>
-                        </div>
+                            <div class="applicant_item">
+                                <a th:href="@{/employment/resume/detail(board_number=${profile.board_number})}"
+                                   class="view-resume"
+                                   th:text="${profile.board_title}"></a>
+                            </div>
+                        </th:block>
                     </th:block>
-                </th:block>
-            </div>
-        </th:block>
-    </div>
-</section>
+                </div>
+            </th:block>
+        </div>
+    </section>
+</div>
 <th:block th:replace="~{common/fragment/footer}"></th:block>
 </body>
 </html>
