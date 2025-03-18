@@ -124,7 +124,18 @@ hr {
 .write_addr_btn:hover {
     background-color: #002244;
 }
+.end{
+    display: flex;
+    justify-content: center;
+    color :  #003366;
+    font-size : 16px;
+    font-weight: bold;
 
+}
+.end_container{
+    margin-top : 80px;
+    margin-bottom: 140px;
+}
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .main_content {

@@ -111,7 +111,7 @@
 
     <div class="total-price">합계: <span th:text="${all_money} + '만원'">합계</span></div>
 
-    <div class="button-section" th:if="${session?.user_type == '0' && takeoffDto?.apply_status == '상담중'}">
+    <div class="button-section" th:if="${session?.user_type == '0' && applystatus?.apply_status == '1'}">
         <th:block th:unless="${takeoffDto?.apply_status} == '계약완료'">
             <form th:action="@{/takeoff/complete}" method="get">
                 <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
@@ -121,7 +121,7 @@
         </th:block>
     </div>
 
-    <div class="button-section" th:if="${session?.user_type == '0' && takeoffDto?.apply_status == '대기중'}">
+    <div class="button-section" th:if="${session?.user_type == '0' && applystatus?.apply_status == '0'}">
         <form th:action="@{/takeoff/changestatus}" method="get">
             <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
             <input type="hidden" name="user_id" th:value="${takeoffDto?.user_id}">

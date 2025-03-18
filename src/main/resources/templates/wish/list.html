@@ -78,23 +78,24 @@
 
                         res.data.forEach(resp => {
                             console.log(resp)
-                            takeofflist.innerHTML += '<div>'
-                            takeofflist.innerHTML += '<span><a class="seller_company" href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number=' + wishnumber + ')}" th:text="' + resp.seller_company + '">' + resp.seller_company + '</a>' + '</span>'
-                            takeofflist.innerHTML += '<span>' + resp.wish_category_seller_price + "만원" + '</span>';
-                            takeofflist.innerHTML += '<span class="status">' + resp.apply_status + '</span>';
+                            takeofflist.innerHTML += '<div class="takeoff_list_div"><div><a class="seller_company" href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number='
+                                + wishnumber + ')}" th:text="' + resp.seller_company + '">' + resp.seller_company + '</a>' + '</div>'
+                            +'<div class="money_div">' + resp.wish_category_seller_price + "만원" + '</div>'
+                            +'<div class="status">' + resp.apply_status + '</div></div>';
+
                             if (resp.apply_status === "상담중") {
                                 takeofflist.innerHTML += '<input class="hidden_wish_number" type="hidden" value=' + resp.wish_number + '>'
                                 takeofflist.innerHTML += '<input class="hidden_user_id" type="hidden" value=' + resp.user_id + '>'
                             }
-                            takeofflist.innerHTML += '</div>'
                         })
-                        document.querySelector('.phone_img').addEventListener('mouseover',function(){
-                            document.querySelector('.phonenumber').style.display="block";
-                        })
-                        document.querySelector('.phone_img').addEventListener('mouseout',function(){
-                            document.querySelector('.phonenumber').style.display="none";
-                        })
+                        // document.querySelector('.phone_img').addEventListener('mouseover',function(){
+                        //     document.querySelector('.phonenumber').style.display="block";
+                        // })
+                        // document.querySelector('.phone_img').addEventListener('mouseout',function(){
+                        //     document.querySelector('.phonenumber').style.display="none";
+                        // })
                         buttonstatus();
+                        seller_status();
                     })
 
                 }
@@ -168,22 +169,15 @@
                 wish_number: wishnumber,
                 user_id :"[[${session.user_id}]]",
             }).then(res=>{
+                    console.log(status)
                 switch (res.data.apply_status){
                     case "0":
                         break;
                     case "1":
                         confirmbtn.style.display="none";
-                        for(let i=0; i<res.data.apply;i++) {
-                            if (status[i].innerText === "상담중") {
-                                contractbtn[i].style.display = "block";
-                            }
-                        }
                         break;
                     case "2":
                         confirmbtn.style.display="none";
-                        for(let i=0; i<5;i++) {
-                            contractbtn[i].style.display = "none";
-                        }
                         break;
                     case "3":
                         confirmbtn.style.display="none";
@@ -193,6 +187,47 @@
                         break;
                 }
             })
+        }
+        function seller_status(){
+            const wishnumber = document.querySelector('.wish_number_status').value
+            const contractbtn = document.querySelectorAll('.contractbtn');
+            const confirmbtn = document.getElementById('confirmbtn')
+            const status_div = document.querySelectorAll('.status')
+                axios.post('/takeoff/seller/status',{
+                    wish_number:wishnumber,
+                }).then(res=>{
+                    // console.log(status_div[1].innerText)
+                    res.data.forEach(status=>{
+                    switch (status.apply_status){
+                        case "0":
+                            break;
+                        case "1":
+                            // if(window.getComputedStyle(confirmbtn).display==="none"){
+                            // for(let i=0; i<res.data.length;i++) {
+                            //     console.log(status_div[i].innerText)
+                            //     if (status_div[i].innerText === "상담중") {
+                            //         contractbtn[i].style.display = "block";
+                            //     }
+                            // }
+                            // }
+                            break;
+                        case "2":
+                            confirmbtn.style.display="none";
+                            for(let i=0; i<5;i++) {
+                                contractbtn[i].style.display = "none";
+                            }
+                            break;
+                        case "3":
+                            confirmbtn.style.display="none";
+                            break;
+                        case "4":
+                            confirmbtn.style.display="none";
+                            break;
+                    }
+                })
+                })
+
+
         }
         let num = 0;
         function endwish(){
@@ -211,22 +246,20 @@
                     endwish_container.style.display="block";
                     endwish.innerHTML+= '<input type="hidden" class="end_wish_number" value="'+res.data.wish_number+'"' +'>';
                     if(res.data.wish_number!=null){
-                    endwish.innerHTML+= '<span>'+res.data.wish_title+'</span>'
-                    endwish.innerHTML+= '<span>'+res.data.apply_status+'</span>'
-                    endwish.innerHTML+= '<span class="endlist"></span>'
-                        buttondiv.forEach(div=>{
-                            console.log(div)
-                            div.innerHTML += '<img class="downimg2" src="/image/down.png" alt="다운" onclick="takeoffendlist(this)">'
-                            div.innerHTML += '<img hidden class="upimg2" src="/image/up.png" alt="다운" onclick="takeoffendlist(this)">'
-                        })
+                    endwish.innerHTML+= '<div class="end_wish_div"><div class="end_title">'+res.data.wish_title+'</div>'+'<div class="end_status">'+res.data.apply_status+'</div>'+'</div>'
+                        // buttondiv.forEach(div=>{
+                        //     console.log(div)
+                        //     div.innerHTML += '<img class="downimg2" src="/image/down.png" alt="다운" onclick="takeoffendlist(this)">'
+                        //     div.innerHTML += '<img hidden class="upimg2" src="/image/up.png" alt="다운" onclick="takeoffendlist(this)">'
+                        // })
                     num=1;
                     }else{
-
-                        endwish.innerHTML+='<p>종료된 위시가 존재하지 않습니다.</p>'
+                        endwish.innerHTML='<p>종료된 위시가 존재하지 않습니다.</p>'
                     }
                 })
             }
         }
+
         function ingtab(){
             const buttondiv = document.querySelectorAll('.button_endlist')
             const wish_ing_container = document.querySelector('.all_wish')
@@ -240,6 +273,7 @@
             endwish_container.style.display="none";
             num=0;
         }
+
 
         function takeoffendlist(btn) {
             const wishnumber = document.querySelectorAll('.end_wish_number')
@@ -264,12 +298,10 @@
                         list.forEach(div=>{
                             res.data.forEach(data=>{
                             if(data.apply_status==="기간만료"){
-                                div.innerHTML += '<div class="seller_class"><span>'+ data.seller_name + '</span>';
+                                div.innerHTML += '<div class="seller_class"><div>'+ data.seller_name + '</div>'+'<div>' + data.wish_category_seller_price+ "만원" + '</div>'+'<div class="status_span">' + data.apply_status + '</div></div>';
                             }else{
-                                div.innerHTML += '<div class="seller_class"><span>' + '<a href="/takeoff/seller/detail?wish_number=' + data.wish_number + '&user_id=' + data.user_id + '">'+ data.seller_name + '<a/></span>';
+                                div.innerHTML += '<div class="seller_class"><div>' + '<a href="/takeoff/seller/detail?wish_number=' + data.wish_number + '&user_id=' + data.user_id + '">'+ data.seller_name + '<a/></div>';
                             }
-                            div.innerHTML += '<span>' + data.wish_category_seller_price+ "만원" + '</span>';
-                            div.innerHTML += '<span class="status_span">' + data.apply_status + '</span></div>'
                             linkcss()
                             })
                         })
@@ -293,11 +325,12 @@
                 }
 
              }
-            function linkcss(){
-                const seller_class = document.querySelector('.seller_class');
-                seller_class.style.backgroundcolor= "gray";
-            }
+        //     function linkcss(){
+        //         const seller_class = document.querySelector('.seller_class');
+        //         seller_class.style.backgroundcolor= "gray";
+        //     }
         }
+
     </script>
 </head>
 <body>
@@ -353,7 +386,7 @@
                             <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
                             <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>
                             <div class="confirmbtn_class">
-                                <input type="button" id="confirmbtn" hidden value="확정" onclick="confirm()">
+                                <input type="button" id="confirmbtn" hidden value="확 정" onclick="confirm()">
                             </div>
                             <div class="">
                                 <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
@@ -398,14 +431,14 @@
         </th:block>
         </div>
         <div class="endwish_container" hidden>
-            <div class="wish_list_block">
+            <div class="wish_list_block2">
                 <div class="takeoff_end">
-                    <span class="button_endlist">
-                    </span>
+                    <div class="button_endlist">
+                    </div>
                     <!--종료된 위시-->
-                    <span class="endwish">
+                    <div class="endwish">
 
-                    </span>
+                    </div>
                 </div>
             </div>
         </div>
