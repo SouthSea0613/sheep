@@ -11,6 +11,7 @@ body {
 /* main */
 
 .main_content {
+    margin: 140px auto 30px auto;
     height: auto;
     min-height: 100%;
 }

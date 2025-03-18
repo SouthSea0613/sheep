@@ -20,41 +20,48 @@
             loginStatus();
         })
     </script>
-<style>
-    ul {
-        list-style-type: none;
-    }
-</style>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+    </style>
+    <script>
+        onload=()=> {
+            const addr = "[[${wish_dto?.wish_addr}]]";
+            const address = addr.split('@')
+            console.log(address[0] + address[1])
+            document.querySelector('.wish_addr').innerHTML = address[0] + " " + address[1]
+        }
+    </script>
 </head>
 
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
-<h2>위시 디테일</h2>
+    <h2>인테리어 위시</h2>
     <div class="eun_wish_detail_box">
-    <div th:text="${wish_dto?.wish_addr}">주소</div><br>
-    <div th:text="${wish_dto?.wish_type}">주거형태</div><br>
-    <div th:text="${wish_dto?.wish_size}">평수</div><br>
-    <div th:text="${wish_dto?.wish_size_text}">평수상세</div><br>
-    <div th:text="${wish_dto?.wish_money}+만원">예산</div><br>
+        <strong>주소</strong><div class="wish_addr">주소</div>
+        <strong>주거형태</strong><div th:text="${wish_dto?.wish_type}">주거형태</div>
+        <strong>평수</strong><div th:text="${wish_dto?.wish_size}">평수</div>
+        <strong>평수상세</strong><div th:text="${wish_dto?.wish_size_text}">평수상세</div>
+        <strong>예산</strong><div th:text="${wish_dto?.wish_money}+만원">예산</div>
 
-    <th:block th:each="category:${category_list_dto}">
-        <div th:text="'<'+${category.major_category}+'>'">대분류 넘버</div>
-        <th:block th:each="subcategory:${category.sub_category}">
-            <div th:text="${subcategory}">중분류 넘버</div>
+        <th:block th:each="category:${category_list_dto}">
+            <div class="majorcategory" th:if="${category.major_category}!=null" th:text="'◎' + ${category.major_category}">대분류 넘버</div>
+            <th:block th:each="subcategory:${category.sub_category}">
+                <div th:if="${subcategory}!=null" th:text="${subcategory}">중분류 넘버</div>
+            </th:block>
+            <div th:if="${category.major_text}!=null" th:text="${category.major_text}">대분류 텍스트</div>
         </th:block>
-        <div th:text="${category.major_text}">대분류 텍스트</div>
-        <br>
-    </th:block>
-    <div id="takeoffarea" th:if="${session?.user_type == '0' && wish_dto?.apply_status==null}" class="takeoffarea">
-        <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
-        <input type="button" class="wish_btn_list" onclick="delete_wish()" th:value="삭제하기">
-    </div>
+        <div id="takeoffarea" th:if="${session?.user_type == '0' && wish_dto?.apply_status==null}" class="takeoffarea">
+            <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
+            <input type="button" class="wish_btn_list" onclick="delete_wish()" th:value="삭제하기">
+        </div>
 
-    <div th:if="${session?.user_type == '1' and wish_dto?.apply_status == '대기중'}">
-        <input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number" id="wish_number">
-        <input type="button" class="wish_btn_list" onclick="seller_write()" value="작성하기">
-    </div>
+        <div th:if="${session?.user_type == '1' and wish_dto?.apply_status == '대기중'}">
+            <input type="hidden" th:value="${wish_dto?.wish_number}" name="wish_number" id="wish_number">
+            <input type="button" class="wish_btn_list" onclick="seller_write()" value="작성하기">
+        </div>
     </div>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
@@ -69,22 +76,22 @@
         location.href = "/wish/delete?wish_number=" + wish_number;
     }
 
-	function takeoff(btn) {
-		const wishnumber = "[[${wish_dto?.wish_number}]]"
-		axios.post('/takeoff/call', {
-			user_id: "[[${session.user_id}]]",
-			wish_number: wishnumber,
-			apply_status: "0",
-		}).then((res) => {
-			if (res) {
-				alert("견적 요청이 완료되었습니다")
-				location.href = "/wish/list";
-			} else {
-				alert("견적 요청이 실패되었습니다");
-				location.href = "/wish/list";
-			}
-		});
-	}
+    function takeoff(btn) {
+        const wishnumber = "[[${wish_dto?.wish_number}]]"
+        axios.post('/takeoff/call', {
+            user_id: "[[${session.user_id}]]",
+            wish_number: wishnumber,
+            apply_status: "0",
+        }).then((res) => {
+            if (res) {
+                alert("견적 요청이 완료되었습니다")
+                location.href = "/wish/list";
+            } else {
+                alert("견적 요청이 실패되었습니다");
+                location.href = "/wish/list";
+            }
+        });
+    }
 
     axios.get("/wish/get_req_wish")
         .then(res => {
