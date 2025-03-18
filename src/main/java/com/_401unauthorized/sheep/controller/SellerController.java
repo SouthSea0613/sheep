@@ -23,4 +23,9 @@ public class SellerController {
     public String write(HttpSession httpSession, Model model) {
         return "/seller/write";
     }
+
+    @GetMapping("/review/list")
+    public String reviewList(HttpSession httpSession, Model model) {
+        return "/seller/review/list";
+    }
 }

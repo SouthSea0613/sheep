@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-	<meta charset="UTF-8">
-	<title>Title</title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
+	</head>
 
-<body>
+	<body>
+		<div id="map" style="width:100%;height:350px;"></div>
+	</body>
+	<script>
+		var mapContainer = document.getElementById('map'),
+			mapOption = {
+				center: new kakao.maps.LatLng(37.43887833749142, 126.67511828936453),
+				level: 3
+			};
 
-</body>
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+	</script>
 </html>
