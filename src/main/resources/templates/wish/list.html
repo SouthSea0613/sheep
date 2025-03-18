@@ -158,7 +158,6 @@
         }
         function buttonstatus(){
             const wishnumber = document.querySelector('.wish_number_status').value
-            const contractbtn = document.querySelectorAll('.contractbtn');
             const status = document.querySelectorAll('.status');
             const confirmbtn = document.getElementById('confirmbtn')
             console.log(status[1])
@@ -233,8 +232,12 @@
             const wish_ing_container = document.querySelector('.all_wish')
             const buttondiv = document.querySelectorAll('.button_endlist')
             const wish_takeoff = document.querySelector('.takeoff_end')
+            const btn = document.querySelector('.wish_ing')
+            const btn2 = document.querySelector('.wish_end')
             console.log(buttondiv)
             if(num===0){
+                btn.style.backgroundColor="#003366";
+                btn2.style.backgroundColor="#C8102E";
             axios.post('/takeoff/endwish',{
             })
                 .then((res)=>{
@@ -262,13 +265,18 @@
             const wish_ing_container = document.querySelector('.all_wish')
             const endwish_container = document.querySelector('.endwish_container')
             const endwish_div = document.querySelector('.endwish')
+            const btn = document.querySelector('.wish_ing')
+            const btn2 = document.querySelector('.wish_end')
             buttondiv.forEach(div=>{
                 div.innerHTML="";
             })
             endwish_div.innerHTML ="";
             wish_ing_container.style.display="block";
             endwish_container.style.display="none";
+            btn.style.backgroundColor="#C8102E";
+            btn2.style.backgroundColor="#003366";
             num=0;
+
         }
 
 
