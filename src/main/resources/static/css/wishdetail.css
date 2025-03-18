@@ -1,4 +1,4 @@
-/* 기본 스타일 */
+/* 전체 페이지 기본 스타일 */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #F5F5DC; /* 크림 화이트 */
@@ -10,12 +10,12 @@ body {
 /* 메인 콘텐츠 */
 .main_content {
     width: 80%;
-    max-width: 900px;
-    margin: 140px auto 30px auto;
+    max-width: 800px;
+    margin: 140px auto 30px auto; /* 헤더 높이만큼 여백 추가 */
     background-color: white;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* 제목 */
@@ -26,44 +26,35 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* 위시 디테일 박스 */
+/* 디테일 박스 */
 .eun_wish_detail_box {
-    border-left: 5px solid #C8102E; /* 딥 레드 */
-    background: white;
     padding: 20px;
     border-radius: 8px;
+    background: white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* 정보 항목 */
-.eun_wish_detail_box div {
+/* 정보 항목 스타일 */
+.eun_wish_detail_box strong {
+    display: block;
     font-size: 18px;
+    font-weight: bold;
+    color: #003366; /* 딥 블루 */
+    margin-top: 15px;
+}
+
+.eun_wish_detail_box div {
+    font-size: 16px;
     padding: 10px 0;
     border-bottom: 1px solid #ddd;
 }
 
 /* 카테고리 스타일 */
-.category_section {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #F5F5DC; /* 크림 화이트 */
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-/* 대분류 */
-.category_section div {
-    font-size: 16px;
+.title {
+    font-size: 18px;
     font-weight: bold;
     color: #003366; /* 딥 블루 */
-    margin-bottom: 8px;
-}
-
-/* 중분류 */
-.category_section .subcategory {
-    font-size: 14px;
-    color: #555;
-    margin-left: 15px;
+    margin-top: 15px;
 }
 
 /* 버튼 스타일 */
@@ -96,20 +87,23 @@ h2 {
     background-color: #002244;
 }
 
+/* 참고 안내 */
+.info {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
 /* 반응형 디자인 */
 @media (max-width: 768px) {
     .main_content {
         width: 95%;
     }
 
-    .eun_wish_detail_box div {
+    .eun_wish_detail_box strong {
         font-size: 16px;
     }
-}
-
-.majorcategory{
-    font-weight : bold;
-}
-strong{
-    font-size: 20px;
+    .eun_wish_detail_box div {
+        font-size: 14px;
+    }
 }
