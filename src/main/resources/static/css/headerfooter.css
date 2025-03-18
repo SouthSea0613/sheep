@@ -150,6 +150,7 @@ nav {
     align-items: center;
     position: relative; /* 부모 요소 기준 */
     color: #333;
+    font-family: 'Pretendard', sans-serif;
 }
 
 /* 전체 컨텐츠 (이미지 포함) */
@@ -160,6 +161,11 @@ nav {
     flex-direction: column;
     align-items: center;
     position: relative;
+}
+
+.footer_left {
+    list-style: none;
+    float: left;
 }
 
 /* 중앙 정렬 (이미지와 같은 높이) */
@@ -186,7 +192,7 @@ nav {
 /* 이미지 최하단 정렬 */
 .footer_img {
     width: auto;
-    height: 80px;
+    height: 50px;
     margin-top: auto; /* 가장 아래쪽으로 */
 }
 
@@ -208,14 +214,6 @@ nav {
         text-align: center;
     }
 
-    .footer_left {
-        position: relative;
-        left: auto;
-        top: auto;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
     .footer_inline {
         flex-direction: column;
         gap: 10px;
@@ -234,10 +232,6 @@ nav {
     .footer_content {
         width: 95%;
         text-align: center;
-    }
-
-    .footer_left {
-        font-size: 13px;
     }
 
     .footer_inline {
