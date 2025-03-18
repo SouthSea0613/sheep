@@ -20,7 +20,7 @@
 		<div class="header_content">
 			<nav class="header_left">
 				<ul class="logo">
-					<li>우편인</li>
+					<li><img src="/image/woopeonin_logo.png" alt="header_logo"></li>
 				</ul>
 				<ul class="left">
 					<li class="all"><a th:href="@{/}">지도 공통</a></li>
@@ -62,7 +62,12 @@
 <footer th:fragment="footer">
     <div class="footer_bottom">
         <div class="footer_content">
-            <div>401_sheeps</div>
+						<ul class="footer_inline">
+							<li><a href="">이용약관</a></li>
+							<li><a href="">개인정보처리방침</a></li>
+							<li><a href="">고객센터</a></li>
+						</ul>
+					<div class="footer_img"><img src="/image/woopeonin_logo.png" alt="footer_logo" class="footer_logo"></div>
         </div>
     </div>
 </footer>
