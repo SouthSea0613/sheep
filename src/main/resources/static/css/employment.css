@@ -89,7 +89,7 @@ body {
     position: relative;
     right: 0;
     color: white;
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .btn:hover {
