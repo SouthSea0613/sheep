@@ -28,7 +28,7 @@
             $(".slider").bxSlider({
                 adaptiveHeight: true,
                 responsive: true,
-                // slideWidth: 1000,
+                slideWidth: 1000,
                 auto: true,
                 controls: true,
                 autoHover: true,
@@ -52,16 +52,13 @@
     <div class="content-home">
         <ul class="slider">
             <li>
-                <div class="slide_text"><h1>우리집을 찾아보세요!</h1></div>
-                <a th:href="@{/}"><img src="/image/malrangcow.jpg"></a>
+                <a th:href="@{/}"><img src="/image/map_banner.png"></a>
             </li>
             <li>
-                <div class="slide_text"><h1>위시리스트</h1></div>
-                <a th:href="@{/wish/list}"><img src="/image/sky.jpg"></a>
+                <a th:href="@{/wish/list}"><img src="/image/interior_banner.png"></a>
             </li>
             <li>
-                <div class="slide_text"><h1>구인구직</h1></div>
-                <a th:href="@{/employment/list(page_number=1)}"><img src=""></a>
+                <a th:href="@{/employment/list(page_number=1)}"><img src="/image/employment_banner.png"></a>
             </li>
         </ul>
     </div>
