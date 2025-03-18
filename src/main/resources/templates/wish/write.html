@@ -19,6 +19,15 @@
         }
 	</style>
 	<script>
+		const user = "[[${session?.user_id}]]";
+		const type = "[[${session?.user_type}]]";
+
+		$(() => {
+			userType();
+			loginStatus();
+		})
+	</script>
+	<script>
 		window.onload = () => {
 			function toggleUl() {
 				let checkbox = document.querySelectorAll('input[class="major_category_number"]');

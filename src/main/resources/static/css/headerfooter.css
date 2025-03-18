@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'BMDOHYEON';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMDOHYEON.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* 헤더 스타일 */
 .header_top {
     background-color: #FFFFFF; /* 화이트 */
@@ -13,6 +20,11 @@
     align-items: center;
     justify-content: space-between;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    font-family: 'BMDOHYEON';
+}
+
+.header_content {
+    width: 100%;
 }
 
 /* 로고 스타일 */
@@ -22,6 +34,11 @@
     letter-spacing: 2px;
     color: #003366; /* 딥 블루 */
     list-style: none;
+}
+
+.logo li img {
+    padding-top: 3px;
+    height: 60px;
 }
 
 /* 네비게이션 바 */
@@ -64,6 +81,7 @@ nav {
     gap: 15px;
     position: relative;
     margin-left: auto; /* 오른쪽 정렬 */
+    margin-right: 30px;
     list-style: none;
 }
 
@@ -135,3 +153,115 @@ nav {
     }
 }
 
+.logout_class {
+    background-color: white;
+    border: none;
+    font-size: 14px;
+    color: #003366;
+    font-weight: bold;
+    Cursor:pointer;
+}
+
+/* footer */
+
+.footer_bottom {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative; /* 부모 요소 기준 */
+    color: #333;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* 전체 컨텐츠 (이미지 포함) */
+.footer_content {
+    width: 80%;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.footer_left {
+    list-style: none;
+    float: left;
+}
+
+/* 중앙 정렬 (이미지와 같은 높이) */
+.footer_inline {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 15px; /* 이미지와 간격 */
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.footer_inline li {
+    display: inline-block;
+    font-size: 14px;
+}
+
+.footer_inline a {
+    text-decoration: none;
+    color: #333;
+    transition: 0.3s ease-in-out;
+}
+
+/* 이미지 최하단 정렬 */
+.footer_img {
+    width: auto;
+    height: 50px;
+    margin-top: auto; /* 가장 아래쪽으로 */
+}
+
+.footer_logo {
+    height: 100%;
+    width: auto;
+}
+
+/* 마우스 오버 시 밑줄 추가 */
+.footer_inline a:hover {
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 1024px) {
+    .footer_content {
+        width: 90%;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer_inline {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer_img {
+        margin-top: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer_bottom {
+        padding: 15px 0;
+    }
+
+    .footer_content {
+        width: 95%;
+        text-align: center;
+    }
+
+    .footer_inline {
+        font-size: 13px;
+        gap: 8px;
+    }
+
+    .footer_img {
+        height: 60px; /* 모바일에서는 이미지 크기 줄이기 */
+    }
+}

@@ -9,6 +9,15 @@
     <link rel="stylesheet" href="/css/headerfooter.css">
     <link rel="stylesheet" href="/css/loginjoin.css">
     <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            userType();
+            loginStatus();
+        })
+    </script>
+    <script>
         function id_find_email() {
             let data = {};
             const id_find_email = $('#id_find_email');

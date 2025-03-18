@@ -6,6 +6,15 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="/javascript/common.js"></script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            userType();
+            loginStatus();
+        })
+    </script>
     <style>
         * {
             box-sizing: border-box;
@@ -121,7 +130,7 @@
         </th:block>
     </div>
 
-    <div class="button-section" th:if="${session?.user_type == '0' && applystatus?.apply_status == '0'}">
+    <div class="button-section" th:if="${session?.user_type == '0' && takeoffDto?.apply_status == '상담중'}">
         <form th:action="@{/takeoff/changestatus}" method="get">
             <input type="hidden" name="wish_number" th:value="${takeoffDto?.wish_number}">
             <input type="hidden" name="user_id" th:value="${takeoffDto?.user_id}">

@@ -59,7 +59,8 @@ textarea:focus {
     width: 100%;
     background-color: #C8102E; /* 딥 레드 */
     color: white;
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: bold;
     border: none;
     padding: 10px;
     margin-top: 15px;
@@ -114,6 +115,7 @@ hr {
 .write_addr_btn {
     background-color: #003366; /* 딥 블루 */
     color: white;
+    font-weight: bold;
     padding: 10px;
     border: none;
     border-radius: 5px;

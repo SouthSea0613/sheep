@@ -132,6 +132,15 @@
 			$('#join_addForm_engineer').submit();
 		}
 	</script>
+	<script>
+		const user = "[[${session?.user_id}]]";
+		const type = "[[${session?.user_type}]]";
+
+		$(() => {
+			userType();
+			loginStatus();
+		})
+	</script>
 </head>
 
 <body>

@@ -10,6 +10,15 @@
     <script th:src="@{/javascript/user.js}"></script>
     <link rel="stylesheet" href="/css/headerfooter.css">
     <link rel="stylesheet" href="/css/loginjoin.css">
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            userType();
+            loginStatus();
+        })
+    </script>
 </head>
 
 <body>

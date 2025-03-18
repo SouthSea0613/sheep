@@ -34,9 +34,9 @@
             }
         }
     </script>
-    <script th:inline="javascript">
-        const user = [[${session?.user_id}]];
-        const type = [[${session?.user_type}]];
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
 
         $(() => {
             console.log(type)
