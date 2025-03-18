@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <title>기술자모집</title>
     <link rel="stylesheet" href="/css/employment.css">
+    <link rel="stylesheet" href="/css/headerfooter.css">
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
           crossorigin/>
 </head>
 <body>
-
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <section>
     <div class="table-header">
         <div class="title-container">
@@ -57,7 +58,7 @@
         </div>
     </div>
 </section>
-
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 
 </body>
 </html>

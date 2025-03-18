@@ -1,7 +1,7 @@
 /* 기본 스타일 */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #F5F5DC; /* 크림 화이트 */
+    background-color: #f8f9fa; /* 크림 화이트 */
     color: #333;
     margin: 0;
     padding: 0;
@@ -42,6 +42,7 @@ h2 {
     border-bottom: 1px solid #ddd;
 }
 
+
 /* 카테고리 스타일 */
 .category_section {
     margin-top: 20px;
@@ -58,7 +59,9 @@ h2 {
     color: #003366; /* 딥 블루 */
     margin-bottom: 8px;
 }
-
+.frame{
+    display: flex;
+}
 /* 중분류 */
 .category_section .subcategory {
     font-size: 14px;
@@ -105,4 +108,7 @@ h2 {
     .eun_wish_detail_box div {
         font-size: 16px;
     }
+}
+.majorcategory{
+    font-weight: bold;
 }

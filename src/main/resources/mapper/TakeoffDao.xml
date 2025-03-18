@@ -102,7 +102,7 @@
                     GROUP BY W.WISH_NUMBER,W.USER_ID,A.APPLY_STATUS) AS WA
                     ON WA.USER_ID = S.USER_ID
                     WHERE WA.WISH_NUMBER=#{wish_number}) AS INFO
-                ON INFO.USER_ID = U.USER_ID;
+                ON INFO.USER_ID = U.USER_ID
     </select>
 
     <select id="my_list" resultType="com._401unauthorized.sheep.dto.TakeoffDto">
