@@ -6,6 +6,9 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="/javascript/common.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+          crossorigin/>
     <link rel="stylesheet" href="/css/headerfooter.css">
     <link rel="stylesheet" href="/css/loginjoin.css">
     <script>
@@ -65,18 +68,18 @@
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
-    <h2>아이디 찾기</h2>
+    <div class="find_h2">아이디 찾기</div>
     <div class="idfind_content">
-        <div>이메일</div>
+        <div class="label">이메일</div>
         <input type="text" name="id_find_email" id="id_find_email" onblur="id_find_email()" placeholder="이메일"><br>
         <input id="id_find_val" type="hidden" value="0">
         <hr>
-        <div>이름</div>
+        <div class="label">이름</div>
         <input type="text" name="id_find_name" id="id_find_name" placeholder="이름"><br>
     </div>
     <span id="id_find_email_check"></span><br>
     <span id="id_find_res"></span>
-    <input type="button" value="아이디 찾기" id="id_find_button" onclick="id_find()">
+    <input type="button" class="btn" value="아이디 찾기" id="id_find_button" onclick="id_find()">
     <input id="id_find_res_val" type="hidden" value="0">
 
     <form th:action="@{/user/login}" method="get">

@@ -30,7 +30,7 @@
         <div class="title-container">
         <div class="title">기술자모집</div>
         </div>
-            <div class="btn_area">
+        <div class="btn_area">
             <th:block th:if="${session?.user_type eq '1'}">
                 <form th:action="@{/employment/write}" method="get">
                     <input type="submit" class="btn" value="작성하기">
@@ -73,6 +73,5 @@
     </div>
 </section>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
-
 </body>
 </html>

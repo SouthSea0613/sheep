@@ -2,31 +2,135 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" th:href="@{/css/employment.css}">
+    <title>기술자모집</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 컨테이너: 중앙 정렬 및 스타일 */
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            margin: 60px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 제목 스타일 */
+        .title {
+            margin: 140px auto 30px auto;
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+        }
+
+        /* 정보 라벨 */
+        .label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        /* 정보 값 */
+        .value {
+            background: #f8f8f8;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 18px;
+            line-height: 1.6;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        /* 경력 내용 */
+        .content_box {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            line-height: 1.6;
+            min-height: 120px;
+        }
+
+        /* 채용하기 버튼 */
+        .btn {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            background: #C8102E;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            width: 100%;
+            max-width: 200px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        .btn:hover {
+            background-color: #9B0C23;
+        }
+
+        /* 반응형 (모바일 최적화) */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 30px;
+            }
+
+            .title {
+                font-size: 24px;
+            }
+
+            .value, .content_box {
+                font-size: 16px;
+                padding: 10px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
 
 <section>
-    <h2>resume detail!!</h2>
-    <div class="profile_detail">
-        <div class="">제목</div>
-        <div th:text="${profileDto?.board_title}"></div>
-        <div class="">지원일자</div>
-        <div th:text="${profileDto?.board_regdate}"></div>
-        <div class="">이름</div>
-        <div th:text="${profileDto?.user_name}"></div>
-        <div class="">연락처</div>
-        <div th:text="${profileDto?.user_phone}"></div>
-        <div class="">경력</div>
-        <div th:text="${profileDto?.board_content}"></div>
+    <div class="title">이력서</div>
+    <div class="container">
+        <div class="profile_detail">
+            <div class="title_area">
+                <div class="label">제목</div>
+                <div class="value" th:text="${profileDto?.board_title}"></div>
+            </div>
+            <div class="name_area">
+                <div class="label">이름</div>
+                <div class="value" th:text="${profileDto?.user_name}"></div>
+            </div>
+            <div class="phone_area">
+                <div class="label">연락처</div>
+                <div class="value" th:text="${profileDto?.user_phone}"></div>
+            </div>
+            <div class="label">경력</div>
+            <div class="content_box" th:text="${profileDto?.board_content}"></div>
 
-        <div th:if="${session.user_type eq '1' and profileDto.employee_status != 1}">
-            <form th:action="@{/employment/lets_do_it}" method="post">
-            <input type="hidden" name="board_number" th:value="${profileDto?.board_number}">
-            <input type="hidden" name="user_id" th:value="${profileDto?.user_id}">
-            <input type="submit" value="채용하기">
-            </form>
+            <div th:if="${session.user_type eq '1' and profileDto.employee_status != 1}">
+                <form th:action="@{/employment/lets_do_it}" method="post">
+                    <input type="hidden" name="board_number" th:value="${profileDto?.board_number}">
+                    <input type="hidden" name="user_id" th:value="${profileDto?.user_id}">
+                    <input type="submit" class="btn" value="채용하기">
+                </form>
+            </div>
         </div>
     </div>
 </section>

@@ -7,6 +7,9 @@
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<script defer src="/javascript/common.js"></script>
 	<script th:src="@{/javascript/user.js}"></script>
+	<link rel="stylesheet"
+		  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+		  crossorigin/>
 	<link rel="stylesheet" href="/css/headerfooter.css">
 	<link rel="stylesheet" href="/css/loginjoin.css">
 	<script>
@@ -87,7 +90,7 @@
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="main_content">
-	<h2>비밀번호 재설정</h2>
+	<div class="reset_h2">비밀번호 재설정</div>
 	<div class="pw_reset_content">
 		<form th:action="@{/user/pw_reset}" th:method="post" id="pw_reset_form">
 			<div>아이디</div>
