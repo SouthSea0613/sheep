@@ -83,7 +83,7 @@ body {
 /* ==================== 상태 표시 박스 ==================== */
 .status_class {
     border-radius: 10px;
-    background-color: #fc9c7c;
+    background-color: #C8102E;
     width: 130px;
     height: 30px;
     display: flex;
@@ -193,7 +193,7 @@ a {
     font-weight: bold;
     text-align: center;
     padding: 15px;
-    background-color: #ffc107;
+    background-color: #003366;
     color: black;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
@@ -260,6 +260,7 @@ a {
 
 .takeoff input {
     width: 100%;
+    height : 150px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -268,7 +269,7 @@ a {
 }
 
 .takeoff input:focus {
-    border-color: #fc9c7c;
+    border-color: #C8102E;
     outline: none;
 }
 
@@ -286,10 +287,11 @@ a {
     border-radius: 5px;
     font-size: 16px;
     text-align: right;
+
 }
 
 .takeoff_money input:focus {
-    border-color: #fc9c7c;
+    border-color: #C8102E;
     outline: none;
 }
 
@@ -306,18 +308,19 @@ a {
     padding: 12px;
     border: none;
     border-radius: 5px;
-    background-color: #FFC5B2;
-    color: black;
+    background-color: #C8102E;
+    color: white;
     font-weight: bold;
     font-size: 16px;
     cursor: pointer;
     margin-top: 15px;
-    transition: background-color 0.3s, transform 0.2s;
+    /*transition: background-color 0.3s, transform 0.2s;*/
 }
 
 .content div input[type="button"]:hover {
-    background-color: #fc9c7c;
-    transform: scale(1.05);
+    background-color: #C8102E;
+    color : white;
+    /*transform: scale(0.5);*/
 }
 
 /* 합계 금액 영역 보완 */
@@ -327,8 +330,8 @@ a {
     font-size: 18px;
     font-weight: bold;
     padding: 15px;
-    background-color: #ffc107;
-    color: black;
+    background-color: #003366;
+    color: white;
     border-radius: 10px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
@@ -344,16 +347,15 @@ a {
 }
 
 /* 정보 표시 영역 (주소, 주거형태, 평수 등) */
-.content div:not(.takeoff, .takeoff_money, .takeoff_all_money) {
+.content div:not(.takeoff, .takeoff_money, .takeoff_all_money, .wish_info) {
     font-size: 16px;
-    padding: 8px 0;
+    padding: 8px 15px;
     border-bottom: 1px solid #ddd;
 }
 
 /* 카테고리 정보 영역 (필요시 사용) */
 .category_section {
     margin-top: 15px;
-    padding: 10px;
     background-color: #f8f9fa;
     border-radius: 10px;
 }
@@ -378,7 +380,7 @@ a {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 15px;
-    border-bottom: 2px solid #fc9c7c;
+    border-bottom: 2px solid  #C8102E;
     padding-bottom: 5px;
 }
 
