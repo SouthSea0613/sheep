@@ -5,14 +5,13 @@
 }
 
 body {
-    padding-top: 80px;
     height: 90vh;
 }
 
 /* main */
 
 .main_content {
-    margin: 0 auto;
+    margin: 140px auto 30px auto;
     width: 70vh;
     height: auto;
     min-height: 100%;
@@ -26,7 +25,10 @@ hr {
 }
 
 h2 {
-    margin: 3vh 0;
+    color: #003366;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 
 .join_main_content {
