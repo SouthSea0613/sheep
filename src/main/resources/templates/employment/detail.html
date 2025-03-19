@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>기술자모집</title>
+    <script defer src="/javascript/common.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script>
         function employment_complete() {
             location.href = "/employment/resume/complete?board_number=" + "[[${param.board_number}]]";
@@ -11,6 +13,13 @@
         function resume_write() {
             location.href = "/employment/resume/write?board_number=" + "[[${param.board_number}]]";
         }
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            userType();
+            loginStatus();
+        })
     </script>
     <!--    <link rel="stylesheet" href="/css/employment.css">-->
     <link rel="stylesheet"
@@ -74,6 +83,7 @@
 
         /* 제목 스타일 */
         .title {
+            padding: 0 15%;
             font-size: 26px;
             font-weight: bold;
         }
@@ -222,6 +232,7 @@
             }
 
             .title {
+
                 font-size: 24px;
                 font-weight: bold;
                 color: #003366;
@@ -255,8 +266,10 @@
 
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
+
 <div class="title">기술자모집</div>
 <section class="container">
+
     <div class="title-btn-container">
         <div class="b_title" th:text="${employmentDto?.board_title}"></div>
         <th:block>
@@ -312,6 +325,6 @@
         </th:block>
     </div>
 </section>
-<th:block th:replace="~{common/fragment/footer}"></th:block>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
