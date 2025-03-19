@@ -52,7 +52,9 @@
                     <!-- 대분류: 굵고 큰 글씨 -->
                     <!-- 대분류 (주요 카테고리) -->
                     <div  id="major_id" class="major_category" th:text="${category.major_category}">대분류</div>
-                    <div class="major_category" th:text="'참고: ' +${category.major_text}">대분류 텍스트</div>
+                    <th:block th:unless="${category.major_category} == '공사준비/마감'">
+                        <div class="major_category" th:text="'참고: ' +${category.major_text}">대분류 텍스트</div>
+                    </th:block>
                     <input type="hidden" name="category_number" th:value="${category?.major_category}">
                     <!-- 중분류: 구분되어 보이도록 -->
                     <th:block th:each="subcategory : ${category.sub_category}">

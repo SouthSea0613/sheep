@@ -359,18 +359,17 @@
             </div>
         </div>
         <div class="all_wish">
-            <div class="wish_list_block">
-                <div class="wish_container">
-                    <div class="non_wish">
-                        인테리어 위시를 작성해주세요
+            <th:block th:if="${#lists.isEmpty(wish_list) and #lists.isEmpty(wish_req_list)}">
+                <div class="wish_list_block">
+                    <div class="wish_container">
+                        <div class="non_wish">
+                            인테리어 위시를 작성해주세요
+                        </div>
                     </div>
                 </div>
-            </div>
+            </th:block>
         <!--위시리스트 요청 후 -->
         <th:block th:unless="${#lists.isEmpty(wish_req_list)}">
-            <th:block th:if="${#lists.isEmpty(wish_list) and #lists.isEmpty(wish_req_list)}">
-
-            </th:block>
             <th:block th:each="wish:${wish_req_list}">
                 <div class="wish_list_block">
                     <div class="wish_container">
