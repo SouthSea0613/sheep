@@ -105,6 +105,7 @@
     </style>
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="title">이력서 작성</div>
 <form action="/employment/resume_write" method="post" id="resume_write">
     <input type="hidden" name="parent_board_number" th:value="${param.board_number}">
@@ -134,5 +135,6 @@
         $('#resume_write').submit();
     }
 </script>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
