@@ -91,6 +91,7 @@ body {
     align-items: center;
     font-weight: bold;
     padding: 5px 0;
+    color : white;
 }
 
 /* ==================== 링크 스타일 ==================== */
@@ -402,5 +403,8 @@ a {
 .button_div input{
     background-color: #C8102E;
     color : white;
+    font-weight: bold;
+}
+.end_div > span{
     font-weight: bold;
 }

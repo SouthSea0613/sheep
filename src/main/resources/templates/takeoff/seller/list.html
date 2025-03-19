@@ -74,8 +74,7 @@
 						enterlist.style.display="none";
 						if(endlist.children.length===0){
 						res.data.forEach(data=>{
-							endlist.innerHTML += '<div class="end_div"><span>' + data.wish_title +  '</span>';
-							endlist.innerHTML += '<p class="status_class">' + data.apply_status +  '</p></div>';
+							endlist.innerHTML += '<div class="end_div"><span>' + data.wish_title +  '</span>'+'<p class="status_class">' + data.apply_status +  '</p></div>';
 							})
 						}
 					})
