@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>지도 오버레이</title>
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eddb73b334a91dd68752e08c6c36bd7d&libraries=services"></script>
 	<script defer src="/javascript/common.js"></script>
 	<script>
@@ -27,8 +28,26 @@
 			})
 		})
 	</script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" crossorigin/>
 	<link rel="stylesheet" href="/css/headerfooter.css">
 	<style>
+        #map {
+            width: 100%;
+            height: 600px;
+            position: relative;
+        }
+        .map-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fff;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
         .overlaybox {
             position: relative;
             width: 360px;
@@ -77,65 +96,118 @@
         }
 
         .main_content_container {
-            margin: 80px auto 30px auto;
+            margin: 100px auto 30px auto;
         }
 	</style>
 </head>
+
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>
-<div class="main_content_container" id="map" style="width:100%;height:600px;"></div>
+<div id="map" class="main_content_container">
+	<button class="map-btn" onclick="find_addr()">주소 찾기</button>
+</div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 <script>
 	var mapContainer = document.getElementById('map'),
 		mapOption = {
-			center: new kakao.maps.LatLng(33.450701, 126.570667), // 기본 중심 좌표
-			level: 3 // 확대 레벨
+			center: new kakao.maps.LatLng(33.450701, 126.570667),
+			level: 3
 		};
 
 	var map = new kakao.maps.Map(mapContainer, mapOption);
 
-	// 주소-좌표 변환 객체 생성
 	var geocoder = new kakao.maps.services.Geocoder();
 
-	// 주소 검색
-	geocoder.addressSearch('인천 미추홀구 매소홀로488번길 6-32', function (result, status) {
-		if (status === kakao.maps.services.Status.OK) {
-			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	function find_addr(){
+		new daum.Postcode({
+			oncomplete : data => {
+				if (data.userSelectedType === 'R') {
+					panTo(data.roadAddress)
+				}
+			}
+		}).open();
+	}
 
-			// 마커 생성
-			var marker = new kakao.maps.Marker({
-				map: map,
-				position: coords
-			});
+	function panTo(address) {
+		geocoder.addressSearch(address, function (result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				map.panTo(new kakao.maps.LatLng(result[0].y, result[0].x));
+			}
+		});
+	}
 
-			// 커스텀 오버레이 HTML
-			var content =
-				'<div class="overlaybox">' +
-				'    <div class="boxtitle">인테리어 회사명</div>' +
-				'    <div class="first">' +
-				'        <a href="https://www.kakaocorp.com/main" target="_blank">' +
-				'            <img src="https://interiorteacher.com/_next/image?url=https%3A%2F%2Fstatic.interiorteacher.com%2Fportfolio%2F864%2FCOVER%2Fmainjpg20240701110623_4.jpg&w=1920&q=75" alt="">' +
-				'        </a>' +
-				'    </div>' +
-				'</div>';
+	var locations = [
+		{ name: "고객 1", address: "인천 미추홀구 매소홀로475번길 60" },
+		{ name: "고객 2", address: "인천 미추홀구 학익소로63번길 59" },
+		{ name: "고객 3", address: "인천 미추홀구 학익소로61번길 132" },
+		{ name: "고객 4", address: "인천 미추홀구 소성로 211" },
+		{ name: "고객 5", address: "인천 미추홀구 매소홀로438번길 8" },
+		{ name: "고객 6", address: "인천 미추홀구 소성로256번길 18" },
+		{ name: "고객 7", address: "인천 미추홀구 소성로318번길 5" },
+		{ name: "고객 8", address: "인천 미추홀구 학익동 6-55" },
+		{ name: "고객 9", address: "인천 미추홀구 매소홀로488번길 5-49" },
+		{ name: "고객 10", address: "인천 미추홀구 승학길 51" },
+		{ name: "고객 11", address: "인천 미추홀구 승학길 14" },
+		{ name: "고객 12", address: "인천 미추홀구 매소홀로 517" },
+		{ name: "고객 13", address: "인천 미추홀구 소성로289번길 15" },
+		{ name: "고객 14", address: "인천 미추홀구 매소홀로438번길 40" },
+		{ name: "고객 15", address: "인천 미추홀구 매소홀로418번길 21" },
+		{ name: "고객 16", address: "인천 미추홀구 매소홀로427번길 7-25" },
+		{ name: "고객 17", address: "인천 미추홀구 학익소로61번길 12" },
+		{ name: "고객 18", address: "인천 미추홀구 학익소로61번길 36-23" },
+		{ name: "고객 19", address: "인천 미추홀구 학익소로63번길 37" },
+		{ name: "고객 20", address: "인천 미추홀구 주승로31번길 7" },
+		{ name: "고객 21", address: "인천 미추홀구 주승로 51" },
+		{ name: "고객 22", address: "인천 미추홀구 승학길76번길 3" },
+		{ name: "고객 23", address: "인천 미추홀구 승학길 63" },
+		{ name: "고객 24", address: "인천 미추홀구 승학길 22" },
+		{ name: "고객 25", address: "인천 미추홀구 승학길26번길 23" }
+	];
 
-			// 커스텀 오버레이 생성
-			var overlay = new kakao.maps.CustomOverlay({
-				content: content,
-				position: coords,
-				xAnchor: 0.3,
-				yAnchor: 1.0
-			});
+	var markers = [];
+	var overlays = [];
 
-			// 마커 클릭 시 오버레이 표시
-			kakao.maps.event.addListener(marker, 'click', function () {
-				overlay.setMap(map);
-			});
+	locations.forEach(function (location, index) {
+		geocoder.addressSearch(location.address, function (result, status) {
+			if (status === kakao.maps.services.Status.OK) {
+				var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-			// 지도 중심 이동
-			map.setCenter(coords);
-		}
+				var marker = new kakao.maps.Marker({
+					map: map,
+					position: coords
+				});
+				markers.push(marker);
+
+				var content =
+					'<div class="overlaybox">' +
+					'    <a href="/employment/list?page_number=1" class="boxtitle">지은 인테리어</a>' +
+					'    <div class="first">' +
+					'        <a href="/">' +
+					'            <img src="https://interiorteacher.com/_next/image?url=https%3A%2F%2Fstatic.interiorteacher.com%2Fportfolio%2F864%2FCOVER%2Fmainjpg20240701110623_4.jpg&w=1920&q=75" alt="">' +
+					'        </a>' +
+					'    </div>' +
+					'</div>';
+
+				var overlay = new kakao.maps.CustomOverlay({
+					content: content,
+					position: coords,
+					xAnchor: 0.3,
+					yAnchor: 1.0
+				});
+				overlays.push(overlay);
+
+				kakao.maps.event.addListener(marker, 'click', function () {
+					overlays.forEach(function (ov) {
+						ov.setMap(null);
+					});
+
+					overlay.setMap(map);
+				});
+
+				map.setCenter(coords);
+			}
+		});
 	});
 </script>
 </html>
