@@ -101,6 +101,12 @@
         WHERE USER_ID = #{user_id}
     </select>
 
+    <select id="get_seller_company" resultType="java.lang.String">
+        SELECT SELLER_COMPANY
+        FROM SERLLER
+        WHERE USER_ID = #{user_id}
+    </select>
+
     <update id="select_area">
         UPDATE SELLER
         SET SELLER_AREA = #{seller_area}

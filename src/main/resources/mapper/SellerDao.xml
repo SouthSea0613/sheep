@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.SellerDao">
+    <insert id="seller_write_main">
+        INSERT INTO BOARD
+        VALUES (NULL, #{user_id}, #{board_title}, #{board_content}, 0, DEFAULT, 1);
+    </insert>
+    <insert id="board_file_insert">
+        INSERT INTO IMAGE
+        VALUES (#{system_name}, #{board_number})
+    </insert>
+
     <select id="seller_list" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT WA.WISH_NUMBER, WA.WISH_TITLE, WA.APPLY_STATUS, S.USER_NAME, WA.WISH_MONEY
         FROM USER S
@@ -17,6 +26,7 @@
             GROUP BY WA.WISH_NUMBER) WA
         ON WA.USER_ID = S.USER_ID;
     </select>
+
     <select id="get_category" resultType="com._401unauthorized.sheep.dto.MajorDto">
         SELECT CATEGORY_NUMBER
         FROM MAJOR_CATEGORY_CONTENT
@@ -27,5 +37,13 @@
         SELECT CATEGORY_NUMBER
         FROM SUB_CATEGORY
         WHERE CATEGORY_NUMBER = 16 AND WISH_NUMBER = #{wish_number};
+    </select>
+
+    <select id="seller_main" resultType="com._401unauthorized.sheep.dto.BoardDto">
+        SELECT *
+        FROM BOARD B
+        JOIN SELLER_BOARD S
+        ON B.BOARD_NUMBER = S.BOARD_NUMBER
+        WHERE USER_ID = #{user_id} AND BOARD_KIND = 1
     </select>
 </mapper>

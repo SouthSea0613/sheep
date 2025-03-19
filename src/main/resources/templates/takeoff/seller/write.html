@@ -49,15 +49,18 @@
             <th:block th:each="category : ${category_list_dto}">
                 <!-- category_section 클래스도 추가하여 기존 테마와 일치 -->
                 <div class="wish_info category_section">
-                    <!-- 대분류: 굵고 큰 글씨 -->
-                    <div class="major_category" th:text="${category.major_text}">대분류 텍스트</div>
+                    <!-- 대분류 (주요 카테고리) -->
+                    <div class="major_category" th:text="${category.major_category}">대분류</div>
                     <input type="hidden" name="category_number" th:value="${category?.major_category}">
                     <!-- 중분류: 구분되어 보이도록 -->
                     <th:block th:each="subcategory : ${category.sub_category}">
                         <div class="sub_category" th:text="${subcategory}">중분류 넘버</div>
                     </th:block>
 
-                    <!-- 견적 입력 부분 -->
+                    <!-- 대분류 텍스트 (사용자가 입력한 내용) -->
+                    <div class="major_text" th:if="${category.major_text}!=null" th:text="${category.major_text}">대분류 설명</div>
+
+                    <!-- 견적 입력 -->
                     <div class="takeoff">
                         <input type="text" name="takeoff_content" class="takeoff_content" placeholder="상세하게 적어주세요.">
                     </div>
@@ -73,36 +76,38 @@
                 <input type="button" value="견적 저장" onclick="takeoffbtn()">
             </div>
         </form>
-        <br>
+
         <!-- 합계 영역 -->
         <div class="takeoff_all_money total_price">
             합계: <input type="text" id="takeoff_all_money" readonly name="takeoff_all_money">만원
         </div>
     </div>
-    <script>
-        function takeoffbtn() {
-            let takeoff_content_number = document.getElementsByClassName("takeoff_content");
-            for (let i = 0; i < takeoff_content_number.length; i++) {
-                if (takeoff_content_number[i].value == '') {
-                    alert("상세 견적을 작성 해주세요.");
-                    takeoff_content_number[i].focus();
-                    return false;
-                }
-            }
-            $('#write_form').submit();
-        }
-
-        function all_money() {
-            let total = 0;
-            const money_input = document.querySelectorAll(".takeoff_money");
-            money_input.forEach(money => {
-                total += parseInt(money.value) || 0;
-            });
-            const all_money_input = document.getElementById("takeoff_all_money");
-            all_money_input.value = total;
-        }
-    </script>
 </div>
+
+<!-- JavaScript -->
+<script>
+    function takeoffbtn() {
+        let takeoff_content_number = document.getElementsByClassName("takeoff_content");
+        for (let i = 0; i < takeoff_content_number.length; i++) {
+            if (takeoff_content_number[i].value == '') {
+                alert("상세 견적을 작성 해주세요.");
+                takeoff_content_number[i].focus();
+                return false;
+            }
+        }
+        $('#write_form').submit();
+    }
+
+    function all_money() {
+        let total = 0;
+        const money_input = document.querySelectorAll(".takeoff_money");
+        money_input.forEach(money => {
+            total += parseInt(money.value) || 0;
+        });
+        document.getElementById("takeoff_all_money").value = total;
+    }
+</script>
+
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

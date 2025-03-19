@@ -30,9 +30,12 @@
         /* 제목 스타일 */
         .title {
             font-size: 24px;
-            color: #003366;
             font-weight: bold;
-            margin-bottom: 20px;
+            color: #003366;
+            text-align: left;
+            margin: 140px 0 20px 10%; /* 좌우 margin을 auto 대신 10%로 설정 */
+            max-width: 1000px;
+            display: block;
         }
 
         /* 입력 필드 (제목 입력칸 & 텍스트 영역) */
@@ -102,12 +105,13 @@
     </style>
 </head>
 <body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
 <div class="title">이력서 작성</div>
 <form action="/employment/resume_write" method="post" id="resume_write">
     <input type="hidden" name="parent_board_number" th:value="${param.board_number}">
     <input type="hidden" name="user_id" th:value="${session?.user_id}">
     <input type="text" id="resume_title" name="board_title" autofocus placeholder="제목" required><br>
-    <textarea id="resume_content" name="board_content" rows="15" placeholder="경력을 적어주요.">
+    <textarea id="resume_content" name="board_content" rows="15" placeholder="경력을 적어주세요.">
 나이:&#10;
 경력:
     </textarea>
@@ -131,5 +135,6 @@
         $('#resume_write').submit();
     }
 </script>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
