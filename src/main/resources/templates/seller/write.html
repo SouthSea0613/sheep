@@ -1,54 +1,131 @@
 <!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>업체 등록</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script defer src="/javascript/common.js"></script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
 
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script defer src="/javascript/common.js"></script>
-        <script>
-            const user = "[[${session?.user_id}]]";
-            const type = "[[${session?.user_type}]]";
+        $(() => {
+            userType();
+            loginStatus();
 
-            $(() => {
-                console.log(type)
-                userType();
-                loginStatus();
-
-                $(".slider").bxSlider({
-                    adaptiveHeight: true,
-                    responsive: true,
-                    // slideWidth: 1000,
-                    auto: true,
-                    controls: true,
-                    autoHover: true,
-                    pager: true,
-                    autoControls: false,
-                })
+            $(".slider").bxSlider({
+                adaptiveHeight: true,
+                responsive: true,
+                // slideWidth: 1000,
+                auto: true,
+                controls: true,
+                autoHover: true,
+                pager: true,
+                autoControls: false,
             })
-        </script>
-        <link rel="stylesheet" href="/css/headerfooter.css">
-        <style>
-            .main_content_container {
-                margin: 140px auto 30px auto;
-            }
-        </style>
-    </head>
+        })
 
-    <body>
-        <form action="">
-            <div>
-                <span>로고 : </span>
-                <input name="multipart_files" type="file">
-            </div>
+        $(document).ready(() => {
+            console.log("페이지 로드 완료");
+        });
+    </script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <style>
+        .main_content_container {
+            margin: 140px auto 30px auto;
+        }
 
-            <div>
-                <div>업체소개 : </div>
-                <textarea name="board_content">
-                </textarea>
-            </div>
+        /* 전체 페이지 스타일 */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
 
-            <input type="submit" value="작성완료">
-        </form>
-    </body>
+        /* 메인 컨테이너 */
+        .main_content_container {
+            width: 50%;
+            margin: 140px auto 30px auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 제목 스타일 */
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #003399;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* 입력 폼 스타일 */
+        .form_group {
+            margin-bottom: 20px;
+        }
+
+        .form_group label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form_group input[type="file"],
+        .form_group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .form_group textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        /* 버튼 스타일 */
+        .submit_btn {
+            width: 100%;
+            background-color: #003399;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit_btn:hover {
+            background-color: #002266;
+        }
+    </style>
+</head>
+
+<body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<div class="main_content_container">
+    <div class="title">업체 등록</div>
+    <form action="" method="post">
+        <div class="form_group">
+            <label>로고 업로드</label>
+            <input name="multipart_files" type="file">
+        </div>
+
+        <div class="form_group">
+            <label>업체 소개</label>
+            <textarea name="board_content" placeholder="업체 소개를 입력하세요."></textarea>
+        </div>
+
+        <input type="submit" value="작성 완료" class="submit_btn">
+    </form>
+</div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
+</body>
 </html>
