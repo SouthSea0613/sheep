@@ -348,11 +348,6 @@
 <div class="main_content">
     <div class="wish-list-area">
         <h2>인테리어 위시</h2>
-        <th:block th:if="${#lists.isEmpty(wish_list) and #lists.isEmpty(wish_req_list)}">
-            <div class="non_wish">
-                <div>위시리스트가 없습니다</div>
-            </div>
-        </th:block>
         <div class="wishBarea wish_write_btn">
             <div class="tab">
                 <div class="tab_button">
@@ -364,8 +359,18 @@
             </div>
         </div>
         <div class="all_wish">
+            <div class="wish_list_block">
+                <div class="wish_container">
+                    <div class="non_wish">
+                        인테리어 위시를 작성해주세요
+                    </div>
+                </div>
+            </div>
         <!--위시리스트 요청 후 -->
         <th:block th:unless="${#lists.isEmpty(wish_req_list)}">
+            <th:block th:if="${#lists.isEmpty(wish_list) and #lists.isEmpty(wish_req_list)}">
+
+            </th:block>
             <th:block th:each="wish:${wish_req_list}">
                 <div class="wish_list_block">
                     <div class="wish_container">
