@@ -185,6 +185,7 @@ body{
     margin-bottom: 1%;
     margin-top: 3.5%;
     width : 10%;
+    position : relative;
 }
 
 #confirmbtn{
@@ -301,4 +302,19 @@ body{
 .seller_company_name {
     width: 100%;
     margin-right: auto;
+}
+.phonenumber{
+    display: none;
+    position: absolute;
+    border: 1px solid lightgray;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 0 3px 0;
+    top : 1%;
+    left: 24px;
+    width: 120px;
+}
+.phone_img{
+    width : 40px;
+    height : 40px;
 }
