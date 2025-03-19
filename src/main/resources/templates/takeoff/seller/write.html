@@ -38,11 +38,11 @@
             <div class="basic_info">
                 <h3>기본 정보</h3>
                 <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">
-                <div class="u_addr">주소</div>
-                <div th:text="${wish_dto?.wish_type}">주거형태</div>
-                <div th:text="${wish_dto?.wish_size}">평수</div>
-                <div th:text="${wish_dto?.wish_size_text}">평수참고</div>
-                <div class="u_money" th:text="${wish_dto?.wish_money}+만원">예산</div>
+                <strong>주소</strong><div class="u_addr">주소</div>
+                <strong>주거형태</strong><div class="u_type" th:text="${wish_dto?.wish_type}">주거형태</div>
+                <strong>평수</strong><div class="u_size" th:text="${wish_dto?.wish_size}">평수</div>
+                <strong>평수참고</strong><div class="u_size_text" th:text="${wish_dto?.wish_size_text}">평수참고</div>
+                <strong>예산</strong><div class="u_money" th:text="${wish_dto?.wish_money}+만원">예산</div>
             </div>
 
             <!-- 카테고리별 정보 -->
