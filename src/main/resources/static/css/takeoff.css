@@ -17,10 +17,10 @@ body {
 .container {
     width: 60%;
     padding: 20px;
-    background-color: #ffffff;
+    /*background-color: #ffffff;*/
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 140px auto 30px auto;
+    /*box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);*/
+    margin: 40px auto 30px auto;
 }
 
 /* ==================== 페이지 제목 ==================== */
@@ -33,10 +33,7 @@ body {
 
 /* ==================== 버튼 스타일 ==================== */
 .button_div {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 20px;
+
 }
 
 .button_div input {
@@ -58,8 +55,10 @@ body {
 }
 
 /* ==================== 리스트 스타일 ==================== */
-#enterlist, .endtakeoff, #writetakeoff {
+.endtakeoff {
     padding: 15px;
+    background-color: #003366;
+    border-radius: 0 15px 15px 15px;
 }
 
 /* 항목별 리스트 스타일 */
@@ -112,11 +111,10 @@ a {
 
 /* ==================== 메인 박스 디자인 ==================== */
 .main_box {
-    background-color: #003366;
+    background-color: white;
     color: white;
-    margin-top: 20px;
     padding: 15px;
-    border-radius: 10px;
+    border-radius:15px;
     transition: transform 0.2s ease-in-out;
 }
 
@@ -408,4 +406,28 @@ a {
 }
 .end_div > span{
     font-weight: bold;
+}
+.enterlist_div{
+    background-color: white;
+}
+#enterlist{
+
+}
+span{
+    color:#003366;
+}
+.main_box_container{
+    padding: 40px;
+    /*border-radius: 0  0 0;*/
+}
+.takeofflist{
+    border-radius: 0 15px 15px 15px;
+}
+.enterlist_div{
+    background-color: #003366;
+    border-radius: 0 15px 15px 15px;
+}
+.entercontent{
+    background-color: white;
+    padding: 20px;
 }

@@ -50,6 +50,11 @@
         SET APPLY_STATUS = 2
         WHERE WISH_NUMBER = #{wish_number} AND USER_ID = #{user_id}
     </update>
+    <update id="change_end_status">
+        UPDATE APPLY_STATUS
+        SET APPLY_STATUS = 4
+        WHERE WISH_NUMBER = #{wish_number} AND APPLY_STATUS !=1
+    </update>
 
     <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT W.WISH_NUMBER,W.WISH_TITLE,W.WISH_TYPE, W.WISH_SIZE, W.WISH_SIZE_TEXT, W.WISH_MONEY, W.WISH_ADDR, A.APPLY_STATUS, A.USER_ID

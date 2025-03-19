@@ -6,7 +6,7 @@ body{
     border : none;
     width : 130px;
     height : 40px;
-    background-color: #c20923;
+    background-color: #003366;
     box-shadow: 0 0 2px 0;
     cursor: pointer;
 }
@@ -135,16 +135,20 @@ body{
     justify-content: space-between;
 }
 
+
 .tab_button input{
     border : none;
     width : 130px;
     height : 40px;
-    background-color: #003366;
     font-weight : bold;
     font-size : 15px;
     color : white;
     border-radius: 15px 15px 0 0;
 }
+.wish_end{
+    background-color: #C8102E;
+}
+
 
 .detaillink{
     font-size : 20px;

@@ -41,4 +41,6 @@ public interface TakeoffDao {
     List<TakeoffDto> endseller_takeoff(String user_id);
 
     List<TakeoffDto> get_seller_status(Integer wish_number, String user_id);
+
+    boolean change_end_status(Integer wish_number);
 }

@@ -136,10 +136,10 @@
             const takeofflist = document.querySelector('.takeoff_list');
             const status = document.querySelectorAll('.status');
             const confirmbtn = document.getElementById('confirmbtn')
+            // const user_id = document.querySelectorAll('.user_id')
             console.log(wishnumber)
 
                     axios.post('/takeoff/confirm',{
-                        user_id : "[[${session.user_id}]]",
                         wish_number : wishnumber.value,
                     }).then((res)=>{
                         if(res.data){
@@ -236,8 +236,8 @@
             const btn2 = document.querySelector('.wish_end')
             console.log(buttondiv)
             if(num===0){
-                btn.style.backgroundColor="#003366";
-                btn2.style.backgroundColor="#C8102E";
+                btn.style.backgroundColor="#C8102E";
+                btn2.style.backgroundColor="#003366";
             axios.post('/takeoff/endwish',{
             })
                 .then((res)=>{
@@ -273,8 +273,8 @@
             endwish_div.innerHTML ="";
             wish_ing_container.style.display="block";
             endwish_container.style.display="none";
-            btn.style.backgroundColor="#C8102E";
-            btn2.style.backgroundColor="#003366";
+            btn.style.backgroundColor="#003366";
+            btn2.style.backgroundColor="#C8102E";
             num=0;
 
         }
@@ -337,6 +337,11 @@
         }
 
     </script>
+    <style>
+        .wish_ing{
+            background-color: #003366;
+        }
+    </style>
 </head>
 <body>
 <th:block th:replace="~{common/fragment::header}"></th:block>

@@ -126,4 +126,7 @@
     <select id="get_status" resultType="com._401unauthorized.sheep.dto.WishDto">
         SELECT APPLY_STATUS FROM APPLY_STATUS WHERE USER_ID=#{user_id} AND WISH_NUMBER = #{wish_number}
     </select>
+    <select id="get_user_status" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT APPLY_STATUS FROM APPLY_STATUS WHERE USER_ID=#{user_id} AND WISH_NUMBER = #{wish_number}
+    </select>
 </mapper>

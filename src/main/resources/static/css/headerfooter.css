@@ -165,7 +165,7 @@ nav {
 /* footer */
 
 .footer_bottom {
-    background-color: #f8f9fa;
+    background-color: white;
     padding: 20px 0;
     display: flex;
     flex-direction: column;

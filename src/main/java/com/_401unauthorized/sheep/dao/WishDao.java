@@ -23,4 +23,6 @@ public interface WishDao {
     WishDto get_wish_req_list(String userId);
 
     WishDto get_status(String user_id, Integer wish_number);
+
+    WishDto get_user_status(String user_id, Integer wish_number);
 }

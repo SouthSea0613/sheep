@@ -340,5 +340,9 @@ public class WishService {
     public WishDto get_status(String user_id, Integer wish_number) {
         return wishDao.get_status(user_id,wish_number);
     }
+
+    public WishDto get_user_status(String user_id, Integer wish_number) {
+        return wishDao.get_user_status(user_id,wish_number);
+    }
 }
 

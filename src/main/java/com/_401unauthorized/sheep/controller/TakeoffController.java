@@ -133,11 +133,14 @@ public class TakeoffController {
 
         WishDto takeoffDto = takeoffService.essential(wish_number,user_id);
         List<CategoryListDto> takeoffSellerDto = takeoffService.takeoff(wish_number, user_id);
-        WishDto wishDto  = wishService.get_status(httpSession.getAttribute("user_id").toString(),wish_number);
+        WishDto wishDto  = wishService.get_status(user_id,wish_number);
+        WishDto userStatus = wishService.get_user_status(httpSession.getAttribute("user_id").toString(),wish_number);
+
         if (takeoffDto != null) {
             model.addAttribute("takeoffDto", takeoffDto);
             model.addAttribute("takeoffSellerDto", takeoffSellerDto);
             model.addAttribute("applystatus", wishDto);
+            model.addAttribute("userStatus",userStatus);
             int all = 0;
             for (CategoryListDto price : takeoffSellerDto) {
                 all += price.getWish_category_seller_price();
@@ -241,9 +244,9 @@ public class TakeoffController {
 
     @PostMapping("/confirm")
     @ResponseBody
-    public boolean confirm(@RequestBody WishDto wishdto){
+    public boolean confirm(@RequestBody WishDto wishdto,HttpSession httpSession){
         log.info("테스트");
-        if(takeoffService.confirm(wishdto.getUser_id(),wishdto.getWish_number())){
+        if(takeoffService.confirm(wishdto.getWish_number(),httpSession.getAttribute("user_id").toString())){
             return true;
         }
         return false;

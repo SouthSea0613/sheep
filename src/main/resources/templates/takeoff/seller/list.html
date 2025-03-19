@@ -40,6 +40,7 @@
 					const enterlist = document.getElementById('enterlist')
 					const content = document.getElementById('writetakeoff')
 					const endlist = document.querySelector('.endtakeoff')
+						endlist.style.display="none";
 					endlist.textContent ="";
 					enterlist.style.display ='block';
 					content.textContent="";
@@ -49,18 +50,30 @@
 					axios.post('/takeoff/seller/my_list',{
 						user_id : "[[${session.user_id}]]"
 					}).then((res)=>{
-						if(res.data!=null){
+						if(res.data!=null) {
 							const enterlist = document.getElementById('enterlist')
 							const content = document.getElementById('writetakeoff')
 							const endlist = document.querySelector('.endtakeoff')
-							if(content.children.length===0){
-							enterlist.style.display="none";
-							endlist.textContent="";
-							res.data.forEach(list=>{
-								content.innerHTML+='<div class="entercontent">'+'<a class="write_a" href="/takeoff/seller/detail?wish_number='+list.wish_number+'&user_id='+list.user_id+ '">' + list.wish_title+'</a>'+'<p class="status_class">'+list.apply_status+'</p>'+'</div>'
-							})
+							if (content.children.length === 0) {
+								enterlist.style.display = "none";
+								endlist.style.display = "none";
+								endlist.textContent = "";
+								content.style.display = "block"
+								res.data.forEach(list => {
+									content.innerHTML += '<div class="entercontent">' + '<a class="write_a" href="/takeoff/seller/detail?wish_number=' + list.wish_number + '&user_id=' + list.user_id + '">' + list.wish_title + '</a>' + '<p class="status_class">' + list.apply_status + '</p>' + '</div>'
+								})
 							}
+						}else {
+							const enterlist = document.getElementById('enterlist')
+							const content = document.getElementById('writetakeoff')
+							const endlist = document.querySelector('.endtakeoff')
+							enterlist.style.display = "none";
+							endlist.style.display = "none";
+							endlist.textContent = "";
+							content.style.display = "block"
+							content.innerHTML = '<div class="writecontent">작성한 견적이 없습니다.</div>'
 						}
+
 					})
 					break;
 				case "2":
@@ -72,6 +85,7 @@
 						const endlist = document.querySelector('.endtakeoff')
 						writelist.textContent="";
 						enterlist.style.display="none";
+						endlist.style.display="block"
 						if(endlist.children.length===0){
 						res.data.forEach(data=>{
 							endlist.innerHTML += '<div class="end_div"><span>' + data.wish_title +  '</span>'+'<p class="status_class">' + data.apply_status +  '</p></div>';
@@ -91,14 +105,17 @@
 	<div class="page_logo">
 		견적리스트
 	</div>
+	<div class="button_div"><input type="button" class="0" value="들어온 견적" onclick="tab(this)"><input type="button" class="1" value="작성한 견적" onclick="tab(this)"><input type="button" class="2" value="종료된 견적" onclick="tab(this)"></div>
+	<div class="takeofflist">
 <div>
 	<th:block th:if="${#lists.isEmpty(seller_takeoff_list)}">
 		<a th:href="@{takeoff/seller/location_insert}"></a>
 	</th:block>
 </div>
-<div class="button_div"><input type="button" class="0" value="들어온 견적" onclick="tab(this)"><input type="button" class="1" value="작성한 견적" onclick="tab(this)"><input type="button" class="2" value="종료된 견적" onclick="tab(this)"></div>
+
 
 	<div id="enterlist">
+		<div class="enterlist_div">
 	<th:block th:if="${#lists.isEmpty(seller_takeoff_list)}">
 		<div class="non_seller_takeoff_list">
 			<div>들어온 견적리스트가 없습니다.</div>
@@ -108,6 +125,7 @@
 
 	<th:block th:unless="${#lists.isEmpty(seller_takeoff_list)}">
 		<th:block th:each="takeofflist : ${seller_takeoff_list}">
+			<div class="main_box_container">
 			<div class="main_box" th:onclick="|location.href='/wish/detail?wish_number=' + ${takeofflist.wish_number}|">
 
 					<div class="u_name_money">
@@ -133,12 +151,14 @@
 				</div>
 
 			</div>
+			</div>
 		</th:block>
 	</th:block>
-
+		</div>
 	</div>
 <div id="writetakeoff"></div>
-<div class="endtakeoff"></div>
+<div class="endtakeoff" hidden></div>
+</div>
 </div>
 <th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>

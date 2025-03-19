@@ -366,11 +366,15 @@ public class TakeoffService {
         return false;
     }
 
-    public boolean confirm(String user_id, Integer wish_number) {
-        if(takeoffDao.changestatus(wish_number,user_id)){
-            return true;
+    @Transactional
+    public boolean confirm(Integer wish_number, String user_id) {
+        if(!takeoffDao.changestatus(wish_number,user_id)){
+            return false;
         }
-        return false;
+        if(!takeoffDao.change_end_status(wish_number)){
+            return false;
+        }
+        return true;
     }
 
     public WishDto getstatus(String user_id, int wish_number) {
