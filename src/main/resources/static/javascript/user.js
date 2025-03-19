@@ -6,10 +6,10 @@ function id_check() {
 		axios.post('/user/id_check', data)
 			.then(res => {
 				if (res.data) {
-					$('#alert_msg').text('사용 가능한 아이디 입니다.').css('color','green');
+					$('#id_check').text('사용 가능한 아이디 입니다.').css('color','green');
 					$('#id_check_val').val(1);
 				} else {
-					$('#alert_msg').text('이미 사용중인 아이디 입니다.').css('color','red');
+					$('#id_check').text('이미 사용중인 아이디 입니다.').css('color','red');
 					$('#id_check_val').val(0);
 				}
 			})

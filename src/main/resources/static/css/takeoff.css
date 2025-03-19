@@ -9,7 +9,7 @@
 
 body {
     height: 90vh;
-    font-family: 'Arial', sans-serif;
+    font-family: 'Pretendard', sans-serif;
     background-color: #f8f9fa;
 }
 
@@ -41,17 +41,14 @@ body {
     width: 130px;
     height: 40px;
     background-color: #C8102E;
-    box-shadow: 0 0 2px 0;
     border-radius: 10px 10px 0 0;
     font-weight: bold;
     font-size: 15px;
-    transition: background-color 0.3s, transform 0.2s;
 }
 
 .button_div input:hover {
     background-color: #ab0e28;
     cursor: pointer;
-    transform: scale(1.05);
 }
 
 /* ==================== 리스트 스타일 ==================== */
@@ -439,4 +436,32 @@ span{
 }
 .u_size_text{
     margin-bottom: 15px;
+}
+.non_seller_takeoff_list{
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+}
+.non_seller_takeoff_list div{
+    background-color: white;
+    font-weight: bold;
+    border-radius: 15px;
+    margin-bottom: 10px;
+
+
+}
+.enterlist_div{
+    padding: 20px;
+}
+#seller_area{
+    background-color: #C8102E;
+    color : white;
+    border-radius: 10px;
+    padding: 5px 15px;
+    font-weight: bold;
+    border : none;
+}
+#major_id{
+    font-weight: bold;
+    font-size : 20px;
 }

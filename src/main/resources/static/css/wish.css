@@ -295,3 +295,10 @@ body{
 .end_title{
     width : 100%;
 }
+#major_category_id{
+    font-size : 20px;
+}
+.seller_company_name {
+    width: 100%;
+    margin-right: auto;
+}

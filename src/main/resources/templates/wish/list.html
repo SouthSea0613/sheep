@@ -78,7 +78,7 @@
 
                         res.data.forEach(resp => {
                             console.log(resp)
-                            takeofflist.innerHTML += '<div class="takeoff_list_div"><div><a class="seller_company" href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number='
+                            takeofflist.innerHTML += '<div class="takeoff_list_div"><div class="seller_company_name"><a class="seller_company" href="/takeoff/seller/detail?wish_number=' + wishnumber + '&user_id=' + resp.user_id + '" th:href="@{/takeoff/detail(wish_number='
                                 + wishnumber + ')}" th:text="' + resp.seller_company + '">' + resp.seller_company + '</a>' + '</div>'
                             +'<div class="money_div">' + resp.wish_category_seller_price + "만원" + '</div>'
                             +'<div class="status">' + resp.apply_status + '</div></div>';

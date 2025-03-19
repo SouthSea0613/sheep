@@ -40,18 +40,18 @@
 <div class="main_content">
 <h2>위시 디테일</h2>
     <div class="eun_wish_detail_box">
-        <div class="wish_addr">주소</div>
-        <div th:text="${wish_dto?.wish_type}">주거형태</div>
-        <div th:text="${wish_dto?.wish_size}">평수</div>
-        <div th:text="${wish_dto?.wish_size_text}">평수상세</div>
-        <div th:text="${wish_dto?.wish_money}+만원">예산</div>
+        <strong>주소</strong><div class="wish_addr">주소</div>
+        <strong>주거 형태</strong><div th:text="${wish_dto?.wish_type}">주거형태</div>
+        <strong>평수</strong><div th:text="${wish_dto?.wish_size}">평수</div>
+        <strong>평수 상세</strong><div th:text="${wish_dto?.wish_size_text}">평수상세</div>
+        <strong>예산:</strong><div th:text="${wish_dto?.wish_money}+만원">예산</div>
 
     <th:block th:each="category:${category_list_dto}">
-        <div class="majorcategory" th:if="${category.major_category}!=null" th:text="${category.major_category}">대분류 넘버</div>
+        <div id="major_category_id" class="majorcategory" th:if="${category.major_category}!=null" th:text="${category.major_category}">대분류 넘버</div>
         <th:block th:each="subcategory:${category.sub_category}">
             <div th:if="${subcategory}!=null" th:text="${subcategory}">중분류 넘버</div>
         </th:block>
-        <div th:if="${category.major_text}!=null" th:text="${category.major_text}">대분류 텍스트</div>
+        <div th:if="${category.major_text}!=null" th:text="'참고: ' + ${category.major_text}">대분류 텍스트</div>
     </th:block>
     <div id="takeoffarea" th:if="${session?.user_type == '0' && wish_dto?.apply_status==null}" class="takeoffarea">
         <input type="hidden" name="wish_number" th:value="${wish_dto?.wish_number}">

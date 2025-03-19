@@ -15,7 +15,7 @@
                 WHERE A.APPLY_STATUS=0) AS WA
             WHERE WA.WISH_TITLE LIKE CONCAT('%', S.SELLER_AREA,'%') AND S.USER_ID=#{user_id}
             GROUP BY WA.WISH_NUMBER) WA
-        ON WA.USER_ID = S.USER_ID;
+        ON WA.USER_ID = S.USER_ID
     </select>
     <select id="get_category" resultType="com._401unauthorized.sheep.dto.MajorDto">
         SELECT CATEGORY_NUMBER

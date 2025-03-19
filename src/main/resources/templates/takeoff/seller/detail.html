@@ -25,7 +25,7 @@
 
         body {
             height: 90vh;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Pretendard', sans-serif;
             background-color: #f8f9fa;
         }
 
@@ -90,6 +90,18 @@
             border-radius: 10px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
         }
+        .hr_text{
+             border : 1px solid lightgray;
+             margin-bottom: 10px;
+         }
+        #major_category_id{
+            font-weight: bold;
+            font-size : 20px;
+            color : #003366;
+        }
+        strong{
+            color : #003366;
+        }
     </style>
 </head>
 <body>
@@ -106,12 +118,13 @@
 
     <th:block th:each="takeoffSeller:${takeoffSellerDto}">
         <div class="info-box">
-            <div><strong>대분류:</strong> <span th:text="${takeoffSeller?.major_category}">대분류 넘버</span></div>
+            <div><span id="major_category_id" th:text="${takeoffSeller?.major_category}">대분류 넘버</span></div>
             <th:block th:each="subcategory:${takeoffSeller.sub_category}">
-                <div><strong>중분류:</strong> <span th:text="${subcategory}">중분류 넘버</span></div>
+                <div><span th:text="${subcategory}">중분류 넘버</span></div>
             </th:block>
-            <div><strong>대분류 텍스트:</strong> <span th:text="${takeoffSeller?.major_text}">대분류 텍스트</span></div>
-            <div><strong>판매자 답변:</strong> <span th:text="${takeoffSeller?.wish_category_seller_answer}">판매자답변</span></div>
+            <div><strong>참고:</strong> <span th:text="${takeoffSeller?.major_text}">대분류 텍스트</span></div>
+            <hr class="hr_text">
+            <div><strong>견적 상세 설명: </strong> <span th:text="${takeoffSeller?.wish_category_seller_answer}">판매자답변</span></div>
             <div><strong>견적 금액:</strong> <span th:text="${takeoffSeller?.wish_category_seller_price} + '만원'">견적금액</span></div>
         </div>
     </th:block>
