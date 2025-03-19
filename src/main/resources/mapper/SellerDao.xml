@@ -2,20 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.SellerDao">
     <select id="seller_list" resultType="com._401unauthorized.sheep.dto.WishDto">
-        SELECT WA.WISH_NUMBER, WA.WISH_TITLE, WA.APPLY_STATUS, S.USER_NAME, WA.WISH_MONEY
-        FROM USER S
-        JOIN (
-            SELECT WA.WISH_NUMBER,WA.WISH_TITLE,WA.USER_ID,WA.APPLY_STATUS, WA.WISH_MONEY
-            FROM SELLER S
-            JOIN (
-                SELECT W.WISH_NUMBER, W.USER_ID, W.WISH_TITLE, W.WISH_MONEY, A.APPLY_STATUS
-                FROM WISH W
-                JOIN APPLY_STATUS A
-                ON W.WISH_NUMBER = A.WISH_NUMBER
-                WHERE A.APPLY_STATUS=0) AS WA
-            WHERE WA.WISH_TITLE LIKE CONCAT('%', S.SELLER_AREA,'%') AND S.USER_ID=#{user_id}
-            GROUP BY WA.WISH_NUMBER) WA
-        ON WA.USER_ID = S.USER_ID
+        SELECT WA.WISH_NUMBER, WA.WISH_TITLE, WA.APPLY_STATUS, WA.USER_ID, WA.WISH_MONEY
+        FROM SELLER S
+                 JOIN (
+            SELECT W.WISH_NUMBER, W.USER_ID, W.WISH_TITLE, W.WISH_MONEY, A.APPLY_STATUS
+            FROM WISH W
+                     JOIN APPLY_STATUS A
+                          ON W.WISH_NUMBER = A.WISH_NUMBER
+            WHERE A.APPLY_STATUS=0) AS WA
+        WHERE WA.WISH_TITLE LIKE CONCAT('%', S.SELLER_AREA,'%') AND S.USER_ID = #{user_id}
+        GROUP BY WA.WISH_NUMBER
+        EXCEPT
+        SELECT W.WISH_NUMBER, W.WISH_TITLE, ASW.APPLY_STATUS, W.USER_ID, W.WISH_MONEY
+        FROM WISH W
+                 JOIN APPLY_STATUS ASW
+                      ON W.WISH_NUMBER = ASW.WISH_NUMBER
+        WHERE ASW.USER_ID = #{user_id}
+        GROUP BY W.WISH_NUMBER
     </select>
     <select id="get_category" resultType="com._401unauthorized.sheep.dto.MajorDto">
         SELECT CATEGORY_NUMBER
