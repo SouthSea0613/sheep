@@ -43,7 +43,7 @@ body {
     border: none;
     width: 130px;
     height: 40px;
-    background-color: #FFC5B2;
+    background-color: #C8102E;
     box-shadow: 0 0 2px 0;
     border-radius: 10px 10px 0 0;
     font-weight: bold;
@@ -52,7 +52,7 @@ body {
 }
 
 .button_div input:hover {
-    background-color: #fc9c7c;
+    background-color: #ab0e28;
     cursor: pointer;
     transform: scale(1.05);
 }
@@ -216,7 +216,7 @@ a {
     padding: 10px 20px;
     font-size: 16px;
     font-weight: bold;
-    background-color: #28a745;
+    background-color: #C8102E;
     color: white;
     border-radius: 5px;
     cursor: pointer;
@@ -224,7 +224,7 @@ a {
 }
 
 .contract_section input[type="submit"]:hover {
-    background-color: #218838;
+    background-color: #C8102E;
 }
 
 /* ========== 여기서부터 추가할 CSS 코드 ========== */
@@ -344,6 +344,7 @@ a {
     font-size: 18px;
     font-weight: bold;
     border: none;
+    color : white;
     background-color: transparent;
 }
 
