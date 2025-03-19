@@ -129,8 +129,9 @@ a {
     align-items: center;
     width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
-    margin-bottom: 10px; /* 테이블과 버튼 사이 여백 추가 */
+    padding: 3% 8%;
+    /*margin: 0 auto;*/
+    /*margin-bottom: 10px; !* 테이블과 버튼 사이 여백 추가 *!*/
 }
 
 /* 버튼 위치 조정 */
@@ -140,4 +141,7 @@ a {
     width: 100%;
     max-width: 1200px;
     margin: 0;
+}
+section{
+    margin: 100px auto 30px auto;
 }
