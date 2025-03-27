@@ -1,22 +1,137 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>기술자모집</title>
+    <style>
+        /* 전체 스타일 */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 컨테이너 (폼) */
+        form {
+            width: 80%;
+            max-width: 800px; /* PC 화면에서는 최대 800px */
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 제목 스타일 */
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+            text-align: left;
+            margin: 140px 0 20px 10%; /* 좌우 margin을 auto 대신 10%로 설정 */
+            max-width: 1000px;
+            display: block;
+        }
+
+        /* 입력 필드 (제목 입력칸 & 텍스트 영역) */
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        /* 텍스트 영역 스타일 */
+        textarea {
+            height: 200px;
+            resize: none;
+            overflow-y: auto;
+        }
+
+        /* 작성완료 버튼 */
+        .btn {
+            width: 100%;
+            max-width: 200px; /* PC에서는 버튼 크기 고정 */
+            padding: 12px;
+            font-size: 14px;
+            background: #C8102E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            margin: 20px auto 0; /* textarea와 간격 추가 */
+        }
+
+        .btn:hover {
+            background-color: #9B0C23;
+        }
+
+        /* 반응형 (모바일 최적화) */
+        @media screen and (max-width: 768px) {
+            form {
+                width: 95%; /* 모바일에서는 폼이 꽉 차도록 설정 */
+                padding: 30px;
+            }
+
+            .title {
+                font-size: 22px; /* 모바일에서 폰트 크기 조정 */
+            }
+
+            input[type="text"], textarea {
+                font-size: 14px; /* 모바일에서 입력 필드 폰트 크기 조정 */
+                padding: 10px;
+            }
+
+            textarea {
+                height: 180px; /* 모바일에서 조금 작게 */
+            }
+
+            .btn {
+                width: 100%; /* 모바일에서는 버튼이 꽉 차도록 설정 */
+                max-width: none;
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+    </style>
 </head>
 <body>
-<h2>이력서 작성하기</h2>
-<form method="post" action="">
-<input th:type="text" th:name="board_title" th:id="title" placeholder="제목 입력">
-<textarea th:type="text" th:name="board_content" th:id="content">내용 입력</textarea>
-<input type="button" value="등록하기" onclick="resumementsubmit()">
+<div class="title">이력서 작성</div>
+<form action="/employment/resume_write" method="post" id="resume_write">
+    <input type="hidden" name="parent_board_number" th:value="${param.board_number}">
+    <input type="hidden" name="user_id" th:value="${session?.user_id}">
+    <input type="text" id="resume_title" name="board_title" autofocus placeholder="제목" required><br>
+    <textarea id="resume_content" name="board_content" rows="15" placeholder="경력을 적어주세요.">
+나이:&#10;
+경력:
+    </textarea>
+
+    <div><input type="button" class="btn" value="작성완료" onclick="resume_write()"></div>
 </form>
 <script>
-    function resumementsubmit(){
-        //동기
-        location.href='detail.html'
+    function resume_write() {
+        const resume_title = $('#resume_title');
+        const resume_contents = $('#resume_contents');
+        if (resume_title.val() === '') {
+            alert("제목을 입력하세요.")
+            resume_title.focus();
+            return false;
+        }
+        if (resume_contents.val() === '') {
+            alert("내용을 입력하세요.")
+            resume_contents.focus();
+            return false;
+        }
+        $('#resume_write').submit();
     }
 </script>
 </body>

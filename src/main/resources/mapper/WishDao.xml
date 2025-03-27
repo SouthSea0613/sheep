@@ -2,4 +2,130 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com._401unauthorized.sheep.dao.WishDao">
 
+    <!--리스트 가져오기-->
+    <!--  위시리스트에 갔을때 제목이랑 상태 값을 가지고 와야함으로 WISH_TITLE이랑 APPLY_STATUS를 select했다.  -->
+    <!--  LEFT JOIN은 왼쪽의테이블을 중심으로 오른쪽테이블을 매치를 함으로 WISH_TITLE오른쪽에 APPLY_STATUS를 매치한다.  -->
+    <!--  ON은 WISH 테이블과 APPLY_STATUS 테이블의 WISH_NUMBER로 조인했다.  -->
+    <!--  WHERE은 조건문으로 WISH의 USER_ID와 값이 같은 USER_ID를 찾는다.  -->
+    <select id="get_wish_list" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT * FROM WISH W
+        LEFT JOIN APPLY_STATUS A
+        ON W.WISH_NUMBER = A.WISH_NUMBER AND W.USER_ID = A.USER_ID
+        WHERE W.USER_ID = #{user_id} AND A.APPLY_STATUS IS NULL
+    </select>
+
+    <select id="get_wish_detail" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT *
+        FROM WISH W LEFT JOIN APPLY_STATUS A
+        ON W.WISH_NUMBER = A.WISH_NUMBER AND W.USER_ID = A.USER_ID
+        WHERE W.WISH_NUMBER = #{wish_number}
+    </select>
+
+    <select id="get_category_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
+        SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+        FROM MAJOR_CATEGORY_CONTENT MC
+        LEFT JOIN (
+            SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
+            FROM CATEGORY C
+            RIGHT JOIN SUB_CATEGORY S
+            ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+            WHERE C.CATEGORY_PARENT IS NOT NULL) C
+        ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+        WHERE MC.WISH_NUMBER = #{wish_number}
+        UNION
+        SELECT C.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+        FROM MAJOR_CATEGORY_CONTENT MC
+        RIGHT JOIN (
+            SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
+            FROM CATEGORY C
+            RIGHT JOIN SUB_CATEGORY S
+            ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+            WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
+        ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+    </select>
+
+    <select id="get_apply_count" resultType="java.lang.Integer">
+        SELECT COUNT(*)
+        FROM APPLY_STATUS
+        WHERE WISH_NUMBER = #{wishNumber}
+    </select>
+
+    <!--글쓰기!(generateKey) 사용-->
+    <!--  wish_number(PK/ 오토인크리먼트) 로 작성하면서 겹치지 않게 지켜줌, 하위 친구들도 동일한 위시넘버로 계속 간다.  -->
+    <!--  WISH 테이블의 필수 값을 순서대로 write.html에 있는 틀에 맞춰 작성된 VALUE값을 불러온다. 아래 모두 같다.  -->
+    <!--  제너레이트키의 역할은 wish_number을 고정값으로 주기 위해서 절대 겹치는 값을 만들지 않는 역할로 오토인크리먼트랑 주로 쓴다.  -->
+    <insert id="insert_wish" useGeneratedKeys="true" keyProperty="wish_number">
+        INSERT INTO WISH
+        VALUES (null, #{user_id}, #{wish_title}, #{wish_type}, #{wish_size}, #{wish_size_text}, #{wish_money}, #{wish_addr})
+    </insert>
+
+    <!--대분류 insert-->
+    <insert id="insert_major">
+        INSERT INTO MAJOR_CATEGORY_CONTENT
+        VALUES (#{category_number}, #{wish_number}, #{major_text})
+    </insert>
+
+    <!--중분류 insert-->
+    <insert id="insert_sub">
+        INSERT INTO SUB_CATEGORY
+        VALUES (#{category_number}, #{wish_number})
+    </insert>
+
+    <!-- 삭제 요청 -->
+    <delete id="delete_sub_category">
+        DELETE FROM SUB_CATEGORY
+        WHERE WISH_NUMBER = #{wish_number}
+    </delete>
+
+    <delete id="delete_major_category">
+        DELETE FROM MAJOR_CATEGORY_CONTENT
+        WHERE WISH_NUMBER = #{wish_number}
+    </delete>
+
+    <delete id="delete_wish">
+        DELETE FROM WISH
+        WHERE WISH_NUMBER = #{wish_number}
+    </delete>
+
+    <select id="get_takeoff_detail" resultType="com._401unauthorized.sheep.dto.CategoryDto">
+        SELECT SELLER.WISH_NUMBER, SELLER.CATEGORY_PARENT, SELLER.CATEGORY_NUMBER, SELLER.MAJOR_TEXT, WCS.WISH_CATEGORY_SELLER_ANSWER, WCS.WISH_CATEGORY_SELLER_PRICE
+        FROM WISH_CATEGORY_SELLER WCS
+        RIGHT JOIN (
+            SELECT MC.WISH_NUMBER, MC.CATEGORY_NUMBER AS CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+            FROM MAJOR_CATEGORY_CONTENT MC
+            LEFT JOIN (
+                SELECT C.CATEGORY_NUMBER, C.CATEGORY_PARENT, S.WISH_NUMBER
+                FROM CATEGORY C
+                RIGHT JOIN SUB_CATEGORY S
+                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+                WHERE C.CATEGORY_PARENT IS NOT NULL) C
+            ON  MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER
+            WHERE MC.WISH_NUMBER = #{wish_number}
+            UNION
+            SELECT C.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER, MC.MAJOR_TEXT
+            FROM MAJOR_CATEGORY_CONTENT MC
+            RIGHT JOIN (
+                SELECT S.WISH_NUMBER, C.CATEGORY_PARENT, C.CATEGORY_NUMBER
+                FROM CATEGORY C
+                RIGHT JOIN SUB_CATEGORY S
+                ON C.CATEGORY_NUMBER = S.CATEGORY_NUMBER
+                WHERE C.CATEGORY_PARENT IS NOT NULL AND S.WISH_NUMBER = #{wish_number}) C
+            ON MC.CATEGORY_NUMBER = C.CATEGORY_PARENT AND C.WISH_NUMBER = MC.WISH_NUMBER) SELLER
+        ON SELLER.WISH_NUMBER = WCS.WISH_NUMBER AND SELLER.CATEGORY_PARENT = WCS.CATEGORY_NUMBER
+    </select>
+
+    <select id="get_wish_req_list" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT W.WISH_NUMBER,W.WISH_TITLE,A.APPLY_STATUS
+        FROM WISH W
+        JOIN APPLY_STATUS A
+        ON W.WISH_NUMBER = A.WISH_NUMBER
+        WHERE A.USER_ID = #{user_id} AND APPLY_STATUS IS NOT NULL AND (APPLY_STATUS = 0 OR APPLY_STATUS = 1)
+        GROUP BY W.WISH_NUMBER,W.WISH_TITLE,A.APPLY_STATUS
+    </select>
+    <select id="get_status" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT APPLY_STATUS FROM APPLY_STATUS WHERE USER_ID=#{user_id} AND WISH_NUMBER = #{wish_number}
+    </select>
+    <select id="get_user_status" resultType="com._401unauthorized.sheep.dto.WishDto">
+        SELECT APPLY_STATUS FROM APPLY_STATUS WHERE USER_ID=#{user_id} AND WISH_NUMBER = #{wish_number}
+    </select>
 </mapper>

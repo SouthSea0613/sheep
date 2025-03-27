@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>견적 지역 설정</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="/javascript/common.js"></script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/takeoff.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        select {
+            width: 250px;
+            padding: 8px;
+            margin: 10px;
+        }
+        #selected-area {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+        })
+    </script>
+</head>
+<body>
+
+<h2>견적 지역 설정</h2>
+
+<form th:action="${action}" method="post">
+<!-- 도 선택 -->
+<select id="province" onchange="updateCities()">
+    <option value="">도 선택</option>
+</select>
+
+<!-- 시 선택 -->
+<select id="city" name="seller_area" disabled onchange="displaySelectedArea()">
+    <option value="">시 선택</option>
+</select>
+<!-- 선택한 지역 표시 -->
+<div id="selected-area">선택한 지역: 없음</div>
+    <br>
+    <input type="submit" value="설정완료">
+</form>
+
+<script>
+    // 대한민국 도/시 데이터 (광역시들을 특정 도에 포함)
+    const regions = {
+        "경기/서울/인천": ["서울", "인천", "수원", "고양", "용인", "성남", "부천", "안산", "남양주", "화성"],
+        "강원도": ["춘천", "원주", "강릉", "동해", "속초", "삼척"],
+        "충청북도": ["청주", "충주", "제천"],
+        "충청남도": ["대전", "세종", "천안", "공주", "아산", "논산"],
+        "전라북도": ["전주", "익산", "군산", "정읍", "남원"],
+        "전라남도": ["광주", "목포", "순천", "여수", "나주"],
+        "경상북도": ["포항", "구미", "경산", "안동"],
+        "경상남도": ["울산", "부산", "대구", "창원", "김해", "진주", "양산", "거제"],
+        "제주특별자치도": ["제주", "서귀포"]
+    };
+
+    const provinceSelect = document.getElementById("province");
+    const citySelect = document.getElementById("city");
+
+    // 도 목록 채우기
+    Object.keys(regions).forEach(province => {
+        const option = document.createElement("option");
+        option.value = province;
+        option.textContent = province;
+        provinceSelect.appendChild(option);
+    });
+
+    // 시 목록 업데이트
+    function updateCities() {
+        citySelect.innerHTML = '<option value="">시 선택</option>';
+        citySelect.disabled = true;
+
+        const selectedProvince = provinceSelect.value;
+        if (selectedProvince && regions[selectedProvince]) {
+            regions[selectedProvince].forEach(city => {
+                const option = document.createElement("option");
+                option.value = city;
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+            citySelect.disabled = false;
+        }
+    }
+
+    // 선택한 지역 표시
+    function displaySelectedArea() {
+        document.getElementById("selected-area").textContent = `선택한 지역: ${provinceSelect.value} ${citySelect.value}`;
+    }
+</script>
+
+</body>
+</html>

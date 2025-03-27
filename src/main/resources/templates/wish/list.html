@@ -1,39 +1,525 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script src="/javascript/wish.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer src="/javascript/common.js"></script>
+    <script src="https://kit.fontawesome.com/3e18228bfa.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/wish.css">
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            userType();
+            loginStatus();
+            createbtn();
+        })
+
+        function wish_write() {
+            location.href = "/wish/write"
+        }
+
+        function takeoff(btn) {
+            const wishnumber = btn.previousElementSibling.value;
+            axios.post('/takeoff/call', {
+                user_id: "[[${session.user_id}]]",
+                wish_number: wishnumber,
+                apply_status: "0",
+            }).then((res) => {
+                if (res) {
+                    alert("견적 요청이 완료되었습니다")
+                    location.href = "/wish/list";
+                } else {
+                    alert("견적 요청이 실패되었습니다");
+                    location.href = "/wish/list";
+                }
+            });
+        }
+        function contract(){
+            const wishnumber = document.querySelectorAll('.hidden_wish_number')
+            const userid = document.querySelectorAll('.hidden_user_id')
+            for(let i=0; i<wishnumber.length; i++){
+                axios.post('/takeoff/contract',{
+                    wish_number: wishnumber[i].value,
+                    user_id: userid[i].value,
+                }).then((res)=>{
+                    if(res.data) {
+                        alert("계약이 완료되었습니다");
+                        history.go(0);
+                    }else{
+                        alert("계약이 실패했습니다");
+                    }
+                })
+            }
+        }
+        function takeofflist(btn) {
+            const takeofflist = document.querySelector('.takeoff_list');
+            const openbtn = document.querySelector('.downimg');
+            const closebtn = document.querySelector('.upimg');
+            const confirmbtn = document.querySelector('#confirmbtn');
+            const contractbtn = document.querySelectorAll('.contractbtn');
+
+            if (btn === openbtn) {
+                const wishnumber = btn.previousElementSibling.value;
+                confirmbtn.style.display = "block";
+                console.log(wishnumber);
+                openbtn.style.display = "none";
+                closebtn.style.display = "block";
+
+                axios.post('/takeoff/list', { wish_number: wishnumber }).then((res) => {
+                    closebtn.style.display = 'block';
+                    btn.style.display = 'none';
+                    console.log(res.data);
+                    console.log(takeofflist);
+
+                    takeofflist.innerHTML = "";  // 기존 목록 초기화
+
+                    res.data.forEach(resp => {
+                        console.log(resp);
+
+                        // 새로운 div 생성하여 목록 추가
+                        const listItem = document.createElement("div");
+                        listItem.classList.add("takeoff_list_div");
+
+                        // 판매자 정보
+                        const sellerDiv = document.createElement("div");
+                        sellerDiv.classList.add("seller_company_name");
+                        sellerDiv.innerHTML = `<a class="seller_company" href="/takeoff/seller/detail?wish_number=${wishnumber}&user_id=${resp.user_id}">${resp.seller_company}</a>`;
+
+                        // 가격 정보
+                        const priceDiv = document.createElement("div");
+                        priceDiv.classList.add("money_div");
+                        priceDiv.textContent = resp.wish_category_seller_price + "만원";
+
+                        // 상태 정보
+                        const statusDiv = document.createElement("div");
+                        statusDiv.classList.add("status");
+                        statusDiv.textContent = resp.apply_status;
+
+                        // 전화번호 추가 (상담중일 경우만)
+                        if (resp.apply_status === "상담중") {
+                            const imgContainer = document.createElement("div");
+                            imgContainer.classList.add("img_container");
+
+                            const phoneImg = document.createElement("img");
+                            phoneImg.src = "/image/phone.png";
+                            phoneImg.classList.add("phone_img");
+                            phoneImg.alt = "전화번호";
+
+                            const phoneNumber = document.createElement("p");
+                            phoneNumber.classList.add("phonenumber");
+                            phoneNumber.textContent = resp.user_phone;
+                            phoneNumber.style.display = "none";
+
+                            phoneImg.addEventListener('mouseover', function () {
+                                phoneNumber.style.display = "block";
+                            });
+
+                            phoneImg.addEventListener('mouseout', function () {
+                                phoneNumber.style.display = "none";
+                            });
+
+                            imgContainer.appendChild(phoneImg);
+                            imgContainer.appendChild(phoneNumber);
+                            listItem.appendChild(imgContainer);
+                        }
+
+                        // 숨은 필드 추가
+                        const hiddenWish = document.createElement("input");
+                        hiddenWish.type = "hidden";
+                        hiddenWish.classList.add("hidden_wish_number");
+                        hiddenWish.value = resp.wish_number;
+
+                        const hiddenUser = document.createElement("input");
+                        hiddenUser.type = "hidden";
+                        hiddenUser.classList.add("hidden_user_id");
+                        hiddenUser.value = resp.user_id;
+
+                        // 리스트 아이템에 모든 요소 추가
+                        listItem.appendChild(sellerDiv);
+                        listItem.appendChild(priceDiv);
+                        listItem.appendChild(statusDiv);
+                        listItem.appendChild(hiddenWish);
+                        listItem.appendChild(hiddenUser);
+
+                        takeofflist.appendChild(listItem);
+                    });
+
+                    buttonstatus();
+                    seller_status();
+                });
+            } else if (btn === closebtn) {
+                btn.style.display = 'none';
+                openbtn.style.display = 'block';
+                closebtn.style.display = "none";
+                takeofflist.innerHTML = "";  // 리스트 닫을 때 초기화
+                confirmbtn.style.display = "none";
+                contractbtn.forEach(cbtn => {
+                    cbtn.style.display = "none";
+                });
+            }
+        }
+
+
+        function createbtn() {
+            const btndiv = document.querySelectorAll('.status_wish_number')
+            for (let i = 0; i < btndiv.length; i++) {
+                axios.post('/takeoff/count', null, {
+                    params: {
+                        wish_number: btndiv[i].value,
+                        user_id: "[[${session.user_id}]]"
+                    }
+                })
+                    .then((res) => {
+                        if (res.data) {
+
+                        } else {
+                        }
+                    })
+            }
+        }
+
+        function confirm(){
+            const wishnumber = document.querySelector('.hidden_wish_number')
+            const takeofflist = document.querySelector('.takeoff_list');
+            const status = document.querySelectorAll('.status');
+            const confirmbtn = document.getElementById('confirmbtn')
+            // const user_id = document.querySelectorAll('.user_id')
+            console.log(wishnumber)
+
+                    axios.post('/takeoff/confirm',{
+                        wish_number : wishnumber.value,
+                    }).then((res)=>{
+                        if(res.data){
+                            alert("견적이 확정되었습니다.")
+                            // status.forEach(s=>{
+                            //     if(s.innerText==="상담중"){
+                            takeofflist.style.display = "block";
+                            confirmbtn.style.display="none";
+                        }else{
+                            alert("견적확정이 실패했습니다.")
+                        }
+                    // })
+                // }
+            })
+
+        }
+        function buttonstatus(){
+            const wishnumber = document.querySelector('.wish_number_status').value
+            const status = document.querySelectorAll('.status');
+            const confirmbtn = document.getElementById('confirmbtn')
+            console.log(status[1])
+            axios.post('/takeoff/getstatus',{
+                wish_number: wishnumber,
+                user_id :"[[${session.user_id}]]",
+            }).then(res=>{
+                    console.log(status)
+                switch (res.data.apply_status){
+                    case "0":
+                        break;
+                    case "1":
+                        confirmbtn.style.display="none";
+                        break;
+                    case "2":
+                        confirmbtn.style.display="none";
+                        break;
+                    case "3":
+                        confirmbtn.style.display="none";
+                        break;
+                    case "4":
+                        confirmbtn.style.display="none";
+                        break;
+                }
+            })
+        }
+        function seller_status(){
+            const wishnumber = document.querySelector('.wish_number_status').value
+            const contractbtn = document.querySelectorAll('.contractbtn');
+            const confirmbtn = document.getElementById('confirmbtn')
+            const status_div = document.querySelectorAll('.status')
+                axios.post('/takeoff/seller/status',{
+                    wish_number:wishnumber,
+                }).then(res=>{
+                    // console.log(status_div[1].innerText)
+                    res.data.forEach(status=>{
+                    switch (status.apply_status){
+                        case "0":
+                            break;
+                        case "1":
+                            // if(window.getComputedStyle(confirmbtn).display==="none"){
+                            // for(let i=0; i<res.data.length;i++) {
+                            //     console.log(status_div[i].innerText)
+                            //     if (status_div[i].innerText === "상담중") {
+                            //         contractbtn[i].style.display = "block";
+                            //     }
+                            // }
+                            // }
+                            break;
+                        case "2":
+                            confirmbtn.style.display="none";
+                            for(let i=0; i<5;i++) {
+                                contractbtn[i].style.display = "none";
+                            }
+                            break;
+                        case "3":
+                            confirmbtn.style.display="none";
+                            break;
+                        case "4":
+                            confirmbtn.style.display="none";
+                            break;
+                    }
+                })
+                })
+
+
+        }
+        let num = 0;
+        function endwish(){
+            const endwish = document.querySelector('.endwish')
+            const endwish_container = document.querySelector('.endwish_container')
+            const wish_ing_container = document.querySelector('.all_wish')
+            const buttondiv = document.querySelectorAll('.button_endlist')
+            const wish_takeoff = document.querySelector('.takeoff_end')
+            const btn = document.querySelector('.wish_ing')
+            const btn2 = document.querySelector('.wish_end')
+            console.log(buttondiv)
+            if(num===0){
+                btn.style.backgroundColor="#C8102E";
+                btn2.style.backgroundColor="#003366";
+            axios.post('/takeoff/endwish',{
+            })
+                .then((res)=>{
+
+                    wish_ing_container.style.display='none';
+                    endwish_container.style.display="block";
+                    endwish.innerHTML+= '<input type="hidden" class="end_wish_number" value="'+res.data.wish_number+'"' +'>';
+                    if(res.data.wish_number!=null){
+                    endwish.innerHTML+= '<div class="end_wish_div"><div class="end_title">'+res.data.wish_title+'</div>'+'<div class="end_status">'+res.data.apply_status+'</div>'+'</div>'
+                        // buttondiv.forEach(div=>{
+                        //     console.log(div)
+                        //     div.innerHTML += '<img class="downimg2" src="/image/down.png" alt="다운" onclick="takeoffendlist(this)">'
+                        //     div.innerHTML += '<img hidden class="upimg2" src="/image/up.png" alt="다운" onclick="takeoffendlist(this)">'
+                        // })
+                    num=1;
+                    }else{
+                        endwish.innerHTML='<p>종료된 위시가 존재하지 않습니다.</p>'
+                    }
+                })
+            }
+        }
+
+        function ingtab(){
+            const buttondiv = document.querySelectorAll('.button_endlist')
+            const wish_ing_container = document.querySelector('.all_wish')
+            const endwish_container = document.querySelector('.endwish_container')
+            const endwish_div = document.querySelector('.endwish')
+            const btn = document.querySelector('.wish_ing')
+            const btn2 = document.querySelector('.wish_end')
+            buttondiv.forEach(div=>{
+                div.innerHTML="";
+            })
+            endwish_div.innerHTML ="";
+            wish_ing_container.style.display="block";
+            endwish_container.style.display="none";
+            btn.style.backgroundColor="#003366";
+            btn2.style.backgroundColor="#C8102E";
+            num=0;
+
+        }
+
+
+        function takeoffendlist(btn) {
+            const wishnumber = document.querySelectorAll('.end_wish_number')
+            const openbtn = document.querySelectorAll('.downimg2')
+            const closebtn = document.querySelectorAll('.upimg2')
+            const list = document.querySelectorAll('.endlist')
+            const endwish_div = document.querySelectorAll('.endwish')
+            console.log("엥")
+             for(let i =0; i<openbtn.length; i++){
+                if(btn===openbtn[i]){
+                    endwish_div.forEach(div=>{
+                        div.style.display="block";
+                    })
+                    wishnumber.forEach(number=>{
+                        console.log(number)
+                    axios.post('/takeoff/endtakeoff', {
+                        wish_number:number.value,
+                        user_id : "[[${session.user_id}]]"
+                    }).then(res=>{
+                        if(res!=null){
+                        console.log(res.data);
+                        list.forEach(div=>{
+                            res.data.forEach(data=>{
+                            if(data.apply_status==="기간만료"){
+                                div.innerHTML += '<div class="seller_class"><div>'+ data.seller_name + '</div>'+'<div>' + data.wish_category_seller_price+ "만원" + '</div>'+'<div class="status_span">' + data.apply_status + '</div></div>';
+                            }else{
+                                div.innerHTML += '<div class="seller_class"><div>' + '<a href="/takeoff/seller/detail?wish_number=' + data.wish_number + '&user_id=' + data.user_id + '">'+ data.seller_name + '<a/></div>';
+                            }
+                            linkcss()
+                            })
+                        })
+                        }
+                        closebtn[i].style.display="block";
+                        openbtn[i].style.display="none";
+                    })
+                    })
+                }else if(btn===closebtn[i]){
+                    // endwish_div.forEach(div=>{
+                    //
+                    //     div.style.display="none";
+                    //
+                    // })
+                    list.forEach(div => {
+                        openbtn[i].style.display="block";
+                        closebtn[i].style.display="none";
+                        div.innerHTML = null;
+                    })
+                    endwish();
+                }
+
+             }
+        //     function linkcss(){
+        //         const seller_class = document.querySelector('.seller_class');
+        //         seller_class.style.backgroundcolor= "gray";
+        //     }
+        }
+
+    </script>
+    <style>
+        .wish_ing{
+            background-color: #003366;
+        }
+    </style>
 </head>
 <body>
-<h2>위시리스트 목록</h2>
-
-<div class="list-area">
-<div>
-    <input type="checkbox">번호
-</div>
-
-<div>제목</div>
-</div>
-
-<div class="list-row">
-    <th:block th:if="${#lists.isEmpty(wishList)}">
-        <div>
-            <div>위시리스트가 없습니다</div>
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<div class="main_content">
+    <div class="wish-list-area">
+        <h2>인테리어 위시</h2>
+        <div class="wishBarea wish_write_btn">
+            <div class="tab">
+                <div class="tab_button">
+                    <input type="button" class="wish_ing" value="진행중 위시" onclick="ingtab()"><input type="button" class="wish_end" value="종료된 위시" onclick="endwish()">
+                </div>
+                <div class="write_btn">
+                    <input type="button" id="wish_write" onclick="wish_write()" value="글쓰기">
+                </div>
+            </div>
         </div>
-    </th:block>
-    <th:block th:unless="${#lists.isEmpty(wishList)}">
-        <th:block th:each="wish:${wishList}">
-            <div th:text="${wish.wish_number}"></div>
-            <div th:href="@{/wish/detail(wish_number=${wish.wish_number})}" th:text="${wish.wish_title}"></div>
+        <div class="all_wish">
+            <th:block th:if="${#lists.isEmpty(wish_list) and #lists.isEmpty(wish_req_list)}">
+                <div class="wish_list_block">
+                    <div class="wish_container">
+                        <div class="non_wish">
+                            인테리어 위시를 작성해주세요
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+        <!--위시리스트 요청 후 -->
+        <th:block th:unless="${#lists.isEmpty(wish_req_list)}">
+            <th:block th:each="wish:${wish_req_list}">
+                <div class="wish_list_block">
+                    <div class="wish_container">
+                        <div class="button">
+                            <th:block th:if="${takeoff>0}">
+                                <div>
+                                    <input type="hidden" class="hidden-regwish" th:value="${wish.wish_number}">
+                                    <img class="downimg" src="/image/down.png" alt="다운" onclick="takeofflist(this)">
+                                    <img hidden class="upimg" src="/image/up.png" alt="업" onclick="takeofflist(this)">
+                                </div>
+                            </th:block>
+                            <div class="wish_box">
+                                <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
+                                   th:text="${wish?.wish_title}"></a>
+                                <th:block th:unless="${wish?.apply_status!=null}">
+                                    <th:block th:unless="${wish?.apply_status!=null}">
+                                        <div class="takeoffarea">
+                                            <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                                            <input type="button" class="wish_takeoff" onclick="takeoff()" value="견적요청">
+                                        </div>
+                                    </th:block>
+                                </th:block>
+                            </div>
+                        </div>
+
+                        <th:block th:if="${wish?.apply_status}">
+                            <div id="applystatus" th:text="${wish?.apply_status}"
+                                 class="wish_apply_status">상태값
+                            </div>
+                        </th:block>
+                    </div>
+                        <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
+                            <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
+                                   name="wish_number">
+                            <div class="listbtn"></div>
+                            <div class="takeoff_list">
+                            </div>
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
+<!--                            <div><input type="button" hidden class="contractbtn" value="계약완료" onclick="contract()"></div>-->
+                            <div class="confirmbtn_class">
+                                <input type="button" id="confirmbtn" hidden value="확 정" onclick="confirm()">
+                            </div>
+                            <div class="">
+                                <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
+                                       name="wish_number">
+                                <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
+                            </div>
+                        </div>
+                </div>
+
+            </th:block>
         </th:block>
-    </th:block>
-</div>
+            <!--위시리스트(요청전)-->
+            <th:block th:unless="${#lists.isEmpty(wish_list)}">
+                <th:block th:each="wish:${wish_list}">
+                    <div class="wish_list_block">
+                        <div class="wish_container">
+                            <div>
+                                <a class="detaillink" th:href="@{/wish/detail(wish_number=${wish?.wish_number})}"
+                                   th:text="${wish?.wish_title}"></a>
+                            </div>
+                            <div th:if="${wish?.apply_status!=0 or wish?.apply_status!=null}">
+                                <input type="hidden" th:value="${wish?.wish_number}" class="wish_number_status"
+                                       name="wish_number">
+                                <div class="">
+                                    <input type="hidden" th:value="${wish?.wish_number}" class="status_wish_number"
+                                           name="wish_number">
+                                    <input type="hidden" th:value="${wish?.user_id}" class="wish_user_id">
+                                </div>
+                            </div>
+                            <div th:unless="${wish?.apply_status!=null}" class="takeoffarea">
+                                <div th:if="${wish_req_list==null}">
+                                    <input type="hidden" th:value="${wish?.wish_number}" class="wish_number" name="wish_number">
+                                    <input type="button" class="wish_takeoff" onclick="takeoff(this)" value="견적요청">
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            </th:block>
+        </th:block>
+        </div>
+        <div class="endwish_container" hidden>
+            <div class="wish_list_block2">
+                <div class="takeoff_end">
+                    <div class="button_endlist">
+                    </div>
+                    <!--종료된 위시-->
+                    <div class="endwish">
 
-<div id="wish_button area">
-    <input type="button" id="wish_write" onclick="write()" value="글쓰기" >
-    <input type="button" id="wish_takeoff" onclick="takeoff()" value="견적요청">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

@@ -1,52 +1,119 @@
- <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="/javascript/join.js"></script>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+	<script defer src="/javascript/common.js"></script>
+	<script th:src="@{/javascript/user.js}"></script>
+	<script th:src="@{/javascript/mypage.js}"></script>
+	<link rel="stylesheet" href="/css/headerfooter.css">
+	<link rel="stylesheet" href="/css/mypage.css">
+	<script>
+		const user = "[[${session?.user_id}]]";
+		const type = "[[${session?.user_type}]]";
+
+		$(() => {
+			userType();
+			loginStatus();
+		})
+	</script>
 </head>
 <body>
-<h2>회원정보수정</h2>
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<div class="main_content">
+	<h2>회원정보수정</h2><br>
+	<form th:action="@{/mypage/write}" method="post" id="insert_info">
+		<div class="mypage_content">
+			<div>아이디</div>
+			<input type="text" id="user_id" th:value="${session?.user_id}" readonly class="mypage_text"><br>
+			<hr>
+			<div>이름</div>
+			<input type="text" name="user_name" id="user_name" th:value="${userdto.user_name}" class="mypage_text"><br>
+			<hr>
+			<div>전화번호</div>
+			<select name="user_phone_company" id="user_phone_company">
+				<option id="optionid" value="none">통신사</option>
+				<option value="1">SKT</option>
+				<option value="2">KT</option>
+				<option value="3">LGU</option>
+				<option value="4">알뜰폰</option>
+			</select>
+			<input type="text" name="user_phone" id="user_phone" th:value="${userdto.user_phone}" class="mypage_text"><br>
+			<hr>
+			<div>주소</div>
+			<input type="text" name="user_addr" id="user_addr" th:value="${userdto.user_addr}" class="mypage_text"><br>
+			<hr>
+			<div>이메일</div>
+			<input type="text" name="user_email" id="user_email"> @
+			<select name="user_email_detail" id="user_email_detail" onchange="self_insert()">
+				<option value="none">메일 선택</option>
+				<option value="naver.com">naver.com</option>
+				<option value="gmail.com">gmail.com</option>
+				<option value="daum.net">daum.net</option>
+				<option value="nate.com">nate.com</option>
+				<option value="other">직접입력</option>
+			</select>
+			<span id="email_check"></span><br>
+			<input type="text" name="email_input" id="email_input" style="display: none" onblur="self_insert_check()"><br>
+			<th:block th:unless="${#lists.isEmpty(userdto.engineer_regnum)}">
+				<div class="engineer_info">
+					<hr>
+					<div>자격증번호</div>
+					<input type="text" id="engineer_regnum" th:value="${userdto.engineer_regnum}" readonly><br>
+					<hr>
+					<div>자격증 발급일자</div>
+					<input type="text" name="engineer_regdate" th:value="${userdto.engineer_regdate}" id="engineer_regdate" class="mypage_text">
+				</div>
+			</th:block>
+		<th:block th:if="${session.user_type} == 0">
+		<div class="button_area">
+			<input type="button" value="추가인증" onclick="location.href = '/user/join_additional'" class="mypage_additional_button">
+		</div>
+		</th:block>
 
-<div>
-    <form action="/../../resources/templates/mypage/write" id="insertInfo">
-        아이디 <!-- dto랑 만들고 하자 -->
-        <input type="text" id="user_id" th:text="${session.user_id}" readonly><br>
+		<div class="button-area">
+			<input type="button" id="write_button" value="수정완료" onclick="writebtn()" class="mypage_write_button">
+		</div>
+		</div>
+	</form>
+	<script>
+		const email = "[[${userdto?.user_email}]]";
+		const emailsplit = email.split("@");
+		const user_email = document.getElementById('user_email');
+		const email_detail = document.getElementById('user_email_detail');
+		user_email.value = emailsplit[0];
+		email_detail.value = emailsplit[1];
 
-        비밀번호
-        <input type="password" id="user_pw" th:text="${session.user_pw}" readonly><br>
-
-        이름
-        <input type="text" id="user_name"><br>
-
-        전화번호
-        <select>
-            <option value="none">통신사</option>
-            <option value="SKT">SKT</option>
-            <option value="KT">KT</option>
-            <option value="LGU">LGU</option>
-            <option value="OTHER">알뜰폰</option>
-        </select>
-        <input type="text" id="user_phone"><br>
-
-        주소
-        <input type="text" id="user_addr"><br>
-
-        이메일
-        <input type="text" id="user_email">
-        <select>
-            <option value="none">도메인 선택</option>
-            <option value="naver.com">@naver.com</option>
-            <option value="gmail.com">@gmail.com</option>
-            <option value="daum.net">@daum.net</option>
-            <option value="nate.com">@nate.com</option>
-        </select>
-
-        <div class="button-area">
-            <input type="button" onclick="write()" value="수정완료">
-        </div>
-    </form>
+		const phone_company = "[[${userdto?.user_phone_company}]]";
+		;
+		switch (phone_company) {
+			case "1":
+				document.querySelector('option[value="1"]').setAttribute("selected", true)
+				// phone_company_option.selected=true;
+				break;
+			case "2":
+				document.querySelector('option[value="2"]').setAttribute("selected", true)
+				break;
+			case "3":
+				document.querySelector('option[value="3"]').setAttribute("selected", true)
+				break;
+			case "4":
+				document.querySelector('option[value="4"]').setAttribute("selected", true)
+				break;
+		}
+	</script>
 </div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
+<script>
+	const email = "[[${userdto?.user_email}]]";
+	const emailsplit = email.split("@");
+	const user_email = document.getElementById('user_email');
+	const email_detail = document.getElementById('user_email_detail');
+	user_email.value = emailsplit[0];
+	email_detail.value = emailsplit[1];
+</script>

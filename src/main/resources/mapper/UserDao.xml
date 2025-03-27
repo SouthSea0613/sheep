@@ -1,5 +1,115 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com._401unauthorized.sheep.dao.UserDao">
+<mapper namespace="com._401unauthorized.sheep.dao.UserDao" >
+    <insert id="join">
+        INSERT INTO USER
+        VALUES (#{user_id}, #{user_pw}, #{user_name}, #{user_phone_company}, #{user_phone}, #{user_addr}, #{user_email}, 0)
+    </insert>
 
+    <insert id="join_additional_seller">
+        INSERT INTO SELLER
+        VALUES (#{seller_regnum}, #{user_id}, #{seller_company}, #{seller_name}, #{seller_addr}, null)
+    </insert>
+
+    <insert id="join_additional_engineer">
+        insert into engineer
+        values (#{engineer_regnum}, #{user_id}, #{engineer_regdate})
+    </insert>
+
+    <update id="change_user_type">
+        UPDATE USER
+        SET USER_TYPE = #{type}
+        WHERE USER_ID = #{user_id}
+    </update>
+
+    <select id="id_check" resultType="java.lang.String">
+        SELECT USER_ID
+        FROM USER
+        WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="email_check" resultType="java.lang.String">
+        SELECT USER_EMAIL
+        FROM USER
+        WHERE USER_EMAIL = #{user_email}
+    </select>
+
+    <select id="login" resultType="com._401unauthorized.sheep.dto.UserDto">
+        SELECT USER_ID, USER_PW, USER_TYPE
+        FROM USER
+        WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="seller_regnum_check" resultType="java.lang.String">
+        SELECT *
+        FROM SELLER
+        WHERE  SELLER_REGNUM = #{seller_regnum}
+    </select>
+
+    <select id="engineer_regnum_check" resultType="java.lang.String">
+        select *
+        from engineer
+        where engineer_regnum = #{engineer_regnum}
+    </select>
+
+    <select id="id_find_check" resultType="java.lang.String">
+        SELECT USER_ID
+        FROM USER
+        WHERE USER_EMAIL = #{user_email}
+    </select>
+
+    <update id="pw_reset">
+        UPDATE USER
+        SET USER_PW = #{user_pw}
+        WHERE USER_ID = #{user_id}
+    </update>
+
+    <update id="update_info">
+        UPDATE USER
+        SET USER_NAME = #{user_name}, USER_PHONE_COMPANY = #{user_phone_company}, USER_PHONE = #{user_phone}, USER_ADDR = #{user_addr}, USER_EMAIL = #{user_email}
+        WHERE USER_ID = #{user_id}
+    </update>
+
+    <update id="update_engineer_info">
+        UPDATE ENGINEER SET ENGINEER_REGDATE = #{engineer_regdate}
+        WHERE USER_ID = #{user_id}
+    </update>
+
+    <select id="additional" resultType="java.lang.String">
+        SELECT USER_PW
+        FROM USER
+        WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="get_info_engineer" resultType="com._401unauthorized.sheep.dto.UserDto">
+        SELECT U.USER_ID, U.USER_PW, U.USER_NAME, U.USER_PHONE_COMPANY, U.USER_PHONE, U.USER_ADDR, U.USER_EMAIL, U.USER_TYPE, E.ENGINEER_REGNUM, E.ENGINEER_REGDATE
+        FROM USER U
+        JOIN ENGINEER E
+        ON U.USER_ID = E.USER_ID
+        WHERE U.USER_ID = #{user_id}
+    </select>
+
+    <select id="get_info" resultType="com._401unauthorized.sheep.dto.UserDto">
+        SELECT *
+        FROM USER
+        WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="getSeller_area" resultType="java.lang.String">
+        SELECT SELLER_ADDR
+        FROM SELLER
+        WHERE USER_ID = #{user_id}
+    </select>
+
+    <select id="get_seller_company" resultType="java.lang.String">
+        SELECT SELLER_COMPANY
+        FROM SERLLER
+        WHERE USER_ID = #{user_id}
+    </select>
+
+    <update id="select_area">
+        UPDATE SELLER
+        SET SELLER_AREA = #{seller_area}
+        WHERE USER_ID = #{user_id}
+    </update>
 </mapper>

@@ -1,72 +1,108 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>기술자모집</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script defer src="/javascript/common.js"></script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+
+            $(".slider").bxSlider({
+                adaptiveHeight: true,
+                responsive: true,
+                // slideWidth: 1000,
+                auto: true,
+                controls: true,
+                autoHover: true,
+                pager: true,
+                autoControls: false,
+            })
+        })
+    </script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <style>
+        .main_content_container {
+            margin: 140px auto 30px auto;
+        }
+    </style>
+    <link rel="stylesheet" href="/css/employment.css">
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+          crossorigin/>
+
+    <script src="/javascript/common.js"></script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+        $(() => {
+            userType();
+            loginStatus();
+        })
+    </script>
+
+
 </head>
 <body>
-    <div class="">
-        <h2>구인 구직 목록</h2>
-        <div class="">
-            <div class="">
-            <select>
-                <option value="none">위치</option>
-                <option value="">서울</option>
-                <option value="">인천</option>
-                <option value="">경기</option>
-                <option value="">춘천</option>
-                <option value="">강릉</option>
-                <option value="">대구</option>
-                <option value="">청주</option>
-                <option value="">전주</option>
-                <option value="">전북</option>
-                <option value="">경남</option>
-                <option value="">울산</option>
-                <option value="">광주</option>
-                <option value="">전남</option>
-                <option value="">진주</option>
-                <option value="">목포</option>
-                <option value="">울산</option>
-                <option value="">부산</option>
-                <option value="">제주</option>
-            </select>
-            <select>
-                <option value="none">시공종류</option>
-                <option value="">목공</option>
-                <option value="">도배</option>
-                <option value="">전기</option>
-                <option value="">조명</option>
-                <option value="">타일</option>
-                <option value="">필름</option>
-                <option value="">도장</option>
-                <option value="">부엌</option>
-                <option value="">욕실</option>
-                <option value="">수납</option>
-                <option value="">바닥</option>
-                <option value="">창호</option>
-                <option value="">도어</option>
-                <option value="">중문</option>
-
-
-
-            </select>
-            <input type="button" onclick="location.href='/employment/write'" value="구인글 작성" />
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<section>
+    <div class="main_content">
+        <div class="table-header">
+            <div class="title-container">
+                <div class="title">기술자모집</div>
             </div>
-            <div class="">
-            <ul>
+            <div class="btn_area">
+                <th:block th:if="${session?.user_type eq '1'}">
+                    <form th:action="@{/employment/write}" method="get">
+                        <input type="submit" class="btn" value="작성하기">
+                    </form>
+                </th:block>
+            </div>
+        </div>
+        <div>
+            <th:block th:if="${#lists.isEmpty(boarddto)}">
+                <div class="">현재 구인글이 존재하지 않습니다.</div>
+            </th:block>
+        </div>
 
-                <li>글제목</li>
-                <li>작성자</li>
-                <li>날짜</li>
-            </ul>
-                <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                </ul>
+        <div class="container">
+            <div class="table">
+                <div class="label">지역</div>
+                <div class="label">글제목</div>
+                <div class="label">글쓴이</div>
+                <div class="label">모집상황</div>
+            </div>
+            <div class="timeleaf">
+                <th:block th:unless="${#lists.isEmpty(boarddto)}">
+                    <th:block th:each="employment:${boarddto}">
+                        <div th:if="${employment?.employee_status < employment?.job_count}">
+                            <div class="value" style="font-family: 'Do Hyeon', sans-serif"
+                                 th:text="${employment?.job_area}"></div>
+                            <input type="hidden" name="board_number" th:value="${employment?.board_number}">
+                            <a class="value" style="font-family: 'Pretendard', sans-serif"
+                               th:href="@{/employment/detail(board_number=${employment.board_number})}"
+                               th:text="${employment.board_title}"></a>
+                            <div class="value" th:text="${employment?.user_id}"></div>
+                            <div class="status">
+                                <div class="value1" th:text="${employment?.employee_status}"></div>
+                                /
+                                <div class="value1" th:text="${employment?.job_count}"></div>
+                            </div>
+                        </div>
+                    </th:block>
+                </th:block>
             </div>
         </div>
     </div>
+</section>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

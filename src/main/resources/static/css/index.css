@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding-top: 80px;
+    height: 90vh;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* main */
+
+.main_content {
+    margin: 140px auto 30px auto;
+    height: auto;
+    min-height: 100%;
+    margin: 140px auto 30px auto;
+    background-color: #f8f9fa;;
+}
+
+/* 배너 */
+.content-home {
+    display: flex;
+    justify-content: center;
+
+}
+.brand_content > div{
+
+}
+
+.slider {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.slider div {
+    display: flex;
+    width: 100%;
+}
+
+.slider img {
+    max-width: 100%;
+    height: 500px;
+}
+
+.slide_text {
+    color: #449fff;
+    position: absolute;
+    padding: 5vh 5vh;
+}
+
+    /* 브랜드 */
+.brand_ex {
+    margin: 100px auto;
+    width: 80%;
+    font-size: 16px;
+}
+
+.brand_content {
+    margin: 30px 0;
+}
+
+.brand_title {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 10px;
+}
+
+.brand_title h2 {
+    margin: 0 3px;
+    color: #003366;
+}
+
+.brand_text {
+    display: flex;
+}
+
+.b_text1 {
+    flex-shrink: 0;
+    font-weight: bold;
+    color: #003366;
+}
+
+/* 업체페이지 */
+.seller_img {
+    margin: 20px 10px;
+    width: 400px;
+    height: 220px;
+    background-color: #B6C2CE;
+    flex-shrink: 0;
+}
+
+.seller_content {
+    margin: 150px auto;
+    width: 80%;
+}
+
+.seller_subcontent {
+    display: flex;
+}
+
+.seller_text {
+    margin: auto 20px;
+    font-size: 16px;
+}

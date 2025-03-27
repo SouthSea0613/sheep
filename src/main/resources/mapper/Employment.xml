@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com._401unauthorized.sheep.dao.EmploymentDao">
+
+    <!--글을 쓰자!-->
+    <insert id="write" useGeneratedKeys="true" keyProperty="board_number">
+        INSERT INTO BOARD
+        VALUES (null, #{user_id}, #{board_title}, #{board_content}, 0, default, 2)
+    </insert>
+
+    <insert id="insert_job">
+        INSERT INTO JOB_BOARD (BOARD_NUMBER, JOB_COUNT, JOB_AREA, JOB_STATUS) VALUES (#{board_number}, #{job_count}, #{job_area}, 0)
+    </insert>
+
+    <insert id="resume_write" useGeneratedKeys="true" keyProperty="board_number">
+        INSERT INTO BOARD VALUES (NULL, #{user_id}, #{board_title}, #{board_content}, 0, DEFAULT, 3)
+    </insert>
+
+    <insert id="resume_write2">
+        INSERT INTO EMPLOYEE VALUES (#{board_number}, #{parent_board_number}, #{user_id}, 0)
+    </insert>
+
+    <select id="list" resultType="com._401unauthorized.sheep.dto.BoardDto">
+        SELECT
+            JB.JOB_AREA, B.BOARD_NUMBER, B.BOARD_TITLE, B.USER_ID, B.BOARD_REGDATE, B.BOARD_STATUS, JB.JOB_COUNT
+        FROM BOARD B
+                 JOIN JOB_BOARD JB
+                      ON B.BOARD_NUMBER = JB.BOARD_NUMBER
+        WHERE BOARD_KIND = 2
+    </select>
+
+    <select id="detail" resultType="com._401unauthorized.sheep.dto.BoardDto">
+        SELECT
+            B.BOARD_NUMBER, B.BOARD_TITLE, B.USER_ID, B.BOARD_CONTENT, B.BOARD_REGDATE, JB.JOB_COUNT, JB.JOB_AREA, S.SELLER_COMPANY
+        FROM
+            BOARD B
+                JOIN JOB_BOARD JB ON B.BOARD_NUMBER = JB.BOARD_NUMBER
+                JOIN SELLER S ON B.USER_ID = S.USER_ID
+        WHERE B.BOARD_NUMBER = #{board_number}
+    </select>
+
+    <select id="get_board_list" resultType="com._401unauthorized.sheep.dto.BoardDto">
+        SELECT
+            JB.JOB_AREA,
+            B.BOARD_NUMBER,
+            B.BOARD_TITLE,
+            B.USER_ID,
+            B.BOARD_REGDATE,
+            JB.JOB_COUNT,
+            COALESCE(SUM(E.EMPLOYEE_STATUS), 0) AS EMPLOYEE_STATUS
+        FROM BOARD B
+                 JOIN JOB_BOARD JB ON B.BOARD_NUMBER = JB.BOARD_NUMBER
+                 LEFT JOIN EMPLOYEE E ON JB.BOARD_NUMBER = E.PARENT_BOARD_NUMBER
+        WHERE B.BOARD_KIND = 2 AND JB.JOB_STATUS = 0
+        GROUP BY JB.JOB_AREA, B.BOARD_NUMBER, B.BOARD_TITLE, B.USER_ID, B.BOARD_REGDATE, JB.JOB_COUNT;
+    </select>
+
+    <update id="resume_complete">
+        UPDATE JOB_BOARD
+        SET JOB_STATUS = 1
+        WHERE BOARD_NUMBER = #{board_number}
+    </update>
+
+    <select id="resume_list" resultType="com._401unauthorized.sheep.dto.BoardDto">
+        SELECT
+            E.PARENT_BOARD_NUMBER, B.BOARD_NUMBER, B.BOARD_TITLE, E.USER_ID, B.BOARD_REGDATE, E.EMPLOYEE_STATUS
+        FROM EMPLOYEE E
+                 JOIN BOARD B ON E.BOARD_NUMBER = B.BOARD_NUMBER
+        WHERE E.PARENT_BOARD_NUMBER = #{board_number}
+    </select>
+
+    <select id="profile_detail" resultType="com._401unauthorized.sheep.dto.BoardDto">
+        SELECT
+            E.PARENT_BOARD_NUMBER, B.BOARD_NUMBER, B.BOARD_TITLE, B.BOARD_CONTENT, E.USER_ID, U.USER_NAME, U.USER_PHONE, B.BOARD_REGDATE, E.EMPLOYEE_STATUS
+        FROM EMPLOYEE E
+                 JOIN BOARD B ON E.BOARD_NUMBER = B.BOARD_NUMBER
+                 JOIN USER U ON U.USER_ID = B.USER_ID
+        WHERE E.BOARD_NUMBER = #{board_number}
+    </select>
+
+    <update id="lets_do_it">
+        UPDATE EMPLOYEE E
+            JOIN BOARD B ON E.BOARD_NUMBER = B.BOARD_NUMBER
+            JOIN USER U ON U.USER_ID = B.USER_ID
+            SET E.EMPLOYEE_STATUS = 1
+        WHERE B.BOARD_NUMBER = #{board_number} AND U.USER_ID = #{user_id}
+    </update>
+</mapper>

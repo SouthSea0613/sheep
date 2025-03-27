@@ -1,25 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="/../../resources/static/javascript/join.js"></script>
+    <script defer src="/javascript/common.js"></script>
+    <script th:src="@{/javascript/user.js}"></script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/mypage.css">
+    <script>
+        function additional() {
+            const user_pw = $('#user_pw');
+            if (user_pw.val() == '') {
+                alert('비밀번호를 입력바랍니다.');
+                user_pw.focus();
+                return false;
+            } else {
+                let data = {};
+                data.user_pw = user_pw.val();
+                axios.post('/mypage/additional', data)
+                    .then(res => {
+                        if (res.data) {
+                            alert('인증이 완료 되었습니다');
+                            location.href = "/mypage/write";
+                        } else {
+                            $('#pw_check').text('인증이 실패 되었습니다.');
+                        }
+                    })
+                    .catch(err => {
+                        $('#pw_check').text('');
+                    });
+            }
+        }
+    </script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            console.log(type)
+            userType();
+            loginStatus();
+        })
+    </script>
 </head>
 <body>
-<h2>사용자 추가인증</h2>
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<div class="main_content">
+    <h2>사용자 추가인증</h2>
 
-<div>
-    <form action="/user/login" id="addPwCheck">
-        아이디
-        <input type="text" id="user_id" readonly placeholder="아이디"><br>
-
+    <div>
         비밀번호
-        <input type="password" id="user_pw"><br>
+        <input type="password" name="user_pw" id="user_pw"><br>
+        <span id="pw_check"></span><br>
 
-        <input type="button" onclick="addPwCheck()" value="확인">
-    </form>
+        <input type="button" onclick="additional()" value="확인">
+    </div>
 </div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

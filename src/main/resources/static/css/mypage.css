@@ -1,0 +1,86 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 90vh;
+    background-color: #f8f9fa;;
+}
+
+/* main */
+
+.main_content {
+    margin: 140px auto 30px auto;
+    width: 70vh;
+    height: auto;
+    min-height: 100%;
+    padding: 3vh 0;
+    font-family: 'Pretendard', sans-serif;
+}
+
+h2 {
+    color: #003366;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+hr {
+    margin: 1vh 0;
+}
+
+.mypage_content {
+    margin: 1vh 2vh;
+    padding: 1vh 1vh;
+    border: 1px solid black;
+    border-radius: 1vh;
+}
+
+.mypage_text {
+    all: unset;
+    margin: 1vh 1vh;
+    width: 100%;
+    font-size: 14px;
+}
+
+.mypage_write_button {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 80%;
+    height: 4vh;
+    color: white;
+    text-align: center;
+    background-color: #C8102E;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mypage_write_button:hover {
+    background-color: #9B0C23;
+    cursor: pointer;
+}
+
+.mypage_additional_button {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 80%;
+    height: 4vh;
+    color: white;
+    text-align: center;
+    background-color: #003366;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.mypage_additional_button:hover {
+    background-color: #002244;
+    cursor: pointer;
+}

@@ -3,13 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script defer src="/javascript/common.js"></script>
+    <script>
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            userType();
+            loginStatus();
+        })
+    </script>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <link rel="stylesheet" href="/css/loginjoin.css">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+          crossorigin/>
 </head>
 <body>
-    <h2>회원가입 성공.html</h2>
-    <span th:text="">남피오</span>
-    <span>님 회원이 되신 것을 환영합니다.</span><br>
-    <button>로그인</button><br>
-    <h4>시공사 or 기술자 이시면 추가인증을 진행해주세요.</h4>
-    <a href="join_additional">추가인증</a>
+<th:block th:replace="~{common/fragment::header}"></th:block>
+<div class="main_content">
+    <div class="suc_h2">회원가입 성공</div>
+    <div class="join_success_content">
+        <span th:text="${user_id}"></span>
+        <span>님 회원이 되신 것을 환영합니다.</span><br>
+
+        <form th:action="@{/user/login}" method="get">
+            <input type="submit" value="로그인" class="login_btn"><br>
+        </form>
+
+        <h4>시공사 or 기술자 이시면 추가인증을 진행해주세요.</h4>
+
+        <form th:action="@{/user/join_additional}" method="get">
+            <input type="hidden" name="user_id" th:value="${user_id}">
+            <input type="submit" value="추가인증" class="join_additional_btn">
+        </form>
+    </div>
+</div>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>

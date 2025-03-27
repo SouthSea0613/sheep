@@ -1,0 +1,417 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 90vh;
+    background-color: #f8f9fa;
+    font-family: 'Pretendard', sans-serif;
+}
+
+/* main */
+
+.main_content {
+    margin: 140px auto 30px auto;
+    width: 70vh;
+    height: auto;
+    min-height: 100%;
+    padding: 3vh 0;
+}
+
+/* join css */
+
+hr {
+    margin: 1vh 0;
+}
+
+h2 {
+    margin: 3vh 0;
+}
+
+.join_main_content {
+    margin: 1vh 2vh;
+    padding: 1vh 1vh;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.join_user_content {
+    margin: 1vh 2vh;
+    padding: 1vh 1vh;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+span {
+    margin: 2vh 2vh;
+}
+
+input[type="text"] {
+    all: unset;
+    margin: 1vh 1vh;
+    width: 100%;
+    font-size: 14px;
+}
+
+input[type="password"] {
+    all: unset;
+    margin: 1vh 1vh;
+    font-size: 14px;
+    width: 100%;
+}
+
+.join_email_title {
+    width: 4vh;
+}
+
+input[type="text"].join_Email {
+    margin: 0 5vh;
+    width: 15vh;
+}
+
+.join_Email_content {
+    display: flex;
+    align-items: center; /* 세로 정렬 */
+}
+
+.join_Email, #user_email_detail, #email_input {
+    font-size: 16px;
+    padding: 1vh;
+}
+
+#user_email_detail {
+    border: none;
+    outline: none;
+    margin: 0 auto;
+    min-width: 4vh; /* 셀렉트 박스 크기 설정 */
+}
+
+#email_input {
+    margin: 0 auto;
+    display: none; /* 기본적으로 숨김 */
+}
+
+#id_check #pw_check #email_check #error_user #id_find_email_check #id_find_res  {
+    margin: 1vh 3vh;
+}
+
+#user_phone_company {
+    border: none;
+    outline: none;
+    margin: 0 auto;
+    min-width: 4vh;
+}
+
+.join_addr_title {
+    display: inline;
+}
+
+.join_addr {
+    all: unset; /* 기본 스타일 제거 */
+    margin: 1vh 3vh;
+    display: inline-block;
+    width: auto;
+    height: 3vh; /* 높이를 2vh로 설정 */
+    padding: 0 1vh; /* 좌우 패딩 추가 */
+    font-size: 12px; /* 글씨 크기 조절 */
+    text-align: center;
+    background: #003366;; /* 기존보다 옅은 파란색 */
+    color: white; /* 글자 색상 */
+    border-radius: 8px; /* 둥근 모서리 */
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* 마우스를 올렸을 때 */
+.join_addr:hover {
+    background-color: #002447; /* 조금 더 진한 파란색 */
+}
+
+/* 클릭했을 때 */
+.join_addr:active {
+    background-color: #4867ea; /* 클릭 시 더 진한 색 */
+    transform: scale(0.95);
+}
+
+.join_btn {
+    all: unset;
+    display: block;
+    margin: 0 auto;
+    width: 20vh;
+    height: 5vh;
+    text-align: center;
+    background-color: #c20923;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.join_btn:hover {
+    background-color: #9B0C23;
+    cursor: pointer;
+}
+
+/* login css */
+.login_h2 {
+    color: #003366;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.login_main_content {
+    margin: 1vh 2vh;
+    padding: 1vh 1vh;
+    border: 1px solid black;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.login_btn {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 20vh;
+    height: 5vh;
+    text-align: center;
+    background-color: #C8102E;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    font-weight: bold;
+    color: white;
+}
+
+.login_btn:hover {
+    background-color: #9B0C23;
+    cursor: pointer;
+}
+
+.login_id_pw {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* id find */
+.find_h2 {
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+
+.idfind_content {
+    margin: 1vh 2vh;
+    padding: 1vh 1vh;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+#id_find_email {
+    margin: 1vh 1vh;
+    width: 60%;
+}
+
+#id_find_button {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 20vh;
+    height: 5vh;
+    text-align: center;
+    background: #C8102E;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#id_find_button:hover {
+    background-color: #9B0C23;
+    cursor: pointer;
+}
+
+#id_find_pwreset {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 20vh;
+    height: 5vh;
+    text-align: center;
+    background: #C8102E;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#id_find_pwreset:hover {
+    background-color: #9B0C23;
+    cursor: pointer;
+}
+
+/* join success */
+.suc_h2 {
+    font-weight: bold;
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: left;
+    color: #003366;
+}
+
+.join_success_content {
+    margin: 1vh 2vh;
+    padding: 1vh 1vh;
+    border: 1px solid black;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.join_additional_btn {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 20vh;
+    height: 5vh;
+    text-align: center;
+    background-color: #003366;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.join_additional_btn:hover {
+    background-color: #002447;
+    cursor: pointer;
+}
+
+/* join_additional */
+
+.join_additional_content {
+    margin: 1vh 2vh;
+    padding: 1vh 1vh;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+#join_addBtn {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 20vh;
+    height: 5vh;
+    text-align: center;
+    background: #C8102E;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#join_addBtn:hover {
+    background-color: #9B0C23;
+    cursor: pointer;
+}
+
+#join_addBtn2 {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 20vh;
+    height: 5vh;
+    text-align: center;
+    background: #C8102E;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+#join_addBtn2:hover {
+    background-color: #9B0C23;
+    cursor: pointer;
+}
+
+.join_addr_btn {
+    all: unset;
+    display: inline-block;
+    margin: 0 1vh;
+    width: 8vh;
+    height: 3vh;
+    padding: 0 10px;
+    text-align: center;
+    background-color: #003366;
+    color: white;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.join_addr_btn:hover {
+    background-color: #002447;
+    cursor: pointer;
+}
+
+/* pw_reset */
+.reset_h2 {
+    text-align: left;
+    font-size: 24px;
+    font-weight: bold;
+    color: #003366;
+    margin-bottom: 20px;
+}
+
+.pw_reset_content {
+    margin: 1vh 2vh;
+    padding: 1vh 1vh;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+.pw_reset_btn {
+    all: unset;
+    display: block;
+    margin: 1vh auto;
+    width: 20vh;
+    height: 5vh;
+    text-align: center;
+    background: #C8102E;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.pw_reset_btn:hover {
+    background-color: #9B0C23;
+    cursor: pointer;
+}
+.login_id_pw a{
+    text-decoration: none;
+    color :#4D403A;
+}
+
+.join_h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #003366;
+    text-align: left;
+    width: 80%;
+    max-width: 800px;
+    margin-bottom: 20px;
+}

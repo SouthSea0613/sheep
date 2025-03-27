@@ -2,27 +2,207 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-</head>
-<body>
-    <h2>구인글 작성하기</h2>
-    <form method="post" action="">
-    <input th:type="text" th:name="board_title" th:id="title" placeholder="제목 입력">
-    <textarea th:type="text" th:name="board_content" th:id="content">내용 입력</textarea>
-    <input type="button" value="등록하기" onclick="employmentsubmit()">
-    </form>
+    <title>기술자모집</title>
     <script>
-        //비동기
-        function employmentsubmit(){
-            axios.post('',{
-
-            }).then((res)=>{
-                console.log(res)
-            })
-            location.href='detail.html'
+        function select_seller_area() {
+            location.href = "/employment/select_area"
         }
     </script>
+    <style>
+        /* 전체적인 스타일 */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* 타이틀 (왼쪽 정렬) */
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 20px;
+            text-align: left;
+            width: 80%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 폼 컨테이너 */
+        form {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+        }
+
+        /* 입력 필드 스타일 */
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        /* 라벨 스타일 */
+        .label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .area_btn {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #003366;
+            cursor: pointer;
+            font-weight: bold;
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* 모집인원: 입력창과 '명' 가로 정렬 */
+        .count_container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+        }
+
+        .job_count {
+            width: 25px !important; /* 크기 조정 */
+            min-width: 25px !important;
+            text-align: right; /* 숫자 중앙 정렬 */
+            padding: 3px;
+            flex-shrink: 0; /* 자동 크기 조정 방지 */
+            height: 10px;
+        }
+
+        .area_container {
+            display: flex;
+            align-items: center; /* 수직 중앙 정렬 */
+            gap: 10px; /* 버튼과 입력 필드 사이 간격 */
+        }
+
+        .job_area_input {
+            border: none !important; /* 테두리 제거 */
+            outline: none !important; /* 클릭 시 테두리 안 나오게 */
+            background: transparent; /* 배경 제거 */
+            font-size: 16px;
+            color: #333; /* 텍스트 색상 */
+            width: auto; /* 내용에 맞게 크기 조정 */
+        }
+
+        .count {
+            line-height: 40px;
+            white-space: nowrap; /* 줄바꿈 방지 */
+        }
+
+        /* 버튼 스타일 */
+        .btn {
+            width: 100%;
+            max-width: 200px;
+            padding: 12px;
+            font-size: 14px;
+            background: #C8102E;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        .btn:hover {
+            background: #9B0C23;
+        }
+
+        /* 텍스트 영역 스타일 */
+        textarea {
+            height: 150px;
+            resize: none;
+            overflow-y: auto;
+        }
+
+        /* 반응형 (모바일 최적화) */
+        @media screen and (max-width: 768px) {
+            form {
+                width: 95%;
+                padding: 30px;
+            }
+
+            .title {
+                font-size: 22px;
+            }
+
+            input[type="text"], textarea {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .job_count {
+                width: 80px; /* 모바일에서 조금 더 줄임 */
+            }
+
+            textarea {
+                height: 140px;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 14px;
+                font-size: 15px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+<!--<th:block th:replace="~{fragments::header}"></th:block>-->
+<section>
+    <div class="title">기술자모집</div>
+    <div class="content">
+
+        <form th:action="@{/employment/insert_write}" method="post">
+
+            <input type="hidden" name="user_id" th:value="${session?.user_id}">
+
+            <div class="label">모집지역</div>
+            <div class="area_container">
+                <input type="button" class="area_btn" id="job_area" value="지역설정" required
+                       onclick="select_seller_area()">
+                <input type="text" class="job_area_input" name="job_area" th:value="${seller_area}" readonly>
+            </div>
+            <div class="label">현장정보</div>
+            <input type="text" class="board_title" name="board_title" autofocus placeholder="현장지역/모집분야/모집인원 순으로 적어주세요"
+                   required><br>
+            <div class="label">모집인원</div>
+            <div class="count_container">
+                <input type="text" class="job_count" name="job_count" required>
+                <div class="count">명</div>
+            </div>
+            <div class="label">내용</div>
+            <textarea class="" id="board_content" name="board_content" placeholder="모집 내용을 적어주세요"></textarea>
+
+            <div class="btn_area">
+                <input type="submit" class="btn" value="작성완료">
+            </div>
+        </form>
+
+    </div>
+</section>
+
+<!--<th:block th:replace="~{fragments::footer}"></th:block>-->
 </body>
 </html>

@@ -1,23 +1,334 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<!--동기-->
-<h2>구인구직 detail.html</h2>
-<div th:class="">
-    <div th:class="">
-        <span>구인기간</span>
-        <span th:text="">2025.03.15</span>
-        <span>고용 인원</span>
-    </div>
-</div>
+    <title>기술자모집</title>
+    <script defer src="/javascript/common.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        function employment_complete() {
+            location.href = "/employment/resume/complete?board_number=" + "[[${param.board_number}]]";
+        }
 
-<div th:class="">
-    <input type="button" onclick="location.href='./resume/write.html'" value="이력서 작성">
-<!--비동기 이력서 목록-->
-</div>
+        function resume_write() {
+            location.href = "/employment/resume/write?board_number=" + "[[${param.board_number}]]";
+        }
+        const user = "[[${session?.user_id}]]";
+        const type = "[[${session?.user_type}]]";
+
+        $(() => {
+            userType();
+            loginStatus();
+        })
+    </script>
+    <!--    <link rel="stylesheet" href="/css/employment.css">-->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+          crossorigin/>
+    <link rel="stylesheet" href="/css/headerfooter.css">
+    <style>
+        /* 전체적인 스타일 */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Pretendard', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 컨테이너: 화면을 시원하게 넓히고 중앙 정렬 */
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            margin: 60px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 제목 */
+        .title {
+            text-align: left;
+            margin: 140px auto 30px auto;
+            font-size: 24px;
+            font-weight: bold;
+            color: #003366;
+            text-align: left;
+            margin: 140px 0 20px 10%; /* 좌우 margin을 auto 대신 10%로 설정 */
+            max-width: 1000px;
+            display: block;
+        }
+
+        /* 버튼 스타일 */
+        .btn {
+            padding: 10px 16px;
+            font-size: 16px;
+            background: #C8102E;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background-color: #9B0C23;
+        }
+
+        /* 제목과 버튼을 같은 줄에 배치 */
+        .title-btn-container {
+            display: flex;
+            align-items: center; /* 수직 정렬 */
+            justify-content: space-between; /* 제목 왼쪽, 버튼 오른쪽 */
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        /* 제목 스타일 */
+        .title {
+            padding: 0 15%;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .company_user {
+            display: flex;
+            align-items: center;
+            gap: 40px; /* 적절한 간격 추가 */
+            margin-bottom: 20px; /* 아래 요소와 여백 추가 */
+        }
+
+        /* 모집지역: 한 줄 정렬 */
+        .b_area-container {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        /* 모집내용: 제목과 내용이 줄 바뀌도록 설정 */
+
+        .b_content-container {
+            display: flex;
+            flex-direction: column; /* 세로 정렬 */
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* 라벨 스타일 */
+        .b_label {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 10px; /* 라벨과 값 사이 여백 추가 */
+        }
+
+        .b_area_label {
+            font-weight: bold;
+            color: #555;
+            margin-right: 10px; /* 라벨과 값 사이 여백 추가 */
+        }
+
+        .b_company {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+
+        /* 모집내용은 가독성을 위해 padding 추가 */
+        .b_content {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        /* 상세보기 내부 스타일 */
+        .b_title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px; /* 기존보다 더 여백 추가 */
+            line-height: 1.6; /* 줄간격 확장 */
+        }
+
+        .details p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        /* 지원자 목록 */
+        .find-job {
+            margin-top: 40px;
+            text-align: center;
+            position: relative;
+            padding-top: 20px; /* 위쪽 여백 추가 */
+        }
+
+        .find-job::before {
+            content: "";
+            display: block;
+            width: 100%;
+            max-width: 800px; /* 선의 최대 너비 설정 */
+            height: 1px;
+            background-color: #ddd; /* 연한 회색 선 */
+            margin: 0 auto 15px auto; /* 중앙 정렬 & 아래 여백 추가 */
+        }
+
+        .no-applicant {
+            color: #777;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        /* 지원자 리스트 (터치 & 클릭 최적화) */
+        .applicant-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .applicant-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+            padding: 0 10px;
+        }
+
+        /* 개별 지원자 아이템 */
+        .applicant_item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #f8f8f8;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 16px;
+            line-height: 1.6;
+            transition: 0.2s;
+        }
+
+        /* 이력서 보기 버튼 */
+        .view-resume {
+            display: inline-block;
+            margin-top: 5px;
+            margin-left: auto;
+            font-size: 14px;
+            background: white;
+            color: #003366;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .view-resume:hover {
+            color: black;
+        }
+
+        /* 반응형 (모바일 최적화) */
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 30px;
+            }
+
+            .title {
+
+                font-size: 24px;
+                font-weight: bold;
+                color: #003366;
+                white-space: nowrap; /* 줄바꿈 방지 */
+            }
+
+            .btn {
+                font-size: 14px;
+                padding: 10px 16px;
+            }
+
+            .details {
+                padding: 25px;
+            }
+
+            .b_title {
+                font-size: 22px;
+            }
+
+            .details p {
+                font-size: 16px;
+            }
+
+            .applicant_item {
+                font-size: 16px;
+                padding: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<th:block th:replace="~{common/fragment::header}"></th:block>
+
+<div class="title">기술자모집</div>
+<section class="container">
+
+    <div class="title-btn-container">
+        <div class="b_title" th:text="${employmentDto?.board_title}"></div>
+        <th:block>
+            <div class="btn_area">
+                <div th:if="${session.user_id eq employmentDto?.user_id and employmentDto?.job_status eq 모집중}">
+                    <input type="button" class="btn" value="마감" onclick="employment_complete()">
+                </div>
+                <div class="btn_area" th:if="${session.user_type eq '2' and employmentDto?.job_status eq 모집중}">
+                    <input type="button" class="btn" value="지원하기" onclick="resume_write()">
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+
+    <div class="details">
+        <div class="detail-box">
+            <div class="company_user">
+                <span class="b_company" th:text="${employmentDto?.seller_company}"></span>
+                <span class="b_user" th:text="${employmentDto?.user_id}"></span>
+            </div>
+
+            <div class="b_area-container">
+                <div class="b_area_label">모집지역</div>
+                <span class="b_area" th:text="${employmentDto?.job_area}"></span>
+            </div>
+            <input type="hidden" class="b_status" th:text="${employmentDto?.job_status}">
+            <div class="b_content-container">
+                <div class="b_label">모집내용</div>
+                <div class="b_content" th:text="${employmentDto?.board_content}"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="find-job">
+        <th:block th:if="${#lists.isEmpty(profileDto)}">
+            <p class="no-applicant">지원자가 없습니다.</p>
+        </th:block>
+        <th:block th:unless="${#lists.isEmpty(profileDto)}">
+            <div class="applicant-list">
+                <th:block th:each="profile: ${profileDto}">
+                    <th:block th:if="${(profile?.parent_board_number eq employmentDto?.board_number
+                and session.user_id eq profile?.user_id) or (profile?.parent_board_number eq employmentDto?.board_number
+                and session.user_type eq '1' and employmentDto?.user_id eq session.user_id) and profile?.employee_status != 1}">
+                        <div class="applicant_item">
+                            <a th:href="@{/employment/resume/detail(board_number=${profile.board_number})}"
+                               class="view-resume"
+                               th:text="${profile.board_title}"></a>
+                        </div>
+                    </th:block>
+                </th:block>
+            </div>
+        </th:block>
+    </div>
+</section>
+<th:block th:replace="~{common/fragment::footer}"></th:block>
 </body>
 </html>
